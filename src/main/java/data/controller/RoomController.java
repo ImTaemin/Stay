@@ -27,4 +27,9 @@ public class RoomController {
 		
 		return mview;
 	}
+	
+	@GetMapping("/insertform")
+	public String roomInsertForm() {
+		return "/room/roomInsertForm";
+	}
 }
