@@ -14,9 +14,9 @@ spring:
   #mongo
   data:
     mongodb:
-      host:localhost
-      port:27017
-      datagbase:chat
+      host: localhost
+      port: 27017
+      database: chat
 
 #mysql
   datasource:
