@@ -1,0 +1,26 @@
+#tomcat port
+server:
+  port: 8080
+
+#jsp
+spring:
+#  mvc:
+#    view:
+#      prefix: /WEB-INF/
+#      suffix: .jsp
+  devtools:
+    livereload:
+      enabled: true
+
+#mysql
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://sist-stay.ct5m6xbkyvuw.ap-northeast-2.rds.amazonaws.com:3306/stay?serverTimezone=Asia/Seoul
+    username: admin
+    password: sist1234
+    
+#mybatis
+mybatis:
+  type-aliases-package: data.mapper, data.dto
+  mapper-locations:
+  - /mapper/**/*.xml
