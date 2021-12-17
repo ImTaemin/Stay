@@ -16,4 +16,8 @@ public class RoomService {
 	public int getRoomCount() {
 		return mapper.getRoomCount();
 	}
+	
+	public void insertRoom(RoomDto roomDto) {
+		mapper.insertRoom(roomDto);
+	}
 }

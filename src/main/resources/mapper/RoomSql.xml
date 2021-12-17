@@ -5,6 +5,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="data.mapper.RoomMapper">
 	<select id="getRoomCount" resultType="int">
-		select count(*) from ROOM
+		select count(*) from room
 	</select>
+	
+	<insert id="insertRoom" parameterType="rdto">
+		insert into room values (null, #{host_id}, #{type}, #{addr1}, #{addr2}, #{addr3}, #{addr4},
+		#{max_per}, #{content}, #{name}, #{photos}, #{price}, #{hosting})
+	</insert>
 </mapper>

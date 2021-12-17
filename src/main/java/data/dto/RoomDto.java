@@ -21,8 +21,6 @@ public class RoomDto {
 	private String photos;
 	private int price;
 	private boolean hosting;
-	private String latitude;
-	private String longitude;
 	// 업로드
 	private MultipartFile upload;
 }

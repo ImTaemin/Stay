@@ -42,28 +42,37 @@ public class RoomController {
 	}
 	
 	@PostMapping("/insert")
-	public String roomInsert(@ModelAttribute RoomDto dto, HttpSession session) {
+	public String roomInsert(@ModelAttribute RoomDto roomDto, HttpSession session) {
 		// 업로드할 폴더 지정
 		String path = session.getServletContext().getRealPath("/photo");
 		
 		// 업로드할 파일명
-		if(dto.getUpload().getOriginalFilename().equals("")) {
+		if(roomDto.getUpload().getOriginalFilename().equals("")) {
 			// DB에 no라고 저장
-			dto.setPhotos(path);
+			roomDto.setPhotos(path);
 		} else {
 			// 업로드 할 경우
-			String uploadfile = dto.getUpload().getOriginalFilename();
+			String uploadfile = roomDto.getUpload().getOriginalFilename();
 			
-			dto.setPhotos(uploadfile);
+			roomDto.setPhotos(uploadfile);
 			
 			// 실제 업로드
 			try {
-				dto.getUpload().transferTo(new File(path + "\\" + uploadfile));
+				roomDto.getUpload().transferTo(new File(path + "\\" + uploadfile));
 			} catch (IllegalStateException | IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
+		
+		// 추후 session으로 변경
+		String myid = "stay";
+		
+		roomDto.setHost_id(myid);
+		
+		
+		
+		roomService.insertRoom(roomDto);
 		
 		return "redirect:main";
 	}
