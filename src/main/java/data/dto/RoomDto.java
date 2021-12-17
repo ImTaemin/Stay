@@ -11,16 +11,12 @@ public class RoomDto {
 	private String no;
 	private String host_id;
 	private String type;
-	private String addr1;
-	private String addr2;
-	private String addr3;
-	private String addr4;
+	private String addr_load;
+	private String addr_detail;
 	private String max_per;
 	private String content;
 	private String name;
 	private String photos;
 	private int price;
 	private boolean hosting;
-	// 업로드
-	private MultipartFile upload;
 }

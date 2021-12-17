@@ -2,6 +2,7 @@ package data.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,10 +12,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import data.dto.RoomDto;
-import data.mapper.RoomMapper;
 import data.service.RoomService;
 
 @Controller
@@ -42,35 +44,37 @@ public class RoomController {
 	}
 	
 	@PostMapping("/insert")
-	public String roomInsert(@ModelAttribute RoomDto roomDto, HttpSession session) {
+	public String roomInsert(@ModelAttribute RoomDto roomDto, @RequestParam ArrayList<MultipartFile> upload, HttpSession session) {
 		// 업로드할 폴더 지정
 		String path = session.getServletContext().getRealPath("/photo");
+		System.out.println(path);
 		
-		// 업로드할 파일명
-		if(roomDto.getUpload().getOriginalFilename().equals("")) {
-			// DB에 no라고 저장
-			roomDto.setPhotos(path);
+		String photo = "";
+		
+		if(upload.get(0).getOriginalFilename().equals("")) {
+			photo  = "no";
 		} else {
-			// 업로드 할 경우
-			String uploadfile = roomDto.getUpload().getOriginalFilename();
-			
-			roomDto.setPhotos(uploadfile);
-			
-			// 실제 업로드
-			try {
-				roomDto.getUpload().transferTo(new File(path + "\\" + uploadfile));
-			} catch (IllegalStateException | IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			for(MultipartFile f : upload) {
+				String fName = f.getOriginalFilename();
+				photo += fName + ",";
+				
+				// 업로드
+				try {
+					f.transferTo(new File(path + "\\" + fName));
+				} catch (IllegalStateException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
+			
+			photo = photo.substring(0, photo.length() - 1);
 		}
 		
-		// 추후 session으로 변경
+		// 추후 로그인 아이디 값으로 변경
 		String myid = "stay";
 		
 		roomDto.setHost_id(myid);
-		
-		
+		roomDto.setPhotos(photo);
 		
 		roomService.insertRoom(roomDto);
 		

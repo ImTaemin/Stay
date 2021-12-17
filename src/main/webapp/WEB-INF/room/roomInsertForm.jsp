@@ -48,13 +48,13 @@
     	
     	<!-- 주소 -->
     	<div class="room-div">
-		   	<label for="addr">숙소 주소</label>
+		   	<label>숙소 주소</label>
 	    	<div>
-				<input type="text" id="sample4_roadAddress" onclick="sample4_execDaumPostcode()" placeholder="도로명주소" readonly="readonly"
+				<input type="text" name="addr_load" id="sample4_roadAddress" onclick="sample4_execDaumPostcode()" placeholder="도로명주소" readonly="readonly"
 				style="margin-bottom: 10px;">
 				<input type="hidden" id="sample4_jibunAddress" placeholder="지번주소" size="60">
-				<span id="guide" style="color:#999;display:none"></span>
-				<input type="text" id="sample4_detailAddress" placeholder="상세주소" size="60">
+				<span id="guide" style="color:#999; display:none"></span>
+				<input type="text" name="addr_detail" id="sample4_detailAddress" placeholder="상세주소" size="60">
 				<input type="hidden" id="sample4_extraAddress" placeholder="참고항목" size="60">
 				<input type="hidden" id="sample4_engAddress" placeholder="영문주소" size="60">
 	    	</div>
@@ -62,10 +62,10 @@
     	
     	<!-- 인원 -->
     	<div class="room-div">
-	    	<label for="people">최대 숙박 인원</label>
+	    	<label for="max_per">최대 숙박 인원</label>
 	    	<div class="detail">
 	    		<div style="width: 90%;">
-	    			<input type="text" required id="people" name="people" placeholder="최대 숙박 인원 수">
+	    			<input type="text" required id="max_per" name="max_per" placeholder="최대 숙박 인원 수">
 	    		</div>
 	    		<div class="de-lable">
 	    			<label>명</label>
@@ -77,7 +77,7 @@
     	<div class="room-div">
     		<label for="content">숙소 소개</label>
     		<div>
-    			<textarea required id="content" name="content"></textarea>
+    			<textarea required id="content" name="content" wrap="hard"></textarea>
     		</div>
     	</div>
     	
@@ -99,24 +99,24 @@
 			<label for="hosting">호스팅 여부</label>
     	</div>
     	<div class="room-check">
-			<input type="checkbox" id="hosting" name="hosting" onclick="checkHosting(this)" value="yes" checked="checked">
+			<input type="checkbox" id="hosting" name="hosting" onclick="checkHosting(this)" value="1" checked="checked">
    			<label>YES</label>
    			<label></label>
-			<input type="checkbox" id="hosting" name="hosting" onclick="checkHosting(this)" value="no">
+			<input type="checkbox" id="hosting" name="hosting" onclick="checkHosting(this)" value="0">
 			<label>NO</label>
 	    </div>
 	    
 	    <!-- 이미지 -->
 	    <div class="room-div">
-    		<label for="photos">숙소 상세 이미지</label>
+    		<label for="upload">숙소 상세 이미지</label>
     		<div>
-    			<input type="file" required id="photos" name="photos" accept=".gif, .jpg, .png" multiple="multiple" style="padding-top: 6px;" maxlength="5">
+    			<input type="file" required id="upload" name="upload" accept=".gif, .jpg, .png" multiple="multiple" style="padding-top: 6px;" maxlength="5">
     		</div>
     		
     		<div id="preview"></div>
     	</div>
     	
-    	<div class="room-div">
+    	<div class="room-div" style="display: flex; justify-content: center; margin-top: 35px;">
     		<button type="submit" id="room-insert" class="btn btn-info">숙소 추가</button>
     	</div>
 	</form>

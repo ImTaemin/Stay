@@ -29,7 +29,7 @@ function sample4_execDaumPostcode() {
 			document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
 
 			document.getElementById("sample4_engAddress").value = data.addressEnglish;
-
+			
 			// 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
 			if (roadAddr !== '') {
 				document.getElementById("sample4_extraAddress").value = extraRoadAddr;

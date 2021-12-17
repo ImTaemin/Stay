@@ -1,0 +1,79 @@
+@charset "UTF-8";
+
+.card-title {
+	display: flex;
+	justify-content: center;
+	background-color: #AED9DA;
+	margin: 0 20%;
+	margin-top: 30px;
+	margin-bottom: 35px;
+	border-radius: 7px;
+	padding-bottom: 10px;
+}
+
+.card-from {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	padding: 0 20%;
+}
+
+.card-div input {
+	display: block;
+	width: 100%;
+	height: 44px;
+	padding: 0 12px;
+	border-radius: 7px;
+	font-size: 16px;
+	border: 2px solid #d3dce6;
+	transition: border-color 200ms ease-in-out;
+	margin-bottom: 25px;
+}
+
+.card-div input:focus, input:hover, input:active {
+	width: 100%;
+	outline: none;
+	box-shadow: none;
+	border-color: #0B57A2;
+	margin-bottom: 25px;
+}
+
+.card-div>label {
+	display: block;
+	width: 100%;
+	font-size: 20px;
+}
+
+.card-div>.detail {
+	display: flex;
+}
+
+#num1, #num2, #num3, #num4 {
+	text-align: center;
+}
+
+.de-lable {
+	width: 10%;
+	display: flex;
+	justify-content: center;
+	font-size: 20px;
+	line-height: 40px;
+}
+
+.card-div>#card-insert {
+	width: 60%;
+	height: 50px;
+	font-size: 1.5em;
+	font-weight: bold;
+}
+
+.card-div>.cvc-pass>label {
+	display: block;
+	width: 20%;
+	font-size: 20px;
+	padding-top: 10px;
+}
+
+.card-div>.cvc-pass {
+	display: flex;
+}
