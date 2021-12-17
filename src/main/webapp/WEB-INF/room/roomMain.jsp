@@ -21,7 +21,6 @@
 	<div class="room-main-wrap">
 		<!-- 숙소 상세 목록 -->
 		<div class="list">
-			${totalCount}
 		</div>
 		
 		<!-- 지도 -->
