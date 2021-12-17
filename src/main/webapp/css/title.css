@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+.main-title{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 1.5%;
+}  
+
+#main-menu{
+	font-size: 45px;
+	width: 30%;
+	padding-left: 7%;
+}
+
+.main-buttons{
+	width: 30%;
+	padding-left: 7%;
+}
+
+.main-buttons button{
+	width: 30%;	
+	font-size: 1.1em;
+}
+
+#loginbtn{
+	margin-right: 5%;
+	font-weight: bold;
+}
+
+#signupbtn{
+	font-weight: bold;
+}

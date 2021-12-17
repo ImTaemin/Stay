@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+.container{
+	margin-top: 5%;
+}
+
+.hostMain-top{
+	display: flex;
+	justify-content: space-around;
+}
+
+.hostMain-info{
+	border: 2pt solid skyblue;
+	border-radius: 1em;
+	width: 27%;
+	height: 280px;
+}
+
+.hostMain-image{
+	width: 200px;
+	height: 200px;
+}
