@@ -24,12 +24,12 @@
 			${totalCount}
 		</div>
 		
-<!-- 		<!-- 지도 --> -->
-<!-- 		<div class="map-wrap"> -->
-<!-- 			<div class="map" id="map"></div> -->
-<!-- 		</div> -->
+		<!-- 지도 -->
+		<div class="map-wrap">
+			<div class="map" id="map"></div>
+		</div>
 		
-<%-- 		<script src="${root}/js/roomMain.js"></script> --%>
+		<script src="${root}/js/roomMain.js"></script>
 	</div>
 </body>
 </html>
