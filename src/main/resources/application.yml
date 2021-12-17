@@ -4,13 +4,19 @@ server:
 
 #jsp
 spring:
-#  mvc:
-#    view:
-#      prefix: /WEB-INF/
-#      suffix: .jsp
+  mvc:
+    view:
+      prefix: /WEB-INF/
+      suffix: .jsp
   devtools:
     livereload:
       enabled: true
+  #mongo
+  data:
+    mongodb:
+      host:localhost
+      port:27017
+      datagbase:chat
 
 #mysql
   datasource:
