@@ -10,7 +10,7 @@
 }
 
 .hostMain-info{
-	border: 2pt solid skyblue;
+	border: 2pt solid #0B57A2;
 	border-radius: 1em;
 	width: 30%;
 	height: 280px;
@@ -76,7 +76,13 @@
 }
 
 .hostMain-content > div{
-	margin-right: 9%;
+	margin-right: 7%;
+}
+
+.content-bar{
+	border: 1px solid gray;
+	width: 1px;
+	height: 45px;
 }
 
 .content-name{

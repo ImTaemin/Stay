@@ -4,18 +4,17 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin-top: 1.5%;
 }  
 
 #main-menu{
 	font-size: 45px;
 	width: 30%;
-	padding-left: 7%;
 }
 
 .main-buttons{
 	width: 30%;
-	padding-left: 7%;
+	display: flex;
+	justify-content: flex-end;
 }
 
 .main-buttons button{

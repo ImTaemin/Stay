@@ -61,6 +61,7 @@
 					<div class="content-checkIn">체크인
 						<div class="content-inDate">2020년 12월 12일 (월)</div>
 					</div>
+					<div class="content-bar"></div>
 					<div class="content-checkOut">체크아웃
 						<div class="content-outDate">2020년 12월 13일 (화)</div>
 					</div>
@@ -81,6 +82,7 @@
 					<div class="content-checkIn">체크인
 						<div class="content-inDate">2020년 12월 12일 (월)</div>
 					</div>
+					<div class="content-bar"></div>
 					<div class="content-checkOut">체크아웃
 						<div class="content-outDate">2020년 12월 13일 (화)</div>
 					</div>

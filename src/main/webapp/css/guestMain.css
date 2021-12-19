@@ -10,7 +10,7 @@
 .guestMain-filter{
 	display: flex;
 	justify-content: space-around;
-	border: 2pt solid skyblue;
+	border: 2pt solid #0B57A2;
 	border-radius: 1em;
 	margin-right: 2%;
 	padding: 1% 10% 1% 10%; 
@@ -40,7 +40,7 @@
 .guestMain-list{
 	margin-top: 5%;
 	display: flex;
-	justify-content: center;
+	justify-content: space-around;
 	align-items: center;
 }
 
@@ -49,25 +49,23 @@
 }
 
 .guestMain-info{
-	display: flex;
-	justify-content: center;
-	
+	display: flex;	
 }
 
 .guestMain-room{
-	border: 2pt solid skyblue;
+	border: 2pt solid #0B57A2;
 	border-radius: 1em;
-	margin-right: 3%;
-	margin-left: 3%;
+	margin-right: 1.5%;
+	margin-left: 1.5%;
 	height: 350px;
 	width: 300px;
 	padding: 1% 1% 1% 1%; 
 }
 
 .guestMain-image img{
-	width: 200px;
+	width: 250px;
 	height: 200px;
-	border: 2pt solid skyblue;
+	border: 2pt solid #0B57A2;
 	border-radius: 1em;
 }
 

@@ -4,6 +4,9 @@
 .main-layout > .title {
 	font-family: 'WandocleanseaR';
 	width: 100%;
+	margin-top: 1.5%;
+	padding-left: 5%;
+	padding-right: 5%;
 }  
 
 .main-layout > .main {
