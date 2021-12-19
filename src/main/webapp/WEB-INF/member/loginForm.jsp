@@ -10,7 +10,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 <!-- css File -->
-<link rel="stylesheet" href="css/loginForm.css">
+<link rel="stylesheet" href="/css/loginForm.css">
 
 <!-- kakao login -->
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
@@ -21,9 +21,12 @@
 <div class="login">
  <h1>로그인</h1>
   <form action="loginform" method="post">
+  <div class="idsave">
+    <input type="checkbox" id="save" name="cbsave" ${sessionScope.saveok==null?"":"checked"}>아이디 저장하기
+  </div>
    <div class="input-form">
     <label for="id">ID</label>
-      <input type="text" id="id" placeholder="아이디 입력" required="required"><br>
+      <input type="text" id="id" placeholder="아이디 입력" required="required" autofocus="autofocus" value="${sessionScope.saveok==null?"":sessionScope.myid}"><br>
    </div>
    <div class="input-form">
     <label for="pass">PW</label>
