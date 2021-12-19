@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{content}, #{name}, #{photos}, #{price}, #{hosting})
 	</insert>
 	
-	<select id="getRooms" resultType="rdto">
+	<select id="getRooms" parameterType="HashMap" resultType="rdto">
 		select * from room order by no
 	</select>
 </mapper>

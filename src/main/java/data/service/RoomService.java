@@ -1,6 +1,7 @@
 package data.service;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,12 @@ public class RoomService {
 		mapper.insertRoom(roomDto);
 	}
 	
-	public ArrayList<RoomDto> getRooms() {
-		return mapper.getRooms();
+	public List<RoomDto> getRooms(int start, int perpage) {
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		
+		map.put("start", start);
+		map.put("perpage", perpage);
+		
+		return mapper.getRooms(map);
 	}
 }

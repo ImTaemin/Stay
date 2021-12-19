@@ -3,6 +3,7 @@ package data.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -17,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import data.dto.RoomDto;
+import data.service.GuestCommentService;
 import data.service.RoomService;
 
 @Controller
@@ -25,16 +27,76 @@ public class RoomController {
 	@Autowired
 	RoomService roomService;
 	
+	@Autowired
+	GuestCommentService gcommentService;
+	
 	@GetMapping("/main")
-	public ModelAndView roomMain() {
+	public ModelAndView roomMain(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage) {
 		ModelAndView mview = new ModelAndView();
-
+		
+		// 방 개수
 		int totalCount = roomService.getRoomCount();
 		
-		ArrayList<RoomDto> roomList = roomService.getRooms();
+		// 페이징 처리
+		// 총 페이지 수
+		int totalPage;
+		// 각 블럭의 시작 페이지
+		int startPage;
+		// 각 블럭의 끝 페이지
+		int endPage;
+		// 각 페이지의 시작 번호
+		int start;
+		  	
+		// 한 페이지에 보여질 글의 개수
+		int perPage = 4;
+		// 한 페이지에 보여지는 페이지 개수
+		int perBlock = 5;
+		  
+		// 총 페이지 개수 구하기
+		totalPage = totalCount / perPage + (totalCount % perPage == 0 ? 0 : 1);
+      	
+	    // 각 블럭의 시작 페이지
+	    startPage = (currentPage -1) / perBlock * perBlock + 1;
+	    endPage = startPage + perBlock - 1;
+	      	
+	    if(endPage > totalPage) {
+	    	endPage = totalPage;
+	    }
+	      	
+	    // 각 페이지에서 불러올 시작 번호
+	    start = (currentPage - 1) * perPage;
+	      	
+	    // 각 페이지에서 필요한 게시글 가져오기
+ 		List<RoomDto> roomList = roomService.getRooms(start, perPage);
+ 		
+ 		for(RoomDto dto : roomList) {
+ 			String photos[] = dto.getPhotos().split(",");
+ 			
+ 			dto.setPhotos(photos[0]);
+ 		}
+ 		
+ 		// 방 평균 별점
+ 		Float avgRating = gcommentService.getRatingAvg();
+ 		
+ 		if(avgRating == null) {
+ 			avgRating = (float) 0;
+ 		}
+ 		
+ 		// 방 댓글 개수
+ 		Integer totalComment = gcommentService.totalComment();
+ 		
+ 		if(totalComment == null) {
+ 			totalComment = 0;
+ 		}
 		
 		mview.addObject("totalCount", totalCount);
 		mview.addObject("roomList", roomList);
+		mview.addObject("totalPage", totalPage);
+		mview.addObject("startPage", startPage);
+		mview.addObject("endPage", endPage);
+		mview.addObject("currentPage", currentPage);
+		mview.addObject("avgRating", avgRating);
+		mview.addObject("totalComment", totalComment);
 		
 		mview.setViewName("/room/roomMain");
 		

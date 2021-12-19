@@ -2,28 +2,80 @@
 
 .room-main-wrap {
 	display: flex;
-	margin-top: 40px;
+	margin: 40px 0;
 }
 
 .room-main-wrap>.list {
-	width: 40%;
+	width: 45%;
 }
 
 .room-main-wrap>.map-wrap {
-	width: 60%;
+	width: 55%;
 	display: flex;
-	justify-content: center;
 	flex-direction: column;
 	padding-left: 1%;
 }
 
 .room-main-wrap>.map-wrap>.map {
 	width: 100%;
-	height: 500px;
+	height: 100%;
 	border-radius: 7px;
 	border: 2px solid #0B57A2;
 }
 
 .room-main-wrap>.list>.room-list-wrap {
-	border: 1px solid black;
+	margin-bottom: 10px;
+	display: flex;
+	cursor: pointer;
+}
+
+.room-main-wrap>.list>.room-list-wrap> .photo {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.room-main-wrap>.list>.room-list-wrap> .photo> img {
+	width: 200px;
+	height: 150px;
+	margin-right: 15px;
+	border-radius: 7px;
+}
+
+.room-main-wrap>.list>.room-list-wrap> .content> .content-top {
+	display: flex;
+	justify-content: space-between;
+}
+
+.room-main-wrap>.list>.room-list-wrap> .content> .content-top b {
+	width: 330px;
+	font-size: 1.3em;
+	color: #0B57A2;
+}
+
+.room-main-wrap>.list>.room-list-wrap> .content i {
+	font-size: 1.5em;
+}
+
+.room-main-wrap>.list>.room-list-wrap> .content .bi-heart:hover {
+	font-size: 1.5em;
+	color: #EB0000;
+}
+
+.room-main-wrap>.list>.room-list-wrap label {
+	font-size: 0.9em;
+	font-weight: normal;
+}
+
+.room-main-wrap>.list>.room-list-wrap> .content> hr {
+	width: 100px;
+	text-align: left;
+	margin: 10px 0;
+}
+
+.room-main-wrap>.list>.room-list-wrap> .content> .star-cost {
+	width: 370px;
+	display: flex;
+	justify-content: space-between;
+	margin-top: 15px;
 }
