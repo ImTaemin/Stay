@@ -6,17 +6,106 @@
 
 .hostMain-top{
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
 }
 
 .hostMain-info{
 	border: 2pt solid skyblue;
 	border-radius: 1em;
-	width: 27%;
+	width: 30%;
 	height: 280px;
 }
 
-.hostMain-image{
-	width: 200px;
-	height: 200px;
+.hostMain-image > img{
+	width: 100%;
+	height: 180px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+
+.hostMain-detail{
+	text-align: center;
+	margin-top: 6%;
+}
+
+.hostMain-name{
+	font-size: 17pt;
+	font-weight: bolder;
+}
+
+.hostMain-middle{
+	display: flex;
+	justify-content: space-between;
+	margin-top: 3%;
+}
+
+.hostMain-date{
+	font-size: 16pt;	
+} 
+
+.hostMain-state{
+	text-align-last: center;
+	text-align: center;
+	-ms-text-align-last: center;
+	-moz-text-align-last: center;
+	width: 150px;
+	height: 30px;
+	font-size: 13pt;
+}
+
+.hostMain-reservation{
+	margin-top: 3%;
+}
+
+.hostMain-reservation{
+	border: 2pt solid black;
+	padding:  2% 2% 2% 2%; 
+}
+
+.hostMain-number{
+	text-align: right;
+	font-weight: bolder;
+	font-size: 13pt;
+}
+
+.hostMain-content{
+	margin-top: 1%;
+	display: flex;
+	font-weight: bolder;
+	font-size: 12pt;
+}
+
+.hostMain-content > div{
+	margin-right: 9%;
+}
+
+.content-name{
+	font-size: 16pt;
+	font-weight: bolder;
+}
+
+.content-site{
+	font-size: 11pt;
+	font-weight: normal;
+	margin-top: 1%;
+}
+
+.content-inDate{
+	font-weight: normal;
+	margin-top: 1%;
+}
+
+.content-outDate{
+	font-weight: normal;
+	margin-top: 1%;
+}
+
+.content-number{
+	font-weight: normal;
+	margin-top: 1%;
+}
+
+.content-cost{
+	font-weight: normal;
+	margin-top: 1%;
 }

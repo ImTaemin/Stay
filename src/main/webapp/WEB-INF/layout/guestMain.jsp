@@ -31,28 +31,28 @@
 			<div class="glyphicon glyphicon-chevron-left"></div>
 			<div class="guestMain-info">
 				<div class="guestMain-room">
-					<div class="guestMain-image"><img alt="" src="../photo/logo_sm.png"></div>
+					<div class="guestMain-image"><img alt="" src="../photo/숙소1_1.jpg"></div>
 					<div class="guestMain-detail">
 						<div class="guestMain-name">숙소이름</div>
 						<div class="guestMain-site">숙소위치</div>
 					</div>
 				</div>
 				<div class="guestMain-room">
-					<div class="guestMain-image"><img alt="" src=""></div>
+					<div class="guestMain-image"><img alt="" src="../photo/숙소1_1.jpg"></div>
 					<div class="guestMain-detail">
 						<div class="guestMain-name">숙소이름</div>
 						<div class="guestMain-site">숙소위치</div>
 					</div>
 				</div>
 				<div class="guestMain-room">
-					<div class="guestMain-image"><img alt="" src=""></div>
+					<div class="guestMain-image"><img alt="" src="../photo/숙소1_1.jpg"></div>
 					<div class="guestMain-detail">
 						<div class="guestMain-name">숙소이름</div>
 						<div class="guestMain-site">숙소위치</div>
 					</div>
 				</div>
 				<div class="guestMain-room">
-					<div class="guestMain-image"><img alt="" src=""></div>
+					<div class="guestMain-image"><img alt="" src="../photo/숙소1_1.jpg"></div>
 					<div class="guestMain-detail">
 						<div class="guestMain-name">숙소이름</div>
 						<div class="guestMain-site">숙소위치</div>
