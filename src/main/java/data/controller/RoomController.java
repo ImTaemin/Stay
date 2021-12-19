@@ -31,7 +31,10 @@ public class RoomController {
 
 		int totalCount = roomService.getRoomCount();
 		
+		ArrayList<RoomDto> roomList = roomService.getRooms();
+		
 		mview.addObject("totalCount", totalCount);
+		mview.addObject("roomList", roomList);
 		
 		mview.setViewName("/room/roomMain");
 		

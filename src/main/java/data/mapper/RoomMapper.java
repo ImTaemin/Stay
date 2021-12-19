@@ -1,5 +1,7 @@
 package data.mapper;
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import data.dto.RoomDto;
@@ -8,4 +10,5 @@ import data.dto.RoomDto;
 public interface RoomMapper {
 	public int getRoomCount();
 	public void insertRoom(RoomDto roomDto);
+	public ArrayList<RoomDto> getRooms();
 }

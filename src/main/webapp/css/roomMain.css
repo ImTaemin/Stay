@@ -6,16 +6,15 @@
 }
 
 .room-main-wrap>.list {
-	width: 60%;
-	height: 100px;
-	border: 1px solid black;
+	width: 40%;
 }
 
-.room-main-wrap>.map-wrap{
-	width: 40%;
+.room-main-wrap>.map-wrap {
+	width: 60%;
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
+	padding-left: 1%;
 }
 
 .room-main-wrap>.map-wrap>.map {
@@ -23,4 +22,8 @@
 	height: 500px;
 	border-radius: 7px;
 	border: 2px solid #0B57A2;
+}
+
+.room-main-wrap>.list>.room-list-wrap {
+	border: 1px solid black;
 }

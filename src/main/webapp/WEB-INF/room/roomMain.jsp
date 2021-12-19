@@ -21,7 +21,11 @@
 	<div class="room-main-wrap">
 		<!-- 숙소 상세 목록 -->
 		<div class="list">
-			${totalCount}
+			<c:forEach var="list" items="${roomList}">
+				<div class="room-list-wrap">
+					${list.no}
+				</div>
+			</c:forEach>
 		</div>
 		
 		<!-- 지도 -->
