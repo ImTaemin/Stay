@@ -14,11 +14,12 @@
 <body>
  <div class="gaip-form">
   <h1>회원가입</h1>
-  <form action="gaipform" method="post">
+  <form action="gaip" method="post">
     <label for="id">아이디</label>
-    <div class="gaip-input">
-      <input type="text" id="id" name="id" minlength="5" maxlength="12" disabled="disabled">
-      <button type="button" id="idcheck" class="input-btn">아이디 입력</button>
+    <div class="gaip-input-id">
+      <input type="text" id="id" name="id" minlength="3" maxlength="12" required="required" oninput = "checkId()">
+      <span class="id_ok">사용 가능한 아이디입니다.</span>
+	  <span class="id_already">이미 존재하는 아이디입니다.</span>
     </div>
     <label for="pass">비밀번호</label>
       <input type="password" id="pass" name="pass" minlength="8" maxlength="16" placeholder="비밀번호를 입력하세요(8~16자 영문·특수문자 조합)" required="required">
@@ -29,16 +30,16 @@
   	<label for="brith">생일</label>
   	  <input type="date" name="birth">
   	<label for="addr">주소</label>
-  	<div class="gaip-input">
-  	  <input type="text" id="addr" name="addr" disabled="disabled">
+  	<div class="gaip-input-addr">
+  	  <input type="text" id="addr" name="addr1" disabled="disabled">
   	  <button type="button" name="btnaddr" class="input-btn">주소 찾기</button>
   	</div>
-  	  <input type="text" name="addr2" placeholder="상세주소를 입력하세요">
+  	  <input type="text" id="addr2" name="addr2" placeholder="상세주소를 입력하세요">
   	<label for="hp">핸드폰 번호</label>
   	  <input type="tel" id="hp" name="hp" placeholder="'-'를 제외한 핸드폰 번호를 입력하세요" required="required">
   	<label for="email">이메일</label>
   	  <input type="email" id="email" name="email" placeholder="이메일을 입력하세요">
-  	<div class="btn">
+  	<div class="gaip-cancel-btn">
   	  <button type="submit" class="gaip-btn">완료</button>
   	  <button type="button" class="cancel-btn">취소</button>
   	</div>
