@@ -20,3 +20,23 @@ map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
 // 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
 var zoomControl = new kakao.maps.ZoomControl();
 map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
+
+// 스크롤 div
+$(document).ready(function() {
+	// 기존 css에서 플로팅 배너 위치(top)값을 가져와 저장한다.
+	var floatPosition = parseInt($(".map-wrap").css('top'));
+
+	$(window).scroll(function() {
+		// 현재 스크롤 위치를 가져온다.
+		var scrollTop = $(window).scrollTop();
+		var newPosition = scrollTop + (floatPosition - 120) + "px";
+		
+		if(scrollTop != 0) {
+			$(".map-wrap").css('top', newPosition);
+		} else {
+			$(".map-wrap").css('top', floatPosition);
+		}
+	}).scroll();
+
+});
