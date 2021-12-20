@@ -13,6 +13,8 @@ public class MemberDto {
 	private String birth;
 	private String hp;
 	private String addr;
+	private String addr1;
+	private String addr2;
 	private String photo;
 	private int likes;
 	private String e_mail;
