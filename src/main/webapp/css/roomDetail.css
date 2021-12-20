@@ -20,13 +20,15 @@
 
 .room-detail>.photo-reser {
 	display: flex;
-	margin-top: 20px;
+	justify-content: space-between;
+	margin-top: 40px;
+	margin-bottom: 30px;
 }
 
 .room-detail>.photo-reser>.reser {
-	width: 35%;
+	width: 34%;
 	height: 200px;
-	border: 1px solid;
+	margin-right: 1%;
 }
 
 /* 이미지 슬라이드 */
@@ -98,7 +100,7 @@
 
 .slides> li> img {
 	width: 720px;
-	height: 570px;
+	height: 500px;
 	border-radius: 7px;
 }
 
@@ -106,9 +108,80 @@
 	font-weight: bold;
 	font-size: 2.0em;
 	color: #0B57A2;
+	margin-bottom: 15px;
 }
 
 .reser>.price> label {
 	font-size: 0.6em;
 	color: black;
+}
+
+.reser> .calendar {
+	border: 2px solid #0B57A2;
+	border-radius: 7px;
+}
+
+.reser> .calendar> .check-date {
+	display: flex;
+	justify-content: space-around;
+	padding: 20px 0;
+	font-size: 1.2em;
+}
+
+.check-date input {
+	display: block;
+	width: 100%;
+	height: 35px;
+	padding: 0 15px;
+	border-radius: 7px;
+	font-size: 12px;
+	border: 2px solid #d3dce6;
+	transition: border-color 200ms ease-in-out;
+	margin-top: 10px;
+}
+
+.check-date input:focus, input:hover, input:active {
+	width: 100%;
+	outline: none;
+	box-shadow: none;
+	border-color: #0B57A2;
+	margin-top: 10px;
+}
+
+.reser-btn {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 20px;
+}
+
+.reser-btn> #reserBtn {
+	width: 90%;
+	height: 45px;
+}
+
+.content-map {
+	display: flex;
+	justify-content: space-between;
+}
+
+.content-map> .content {
+	width: 58%;
+}
+
+.content-map> .content> .title {
+	font-weight: bold;
+	font-size: 1.5em;
+	margin-bottom: 10px;
+}
+
+.content-map> .map-wrap {
+	width: 40%;
+	height: 400px;
+}
+
+.content-map> .map-wrap>.map {
+	width: 100%;
+	height: 100%;
+	border-radius: 7px;
+	border: 2px solid #0B57A2;
 }
