@@ -34,10 +34,9 @@ public class RoomController {
 	public ModelAndView roomMain(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage) {
 		ModelAndView mview = new ModelAndView();
 		
-		// 방 개수
+		// 총 숙소 개수
 		int totalCount = roomService.getRoomCount();
 		
-		// 페이징 처리
 		// 총 페이지 수
 		int totalPage;
 		// 각 블럭의 시작 페이지
@@ -46,34 +45,41 @@ public class RoomController {
 		int endPage;
 		// 각 페이지의 시작 번호
 		int start;
-		  	
+
 		// 한 페이지에 보여질 글의 개수
-		int perPage = 3;
+		int perPage = 5;
 		// 한 페이지에 보여지는 페이지 개수
 		int perBlock = 5;
-		  
+
 		// 총 페이지 개수 구하기
 		totalPage = totalCount / perPage + (totalCount % perPage == 0 ? 0 : 1);
-      	
-	    // 각 블럭의 시작 페이지
-	    startPage = (currentPage -1) / perBlock * perBlock + 1;
-	    endPage = startPage + perBlock - 1;
-	      	
-	    if(endPage > totalPage) {
-	    	endPage = totalPage;
-	    }
-	      	
-	    // 각 페이지에서 불러올 시작 번호
-	    start = (currentPage - 1) * perPage;
-	    
-	    // 각 페이지에서 필요한 게시글 가져오기
- 		List<RoomDto> roomList = roomService.getRooms(start, perPage);
+
+		// 각 블럭의 시작 페이지
+		startPage = (currentPage - 1) / perBlock * perBlock + 1;
+		endPage = startPage + perBlock - 1;
+
+		if (endPage > totalPage) {
+			endPage = totalPage;
+		}
+
+		// 각 페이지에서 불러올 시작 번호
+		start = (currentPage - 1) * perPage;
+
+		// 각 페이지에서 필요한 게시글 가져오기
+		List<RoomDto> roomList = roomService.getRooms(start, perPage);
  		
  		for(RoomDto dto : roomList) {
  			String photos[] = dto.getPhotos().split(",");
  			
  			dto.setPhotos(photos[0]);
  		}
+ 		
+ 		mview.addObject("totalCount", totalCount);
+		mview.addObject("roomList", roomList);
+		mview.addObject("totalPage", totalPage);
+		mview.addObject("startPage", startPage);
+		mview.addObject("endPage", endPage);
+		mview.addObject("currentPage", currentPage);
  		
  		// 방 평균 별점
  		Float avgRating = gcommentService.getRatingAvg();
@@ -89,12 +95,6 @@ public class RoomController {
  			totalComment = 0;
  		}
 		
-		mview.addObject("totalCount", totalCount);
-		mview.addObject("roomList", roomList);
-		mview.addObject("totalPage", totalPage);
-		mview.addObject("startPage", startPage);
-		mview.addObject("endPage", endPage);
-		mview.addObject("currentPage", currentPage);
 		mview.addObject("avgRating", avgRating);
 		mview.addObject("totalComment", totalComment);
 		
@@ -111,7 +111,7 @@ public class RoomController {
 	@PostMapping("/insert")
 	public String roomInsert(@ModelAttribute RoomDto roomDto, @RequestParam ArrayList<MultipartFile> upload, HttpSession session) {
 		// 업로드할 폴더 지정
-		String path = session.getServletContext().getRealPath("/photo");
+		String path = session.getServletContext().getRealPath("/photo/roomPhoto");
 		System.out.println(path);
 		
 		String photo = "";
@@ -135,8 +135,7 @@ public class RoomController {
 			photo = photo.substring(0, photo.length() - 1);
 		}
 		
-		// 추후 로그인 아이디 값으로 변경
-		String myid = "stay";
+		String myid = (String)session.getAttribute("myid");
 		
 		roomDto.setHost_id(myid);
 		roomDto.setPhotos(photo);
@@ -144,5 +143,22 @@ public class RoomController {
 		roomService.insertRoom(roomDto);
 		
 		return "redirect:main";
+	}
+	
+	@GetMapping("/content")
+	public ModelAndView content(@RequestParam String no, @RequestParam(value = "currentPage", defaultValue = "1") int currentPage) {
+		ModelAndView mview = new ModelAndView();
+		
+		RoomDto roomDto = roomService.getRoom(no);
+		
+		String photoList[] = roomDto.getPhotos().split(",");
+		
+		mview.addObject("roomDto", roomDto);
+		mview.addObject("photoList", photoList);
+		mview.addObject("currentPage", currentPage);
+		
+		mview.setViewName("/room/roomDetail");
+		
+		return mview;
 	}
 }

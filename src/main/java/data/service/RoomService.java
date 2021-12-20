@@ -30,4 +30,8 @@ public class RoomService {
 		
 		return mapper.getRooms(map);
 	}
+	
+	public RoomDto getRoom(String no) {
+		return mapper.getRoom(no);
+	}
 }

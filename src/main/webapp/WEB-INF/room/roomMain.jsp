@@ -24,9 +24,9 @@
 		<!-- 숙소 상세 목록 -->
 		<div class="list">
 			<c:forEach var="list" items="${roomList}">
-				<div class="room-list-wrap" id="${list.addr_load}">
+				<div class="room-list-wrap" id="${list.addr_load}" onclick="location.href='content?no=${list.no}&currentPage=${currentPage}'">
 					<div class="photo">
-						<img alt="" src="${root}/photo/${list.photos}">
+						<img alt="" src="${root}/photo/roomPhoto/${list.photos}">
 					</div>
 					
 					<div class="content">
@@ -59,42 +59,40 @@
 				<hr>
 			</c:forEach>
 			
-			<!-- 페이징 -->
-			<div style="width: 100%; text-align: center;">
-				<ul class="pagination">
-					<!-- 이전 -->
-					<c:if test="${startPage > 1}">
-						<li>
-							<a href="main?currentPage=${startPage - 1}">
-								<span class="bi bi-chevron-double-left"></span>
-							</a>
-						</li>
-					</c:if>
-					
-					<c:forEach var="pp" begin="${startPage}" end="${endPage}">
-						<c:if test="${currentPage == pp}">
-							<li class="active">
-								<a href="main?currentPage=${pp}">${pp}</a>
+			<!-- 페이징 처리 -->
+			<c:if test="${totalCount > 0}">
+				<div style="width: 100%; text-align: center;">
+					<ul class="pagination">
+						<!-- 이전 -->
+						<c:if test="${startPage > 1}">
+							<li>
+								<a href="main?currentPage=${startPage - 1}">이전</a>
 							</li>
 						</c:if>
 						
-						<c:if test="${currentPage != pp}">
+						<c:forEach var="pp" begin="${startPage}" end="${endPage}">
+							<c:if test="${currentPage == pp}">
+								<li class="active">
+									<a href="main?currentPage=${pp}">${pp}</a>
+								</li>
+							</c:if>
+							
+							<c:if test="${currentPage != pp}">
+								<li>
+									<a href="main?currentPage=${pp}">${pp}</a>
+								</li>
+							</c:if>
+						</c:forEach>
+						
+						<!-- 다음 -->
+						<c:if test="${endPage < totalPage}">
 							<li>
-								<a href="main?currentPage=${pp}">${pp}</a>
+								<a href="main?currentPage=${endPage + 1}">이전</a>
 							</li>
 						</c:if>
-					</c:forEach>
-					
-					<!-- 다음 -->
-					<c:if test="${endPage < totalPage}">
-						<li>
-							<a href="main?currentPage=${endPage + 1}">
-								<span class="bi bi-chevron-double-right"></span>
-							</a>
-						</li>
-					</c:if>
-				</ul>
-			</div>
+					</ul>
+				</div>
+			</c:if>
 		</div>
 		
 		<!-- 지도 -->
