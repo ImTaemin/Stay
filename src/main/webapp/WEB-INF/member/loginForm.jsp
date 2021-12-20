@@ -20,6 +20,7 @@
 <body>
 <div class="login">
  <h1>로그인</h1>
+ 
   <form action="loginform" method="post">
    <div class="input-form">
     <label for="id">ID</label>
