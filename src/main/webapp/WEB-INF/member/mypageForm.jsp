@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="css/mypageForm.css">
+<link rel="stylesheet" href="/css/mypageForm.css">
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
@@ -14,9 +14,9 @@
 </head>
 <body>
 <div class="cardbtn">
-     <h4>프로필 이미지
+     <!-- <h4>프로필 이미지
      <input type="file" name="photo1" id="photo1" style="display: none;" required="required" multiple="multiple">&nbsp;&nbsp;
-     <span class="glyphicon glyphicon-user" style="cursor: pointer;"></span></h4>
+     <span class="glyphicon glyphicon-user" style="cursor: pointer;"></span></h4> -->
 
 		<div class="photo">
 			<img alt="" src="${root}/photo/${mdto.photo}">
@@ -24,9 +24,10 @@
 
 		<!-- 이미지 -->
 	    <div class="pfimg-div">
-    		<label for="photo">회원프로필 이미지</label>
+    		<!-- <label for="photo">회원프로필 이미지</label> -->
+    		<label for="photo"></label>
     		<div class="pfinput">
-    			<input type="file" required id="photo" name="photo" accept=".gif, .jpg, .png" multiple="multiple" style="padding-top: 6px;" maxlength="5">
+    			<input type="file" required id="photo" name="photo" accept=".gif, .jpg, .png" multiple="multiple" style="width: 200px; padding-top: 6px;" maxlength="5">
     		</div>
     		
     		<div id="pfmainimg"></div>
@@ -80,6 +81,6 @@
   </form>
   
   </div>
-  <script src="js/mypageForm.js"></script>
+  <script src="/js/mypageForm.js"></script>
 </body>
 </html>

@@ -39,34 +39,34 @@ public class MypageController {
 
 	// updatepassform
 	@GetMapping("/updatepassform")
-	public String updatePassForm(@RequestParam String num, Model model) {
-		model.addAttribute("num", num);
+	public String updatePassForm(@RequestParam String id, Model model) {
+		model.addAttribute("id",id);
 		return "/member/updatepassform";
 	}
 
 	// 비밀번호 체크 후 updateform or passfail
 	@PostMapping("/updatepass")
-	public String updatePass(@RequestParam String num, @RequestParam String pass) {
+	public String updatePass(@RequestParam String id, @RequestParam String pass) {
 		// db로부터 비번맞나 체크
 		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("num", num);
+		map.put("id", id);
 		map.put("pass", pass);
 
 		int check = mapper.getCheckPass(map);
 
 		if (check == 1) { // 1:비번이 맞는경우
-			return "redirect:updateform?num=" + num; // num에 해당하는 dto가져와야 하므로
+			return "redirect:updateform?id=" + id; // id에 해당하는 dto가져와야 하므로
 		} else { // 비번 틀린경우
 			return "/member/passfail";
 		}
 	}
 	
 	@GetMapping("/updateform")
-	public ModelAndView updateForm(@RequestParam String num) {
+	public ModelAndView updateForm(@RequestParam String id) {
 		ModelAndView mview=new ModelAndView();
 		
-		//db로부터 num에 해당하는 dto열기
-		MemberDto dto=mapper.getMember(num);
+		//db로부터 id에 해당하는 dto열기
+		MemberDto dto=mapper.getMember(id);
 		
 		dto.setE_mail(dto.getE_mail());
 		
