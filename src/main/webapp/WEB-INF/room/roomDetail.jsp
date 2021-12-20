@@ -18,15 +18,44 @@
 </head>
 <body>
 	<div class="room-detail">
+		<!-- 숙소 이름 -->
 		<div class="title">
 			<label>${roomDto.name}</label>
 		</div>
 		
-		<div class="room-photo">
-			<c:forEach var="photo" items="${photoList}">
-<!-- 				<img alt="" src="../photo/"> -->
-			</c:forEach>
+		<!-- 숙소 주소 -->
+		<div class="addr">
+			<label>주소 | ${roomDto.addr_load} ${roomDto.addr_detail}</label>	
 		</div>
+		
+		<!-- 이미지 & 결제 -->
+		<div class="photo-reser">
+			<div id="slideShow">
+				<ul class="slides">
+					<c:forEach var="img" items="${roomDto.photos}">
+						<li>
+							<img src="../photo/roomPhoto/${img}">
+						</li>
+					</c:forEach>
+				</ul>
+				
+				<p class="controller">
+					<!-- &lang: 왼쪽 방향 화살표 &rang: 오른쪽 방향 화살표 -->
+					<span class="prev">&lang;</span>
+					<span class="next">&rang;</span>
+				</p>
+			</div>
+			
+			<div class="reser">
+				<div class="price">
+					<fmt:formatNumber value="${roomDto.price}" type="currency" currencySymbol="￦"/>
+					<label> / 1박</label>			
+				</div>
+				
+			</div>
+		</div>
+		
+		<script src="${root}/js/roomDetail.js"></script>
 	</div>
 </body>
 </html>
