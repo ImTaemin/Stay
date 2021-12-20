@@ -22,11 +22,11 @@ public class RoomService {
 		mapper.insertRoom(roomDto);
 	}
 	
-	public List<RoomDto> getRooms(int start, int perpage) {
+	public List<RoomDto> getRooms(int start, int perPage) {
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		
 		map.put("start", start);
-		map.put("perpage", perpage);
+		map.put("perPage", perPage);
 		
 		return mapper.getRooms(map);
 	}

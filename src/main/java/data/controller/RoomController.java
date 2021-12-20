@@ -48,7 +48,7 @@ public class RoomController {
 		int start;
 		  	
 		// 한 페이지에 보여질 글의 개수
-		int perPage = 4;
+		int perPage = 3;
 		// 한 페이지에 보여지는 페이지 개수
 		int perBlock = 5;
 		  
@@ -65,7 +65,7 @@ public class RoomController {
 	      	
 	    // 각 페이지에서 불러올 시작 번호
 	    start = (currentPage - 1) * perPage;
-	      	
+	    
 	    // 각 페이지에서 필요한 게시글 가져오기
  		List<RoomDto> roomList = roomService.getRooms(start, perPage);
  		
