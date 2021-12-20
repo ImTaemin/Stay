@@ -1,4 +1,4 @@
-package data.controller;
+package stay.data.controller;
 
 import java.time.LocalDateTime;
 
@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import data.chat.Chat;
-import data.chat.ChatRepository;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
+import stay.data.chat.Chat;
+import stay.data.chat.ChatRepository;
 
 @RequiredArgsConstructor
 @RestController

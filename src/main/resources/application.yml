@@ -11,22 +11,22 @@ spring:
   devtools:
     livereload:
       enabled: true
-  #mongo
-  data:
-    mongodb:
-      host: localhost
-      port: 27017
-      database: chat
-
-#mysql
+      
+  #mysql
+#  db-mysql:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://sist-stay.ct5m6xbkyvuw.ap-northeast-2.rds.amazonaws.com:3306/stay?serverTimezone=Asia/Seoul
     username: admin
     password: sist1234
-    
+      
+#  db-mongo:
+#    data:
+#      mongodb:
+#        uri: mongodb://localhost:27017/chat
+
 #mybatis
 mybatis:
-  type-aliases-package: data.mapper, data.dto
+  type-aliases-package: stay.data.mapper, stay.data.dto
   mapper-locations:
   - /mapper/**/*.xml

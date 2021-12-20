@@ -1,11 +1,11 @@
-package data.mapper;
+package stay.data.mapper;
 
 import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import data.dto.RoomDto;
+import stay.data.dto.RoomDto;
 
 @Mapper
 public interface RoomMapper {

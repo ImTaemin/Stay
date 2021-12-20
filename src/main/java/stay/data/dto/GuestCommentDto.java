@@ -1,4 +1,4 @@
-package data.dto;
+package stay.data.dto;
 
 import org.apache.ibatis.type.Alias;
 

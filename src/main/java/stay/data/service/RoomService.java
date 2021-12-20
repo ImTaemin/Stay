@@ -1,4 +1,4 @@
-package data.service;
+package stay.data.service;
 
 import java.util.HashMap;
 import java.util.List;
@@ -6,8 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import data.dto.RoomDto;
-import data.mapper.RoomMapper;
+import stay.data.dto.RoomDto;
+import stay.data.mapper.RoomMapper;
 
 @Service
 public class RoomService {

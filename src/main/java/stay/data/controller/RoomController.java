@@ -1,4 +1,4 @@
-package data.controller;
+package stay.data.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import data.dto.RoomDto;
-import data.service.GuestCommentService;
-import data.service.RoomService;
+import stay.data.dto.RoomDto;
+import stay.data.service.GuestCommentService;
+import stay.data.service.RoomService;
 
 @Controller
 @RequestMapping("/room")

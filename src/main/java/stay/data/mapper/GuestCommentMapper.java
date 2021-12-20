@@ -1,4 +1,4 @@
-package data.mapper;
+package stay.data.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 

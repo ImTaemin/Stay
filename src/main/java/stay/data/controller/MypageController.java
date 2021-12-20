@@ -1,4 +1,4 @@
-package data.controller;
+package stay.data.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import data.dto.MemberDto;
-import data.mapper.MemberMapper;
-import data.service.MemberService;
+import stay.data.dto.MemberDto;
+import stay.data.mapper.MemberMapper;
+import stay.data.service.MemberService;
 
 @Controller
 @RequestMapping("/mypage")

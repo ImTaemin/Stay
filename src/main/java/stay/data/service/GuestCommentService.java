@@ -1,9 +1,9 @@
-package data.service;
+package stay.data.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import data.mapper.GuestCommentMapper;
+import stay.data.mapper.GuestCommentMapper;
 
 @Service
 public class GuestCommentService {

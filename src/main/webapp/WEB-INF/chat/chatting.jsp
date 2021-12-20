@@ -68,10 +68,6 @@
 		</div>
 	</div>
 
-
-	</div>
-
-	</div>
 	<script src="../../js/chat.js"></script>
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->

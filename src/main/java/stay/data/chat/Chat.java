@@ -1,4 +1,4 @@
-package data.chat;
+package stay.data.chat;
 
 import java.time.LocalDateTime;
 

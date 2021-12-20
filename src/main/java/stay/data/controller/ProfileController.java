@@ -1,4 +1,4 @@
-package data.controller;
+package stay.data.controller;
 
 import java.util.List;
 
@@ -8,9 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import data.dto.MemberDto;
-import data.mapper.MemberMapper;
-import data.service.MemberService;
+import stay.data.dto.MemberDto;
+import stay.data.mapper.MemberMapper;
+import stay.data.service.MemberService;
 
 @Controller
 @RequestMapping("/profile")
