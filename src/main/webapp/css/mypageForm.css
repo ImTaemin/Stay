@@ -76,14 +76,14 @@ div .cardbtn {
 div .btnmypage {
 	display: flex;
 	justify-content: center;
-	margin-left: 30px;
+	margin-left: 25px;
 	margin-top: 5px;
 }
 
 .card-btn {
 	display: inline;
 	/* margin-left: 10px; */
-	width: 170px;
+	width: 200px;
 	height: 40px;
 	border: none;
 	border-radius: 5px;
@@ -125,10 +125,11 @@ div .btnmypage {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	border-radius: 100%;
 }
 
 .cardbtn> .photo> img {
 	width: 200px;
 	height: 150px;
-	border-radius: 7px;
+	border-radius: 100%;
 }

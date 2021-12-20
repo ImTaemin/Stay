@@ -39,7 +39,7 @@
   <div class="mypage-form">
   <form action="mypageform" method="post">
 <!--    <form action="mypageform" method="post" enctype="multipart/form-data" onsubmit="return check(this)"> -->
-  <input type="hidden" name="num" value="${num}">
+  <input type="hidden" name="id" value="${dto.id}">
     
   
    <div class="input">
@@ -49,17 +49,17 @@
     <label for="pass_check">비밀번호 확인</label>
       <input type="password" id="pass_check" placeholder="비밀번호 확인" required="required">
   	<label for="name">이름</label>
-  	  <input type="text" required="required" value="${mdto.name}">
+  	  <input type="text" required="required" value="${dto.name}">
   	<label for="brith">생년월일</label>
-  	  <input type="date" value="${mdto.birth}">
+  	  <input type="date" value="${dto.birth}">
   	<label for="addr">주소</label>
   	  <input type="text" id="addr" name="addr" disabled="disabled">
   	  <button type="button" class="mypage-btn" name="addr">주소 찾기</button><br>
-  	  <input type="text" name="addr" value="${mdto.addr}">
+  	  <input type="text" name="addr" value="${dto.addr}">
   	<label for="hp">핸드폰 번호</label>
-  	  <input type="tel" id="hp" required="required" value="${mdto.hp}">
+  	  <input type="tel" id="hp" required="required" value="${dto.hp}">
   	<label for="email">이메일</label>
-  	   <input type="email" id="email" value="${mdto.email}"> 
+  	   <input type="email" id="email" value="${dto.email}"> 
   	 <!-- <input type="text" name="email1" class="form-control"
   	  		required="required" style="width: 80px;" value="${email1}">
 		<b>@</b>
@@ -75,7 +75,9 @@
 	<div class="btnmypage">
 	   <button type="submit" class="mypage-btn">수정</button>
   	  <button type="button" class="cancel-btn">취소</button>
+  	  
 	</div>
+	<br><br>
   </div>
   
   </form>
