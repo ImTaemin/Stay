@@ -26,4 +26,8 @@ public class MemberService {
 		mapper.insertPhoto(memberDto);
 	}
 	
+	public MemberDto getMember(String id) {
+		return mapper.getMember(id);
+	}
+	
 }

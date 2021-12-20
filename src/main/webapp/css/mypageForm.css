@@ -130,6 +130,11 @@ div .btnmypage {
 
 .cardbtn> .photo> img {
 	width: 200px;
-	height: 150px;
+	height: 200px;
 	border-radius: 100%;
+}
+
+.mypage-update-addr {
+	display: flex;
+	flex-wrap: wrap;
 }

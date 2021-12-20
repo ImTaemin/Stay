@@ -21,7 +21,7 @@
 				<!-- <input type="file" name="photo" id="photo" style="display: none;" required="required" multiple="multiple">
      			<span class="glyphicon glyphicon-user" style="cursor: pointer;"></span> -->
      			<div class="photo">
-					<img alt="" src="${root}/photo/${memlist.photo}">
+					<img alt="" src="${root}/photo/${memberDto.photo}">
 				</div>
 				<!-- <button type="button" class="modal_btn" style="width: 200px; padding-top: 6px;">신고하기</button> -->
 				<button class="openBtn">신고하기</button>
@@ -48,12 +48,12 @@
 				<div class="profile-like">
 					<span class="glyphicon glyphicon-heart likes"
 						style="width: 30px; cursor: pointer; color: red" num="${num}"></span>
-					<span>LIKE ${memlist.likes}</span>
+					<span>LIKE ${memberDto.likes}</span>
 				</div>
 				<div class="profile-message">
 					<span class="glyphicon glyphicon-envelope message"
 						style="width: 30px; cursor: pointer;"></span>
-					<span>MESSAGE ${memlist.message}</span>
+					<span>MESSAGE ${message}</span>
 				</div>
 			</div>
 		</div>

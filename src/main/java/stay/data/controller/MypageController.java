@@ -3,7 +3,6 @@ package stay.data.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,15 +18,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import stay.data.dto.MemberDto;
-import stay.data.mapper.MemberMapper;
 import stay.data.service.MemberService;
 
 @Controller
 @RequestMapping("/mypage")
 public class MypageController {
-	
-	@Autowired
-	MemberMapper mapper;
 	
 	@Autowired
 	MemberService memberService;
@@ -45,52 +40,43 @@ public class MypageController {
 	}
 
 	// 비밀번호 체크 후 updateform or passfail
-	@PostMapping("/updatepass")
-	public String updatePass(@RequestParam String id, @RequestParam String pass) {
-		// db로부터 비번맞나 체크
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("id", id);
-		map.put("pass", pass);
-
-		int check = mapper.getCheckPass(map);
-
-		if (check == 1) { // 1:비번이 맞는경우
-			return "redirect:updateform?id=" + id; // id에 해당하는 dto가져와야 하므로
-		} else { // 비번 틀린경우
-			return "/member/passfail";
-		}
-	}
+	/*
+	 * @PostMapping("/updatepass") public String updatePass(@RequestParam String
+	 * id, @RequestParam String pass) { // db로부터 비번맞나 체크 HashMap<String, String> map
+	 * = new HashMap<String, String>(); map.put("id", id); map.put("pass", pass);
+	 * 
+	 * int check = mapper.getCheckPass(map);
+	 * 
+	 * if (check == 1) { // 1:비번이 맞는경우 return "redirect:updateform?id=" + id; // id에
+	 * 해당하는 dto가져와야 하므로 } else { // 비번 틀린경우 return "/member/passfail"; } }
+	 */
 	
-	@GetMapping("/updateform")
-	public ModelAndView updateForm(@RequestParam String id) {
-		ModelAndView mview=new ModelAndView();
-		
-		//db로부터 id에 해당하는 dto열기
-		MemberDto dto=mapper.getMember(id);
-		
-		dto.setE_mail(dto.getE_mail());
-		
-		mview.addObject("dto", dto);
-		
-		mview.setViewName("/member/updateform");
-		
-		return mview;
-	}
+	/*
+	 * @GetMapping("/updateform") public ModelAndView updateForm(@RequestParam
+	 * String id) { ModelAndView mview=new ModelAndView();
+	 * 
+	 * //db로부터 id에 해당하는 dto열기 MemberDto dto=mapper.getMember(id);
+	 * 
+	 * dto.setE_mail(dto.getE_mail());
+	 * 
+	 * mview.addObject("dto", dto);
+	 * 
+	 * mview.setViewName("/member/updateform");
+	 * 
+	 * return mview; }
+	 */
 	
 	//update
-	@PostMapping("/update")
-	public String memberUpdate(@ModelAttribute MemberDto dto) {
-		
-		//email 형식으로 넣어주기
-		dto.setE_mail(dto.getE_mail());
-		
-		//update 호출
-		mapper.updateMember(dto);
-			
-		//profile로 
-		return "redirect:profile";
-	}
-	
+	/*
+	 * @PostMapping("/update") public String memberUpdate(@ModelAttribute MemberDto
+	 * dto) {
+	 * 
+	 * //email 형식으로 넣어주기 dto.setE_mail(dto.getE_mail());
+	 * 
+	 * //update 호출 mapper.updateMember(dto);
+	 * 
+	 * //profile로 return "redirect:profile"; }
+	 */
 	/*
 	 * @GetMapping("/insertform") public String photoInsertForm() { return
 	 * "/member/photoInsertForm"; }
@@ -125,7 +111,7 @@ public class MypageController {
 		}
 
 		// 추후 로그인 아이디 값으로 변경
-		String myid = "stay";
+		String myid = (String)session.getAttribute("myid");
 
 		memberDto.setId(myid);
 		memberDto.setPhoto(photo);
@@ -133,6 +119,23 @@ public class MypageController {
 		memberService.insertPhoto(memberDto);
 
 		return "redirect:main";
+	}
+	
+	@GetMapping("/member1")
+	public ModelAndView member1(HttpSession session) {
+		ModelAndView mview = new ModelAndView();
+		
+		String myid = (String)session.getAttribute("myid");
+		
+		MemberDto memberDto = memberService.getMember(myid);
+		
+		memberDto.setId(myid);
+		
+		mview.addObject("memberDto", memberDto);
+		
+		mview.setViewName("/member/mypageForm");
+		
+		return mview;
 	}
 	
 }
