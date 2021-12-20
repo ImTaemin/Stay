@@ -9,18 +9,41 @@
 <link rel="stylesheet" href="css/mypageForm.css">
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<c:set var="root" value="${pageContext.request.contextPath}"/>
 <title>마이페이지</title>
 </head>
 <body>
-  <h2>${name}님의 마이페이지</h2>
-  <form action="mypageform" method="post" enctype="multipart/form-data" onsubmit="return check(this)">
+<div class="cardbtn">
+     <h4>프로필 이미지
+     <input type="file" name="photo1" id="photo1" style="display: none;" required="required" multiple="multiple">&nbsp;&nbsp;
+     <span class="glyphicon glyphicon-user" style="cursor: pointer;"></span></h4>
+
+		<div class="photo">
+			<img alt="" src="${root}/photo/${photo}">
+		</div>
+
+		<!-- 이미지 -->
+	    <div class="pfimg-div">
+    		<label for="photo">회원프로필 이미지</label>
+    		<div class="pfinput">
+    			<input type="file" required id="photo" name="photo" accept=".gif, .jpg, .png" multiple="multiple" style="padding-top: 6px;" maxlength="5">
+    		</div>
+    		
+    		<div id="pfmainimg"></div>
+    	</div>
+     
+     <button type="button" class="card-btn" onclick="location.href='card.jsp'">결제 카드 추가</button>
+   </div>
+
+  <div class="mypage-form">
+  <form action="mypageform" method="post">
+<!--    <form action="mypageform" method="post" enctype="multipart/form-data" onsubmit="return check(this)"> -->
   <input type="hidden" name="num" value="${num}">
-  <h4>프로필 이미지
-  <input type="file" name="photo" id="photo" style="display: none;" required="required" multiple="multiple">&nbsp;&nbsp;
-   <span class="glyphicon glyphicon-user" style="cursor: pointer;"></span></h4>
-    <button type="button" class="btn btn-info" style="width: 150px;" onclick="location.href='card.jsp'">결제 카드 추가</button>
     
-    <!-- dsfds -->
+  
+  
+   <div class="input">
+   <h2>${name}님의 마이페이지</h2>
     <label for="pass">비밀번호</label>
       <input type="password" id="pass" minlength="8" maxlength="16" placeholder="비밀번호를 입력하세요(8~16자의 영문·특수문자 조합)" required="required">
     <label for="pass_check">비밀번호 확인</label>
@@ -31,13 +54,13 @@
   	  <input type="date" value="${birth}">
   	<label for="addr">주소</label>
   	  <input type="text" id="addr" name="addr" disabled="disabled">
-  	  <button type="button" name="addr">주소 찾기</button>
+  	  <button type="button" class="mypage-btn" name="addr">주소 찾기</button><br>
   	  <input type="text" name="addr" value="${addr}">
   	<label for="hp">핸드폰 번호</label>
   	  <input type="tel" id="hp" required="required" value="${hp}">
   	<label for="email">이메일</label>
-  	  <!-- <input type="email" id="email" placeholder="이메일을 입력하세요"> -->
-  	  <input type="text" name="email1" class="form-control"
+  	   <input type="email" id="email" value="${email}"> 
+  	 <!-- <input type="text" name="email1" class="form-control"
   	  		required="required" style="width: 80px;" value="${email1}">
 		<b>@</b>
 	  <input type="text" name="email2" id="email2" class="form-control"
@@ -48,12 +71,16 @@
 			<option value="nate.com">네이트</option>
 			<option value="gmail.com">구글</option>
 			<option value="hanmail.net">다음</option>
-	  </select>
-	  
-	<button type="submit" class="btn btn-info" style="width: 100px;">수정</button>
-	<button type="reset" class="btn btn-danger" style="width: 100px;">취소</button>
+	  </select>-->
+	<div class="btnmypage">
+	   <button type="submit" class="mypage-btn">수정</button>
+  	  <button type="button" class="cancel-btn">취소</button>
+	</div>
+  </div>
+  
   </form>
   
+  </div>
   <script src="js/mypageForm.js"></script>
 </body>
 </html>
