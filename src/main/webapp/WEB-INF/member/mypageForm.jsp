@@ -19,7 +19,7 @@
      <span class="glyphicon glyphicon-user" style="cursor: pointer;"></span></h4>
 
 		<div class="photo">
-			<img alt="" src="${root}/photo/${photo}">
+			<img alt="" src="${root}/photo/${mdto.photo}">
 		</div>
 
 		<!-- 이미지 -->
@@ -42,23 +42,23 @@
     
   
    <div class="input">
-   <h2>${name}님의 마이페이지</h2>
+   <h2>${mdto.name}님의 마이페이지</h2>
     <label for="pass">비밀번호</label>
       <input type="password" id="pass" minlength="8" maxlength="16" placeholder="비밀번호를 입력하세요(8~16자의 영문·특수문자 조합)" required="required">
     <label for="pass_check">비밀번호 확인</label>
       <input type="password" id="pass_check" placeholder="비밀번호 확인" required="required">
   	<label for="name">이름</label>
-  	  <input type="text" required="required" value="${name}">
+  	  <input type="text" required="required" value="${mdto.name}">
   	<label for="brith">생년월일</label>
-  	  <input type="date" value="${birth}">
+  	  <input type="date" value="${mdto.birth}">
   	<label for="addr">주소</label>
   	  <input type="text" id="addr" name="addr" disabled="disabled">
   	  <button type="button" class="mypage-btn" name="addr">주소 찾기</button><br>
-  	  <input type="text" name="addr" value="${addr}">
+  	  <input type="text" name="addr" value="${mdto.addr}">
   	<label for="hp">핸드폰 번호</label>
-  	  <input type="tel" id="hp" required="required" value="${hp}">
+  	  <input type="tel" id="hp" required="required" value="${mdto.hp}">
   	<label for="email">이메일</label>
-  	   <input type="email" id="email" value="${email}"> 
+  	   <input type="email" id="email" value="${mdto.email}"> 
   	 <!-- <input type="text" name="email1" class="form-control"
   	  		required="required" style="width: 80px;" value="${email1}">
 		<b>@</b>
