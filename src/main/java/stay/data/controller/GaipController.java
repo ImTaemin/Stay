@@ -33,7 +33,7 @@ public class GaipController {
 	
 	@GetMapping("/list")
 	public String list(Model model) {
-		
+			
 		List<MemberDto> list=mapper.getAllMembers();
 		
 		model.addAttribute("count", list.size());

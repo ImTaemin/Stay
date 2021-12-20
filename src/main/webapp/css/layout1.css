@@ -15,3 +15,13 @@
 	padding-left: 5%;
 	padding-right: 5%;
 }
+
+.main-layout > .footer {
+	font-family: 'WandocleanseaR';
+	background-color: #02c7ea;
+	 /*하단 고정*/
+	width: 100%;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+}

@@ -75,7 +75,7 @@
 		<div class="main-buttons">
 			<c:if test="${sessionScope.loginok==null }">
 				<button type="button" class="btn btn-info" id="loginbtn"  onclick="location.href='${root}/member/login'">Login</button>
-				<button type="button" class="btn btn-default"  id="signupbtn" onclick="location.href='${root}/member/gaipform'">Sign Up</button>
+				<button type="button" class="btn btn-default"  id="signupbtn" onclick="location.href='${root}/member/gaip'">Sign Up</button>
 			</c:if>
 			<c:if test="${sessionScope.loginok!=null }">
 				<b>${sessionScope.myid } 님</b><i class="fas fa-user-circle"></i>
