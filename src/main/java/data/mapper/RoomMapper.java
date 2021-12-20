@@ -12,4 +12,5 @@ public interface RoomMapper {
 	public int getRoomCount();
 	public void insertRoom(RoomDto roomDto);
 	public List<RoomDto> getRooms(HashMap<String, Integer> map);
+	public RoomDto getRoom(String no);
 }

@@ -21,17 +21,17 @@
 <div class="login">
  <h1>로그인</h1>
  
-  <form action="loginform" method="post">
+  <form action="loginprocess" method="post">
   <div class="idsave">
     <input type="checkbox" id="save" name="cbsave" ${sessionScope.saveok==null?"":"checked"}>아이디 저장하기
   </div>
    <div class="input-form">
     <label for="id">ID</label>
-      <input type="text" id="id" placeholder="아이디 입력" required="required" autofocus="autofocus" value="${sessionScope.saveok==null?"":sessionScope.myid}"><br>
+      <input type="text" id="id" name="id" placeholder="아이디 입력" required="required" autofocus="autofocus" value="${sessionScope.saveok==null?"":sessionScope.myid}"><br>
    </div>
    <div class="input-form">
     <label for="pass">PW</label>
-      <input type="password" id="pass" placeholder="비밀번호 입력" required="required"><br>
+      <input type="password" id="pass" name="pass" placeholder="비밀번호 입력" required="required"><br>
    </div>
    
     <span class="find">
@@ -48,6 +48,6 @@
   <!-- 카카오톡 로그인 -->
 </div>
   
-  <script src="js/loginForm.js"></script>
+  <script src="/js/loginForm.js"></script>
 </body>
 </html>

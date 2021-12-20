@@ -17,16 +17,16 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 <!-- js -->
 <!-- 카카오 지도 API -->
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=	05c1abb954049537a223eedcab5c9b64"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=05c1abb954049537a223eedcab5c9b64&libraries=services"></script>
 </head>
 <body>
 	<div class="room-main-wrap">
 		<!-- 숙소 상세 목록 -->
 		<div class="list">
 			<c:forEach var="list" items="${roomList}">
-				<div class="room-list-wrap">
+				<div class="room-list-wrap" id="${list.addr_load}" onclick="location.href='content?no=${list.no}&currentPage=${currentPage}'">
 					<div class="photo">
-						<img alt="" src="${root}/photo/${list.photos}">
+						<img alt="" src="${root}/photo/roomPhoto/${list.photos}">
 					</div>
 					
 					<div class="content">
@@ -59,42 +59,40 @@
 				<hr>
 			</c:forEach>
 			
-			<!-- 페이징 -->
-			<div style="width: 100%; text-align: center;">
-				<ul class="pagination">
-					<!-- 이전 -->
-					<c:if test="${startPage > 1}">
-						<li>
-							<a href="main?currentPage=${startPage - 1}">
-								<span class="bi bi-chevron-double-left"></span>
-							</a>
-						</li>
-					</c:if>
-					
-					<c:forEach var="pp" begin="${startPage}" end="${endPage}">
-						<c:if test="${currentPage == pp}">
-							<li class="active">
-								<a href="main?currentPage=${pp}">${pp}</a>
+			<!-- 페이징 처리 -->
+			<c:if test="${totalCount > 0}">
+				<div style="width: 100%; text-align: center;">
+					<ul class="pagination">
+						<!-- 이전 -->
+						<c:if test="${startPage > 1}">
+							<li>
+								<a href="main?currentPage=${startPage - 1}">이전</a>
 							</li>
 						</c:if>
 						
-						<c:if test="${currentPage != pp}">
+						<c:forEach var="pp" begin="${startPage}" end="${endPage}">
+							<c:if test="${currentPage == pp}">
+								<li class="active">
+									<a href="main?currentPage=${pp}">${pp}</a>
+								</li>
+							</c:if>
+							
+							<c:if test="${currentPage != pp}">
+								<li>
+									<a href="main?currentPage=${pp}">${pp}</a>
+								</li>
+							</c:if>
+						</c:forEach>
+						
+						<!-- 다음 -->
+						<c:if test="${endPage < totalPage}">
 							<li>
-								<a href="main?currentPage=${pp}">${pp}</a>
+								<a href="main?currentPage=${endPage + 1}">이전</a>
 							</li>
 						</c:if>
-					</c:forEach>
-					
-					<!-- 다음 -->
-					<c:if test="${endPage < totalPage}">
-						<li>
-							<a href="main?currentPage=${endPage + 1}">
-								<span class="bi bi-chevron-double-right"></span>
-							</a>
-						</li>
-					</c:if>
-				</ul>
-			</div>
+					</ul>
+				</div>
+			</c:if>
 		</div>
 		
 		<!-- 지도 -->
@@ -103,6 +101,60 @@
 		</div>
 		
 		<script src="${root}/js/roomMain.js"></script>
+		
+		<!-- 마커 JS -->
+		<script type="text/javascript">
+			window.onload = function() {
+				// 마커
+				var imageSrc = '../../photo/mapMarker.png', // 마커이미지의 주소입니다    
+					imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
+					imageOption = { offset: new kakao.maps.Point(27, 69) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+
+				// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+				var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
+					markerPosition = new kakao.maps.LatLng(37.498095, 127.027610); // 마커가 표시될 위치입니다
+
+				// 마커를 생성합니다
+				var marker = new kakao.maps.Marker({
+					position: markerPosition,
+					image: markerImage // 마커이미지 설정 
+				});
+
+				// 마커가 지도 위에 표시되도록 설정합니다
+				marker.setMap(map);
+				
+				$('.room-list-wrap').mouseover(function(){
+				    var divAddr = $(this).attr("id");
+				    
+				    marker.setMap(null);
+				    
+				    // 주소-좌표 변환 객체를 생성합니다.
+				    var geocoder = new kakao.maps.services.Geocoder();
+					
+				    // 주소로 좌표를 검색합니다
+				    geocoder.addressSearch(divAddr, function(result, status) {
+				    
+				    	// 정상적으로 검색이 완료됐으면 
+				    	if (status === kakao.maps.services.Status.OK) {
+				    		var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+				    		
+				    		markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
+							markerPosition = new kakao.maps.LatLng(result[0].y, result[0].x);
+				    		
+				    		// 결과값으로 받은 위치를 마커로 표시합니다
+							marker = new kakao.maps.Marker({
+								map: map,
+								position: coords,
+								image: markerImage // 마커이미지 설정 
+				            });
+				    		
+				    		// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+				    		map.setCenter(coords);
+				        }
+				    });
+				});
+			}
+		</script>
 	</div>
 </body>
 </html>

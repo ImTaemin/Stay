@@ -10,7 +10,7 @@
 }
 
 .hostMain-info{
-	border: 2pt solid #0B57A2;
+	border: 2px solid #0B57A2;
 	border-radius: 1em;
 	width: 30%;
 	height: 280px;
@@ -58,7 +58,7 @@
 }
 
 .hostMain-reservation{
-	border: 2pt solid black;
+	border: 2px solid black;
 	padding:  2% 2% 2% 2%; 
 }
 

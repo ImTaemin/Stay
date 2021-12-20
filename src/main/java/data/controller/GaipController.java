@@ -25,7 +25,7 @@ public class GaipController {
 	@Autowired
 	MemberMapper mapper;
 	
-	@GetMapping("/gaip")
+	@GetMapping("/gaipform")
 	public String gaipForm() {
 		
 		return "/member/gaipForm";
