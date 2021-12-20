@@ -1,14 +1,1 @@
 @charset "UTF-8";
-
-.copyright{
-	height:150px;
-	background-color:#0366d6;
-	color:#ffffff;
-	padding-top: 1%;
-	padding-left: 2%;
-	font-size: 16pt;
-}
-
-.copyright > h6{
-	font-size: 13pt;
-}
