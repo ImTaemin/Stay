@@ -15,6 +15,9 @@ Gugi&family=Nanum+Pen+Script&display=Nanum+Gothic&display=swap" rel="stylesheet"
 <title>Insert title here</title>
 </head>
 <body>
-
+<div class="copyright">
+      <h6>Copyright ⓒ 2021 by 쉼 All Pictures cannot be copied
+         swithout permission.</h6>
+   </div>
 </body>
 </html>
