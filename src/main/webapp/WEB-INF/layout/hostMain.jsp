@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-		<!-- css -->
+<!-- css -->
 <link rel="stylesheet" href="../css/hostMain.css">
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script
@@ -16,6 +16,7 @@
 </head>
 <body>
 	<div class="container">
+		<!-- 선택된 상태의 숙소 정보 -->
 		<div class="hostMain-top">
 			<div class="hostMain-info">
 				<div class="hostMain-image"><img alt="" src="../photo/숙소1_1.jpg"></div>
@@ -42,6 +43,7 @@
 		
 		<div class="hostMain-middle">
 			<div class="hostMain-date">2021년 12월 10일 (금)</div>
+			<!-- 상태별 숙소 조회 selectBox -->
 			<div class="hostMain-option">
 				<select class="hostMain-state">
 					<option value="" selected="selected">체크인예정</option>

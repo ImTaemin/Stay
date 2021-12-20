@@ -17,6 +17,7 @@
 </head>
 <body>
 	<div class="guestMain-top">
+		<!-- 검색핉터창 -->
 		<div class="guestMain-filter">
 			<div class="guestMain-map"><button type="button">위치 검색</button>  |  </div>
 			<div class="guestMain-start"><button type="button">시작 날짜</button>  |  </div>
@@ -26,6 +27,7 @@
 	</div>
 	
 	<div class="guestMain-bottom">
+		<!-- 인기숙소 -->
 		<div class="guestMain-toproom">인기 숙소</div>
 		<div class="guestMain-list">
 			<div class="glyphicon glyphicon-chevron-left"></div>
