@@ -7,11 +7,14 @@
 <meta charset="UTF-8">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet"> <!--CDN 링크 -->
+
 <!-- css -->
 <link rel="stylesheet" href="../css/title.css">
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 	<title>Insert title here</title>
 </head>
 <c:set var="root" value="<%=request.getContextPath() %>"></c:set>
@@ -72,8 +75,8 @@
 				<button type="button" class="btn btn-default"  id="signupbtn" onclick="location.href='${root}/member/gaipform'">Sign Up</button>
 			</c:if>
 			<c:if test="${sessionScope.loginok!=null }">
-				<b>${sessionScope.myid } 님 </b><i class="fas fa-user-circle"></i>
-				<button type="button" class="btn btn-danger" id="logoutbtn"  onclick="location.href='logoutprocess'">Logout</button>
+				<b>${sessionScope.myid } 님 <i class="fas fa-user-circle"></i></b>
+				<button type="button" class="btn btn-danger" id="logoutbtn"  onclick="location.href='/member/logoutprocess'">Logout</button>
 			</c:if>
 		</div>
 	</div>
