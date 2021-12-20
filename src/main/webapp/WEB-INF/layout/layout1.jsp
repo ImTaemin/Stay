@@ -24,10 +24,6 @@ Gugi&family=Nanum+Pen+Script&display=Nanum+Gothic&display=swap" rel="stylesheet"
 	<div class="main">
 		<tiles:insertAttribute name="main"/>
 	</div>
-	
-	<div class="footer">
-		<tiles:insertAttribute name="footer"/>
-	</div>
 </div>
 </body>
 </html>
