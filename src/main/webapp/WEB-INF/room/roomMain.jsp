@@ -104,6 +104,7 @@
 		
 		<script src="${root}/js/roomMain.js"></script>
 		
+		<!-- 마커 JS -->
 		<script type="text/javascript">
 			window.onload = function() {
 				// 마커
@@ -139,7 +140,7 @@
 				    	if (status === kakao.maps.services.Status.OK) {
 				    		var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 				    		
-				    		var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
+				    		markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
 							markerPosition = new kakao.maps.LatLng(result[0].y, result[0].x);
 				    		
 				    		// 결과값으로 받은 위치를 마커로 표시합니다
