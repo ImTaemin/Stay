@@ -97,7 +97,7 @@ public class MypageController {
 	 */
 
 	@PostMapping("/photoinsert")
-	public String roomInsert(@ModelAttribute MemberDto memberDto, @RequestParam ArrayList<MultipartFile> upload,
+	public String photoInsert(@ModelAttribute MemberDto memberDto, @RequestParam ArrayList<MultipartFile> upload,
 			HttpSession session) {
 		// 업로드할 폴더 지정
 		String path = session.getServletContext().getRealPath("/photo");
