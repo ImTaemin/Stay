@@ -41,7 +41,6 @@
   <input type="hidden" name="num" value="${num}">
     
   
-  
    <div class="input">
    <h2>${name}님의 마이페이지</h2>
     <label for="pass">비밀번호</label>
