@@ -100,19 +100,24 @@
 	width: 30%;
 	display: flex;
 	justify-content: flex-end;
+	align-items: center; 
 }
 
 .main-buttons button{
-	width: 30%;	
 	font-size: 1.1em;
+	margin-left: 5%;
 }
 
-#loginbtn{
-	margin-right: 5%;
+.main-buttons b{
+	font-size: 1.7em;
+}
+
+.main-buttons i{
+	font-size: 2.3em;
+	margin-left: 2%;
+}
+#loginbtn, #signupbtn, #logoutbtn{
 	font-weight: bold;
 }
 
-#signupbtn{
-	font-weight: bold;
-}
 

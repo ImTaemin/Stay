@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="../css/title.css">
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 
+
 	<title>Insert title here</title>
 </head>
 <c:set var="root" value="<%=request.getContextPath() %>"></c:set>
@@ -28,7 +29,7 @@
 		<div class="dropdown-menu"> 
 	        <ul>
 	          <li>
-	            <a href="#">
+	            <a href="${root}/room/main">
 	              숙소
 	            </a>
 	          </li>
@@ -45,12 +46,12 @@
 	        </ul>
 	        <ul>
 	          <li>
-	            <a href="">
+	            <a href="${root}/profileform">
 	              프로필
 	            </a>
 	          </li>
 	          <li>
-	            <a href="#">
+	            <a href="${root}/mypage/mypageform">
 	              마이페이지
 	            </a>
 	          </li>
@@ -64,18 +65,20 @@
 	        </ul>
 	      </div>
 		</div>
-		<!-- 로고 -->
+		<!-- 로고_클릭시 메인페이지로 이동 -->
 		<div class="main-logo">
-			<img alt="" src="../photo/logo_sm.png">
+			<a href="${root }/">
+				<img alt="" src="../photo/logo_sm.png">
+			</a>
 		</div>
-		<!-- 로그인, 로그아웃버튼 -->
+		<!-- 로그인, 회원가입, 로그아웃버튼, 로그인중 표시-->
 		<div class="main-buttons">
 			<c:if test="${sessionScope.loginok==null }">
 				<button type="button" class="btn btn-info" id="loginbtn"  onclick="location.href='${root}/member/login'">Login</button>
 				<button type="button" class="btn btn-default"  id="signupbtn" onclick="location.href='${root}/member/gaipform'">Sign Up</button>
 			</c:if>
 			<c:if test="${sessionScope.loginok!=null }">
-				<b>${sessionScope.myid } 님 <i class="fas fa-user-circle"></i></b>
+				<b>${sessionScope.myid } 님</b><i class="fas fa-user-circle"></i>
 				<button type="button" class="btn btn-danger" id="logoutbtn"  onclick="location.href='/member/logoutprocess'">Logout</button>
 			</c:if>
 		</div>
