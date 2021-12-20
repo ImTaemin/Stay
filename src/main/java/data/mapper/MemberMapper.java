@@ -17,5 +17,7 @@ public interface MemberMapper {
 	
 	public String getName(String id);
 	public int login(HashMap<String, String> map);
+	
+	public void insertPhoto(MemberDto memberDto);
 
 }

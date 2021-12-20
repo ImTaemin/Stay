@@ -19,7 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import data.dto.MemberDto;
-import data.dto.RoomDto;
 import data.mapper.MemberMapper;
 import data.service.MemberService;
 
@@ -29,6 +28,9 @@ public class MypageController {
 	
 	@Autowired
 	MemberMapper mapper;
+	
+	@Autowired
+	MemberService memberService;
 	
 	@GetMapping("/mypageform")
 	public String mypageForm() {
@@ -128,7 +130,7 @@ public class MypageController {
 		memberDto.setId(myid);
 		memberDto.setPhoto(photo);
 
-		MemberService.insertPhoto(memberDto);
+		memberService.insertPhoto(memberDto);
 
 		return "redirect:main";
 	}
