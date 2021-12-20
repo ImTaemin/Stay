@@ -33,17 +33,19 @@
     		<div id="pfmainimg"></div>
     	</div>
      
-     <button type="button" class="card-btn" onclick="location.href='card.jsp'">결제 카드 추가</button>
+     <button type="button" class="card-btn" onclick="location.href='../cost/cardInsertForm.jsp'">결제 카드 추가</button>
    </div>
 
   <div class="mypage-form">
   <form action="mypageform" method="post">
 <!--    <form action="mypageform" method="post" enctype="multipart/form-data" onsubmit="return check(this)"> -->
-  <input type="hidden" name="id" value="${dto.id}">
-    
+  
+    <c:if test="${sessionScope.loginok!=null }">
+    <input type="hidden" name="id" value="${sessionScope.myid}">
+	</c:if>
   
    <div class="input">
-   <h2>${mdto.name}님의 마이페이지</h2>
+   <h2>${dto.name}님의 마이페이지</h2>
     <label for="pass">비밀번호</label>
       <input type="password" id="pass" minlength="8" maxlength="16" placeholder="비밀번호를 입력하세요(8~16자의 영문·특수문자 조합)" required="required">
     <label for="pass_check">비밀번호 확인</label>

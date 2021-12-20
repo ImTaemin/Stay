@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,12 +15,13 @@
 </head>
 <body>
 	<div class="profile-main">
+		<%-- <c:forEach var="memlist" items="${memList}"> --%>
 		<div class="profile-top">
 			<div class="profile-first">
 				<!-- <input type="file" name="photo" id="photo" style="display: none;" required="required" multiple="multiple">
      			<span class="glyphicon glyphicon-user" style="cursor: pointer;"></span> -->
      			<div class="photo">
-					<img alt="" src="${root}/photo/${mdto.photo}">
+					<img alt="" src="${root}/photo/${memlist.photo}">
 				</div>
 				<!-- <button type="button" class="modal_btn" style="width: 200px; padding-top: 6px;">신고하기</button> -->
 				<button class="openBtn">신고하기</button>
@@ -28,7 +30,7 @@
 					<div class="modalBox">
 						<p></p>
 						<label for="id">신고 할 아이디&nbsp;</label>
-  	 						<input type="text" required="required" value="${dto.id}"><br><br>
+  	 						<input type="text" required="required" value="${sessionScope.myid }"><br><br>
   	 					<label for="content">&nbsp;&nbsp;&nbsp;&nbsp;신고 사유&nbsp;&nbsp;&nbsp;&nbsp;</label>
   	 						<input type="text" required="required">
 						<button class="closeBtn">✖</button>
@@ -37,24 +39,28 @@
 
 			</div>
 			<div class="profile-second">
-				<h2>${name}님의 프로필입니다.😊</h2>
+				<%-- <h2>${name}님의 프로필입니다.😊</h2> --%>
+				<c:if test="${sessionScope.loginok!=null }">
+				<h2><b>${sessionScope.myid } 님의<br><br>프로필입니다.😊</b></h2>
+				</c:if>
 			</div>
 			<div class="profile-third">
 				<div class="profile-like">
 					<span class="glyphicon glyphicon-heart likes"
 						style="width: 30px; cursor: pointer; color: red" num="${num}"></span>
-					<span>LIKE ${likes}</span>
+					<span>LIKE ${memlist.likes}</span>
 				</div>
 				<div class="profile-message">
 					<span class="glyphicon glyphicon-envelope message"
 						style="width: 30px; cursor: pointer;"></span>
-					<span>MESSAGE ${message}</span>
+					<span>MESSAGE ${memlist.message}</span>
 				</div>
 			</div>
 		</div>
 		<div class="profile-review">
 			<h2>숙소 후기</h2>
 		</div>
+		<%-- </c:forEach> --%>
 	</div>
 	<script src="/js/profileForm.js"></script>
 </body>
