@@ -20,6 +20,7 @@
    <span class="glyphicon glyphicon-user" style="cursor: pointer;"></span></h4>
     <button type="button" class="btn btn-info" style="width: 150px;" onclick="location.href='card.jsp'">결제 카드 추가</button>
     
+    <!-- dsfds -->
     <label for="pass">비밀번호</label>
       <input type="password" id="pass" minlength="8" maxlength="16" placeholder="비밀번호를 입력하세요(8~16자의 영문·특수문자 조합)" required="required">
     <label for="pass_check">비밀번호 확인</label>
