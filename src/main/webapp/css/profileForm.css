@@ -1,26 +1,26 @@
 @charset "UTF-8";
 
-div .profile-main {
+.profile-main {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-    margin-top: 50px; 
+	margin-top: 50px;
 }
 
-div .profile-top {
+.profile-top {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
 }
 
-div .profile-first {
+.profile-first {
 	display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-    width: 180px;
-    align-items: center;
-    justify-content: flex-start;
-    margin-left: 20px;
+	flex-direction: column;
+	margin-top: 20px;
+	width: 180px;
+	align-items: center;
+	justify-content: flex-start;
+	margin-left: 20px;
 }
 
 .warn-btn {
@@ -35,13 +35,13 @@ div .profile-first {
 	margin-top: 15px;
 }
 
-div .profile-second {
+.profile-second {
 	display: flex;
 	justify-content: center;
 	margin-left: 100px;
 }
 
-div .profile-third {
+.profile-third {
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
@@ -50,17 +50,17 @@ div .profile-third {
 	margin-top: 20px;
 }
 
-div .profile-like {
+.profile-like {
 	display: flex;
 	justify-content: center;
 }
 
-div .profile-message {
+.profile-message {
 	display: flex;
 	justify-content: center;
 }
 
-div .profile-review {
+.profile-review {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -69,15 +69,59 @@ div .profile-review {
 	align-items: center;
 }
 
-.profile-main> .profile-top> .profile-first> .photo {
+.profile-main>.profile-top>.profile-first>.photo {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	border-radius: 100%;
 }
 
-.profile-main> .profile-top> .profile-first> .photo> img {
+.profile-main>.profile-top>.profile-first>.photo>img {
 	width: 200px;
 	height: 150px;
 	border-radius: 100%;
+}
+
+.profile-main>.profile-top>.profile-first>.openBtn {
+	background-color: #F9B514;
+	padding: 5px 10px;
+	border-radius: 4px;
+	cursor: pointer;
+	margin-top: 20px;
+    width: 200px;
+}
+
+.modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.modal .bg {
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modalBox {
+	position: absolute;
+	background-color: #fff;
+	width: 400px;
+	height: 200px;
+	padding: 15px;
+}
+
+.modalBox> .closeBtn {
+	display: block;
+	width: 80px;
+	margin: 0 auto;
+}
+
+.hidden {
+	display: none;
 }

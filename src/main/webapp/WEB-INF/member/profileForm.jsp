@@ -21,22 +21,35 @@
      			<div class="photo">
 					<img alt="" src="${root}/photo/${mdto.photo}">
 				</div>
-				<button type="button" class="warn-btn" style="width: 200px; padding-top: 6px;" onclick="location.href='warning.jsp'">신고하기</button>
+				<!-- <button type="button" class="modal_btn" style="width: 200px; padding-top: 6px;">신고하기</button> -->
+				<button class="openBtn">신고하기</button>
+				<div class="modal hidden">
+					<div class="bg"></div>
+					<div class="modalBox">
+						<p></p>
+						<label for="id">신고 할 아이디&nbsp;</label>
+  	 						<input type="text" required="required" value="${dto.id}"><br><br>
+  	 					<label for="content">&nbsp;&nbsp;&nbsp;&nbsp;신고 사유&nbsp;&nbsp;&nbsp;&nbsp;</label>
+  	 						<input type="text" required="required">
+						<button class="closeBtn">✖</button>
+					</div>
+				</div>
+
 			</div>
 			<div class="profile-second">
-  	 		 	<h2>${name}님의 프로필입니다.😊</h2>
+				<h2>${name}님의 프로필입니다.😊</h2>
 			</div>
 			<div class="profile-third">
 				<div class="profile-like">
 					<span class="glyphicon glyphicon-heart likes"
-					style="width: 30px; cursor: pointer; color: red" num="${num}"></span>
-       				<span>LIKE ${likes}</span>
-       			</div>
-       			<div class="profile-message">
-       				<span class="glyphicon glyphicon-envelope message"
-					style="width: 30px; cursor: pointer;"></span>
-       				<span>MESSAGE ${message}</span>
-       			</div>
+						style="width: 30px; cursor: pointer; color: red" num="${num}"></span>
+					<span>LIKE ${likes}</span>
+				</div>
+				<div class="profile-message">
+					<span class="glyphicon glyphicon-envelope message"
+						style="width: 30px; cursor: pointer;"></span>
+					<span>MESSAGE ${message}</span>
+				</div>
 			</div>
 		</div>
 		<div class="profile-review">
