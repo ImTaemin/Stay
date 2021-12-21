@@ -1,10 +1,29 @@
-function check(f) {
-	//id는 선택, pass는 필수
-	//비밀번호 체크
-	if(f.pass.value!=f.pass_check.value) {
-		alert("비밀번호가 일치하지 않습니다.");
-		f.pass.value="";
-		f.pass_check.value="";
-		return false; //action 호출 x
-	}
-}
+function check_pw(){
+            var pw = document.getElementById('pass').value;
+            var SC = ["!","@","#","$","%"];
+            var check_SC = 0;
+ 
+            if(pw.length < 8 || pw.length>16){
+                window.alert('비밀번호는 8글자 이상, 16글자 이하만 이용 가능합니다.(영문·특수문자 조합)');
+                document.getElementById('pass').value='';
+            }
+            for(var i=0;i<SC.length;i++){
+                if(pw.indexOf(SC[i]) != -1){
+                    check_SC = 1;
+                }
+            }
+            if(check_SC == 0){
+                window.alert('!,@,#,$,% 의 특수문자가 들어가 있지 않습니다.')
+                document.getElementById('pass').value='';
+            }
+            if(document.getElementById('pass').value !='' && document.getElementById('pass_check').value!=''){
+                if(document.getElementById('pass').value==document.getElementById('pass_check').value){
+                    document.getElementById('check').innerHTML='비밀번호가 일치합니다.'
+                    document.getElementById('check').style.color='blue';
+                }
+                else{
+                    document.getElementById('check').innerHTML='비밀번호가 일치하지 않습니다.';
+                    document.getElementById('check').style.color='red';
+                }
+            }
+        }

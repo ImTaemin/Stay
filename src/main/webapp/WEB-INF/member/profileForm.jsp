@@ -21,7 +21,7 @@
 				<!-- <input type="file" name="photo" id="photo" style="display: none;" required="required" multiple="multiple">
      			<span class="glyphicon glyphicon-user" style="cursor: pointer;"></span> -->
      			<div class="photo">
-					<img alt="" src="${root}/photo/${memberDto.photo}">
+					<img alt="" src="${root}/photo/memberPhoto/${memberDto.photo}">
 				</div>
 				<!-- <button type="button" class="modal_btn" style="width: 200px; padding-top: 6px;">신고하기</button> -->
 				<button class="openBtn">신고하기</button>
