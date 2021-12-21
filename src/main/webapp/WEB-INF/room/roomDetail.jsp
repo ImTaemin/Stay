@@ -14,6 +14,7 @@
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 <!-- css -->
 <link rel="stylesheet" href="${root}/css/roomDetail.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 <!-- js -->
 <!-- 카카오 지도 API -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=05c1abb954049537a223eedcab5c9b64&libraries=services"></script>
@@ -85,14 +86,35 @@
 			<!-- 설명&지도 -->
 			<div class="content-map">
 				<!-- 설명 -->
-				<div class="content">
-					<label class="title">숙소 상세 설명</label>
-					<label>${roomDto.content}</label>
+				<div class="content-wrap">
+					<label class="title">숙소 설명</label>
+					<label class="content">${roomDto.content}</label>
 				</div>
 				
 				<!-- 지도 -->
 				<div class="map-wrap">
+					<label class="title">숙소 호스팅 지역</label>
 					<div class="map" id="map"></div>
+				</div>
+			</div>
+			
+			<hr>
+			
+			<!-- 후기 -->
+			<div class="comment-wrap">
+				<div class="comment-title">
+					<i class="bi bi-star-fill" style="font-size: 2.0rem;"></i>
+					<label class="title">${avgRating} 점  |  후기  ${totalComment} 개</label>
+				</div>
+				
+				<div class="comment">
+					<c:if test="${totalComment == 0}">
+						<div>등록된 후기가 없습니다.</div>
+					</c:if>
+					
+					<c:if test="${totalCount > 0}">
+						
+					</c:if>
 				</div>
 			</div>
 			

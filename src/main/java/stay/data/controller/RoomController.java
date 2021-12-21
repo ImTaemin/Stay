@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import stay.data.dto.MemberDto;
 import stay.data.dto.RoomDto;
 import stay.data.service.GuestCommentService;
+import stay.data.service.MemberService;
 import stay.data.service.RoomService;
 
 @Controller
@@ -29,6 +31,9 @@ public class RoomController {
 	
 	@Autowired
 	GuestCommentService gcommentService;
+	
+	@Autowired
+	MemberService memberService;
 	
 	@GetMapping("/main")
 	public ModelAndView roomMain(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage) {
@@ -153,9 +158,29 @@ public class RoomController {
 		
 		String photoList[] = roomDto.getPhotos().split(",");
 		
+		// 방 평균 별점
+		Float avgRating = gcommentService.getRatingAvg();
+		
+		if(avgRating == null) {
+			avgRating = (float) 0;
+		}
+		
+		// 방 댓글 개수
+		Integer totalComment = gcommentService.totalComment();
+		
+		if(totalComment == null) {
+			totalComment = 0;
+		}
+		
+		// 호스트 정보
+		String hostId = roomDto.getHost_id();
+		
+		
 		mview.addObject("roomDto", roomDto);
 		mview.addObject("photoList", photoList);
 		mview.addObject("currentPage", currentPage);
+		mview.addObject("avgRating", avgRating);
+		mview.addObject("totalComment", totalComment);
 		
 		mview.setViewName("/room/roomDetail");
 		
