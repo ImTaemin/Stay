@@ -39,3 +39,18 @@ $(document).ready(function() {
 		}
 	}).scroll();
 });
+
+// 하트 클릭 이벤트
+var tmp = true;
+
+function heartClick(e) {
+	var roomId = $(e).attr("roomID");
+	
+	if(tmp) {
+		$(e).attr("class", "bi bi-heart-fill");
+		tmp = false;
+	} else {
+		$(e).attr("class", "bi bi-heart");
+		tmp = true;
+	}
+}

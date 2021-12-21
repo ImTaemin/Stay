@@ -24,23 +24,26 @@
 		<!-- 숙소 상세 목록 -->
 		<div class="list">
 			<c:forEach var="list" items="${roomList}">
-				<div class="room-list-wrap" id="${list.addr_load}" onclick="location.href='content?no=${list.no}&currentPage=${currentPage}'">
-					<div class="photo">
+				<div class="room-list-wrap" id="${list.addr_load}">
+					<div class="photo" onclick="location.href='content?no=${list.no}&currentPage=${currentPage}'">
 						<img alt="" src="${root}/photo/roomPhoto/${list.photos}">
 					</div>
 					
 					<div class="content">
 						<div class="content-top">
-							<b>${list.name}</b>
-							<i id="heart-${list.no}" class="bi bi-heart"></i>
+							<b onclick="location.href='content?no=${list.no}&currentPage=${currentPage}'">${list.name}</b>
+							<i roomID="${list.no}" class="bi bi-heart" onclick="heartClick(this)"></i>
 						</div>
-						<label style="margin-top: 10px;">${list.addr_load}</label>
 						
-						<hr>
+						<div class="content-middle" onclick="location.href='content?no=${list.no}&currentPage=${currentPage}'">
+							<label style="margin-top: 10px;">${list.addr_load}</label>
+							
+							<hr style="margin: 10px 0;">
+							
+							<label style="font-size: 0.6em;">최대 인원 : ${list.max_per}명</label>
+						</div>
 						
-						<label style="font-size: 0.6em;">최대 인원 : ${list.max_per}명</label>
-						
-						<div class="star-cost">
+						<div class="star-cost" onclick="location.href='content?no=${list.no}&currentPage=${currentPage}'">
 							<div class="star">
 								<label><i class="bi bi-star-fill" style="font-size: 1.5rem;"></i>
 								<b>${avgRating}</b> ( 후기 ${totalComment}개 )</label>

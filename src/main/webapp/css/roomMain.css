@@ -53,29 +53,23 @@
 }
 
 .room-main-wrap>.list>.room-list-wrap>.content>.content-top b {
-	width: 85%;
+	width: 90%;
 	font-size: 1.3em;
 	color: #0B57A2;
 	text-decoration: none;
+	padding-right: 5%;
 }
 
 .content {
 	width: 100%;
 }
 
-.content button {
-	background: inherit;
-	border: none;
-	box-shadow: none;
-	border-radius: 0;
-	padding: 0;
-	overflow: visible;
-	cursor: pointer;
-	width: 10%;
-}
-
-.room-main-wrap>.list>.room-list-wrap>.content i {
+.content .bi-heart {
 	font-size: 1.5em;
+	width: 10%;
+	display: flex;
+	justify-content: center;
+	padding-top: 1%;
 }
 
 .room-main-wrap>.list>.room-list-wrap>.content .bi-heart:hover {
@@ -86,6 +80,10 @@
 .content .bi-heart-fill {
 	font-size: 1.5em;
 	color: #EB0000;
+	width: 10%;
+	display: flex;
+	justify-content: center;
+	padding-top: 1%;
 }
 
 .room-main-wrap>.list>.room-list-wrap label {

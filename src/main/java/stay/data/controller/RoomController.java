@@ -108,7 +108,7 @@ public class RoomController {
 		return mview;
 	}
 	
-	@GetMapping("/insertform")
+	 @GetMapping("/insertform")
 	public String roomInsertForm() {
 		return "/room/roomInsertForm";
 	}
@@ -198,7 +198,7 @@ public class RoomController {
 	public ModelAndView roomUpdateForm(String no) {
 		ModelAndView mview = new ModelAndView();
 		
-		RoomDto roomDto = roomService.getRoom("6");
+		RoomDto roomDto = roomService.getRoom(no);
 		
 		mview.addObject("roomDto", roomDto);
 		

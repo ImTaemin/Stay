@@ -92,8 +92,6 @@
 					<script type="text/javascript">
 						// 날짜 비교
 						$(function() {
-							document.getElementById('check-in').value = new Date().toISOString().substring(0, 10);
-	
 							$("#cost-btn").click(function() {
 								var startDate = $('#check-in').val();
 								var endDate = $('#check-out').val();
@@ -105,7 +103,9 @@
 								//배열에 담겨있는 연,월,일을 사용해서 Date 객체 생성
 								var start_date = new Date(startArray[0], startArray[1], startArray[2]);
 								var end_date = new Date(endArray[0], endArray[1], endArray[2]);
-	
+								
+								var s = "";
+								
 								//날짜를 숫자형태의 날짜 정보로 변환하여 비교한다.
 								if (start_date.getTime() == end_date.getTime()) {
 									Swal.fire({
@@ -113,9 +113,26 @@
 										title: '날짜를 다시 선택해주세요.',
 										text: '체크인 날짜와 체크아웃 날짜가 동일합니다.'
 									});
+									
+									s = "";
+									$(".reser").html(s);
 	
 									document.getElementById("check-out").value = '';
 	
+									return false;
+								} else if (start_date.getTime() > end_date.getTime()) {
+									Swal.fire({
+										icon: 'error',
+										title: '날짜를 다시 선택해주세요.',
+										text: '체크아웃 날짜보다 체크인 날짜가 작아야합니다.'
+									});
+									
+									s = "";
+									$(".reser").html(s);
+	
+									document.getElementById("check-in").value = '';
+									document.getElementById("check-out").value = '';
+
 									return false;
 								} else if (document.getElementById("check-out").value == '') {
 									Swal.fire({
@@ -123,6 +140,9 @@
 										title: '날짜를 다시 선택해주세요.',
 										text: '체크아웃 날짜을 입력해주세요.'
 									});
+									
+									s = "";
+									$(".reser").html(s);
 								} else {
 									var betweenMs = end_date.getTime() - start_date.getTime();
 									var betweenDay = betweenMs / (1000 * 60 * 60 * 24);
@@ -137,7 +157,7 @@
 									var allPrice = calPrice + taxPrice;
 									var commaAll = Number(allPrice).toLocaleString();
 									
-									var s = "<div class='reser-price'>";
+									s += "<div class='reser-price'>";
 									s += "<div class='room-price'>";
 									s += "<div><fmt:formatNumber value='${roomDto.price}' type='currency' currencySymbol='￦'/> X " + betweenDay + "박</div>";
 									s += "<div><b>￦" + commaCal + "</b></div>";

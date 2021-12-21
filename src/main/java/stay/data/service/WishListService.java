@@ -1,7 +1,5 @@
 package stay.data.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +13,5 @@ public class WishListService {
 	
 	public void insertWishList(WishListDto wishDto) {
 		mapper.insertWishList(wishDto);
-	}
-	
-	public List<WishListDto> selectAllWish(String guest_id) {
-		return mapper.selectAllWish(guest_id);
 	}
 }
