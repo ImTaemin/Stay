@@ -140,6 +140,6 @@ $(document).ready(function (e){
 		content = content.replace(/(?:\r\n|\r|\n)/g, '<br/>');
 		$("#content").val(content);
 		
-		document.insertForm.submit();
+		document.updateForm.submit();
 	});
 });

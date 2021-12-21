@@ -147,7 +147,9 @@ public class RoomController {
 		
 		roomService.insertRoom(roomDto);
 		
-		return "redirect:main";
+		int no = roomService.getRoomMaxNo();
+		
+		return "redirect:content?no=" + no;
 	}
 	
 	@GetMapping("/content")
@@ -177,6 +179,9 @@ public class RoomController {
 		
 		MemberDto memDto = memberService.getMember(hostId);
 		
+		// 엔터키 입력
+		roomDto.getContent().replaceAll("<br>", "\r\n");
+		
 		mview.addObject("roomDto", roomDto);
 		mview.addObject("memDto", memDto);
 		mview.addObject("photoList", photoList);
@@ -187,5 +192,66 @@ public class RoomController {
 		mview.setViewName("/room/roomDetail");
 		
 		return mview;
+	}
+	
+	@GetMapping("/updateform")
+	public ModelAndView roomUpdateForm(String no) {
+		ModelAndView mview = new ModelAndView();
+		
+		RoomDto roomDto = roomService.getRoom("6");
+		
+		mview.addObject("roomDto", roomDto);
+		
+		mview.setViewName("/room/roomUpdateForm");
+		
+		return mview;
+	}
+	
+	@PostMapping("/update")
+	public String roomUpdate(
+			@ModelAttribute RoomDto roomDto,
+			@RequestParam String no,
+			@RequestParam ArrayList<MultipartFile> upload,
+			HttpSession session) {
+		// 업로드할 폴더 지정
+		String path = session.getServletContext().getRealPath("/photo/roomPhoto");
+		System.out.println(path);
+		
+		String photo = "";
+		
+		if(upload.get(0).getOriginalFilename().equals("")) {
+			photo  = null;
+		} else {
+			String photos = roomService.getRoom(no).getPhotos();
+			String photoArray[] = photos.split(",");
+			
+			for(int i = 0; i < photoArray.length; i++) {
+				File file = new File(path + "/" + photoArray[i]);
+				file.delete();
+			}
+			
+			for(MultipartFile f : upload) {
+				String fName = f.getOriginalFilename();
+				photo += fName + ",";
+				
+				// 업로드
+				try {
+					f.transferTo(new File(path + "\\" + fName));
+				} catch (IllegalStateException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			photo = photo.substring(0, photo.length() - 1);
+		}
+		
+		// 엔터키 입력
+		roomDto.getContent().replaceAll("<br>", "\r\n");
+		roomDto.setPhotos(photo);
+		
+		roomService.updateRoom(roomDto);
+		
+		return "redirect:main";
 	}
 }

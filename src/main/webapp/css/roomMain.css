@@ -49,7 +49,7 @@
 .room-main-wrap>.list>.room-list-wrap> .content> .content-top {
 	display: flex;
 	justify-content: space-between;
-	width: 390px;
+	width: 96%;
 }
 
 .room-main-wrap>.list>.room-list-wrap> .content> .content-top b {
@@ -57,6 +57,10 @@
 	font-size: 1.3em;
 	color: #0B57A2;
 	text-decoration: none;
+}
+
+.content {
+	width: 100%;
 }
 
 .room-main-wrap>.list>.room-list-wrap> .content i {

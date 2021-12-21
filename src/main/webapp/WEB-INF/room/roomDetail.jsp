@@ -170,13 +170,33 @@
 			<div class="content-map">
 				<!-- 설명 -->
 				<div class="content-wrap">
-					<label class="title">숙소 설명</label>
-					<label class="content">${roomDto.content}</label>
+					<div class="maxper-type">
+						<div class="content-detail">
+							<i class="bi bi-person-fill"></i>
+							<label class="title">최대 인원</label>
+							<label class="content">${roomDto.max_per}명</label>
+						</div>
+						
+						<div class="content-detail">
+							<i class="bi bi-house-fill"></i>
+							<label class="title">숙소 타입</label>
+							<label class="content">${roomDto.type}</label>
+						</div>
+					</div>
+					
+					<div class="content-detail">
+						<label class="title" style="margin-bottom: 15px;">
+							<i class="bi bi-journal-text" style="margin-right: 5px;"></i>
+							숙소 설명
+						</label>
+						<label class="content">${roomDto.content}</label>
+					</div>
 				</div>
 				
 				<!-- 지도 -->
 				<div class="map-wrap">
-					<label class="title">숙소 호스팅 지역</label>
+					<i class="bi bi-pin-map-fill"></i>
+					<label class="title" style="margin-bottom: 15px;">숙소 호스팅 지역</label>
 					<div class="map" id="map"></div>
 				</div>
 			</div>

@@ -18,6 +18,10 @@ public class RoomService {
 		return mapper.getRoomCount();
 	}
 	
+	public int getRoomMaxNo() {
+		return mapper.getRoomMaxNo();
+	}
+	
 	public void insertRoom(RoomDto roomDto) {
 		mapper.insertRoom(roomDto);
 	}
@@ -33,5 +37,9 @@ public class RoomService {
 	
 	public RoomDto getRoom(String no) {
 		return mapper.getRoom(no);
+	}
+	
+	public void updateRoom(RoomDto roomDto) {
+		mapper.updateRoom(roomDto);
 	}
 }

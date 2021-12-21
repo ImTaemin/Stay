@@ -24,7 +24,7 @@
 	</div>
 	
 	<!-- 추가 폼 -->
-	<form action="insert" method="post" class="room-from" enctype="multipart/form-data">
+	<form action="insert" method="post" class="room-from" name="insertForm" enctype="multipart/form-data">
 		<!-- 이름 -->
 		<div class="room-div">
 			<label for="name">숙소 이름</label>
@@ -41,7 +41,7 @@
 	    			<option value="아파트" selected="selected">아파트</option>
 	    			<option value="주택">주택</option>
 	    			<option value="펜션">펜션</option>
-	    			<option value="펜션">민박</option>
+	    			<option value="민박">민박</option>
 	    		</select>
 	    	</div>
 		</div>
@@ -117,7 +117,7 @@
     	</div>
     	
     	<div class="room-div" style="display: flex; justify-content: center; margin-top: 35px;">
-    		<button type="submit" id="room-insert" class="btn btn-info">숙소 추가</button>
+    		<button type="button" id="room-insert" class="btn btn-info">숙소 추가</button>
     	</div>
 	</form>
 </body>

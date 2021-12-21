@@ -8,6 +8,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from room
 	</select>
 	
+	<select id="getRoomMaxNo" resultType="int">
+		select ifnull(max(no), 0) from room
+	</select>
+	
 	<insert id="insertRoom" parameterType="rdto">
 		insert into room values (null, #{host_id}, #{type}, #{addr_load}, #{addr_detail}, #{max_per},
 		#{content}, #{name}, #{photos}, #{price}, #{hosting})
@@ -20,4 +24,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getRoom" parameterType="String" resultType="rdto">
 		select * from room where no = #{no}
 	</select>
+	
+	<update id="updateRoom" parameterType="rdto">
+		update room set type = #{type}, addr_load = #{addr_load}, addr_detail = #{addr_detail}, max_per = #{max_per},
+		content = #{content}, name = #{name}, price = #{price}, hosting = #{hosting}
+		<if test="photos != null">
+			, photos = #{photos}
+		</if>
+		where no = #{no}
+	</update>
 </mapper>
