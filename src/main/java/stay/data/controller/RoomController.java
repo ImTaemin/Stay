@@ -175,8 +175,10 @@ public class RoomController {
 		// 호스트 정보
 		String hostId = roomDto.getHost_id();
 		
+		MemberDto memDto = memberService.getMember(hostId);
 		
 		mview.addObject("roomDto", roomDto);
+		mview.addObject("memDto", memDto);
 		mview.addObject("photoList", photoList);
 		mview.addObject("currentPage", currentPage);
 		mview.addObject("avgRating", avgRating);

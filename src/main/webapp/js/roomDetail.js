@@ -18,18 +18,18 @@ function moveSlide(num) {
 	currentIdx = num;
 }
 
-prev.addEventListener('click', function(){
+prev.addEventListener('click', function() {
 	// 첫 번째 슬라이드로 표시 됐을때는 이전 버튼 눌러도 아무런 반응 없게 하기 위해
 	// currentIdx !==0일때만 moveSlide 함수 불러옴
-	if(currentIdx !== 0) moveSlide(currentIdx - 1);
+	if (currentIdx !== 0) moveSlide(currentIdx - 1);
 });
 
-next.addEventListener('click', function(){
-	var slideCount =  $(".slides").find("li").length;
-	
+next.addEventListener('click', function() {
+	var slideCount = $(".slides").find("li").length;
+
 	// 마지막 슬라이드로 표시 됐을때는 다음 버튼 눌러도 아무런 반응 없게 하기 위해
 	// currentIdx !==slideCount - 1 일때만 moveSlide 함수 불러옴
-	if(currentIdx !== slideCount - 1) moveSlide(currentIdx + 1);
+	if (currentIdx !== slideCount - 1) moveSlide(currentIdx + 1);
 });
 
 
@@ -37,6 +37,7 @@ next.addEventListener('click', function(){
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	mapOption = {
 		center: new kakao.maps.LatLng(37.498095, 127.027610), // 지도의 중심좌표
+		draggable: false,	// 드래그 막음
 		level: 3 // 지도의 확대 레벨
 	};
 
