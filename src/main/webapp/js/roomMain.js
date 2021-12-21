@@ -31,12 +31,11 @@ $(document).ready(function() {
 		// 현재 스크롤 위치를 가져온다.
 		var scrollTop = $(window).scrollTop();
 		var newPosition = scrollTop + (floatPosition - 120) + "px";
-		
-		if(scrollTop != 0) {
+
+		if (scrollTop != 0) {
 			$(".map-wrap").css('top', newPosition);
 		} else {
 			$(".map-wrap").css('top', floatPosition);
 		}
 	}).scroll();
-
 });

@@ -33,26 +33,26 @@
 	cursor: pointer;
 }
 
-.room-main-wrap>.list>.room-list-wrap> .photo {
+.room-main-wrap>.list>.room-list-wrap>.photo {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 
-.room-main-wrap>.list>.room-list-wrap> .photo img {
+.room-main-wrap>.list>.room-list-wrap>.photo img {
 	width: 200px;
 	height: 150px;
 	margin-right: 15px;
 	border-radius: 7px;
 }
 
-.room-main-wrap>.list>.room-list-wrap> .content> .content-top {
+.room-main-wrap>.list>.room-list-wrap>.content>.content-top {
 	display: flex;
 	justify-content: space-between;
 	width: 96%;
 }
 
-.room-main-wrap>.list>.room-list-wrap> .content> .content-top b {
+.room-main-wrap>.list>.room-list-wrap>.content>.content-top b {
 	width: 85%;
 	font-size: 1.3em;
 	color: #0B57A2;
@@ -63,11 +63,27 @@
 	width: 100%;
 }
 
-.room-main-wrap>.list>.room-list-wrap> .content i {
+.content button {
+	background: inherit;
+	border: none;
+	box-shadow: none;
+	border-radius: 0;
+	padding: 0;
+	overflow: visible;
+	cursor: pointer;
+	width: 10%;
+}
+
+.room-main-wrap>.list>.room-list-wrap>.content i {
 	font-size: 1.5em;
 }
 
-.room-main-wrap>.list>.room-list-wrap> .content .bi-heart:hover {
+.room-main-wrap>.list>.room-list-wrap>.content .bi-heart:hover {
+	font-size: 1.5em;
+	color: #EB0000;
+}
+
+.content .bi-heart-fill {
 	font-size: 1.5em;
 	color: #EB0000;
 }
@@ -77,20 +93,20 @@
 	color: black;
 }
 
-.room-main-wrap>.list>.room-list-wrap> .content> hr {
+.room-main-wrap>.list>.room-list-wrap>.content>hr {
 	width: 100px;
 	text-align: left;
 	margin: 10px 0;
 }
 
-.room-main-wrap>.list>.room-list-wrap> .content> .star-cost {
+.room-main-wrap>.list>.room-list-wrap>.content>.star-cost {
 	width: 370px;
 	display: flex;
 	justify-content: space-between;
 	margin-top: 15px;
 }
 
-.star> label> i {
+.star>label>i {
 	color: #FFCD28;
 	vertical-align: -0.07em;
-}	
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="stay.data.mapper.WishListMapper">
+	<insert id="insertWishList" parameterType="wldto">
+		insert into wishlist values (null, #{room_no}, #{guest_id})
+	</insert>
+	
+	<select id="selectAllWish" resultType="wldto">
+		select * from wishlist where guest_id = #{guest_id}
+	</select>
+</mapper>

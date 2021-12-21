@@ -40,41 +40,12 @@
     	<div class="room-div">
 	    	<label for="type">숙소 타입</label>
 	    	<div>
-	    		<c:if test="${roomDto.type == '아파트'}">
-	    			<select id="type" name="type">
-		    			<option value="아파트" selected="selected">아파트</option>
-		    			<option value="주택">주택</option>
-		    			<option value="펜션">펜션</option>
-		    			<option value="민박">민박</option>
-		    		</select>
-	    		</c:if>
-	    		
-	    		<c:if test="${roomDto.type == '주택'}">
-	    			<select id="type" name="type">
-		    			<option value="아파트">아파트</option>
-		    			<option value="주택" selected="selected">주택</option>
-		    			<option value="펜션">펜션</option>
-		    			<option value="민박">민박</option>
-		    		</select>
-	    		</c:if>
-	    		
-	    		<c:if test="${roomDto.type == '펜션'}">
-	    			<select id="type" name="type">
-		    			<option value="아파트">아파트</option>
-		    			<option value="주택">주택</option>
-		    			<option value="펜션" selected="selected">펜션</option>
-		    			<option value="민박">민박</option>
-		    		</select>
-	    		</c:if>
-	    		
-	    		<c:if test="${roomDto.type == '민박'}">
-	    			<select id="type" name="type">
-		    			<option value="아파트">아파트</option>
-		    			<option value="주택">주택</option>
-		    			<option value="펜션">펜션</option>
-		    			<option value="민박" selected="selected">민박</option>
-		    		</select>
-	    		</c:if>
+	    		<select id="type" name="type">
+	    			<option value="아파트" ${roomDto.type == '아파트' ? 'selected="selected"' : ''}>아파트</option>
+	    			<option value="주택" ${roomDto.type == '주택' ? 'selected="selected"' : ''}>주택</option>
+	    			<option value="펜션" ${roomDto.type == '펜션' ? 'selected="selected"' : ''}>펜션</option>
+	    			<option value="민박" ${roomDto.type == '민박' ? 'selected="selected"' : ''}>민박</option>
+	    		</select>
 	    	</div>
 		</div>
     	
@@ -131,21 +102,13 @@
 			<label for="hosting">호스팅 여부</label>
     	</div>
     	<div class="room-check">
-			<c:if test="${roomDto.hosting == true}">
-				<input type="checkbox" id="hosting" name="hosting" onclick="checkHosting(this)" value="1" checked="checked">
-	   			<label>YES</label>
-	   			<label></label>
-				<input type="checkbox" id="hosting" name="hosting" onclick="checkHosting(this)" value="0">
-				<label>NO</label>
-			</c:if>
-			
-			<c:if test="${roomDto.hosting == false}">
-				<input type="checkbox" id="hosting" name="hosting" onclick="checkHosting(this)" value="1">
-	   			<label>YES</label>
-	   			<label></label>
-				<input type="checkbox" id="hosting" name="hosting" onclick="checkHosting(this)" value="0" checked="checked">
-				<label>NO</label>
-			</c:if>
+			<input type="checkbox" id="hosting" name="hosting" onclick="checkHosting(this)" value="1"
+			${roomDto.hosting == true ? 'checked="checked"' : ''}>
+   			<label>YES</label>
+   			<label></label>
+			<input type="checkbox" id="hosting" name="hosting" onclick="checkHosting(this)" value="0"
+			${roomDto.hosting == false ? 'checked="checked"' : ''}>
+			<label>NO</label>
 	    </div>
 	    
 	    <!-- 이미지 -->
