@@ -78,7 +78,7 @@
     	<div class="card-div">
 		   	<label for="end-date">유효 기간</label>
 	    	<div>
-	    		<input type="date" required id="end-date" name="end-date">
+	    		<input type="month" required id="end_date" name="end_date">
 	    	</div>
 	    </div>
     	
