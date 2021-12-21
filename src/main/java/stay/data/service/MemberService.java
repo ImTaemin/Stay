@@ -21,13 +21,13 @@ public class MemberService {
         int cnt = memberRepository.idCheck(id);
         return cnt;
     }
+    
+    public MemberDto getMember(String id) {
+    	return mapper.getMember(id);
+    }
 	
 	public void insertPhoto(MemberDto memberDto) {
 		mapper.insertPhoto(memberDto);
-	}
-	
-	public MemberDto getMember(String id) {
-		return mapper.getMember(id);
-	}
+  }
 	
 }

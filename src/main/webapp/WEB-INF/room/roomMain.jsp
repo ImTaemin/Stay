@@ -42,7 +42,8 @@
 						
 						<div class="star-cost">
 							<div class="star">
-								<label>⭐ <b>${avgRating}</b> ( 후기 ${totalComment}개 )</label>
+								<label><i class="bi bi-star-fill" style="font-size: 1.5rem;"></i>
+								<b>${avgRating}</b> ( 후기 ${totalComment}개 )</label>
 							</div>
 							
 							<div class="cost">
