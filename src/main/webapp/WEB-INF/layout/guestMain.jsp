@@ -14,6 +14,10 @@
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<!-- Swiper -->
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+ <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" /> 
+ <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
 <title>Insert title here</title>
 </head>
@@ -30,41 +34,38 @@
 	
 	<div class="guestMain-bottom">
 		<!-- 인기숙소 -->
-		<div class="guestMain-toproom">인기 숙소</div>
+		<div class="guestMain-toproom">
+			<span class="glyphicon glyphicon-heart red"></span> 
+			인기 숙소
+			<span class="glyphicon glyphicon-heart red"></span> 
+		</div>
+		
 		<div class="guestMain-list">
-			<div class="glyphicon glyphicon-chevron-left"></div>
-			<div class="guestMain-info">
-				<div class="guestMain-room">
-					<div class="guestMain-image"><img alt="" src="../photo/숙소1_1.jpg"></div>
-					<div class="guestMain-detail">
-						<div class="guestMain-name">숙소이름</div>
-						<div class="guestMain-site">숙소위치</div>
-					</div>
-				</div>
-				<div class="guestMain-room">
-					<div class="guestMain-image"><img alt="" src="../photo/숙소1_1.jpg"></div>
-					<div class="guestMain-detail">
-						<div class="guestMain-name">숙소이름</div>
-						<div class="guestMain-site">숙소위치</div>
-					</div>
-				</div>
-				<div class="guestMain-room">
-					<div class="guestMain-image"><img alt="" src="../photo/숙소1_1.jpg"></div>
-					<div class="guestMain-detail">
-						<div class="guestMain-name">숙소이름</div>
-						<div class="guestMain-site">숙소위치</div>
-					</div>
-				</div>
-				<div class="guestMain-room">
-					<div class="guestMain-image"><img alt="" src="../photo/숙소1_1.jpg"></div>
-					<div class="guestMain-detail">
-						<div class="guestMain-name">숙소이름</div>
-						<div class="guestMain-site">숙소위치</div>
-					</div>
-				</div>
-			</div>
-			<div class="glyphicon glyphicon-chevron-right"></div>
+			<!-- Slider main container -->
+		    <div class="swiper-container">
+		        <!-- Additional required wrapper -->
+		        <div class="swiper-wrapper">
+		            <!-- Slides ::슬라이더 -->
+		            <c:forEach var="list" items="${roomList }">
+		            	<div class="swiper-slide">
+		            		<div class="guestMain-room"  onclick="location.href='room/content?no=${list.no}&currentPage=${currentPage}'">
+									<div class="guestMain-image"><img alt="" src="${root}/photo/roomPhoto/${list.photos}"></div>
+									<div class="guestMain-detail">
+										<div class="guestMain-name">${list.name }</div>
+										<div class="guestMain-site">${list.addr_load }</div>
+									</div>
+							</div>
+		            	</div>
+		            </c:forEach>
+		        </div>
+			
+		        <!-- If we need navigation buttons ::양옆 좌우 버튼(선택) -->
+		        <div class="swiper-button-next"></div>
+		        <div class="swiper-button-prev"></div>
+		    </div>
+	
 		</div>
 	</div>
+	<script src="${root}/js/guestMain.js"></script>
 </body>
 </html>

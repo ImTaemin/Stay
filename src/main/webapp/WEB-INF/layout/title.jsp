@@ -36,7 +36,7 @@
 	          <li>
 	            <a href="#">
 	              예약정보
-	            </a>
+	            </a>	
 	          </li>
 	          <li>
 	            <a href="#">
@@ -46,7 +46,7 @@
 	        </ul>
 	        <ul>
 	          <li>
-	            <a href="${root}/profileform">
+	            <a href="${root}/profile/profileform">
 	              프로필
 	            </a>
 	          </li>
