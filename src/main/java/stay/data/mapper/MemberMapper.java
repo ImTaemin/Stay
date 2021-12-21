@@ -3,8 +3,11 @@ package stay.data.mapper;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import stay.data.dto.MemberDto;
 
+@Mapper
 public interface MemberMapper {
 	
 	public void insertMember(MemberDto dto);

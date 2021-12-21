@@ -6,10 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="/css/mypageForm.css">
+<link rel="stylesheet" href="${root}/css/mypageForm.css">
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<c:set var="root" value="${pageContext.request.contextPath}"/>
+<c:set var="root" value="<%=request.getContextPath() %>"/>
 <title>마이페이지</title>
 </head>
 <body>
@@ -17,9 +17,9 @@
      <!-- <h4>프로필 이미지
      <input type="file" name="photo1" id="photo1" style="display: none;" required="required" multiple="multiple">&nbsp;&nbsp;
      <span class="glyphicon glyphicon-user" style="cursor: pointer;"></span></h4> -->
-
+		
 		<div class="photo">
-			<img alt="" src="${root}/photo/${mdto.photo}">
+			<img alt="" src="${root}/photo/roomPhoto/${memberDto.photo}">
 		</div>
 
 		<!-- 이미지 -->
@@ -45,23 +45,26 @@
 	</c:if>
   
    <div class="input">
-   <h2>${dto.name}님의 마이페이지</h2>
+   <h2>${memberDto.name}님의 마이페이지</h2>
     <label for="pass">비밀번호</label>
       <input type="password" id="pass" minlength="8" maxlength="16" placeholder="비밀번호를 입력하세요(8~16자의 영문·특수문자 조합)" required="required">
     <label for="pass_check">비밀번호 확인</label>
       <input type="password" id="pass_check" placeholder="비밀번호 확인" required="required">
   	<label for="name">이름</label>
-  	  <input type="text" required="required" value="${dto.name}">
+  	  <input type="text" required="required" value="${memberDto.name}">
   	<label for="brith">생년월일</label>
-  	  <input type="date" value="${dto.birth}">
+  	  <input type="date" value="${memberDto.birth}">
   	<label for="addr">주소</label>
-  	  <input type="text" id="addr" name="addr" disabled="disabled">
-  	  <button type="button" class="mypage-btn" name="addr">주소 찾기</button><br>
-  	  <input type="text" name="addr" value="${dto.addr}">
+  	  <div class="mypage-update-addr">
+  	  <input type="text" id="addr1" name="addr1" disabled="disabled" value="${memberDto.addr}">
+  	  <button type="button" class="mypage-btn" name="addr_find">주소 찾기</button><br>
+  	  </div>
+  	  <input type="text" id="addr2" name="addr2" value="${memberDto.addr}">
+  	  
   	<label for="hp">핸드폰 번호</label>
-  	  <input type="tel" id="hp" required="required" value="${dto.hp}">
+  	  <input type="tel" id="hp" required="required" value="${memberDto.hp}">
   	<label for="email">이메일</label>
-  	   <input type="email" id="email" value="${dto.email}"> 
+  	   <input type="email" id="email" value="${memberDto.e_mail}"> 
   	 <!-- <input type="text" name="email1" class="form-control"
   	  		required="required" style="width: 80px;" value="${email1}">
 		<b>@</b>
@@ -85,6 +88,6 @@
   </form>
   
   </div>
-  <script src="/js/mypageForm.js"></script>
+  <script src="${root}/js/mypageForm.js"></script>
 </body>
 </html>
