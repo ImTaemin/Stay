@@ -59,18 +59,29 @@
 	        </ul>
 	        <ul>
 	          <li>
-	            <a href="#">
-	             	호스트로 전환
-	            </a>
+		          <c:if test="${sessionScope.mode=='guest'}">
+		      	 	<a href="/changeMode">
+		             	호스트로 전환
+		            </a>
+		           </c:if>
+		            <c:if test="${sessionScope.mode=='host'}">
+			            <a href="/changeMode">
+			             	게스트로 전환
+			            </a>
+		            </c:if>
 	          </li>
 	        </ul>
 	       </c:if>
 	       <c:if test="${sessionScope.loginok==null }">
 	        <ul>
 	          <li>
+	          
 	            <a href="${root}/room/main">
+	            
 	              숙소
 	            </a>
+	            
+	            
 	          </li>
 	          <li>
 	            <a href="${root }/member/login">
@@ -97,9 +108,11 @@
 	        </ul>
 	        <ul>
 	          <li>
+	      
 	            <a href="${root}/member/login">
 	             	호스트로 전환
 	            </a>
+	           
 	          </li>
 	        </ul>
 	       </c:if>

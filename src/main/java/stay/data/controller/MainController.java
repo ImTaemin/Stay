@@ -2,6 +2,8 @@ package stay.data.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -97,7 +99,22 @@ public class MainController {
    
    @GetMapping("/host/main")
    public String hostmain() {
-
       return "/layout/hostMain";
+   }
+   
+   @GetMapping("/changeMode")
+   public String modeChange(HttpSession session) {
+	   if(((String)session.getAttribute("mode")).equals("guest")) {
+		   session.setAttribute("mode", "host");
+//		   session.removeAttribute("mode");
+//		   session.setAttribute("mode", "host");
+		   return "redirect:/host/main";
+	   } else {
+		   session.setAttribute("mode", "guest");
+//		   session.removeAttribute("mode");
+//		   session.setAttribute("mode", "host");
+		   return "redirect:/";
+	   }
+	   
    }
 }
