@@ -56,3 +56,34 @@ map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
 // 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
 var zoomControl = new kakao.maps.ZoomControl();
 map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
+
+// 하트 클릭 이벤트
+var tmp = true;
+
+function heartClick(e) {
+	var roomId = $(e).attr("roomID");
+	
+	if(tmp) {
+		$(e).attr("class", "bi bi-heart-fill");
+		tmp = false;
+		
+		$.ajax({
+			type: "post",
+			url: "/wish/insert",
+			data: {"roomId" : roomId}
+		});
+	} else {
+		$(e).attr("class", "bi bi-heart");
+		tmp = true;
+		
+		$.ajax({
+			type: "post",
+			url: "/wish/delete",
+			data: {"roomId" : roomId},
+			error: function(request,error) {
+				console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	}
+}
