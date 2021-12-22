@@ -15,4 +15,5 @@ public interface RoomMapper {
 	public List<RoomDto> getRooms(HashMap<String, Integer> map);
 	public RoomDto getRoom(String no);
 	public void updateRoom(RoomDto roomDto);
+	public List<RoomDto> getBestRoom();
 }

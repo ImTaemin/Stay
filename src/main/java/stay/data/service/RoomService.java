@@ -42,4 +42,8 @@ public class RoomService {
 	public void updateRoom(RoomDto roomDto) {
 		mapper.updateRoom(roomDto);
 	}
+	
+	public List<RoomDto> getBestRoom() {
+		return mapper.getBestRoom();
+	}
 }

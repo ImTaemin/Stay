@@ -34,5 +34,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where no = #{no}
 	</update>
 	
-	//예시
+	<select id="getBestRoom" resultType="rdto">
+		select * from room r, (select room_no, count(*) cnt from wishlist group by room_no order by cnt desc limit 5) w
+		where r.no = w.room_no
+	</select>
 </mapper>
