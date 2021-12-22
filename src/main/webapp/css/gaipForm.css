@@ -10,25 +10,21 @@ div .gaip-form {
 }
 
 h1 {
-	margin-left: -320px;
+	margin-left: -225px;
 	margin-bottom: 20px;
 }
 
-.gaip-input-id {
+.gaip-input-check {
 	display: flex;
 	flex-direction: column;
 }
 
-.gaip-input-addr {
-	display: flex;
-	flex-wrap: wrap;
-}
 
 .id_ok {
 	font-size: 0.8em;
 	color: blue;
 	display: none;
-	margin-top: -10px;
+	margin-top: -7px;
     margin-left: 10px;
     margin-bottom: 10px;
 }
@@ -37,8 +33,53 @@ h1 {
 	font-size: 0.8em;
 	color: red;
 	display: none;
-	margin-top: -10px;
+	margin-top: -7px;
     margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.pw_glyphicon {
+	display: flex;
+}
+
+.pw_check {
+	display: flex;
+}
+
+.glyphicon-ok-sign{
+	font-size: 0.8em;
+	color: green;
+	display: none;
+	margin-top: -5px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.pw_equal {
+	font-size: 0.8em;
+	color: green;
+	display: none;
+	margin-top: -23px;
+    margin-left: 27px;
+    margin-bottom: 10px;
+}
+
+.glyphicon-remove-sign{
+	font-size: 0.8em;
+	color: red;
+	display: none;
+	margin-top: -5px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+.pw_not_equal,
+.pw_not_length,
+.pw_not_sc {
+	font-size: 0.8em;
+	color: red;
+	display: none;
+	margin-top: -23px;
+    margin-left: 27px;
     margin-bottom: 10px;
 }
 
@@ -87,8 +128,8 @@ label {
 }
 
 .gaip-cancel-btn {
-	margin-left: 240px;
-	margin-top: 10px;
+	margin-left: 63px;
+	margin-top: 20px;
 }
 
 .gaip-btn {

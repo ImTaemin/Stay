@@ -46,6 +46,8 @@ html, body { position: relative; height: 100vh; }
 .guestMain-list{
 	margin-top: 5%;
 	position: relative;
+	overflow: hidden;
+	
 }
 
 .guestMain-room{
@@ -54,6 +56,7 @@ html, body { position: relative; height: 100vh; }
 	height: 350px;
 	width: 300px;
 	padding: 3% 3%; 
+	
 }
 
 .guestMain-image img{
@@ -66,14 +69,22 @@ html, body { position: relative; height: 100vh; }
 .guestMain-detail{
 	margin-top: 10%;
 	font-size: 11pt;
+	font-weight: bolder;
+	
 }
 .swiper-container{
 	position: static;
+
 }
 
 .guestMain-name{
 	margin-bottom: 7%;
 }
+
+
+
+
+
     .swiper-slide {
       text-align: center;
       font-size: 18px;
@@ -92,6 +103,7 @@ html, body { position: relative; height: 100vh; }
       -ms-flex-align: center;
       -webkit-align-items: center;
       align-items: center;
+      
     }
 
 

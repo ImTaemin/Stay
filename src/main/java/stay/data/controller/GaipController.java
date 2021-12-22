@@ -42,24 +42,6 @@ public class GaipController {
 		return "/member/memberlist";
 	}
 	
-	/*
-	 * //id체크
-	 * 
-	 * @GetMapping("/idCheck")
-	 * 
-	 * @ResponseBody //json으로 반환되려면 반드시 Map타입이어야하고 @ResponseBody 써줘야 함 public
-	 * Map<String, Integer> idCheckProc(@RequestParam String id){
-	 * 
-	 * int check=mapper.getIdCheck(id);
-	 * 
-	 * System.out.println(check);
-	 * 
-	 * Map<String, Integer> map=new HashMap<String, Integer>(); map.put("check",
-	 * check); //결과값 0(사용가능) 또는 1(사용중)
-	 * 
-	 * return map; }
-	 */
-	
 	// 아이디 체크
     @PostMapping("/idCheck")
     @ResponseBody
@@ -72,43 +54,12 @@ public class GaipController {
 	@PostMapping("/insert")
 	public String memberInsert(@ModelAttribute MemberDto dto) {
 
-		//주소 형식으로 넣어주기
-		dto.setAddr(dto.getAddr1()+" "+dto.getAddr2());
-
 		//insert 호출
 		mapper.insertMember(dto);
 
-		//리스트로
-		return "redirect:list";
+		//메인으로
+		return "redirect:/";
 	}
-
-	/*
-	 * //updatepassform으로 포워드
-	 * 
-	 * @GetMapping("/updatepassform") public String updatePassForm(@RequestParam
-	 * String num, Model model) {
-	 * 
-	 * model.addAttribute("num", num);
-	 * 
-	 * return "/member/updatepassform"; }
-	 */
-
-	/*
-	 * //비밀번호 체크 후 updateform 또는 passfail로
-	 * 
-	 * @PostMapping("/updatepass") public String updatePass(@RequestParam
-	 * String num,
-	 * 
-	 * @RequestParam String pass) {
-	 * 
-	 * //db로부터 비번맞는지 체크 HashMap<String, String> map=new HashMap<String, String>();
-	 * map.put("num", num); map.put("pass", pass);
-	 * 
-	 * int check=mapper.getCheckPass(map);
-	 * 
-	 * if(check==1) { //비번이 맞는 경우 return "redirect:updateform?num="+num; //num에 해당하는
-	 * dto가져와야하므로 } else { return "/member/passfail"; } }
-	 */
 
 	@GetMapping("/updateform")
 	public ModelAndView updateForm(@RequestParam String id) {
@@ -118,11 +69,6 @@ public class GaipController {
 		//db로부터 dto얻기
 		MemberDto dto=mapper.getMember(id);
 		
-		//이메일 분리한 후 다시 dto에 담기
-		String [] ad=dto.getAddr().split(" ");
-		dto.setAddr1(ad[0]);
-		dto.setAddr2(ad[1]);
-
 		mv.addObject("dto", dto);
 
 		mv.setViewName("/member/updateform");
@@ -136,8 +82,8 @@ public class GaipController {
 		//update 호출
 		mapper.updateMember(dto);
 
-		//리스트로
-		return "redirect:list";
+		//메인으로
+		return "redirect:/";
 	}
 
 	@GetMapping("/delete")

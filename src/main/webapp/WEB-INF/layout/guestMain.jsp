@@ -35,9 +35,9 @@
 	<div class="guestMain-bottom">
 		<!-- 인기숙소 -->
 		<div class="guestMain-toproom">
-			<span class="glyphicon glyphicon-heart red"></span> 
+			<span class="glyphicon glyphicon-heart"></span> 
 			인기 숙소
-			<span class="glyphicon glyphicon-heart red"></span> 
+			<span class="glyphicon glyphicon-heart"></span> 
 		</div>
 		
 		<div class="guestMain-list">

@@ -27,6 +27,7 @@
 			<div class="glyphicon glyphicon-align-justify" id="main-menu"></div>
 	      </button>
 		<div class="dropdown-menu"> 
+		<c:if test="${sessionScope.loginok!=null }">
 	        <ul>
 	          <li>
 	            <a href="${root}/room/main">
@@ -39,7 +40,7 @@
 	            </a>	
 	          </li>
 	          <li>
-	            <a href="#">
+	            <a href="${root }/wish/list">
 	              위시리스트
 	            </a>
 	          </li>
@@ -63,6 +64,45 @@
 	            </a>
 	          </li>
 	        </ul>
+	       </c:if>
+	       <c:if test="${sessionScope.loginok==null }">
+	        <ul>
+	          <li>
+	            <a href="${root}/room/main">
+	              숙소
+	            </a>
+	          </li>
+	          <li>
+	            <a href="${root }/member/login">
+	              예약정보
+	            </a>	
+	          </li>
+	          <li>
+	            <a href="${root }/member/login">
+	              위시리스트
+	            </a>
+	          </li>
+	        </ul>
+	        <ul>
+	          <li>
+	            <a href="${root}/member/login">
+	              프로필
+	            </a>
+	          </li>
+	          <li>
+	            <a href="${root}/member/login">
+	              마이페이지
+	            </a>
+	          </li>
+	        </ul>
+	        <ul>
+	          <li>
+	            <a href="${root}/member/login">
+	             	호스트로 전환
+	            </a>
+	          </li>
+	        </ul>
+	       </c:if>
 	      </div>
 		</div>
 		<!-- 로고_클릭시 메인페이지로 이동 -->
@@ -75,7 +115,7 @@
 		<div class="main-buttons">
 			<c:if test="${sessionScope.loginok==null }">
 				<button type="button" class="btn btn-info" id="loginbtn"  onclick="location.href='${root}/member/login'">Login</button>
-				<button type="button" class="btn btn-default"  id="signupbtn" onclick="location.href='${root}/member/gaipform'">Sign Up</button>
+				<button type="button" class="btn btn-default"  id="signupbtn" onclick="location.href='${root}/member/gaip'">Sign Up</button>
 			</c:if>
 			<c:if test="${sessionScope.loginok!=null }">
 				<b>${sessionScope.myid } 님</b><i class="fas fa-user-circle"></i>
