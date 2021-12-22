@@ -43,7 +43,8 @@
 
 		<form name="signform" method="POST" ENCTYPE="multipart/form-data">
 			<input type="file" id="file" name="file" style="display: none;" onchange="changeValue(this)">
-			<input type="hidden" name="target_url">
+			<input type="hidden"
+				name="target_url">
 		</form>
 
 
