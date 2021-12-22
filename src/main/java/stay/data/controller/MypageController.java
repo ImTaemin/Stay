@@ -26,11 +26,6 @@ public class MypageController {
 	
 	@Autowired
 	MemberService memberService;
-	
-	@GetMapping("/mypageform")
-	public String mypageForm() {
-		return "/member/mypageForm";
-	}
 
 	// updatepassform
 	@GetMapping("/updatepassform")
@@ -121,7 +116,7 @@ public class MypageController {
 		return "redirect:main";
 	}
 	
-	@GetMapping("/member1")
+	@GetMapping("/mypageform")
 	public ModelAndView member1(HttpSession session) {
 		ModelAndView mview = new ModelAndView();
 		

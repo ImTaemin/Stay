@@ -23,11 +23,6 @@ public class ProfileController {
 	MemberService memberService;
 	
 	@GetMapping("/profileform")
-	public String profileForm() {
-		return "/member/profileForm";
-	}
-	
-	@GetMapping("/profile1")
 	public ModelAndView profile1(HttpSession session) {
 		ModelAndView mview = new ModelAndView();
 		
