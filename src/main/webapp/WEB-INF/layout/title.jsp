@@ -30,89 +30,74 @@
 		<c:if test="${sessionScope.loginok!=null }">
 	        <ul>
 	          <li>
-	            <a href="${root}/room/main">
-	              숙소
-	            </a>
-	          </li>
-	          <li>
-	            <a href="#">
-	              예약정보
-	            </a>	
-	          </li>
-	          <li>
-	            <a href="${root }/wish/list">
-	              위시리스트
-	            </a>
+		          <c:if test="${sessionScope.mode=='guest'}">
+			      	<a href="${root}/room/main">숙소</a>
+			      </c:if>
+			      <c:if test="${sessionScope.mode=='host'}">
+				     <a href="#">숙소</a>
+			      </c:if>
 	          </li>
 	        </ul>
 	        <ul>
 	          <li>
-	            <a href="${root}/profile/profileform">
-	              프로필
-	            </a>
+	            <a href="#">예약정보</a>	
 	          </li>
 	          <li>
-	            <a href="${root}/mypage/mypageform">
-	              마이페이지
-	            </a>
+		          <c:if test="${sessionScope.mode=='guest'}">
+			      	 	<a href="${root }/wish/list">위시리스트</a>
+			      </c:if>
+		          <c:if test="${sessionScope.mode=='host'}">
+			      	 	<a href="#">달력</a>
+			      </c:if>
+	          </li>
+	        </ul>
+	        <ul>
+	          <li>
+	            <a href="${root}/profile/profileform">프로필</a>
+	          </li>
+	          <li>
+	            <a href="${root}/mypage/mypageform">마이페이지</a>
+	          </li>
+	          <li>
+		          <c:if test="${sessionScope.mode=='host'}">
+			            <a href="/card/insertform">수금 계좌번호 등록</a>
+		          </c:if>
 	          </li>
 	        </ul>
 	        <ul>
 	          <li>
 		          <c:if test="${sessionScope.mode=='guest'}">
-		      	 	<a href="/changeMode">
-		             	호스트로 전환
-		            </a>
+		      	 	<a href="/changeMode">호스트로 전환</a>
 		           </c:if>
 		            <c:if test="${sessionScope.mode=='host'}">
-			            <a href="/changeMode">
-			             	게스트로 전환
-			            </a>
+			            <a href="/changeMode">게스트로 전환</a>
 		            </c:if>
-	          </li>
+	           </li>
 	        </ul>
-	       </c:if>
+	    </c:if>
 	       <c:if test="${sessionScope.loginok==null }">
 	        <ul>
 	          <li>
-	          
-	            <a href="${root}/room/main">
-	            
-	              숙소
-	            </a>
-	            
-	            
+	            <a href="${root}/room/main">숙소</a>
 	          </li>
 	          <li>
-	            <a href="${root }/member/login">
-	              예약정보
-	            </a>	
+	            <a href="${root }/member/login">예약정보</a>	
 	          </li>
 	          <li>
-	            <a href="${root }/member/login">
-	              위시리스트
-	            </a>
+	            <a href="${root }/member/login">위시리스트</a>
 	          </li>
 	        </ul>
 	        <ul>
 	          <li>
-	            <a href="${root}/member/login">
-	              프로필
-	            </a>
+	            <a href="${root}/member/login">프로필</a>
 	          </li>
 	          <li>
-	            <a href="${root}/member/login">
-	              마이페이지
-	            </a>
+	            <a href="${root}/member/login">마이페이지</a>
 	          </li>
 	        </ul>
 	        <ul>
 	          <li>
-	      
-	            <a href="${root}/member/login">
-	             	호스트로 전환
-	            </a>
-	           
+	            <a href="${root}/member/login">호스트로 전환</a>
 	          </li>
 	        </ul>
 	       </c:if>
@@ -131,7 +116,7 @@
 				<button type="button" class="btn btn-default"  id="signupbtn" onclick="location.href='${root}/member/gaip'">Sign Up</button>
 			</c:if>
 			<c:if test="${sessionScope.loginok!=null }">
-				<b>${sessionScope.myid } 님</b><i class="fas fa-user-circle"></i>
+				<b>${sessionScope.myid } 님</b><i class="fas fa-user-circle" onclick="location.href='/mypage/mypageform'"></i>
 				<button type="button" class="btn btn-danger" id="logoutbtn"  onclick="location.href='/member/logoutprocess'">Logout</button>
 			</c:if>
 		</div>

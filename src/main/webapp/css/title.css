@@ -41,6 +41,8 @@
     height: auto;
   }
   
+
+  
   .dropdown-menu {
     display: none;
     position: absolute;
@@ -73,8 +75,11 @@
     list-style-type: none;
     padding: 8px 0;
   }
+     .dropdown-menu ul:nth-child(2) {
+    border-top: 1px solid #e1e4e8;
+  }
   
-  .dropdown-menu ul:nth-child(2){
+  .dropdown-menu ul:nth-child(3){
     border-top: 1px solid #e1e4e8;
   }
   
@@ -115,6 +120,7 @@
 .main-buttons i{
 	font-size: 2.3em;
 	margin-left: 2%;
+	cursor: pointer;
 }
 #loginbtn, #signupbtn, #logoutbtn{
 	font-weight: bold;

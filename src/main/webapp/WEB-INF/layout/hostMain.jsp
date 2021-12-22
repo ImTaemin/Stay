@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,7 +44,11 @@
 		</div>
 		
 		<div class="hostMain-middle">
-			<div class="hostMain-date">2021년 12월 10일 (금)</div>
+		<c:set var="now" value="<%=new java.util.Date()%>" /> 
+		<fmt:formatDate value="${now}" pattern="yyyy년 MM월 dd일 (E)" var="today" />
+			<div class="hostMain-date">
+			${today }
+			</div>
 			<!-- 상태별 숙소 조회 selectBox -->
 			<div class="hostMain-option">
 				<select class="hostMain-state">
