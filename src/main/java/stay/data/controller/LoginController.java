@@ -68,7 +68,8 @@ public class LoginController {
 			session.setAttribute("myid", id);
 			session.setAttribute("loginok", "yes");
 			session.setAttribute("cbsave", cbsave);
-
+			session.setAttribute("mode", "guest");
+			
 			// 체크했을때 on, 안하면 null
 			return "redirect:/";
 		} else {
