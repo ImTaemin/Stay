@@ -116,7 +116,10 @@
 				<button type="button" class="btn btn-default"  id="signupbtn" onclick="location.href='${root}/member/gaip'">Sign Up</button>
 			</c:if>
 			<c:if test="${sessionScope.loginok!=null }">
-				<b>${sessionScope.myid } 님</b><i class="fas fa-user-circle" onclick="location.href='/mypage/mypageform'"></i>
+				<b>${sessionScope.myid } 님</b>
+				<div class="mypage-img" onclick="location.href='/mypage/mypageform'">
+					<img id="img" src="${root}/photo/memberPhoto/${photo}">
+				</div>
 				<button type="button" class="btn btn-danger" id="logoutbtn"  onclick="location.href='/member/logoutprocess'">Logout</button>
 			</c:if>
 		</div>

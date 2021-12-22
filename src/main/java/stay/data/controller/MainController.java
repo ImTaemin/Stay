@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import stay.data.dto.MemberDto;
 import stay.data.dto.RoomDto;
 import stay.data.service.GuestCommentService;
+import stay.data.service.MemberService;
 import stay.data.service.RoomService;
 
 @Controller
@@ -19,18 +21,18 @@ public class MainController {
 	
 	@Autowired
 	RoomService roomService;
-	
+	@Autowired
+	MemberService memberService;
 	@Autowired
 	GuestCommentService gcommentService;
 	
-	
+
    @GetMapping("/")
-   public ModelAndView home(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage) {
+   public ModelAndView home(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage,HttpSession session) {
 		ModelAndView mview = new ModelAndView();
 		
 		// 총 숙소 개수
 		int totalCount = roomService.getRoomCount();
-		
 		// 총 페이지 수
 		int totalPage;
 		// 각 블럭의 시작 페이지
@@ -75,6 +77,7 @@ public class MainController {
 		mview.addObject("endPage", endPage);
 		mview.addObject("currentPage", currentPage);
 		
+		
 		// 방 평균 별점
 		Float avgRating = gcommentService.getRatingAvg();
 		
@@ -91,6 +94,17 @@ public class MainController {
 		
 		mview.addObject("avgRating", avgRating);
 		mview.addObject("totalComment", totalComment);
+		
+		String myid = (String)session.getAttribute("myid");
+		String loginok = (String)session.getAttribute("loginok");
+		
+		if(loginok != null) {
+			MemberDto memberDto = memberService.getMember(myid);
+			
+			String photo = memberDto.getPhoto();
+			
+			mview.addObject("photo", photo);
+		}
 		
 		mview.setViewName("/layout/guestMain");
 		
@@ -117,4 +131,6 @@ public class MainController {
 	   }
 	   
    }
+   
+  
 }
