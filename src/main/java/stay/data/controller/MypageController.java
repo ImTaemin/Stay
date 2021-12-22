@@ -1,5 +1,6 @@
 package stay.data.controller;
 
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,10 +49,8 @@ public class MypageController {
 		mapper.updateMember(dto);
 
 		//메인으로
-		return "redirect:/";
+		return "redirect:main";
 	}
-
-	
 	
 	
 	// updatepassform

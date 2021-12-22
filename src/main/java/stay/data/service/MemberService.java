@@ -30,4 +30,8 @@ public class MemberService {
 		mapper.insertPhoto(memberDto);
   }
 	
+	public void updateMember(MemberDto memberDto) {
+		mapper.updateMember(memberDto);
+	}
+	
 }
