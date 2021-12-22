@@ -12,9 +12,6 @@
 <!-- css File -->
 <link rel="stylesheet" href="/css/loginForm.css">
 
-<!-- kakao login -->
-<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-
 <title>회원 로그인</title>
 </head>
 <body>
@@ -40,12 +37,14 @@
 	  <a href="findpw">비밀번호 찾기</a>
     </span><br>
 	    
-    <span class="sign-up">회원이 아니신가요?&nbsp;&nbsp;<a href="gaipform" class="sign-up-link">Sign up</a></span>
+    <span class="sign-up">회원이 아니신가요?&nbsp;&nbsp;<a href="gaip" class="sign-up-link">Sign up</a></span>
     
     <button type="submit" class="login-btn">Login</button>
   </form>
   
   <!-- 카카오톡 로그인 -->
+  <!-- kakao login -->
+  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 </div>
   
   <script src="/js/loginForm.js"></script>
