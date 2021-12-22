@@ -34,4 +34,8 @@ public class MemberService {
 		mapper.updateMember(memberDto);
 	}
 	
+	public void updateImg(MemberDto memberDto) {
+		mapper.updateImg(memberDto);
+	}
+	
 }

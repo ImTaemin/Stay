@@ -22,5 +22,7 @@ public interface MemberMapper {
 	public int login(HashMap<String, String> map);
 	
 	public void insertPhoto(MemberDto memberDto);
+	
+	public void updateImg(MemberDto dto);
 
 }
