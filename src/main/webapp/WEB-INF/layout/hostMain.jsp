@@ -44,10 +44,11 @@
 		</div>
 		
 		<div class="hostMain-middle">
-		<c:set var="now" value="<%=new java.util.Date()%>" /> 
-		<fmt:formatDate value="${now}" pattern="yyyy년 MM월 dd일 (E)" var="today" />
+			<!-- 오늘날짜 출력 -->
+			<c:set var="now" value="<%=new java.util.Date()%>" /> 
+			<fmt:formatDate value="${now}" pattern="yyyy년 MM월 dd일 (E)" var="today" />
 			<div class="hostMain-date">
-			${today }
+				${today }
 			</div>
 			<!-- 상태별 숙소 조회 selectBox -->
 			<div class="hostMain-option">
