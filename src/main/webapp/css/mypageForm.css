@@ -76,7 +76,6 @@ div .cardbtn {
 div .btnmypage {
 	display: flex;
 	justify-content: center;
-	margin-left: 25px;
 	margin-top: 5px;
 }
 
@@ -137,4 +136,54 @@ div .btnmypage {
 .mypage-update-addr {
 	display: flex;
 	flex-wrap: wrap;
+}
+
+.mypage-update-check {
+	display: flex;
+	flex-direction: column;
+}
+
+.pw_glyphicon {
+	display: flex;
+}
+
+.pw_check {
+	display: flex;
+}
+
+.glyphicon-ok-sign{
+	font-size: 0.8em;
+	color: green;
+	display: none;
+	margin-top: -5px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.pw_equal {
+	font-size: 0.8em;
+	color: green;
+	display: none;
+	margin-top: -23px;
+    margin-left: 27px;
+    margin-bottom: 10px;
+}
+
+.glyphicon-remove-sign{
+	font-size: 0.8em;
+	color: red;
+	display: none;
+	margin-top: -5px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+.pw_not_equal,
+.pw_not_length,
+.pw_not_sc {
+	font-size: 0.8em;
+	color: red;
+	display: none;
+	margin-top: -23px;
+    margin-left: 27px;
+    margin-bottom: 10px;
 }
