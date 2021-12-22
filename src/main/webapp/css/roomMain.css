@@ -37,19 +37,20 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	width: 35%;
 }
 
 .room-main-wrap>.list>.room-list-wrap>.photo img {
-	width: 200px;
 	height: 150px;
 	margin-right: 15px;
 	border-radius: 7px;
+	width: 90%;
 }
 
 .room-main-wrap>.list>.room-list-wrap>.content>.content-top {
 	display: flex;
 	justify-content: space-between;
-	width: 96%;
+	width: 100%;
 }
 
 .room-main-wrap>.list>.room-list-wrap>.content>.content-top b {
@@ -61,7 +62,7 @@
 }
 
 .content {
-	width: 100%;
+	width: 63%;
 }
 
 .content .bi-heart {
@@ -98,7 +99,6 @@
 }
 
 .room-main-wrap>.list>.room-list-wrap>.content>.star-cost {
-	width: 370px;
 	display: flex;
 	justify-content: space-between;
 	margin-top: 15px;

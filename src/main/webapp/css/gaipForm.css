@@ -10,7 +10,7 @@ div .gaip-form {
 }
 
 h1 {
-	margin-left: -320px;
+	margin-left: -225px;
 	margin-bottom: 20px;
 }
 
@@ -19,10 +19,6 @@ h1 {
 	flex-direction: column;
 }
 
-.gaip-input-addr {
-	display: flex;
-	flex-wrap: wrap;
-}
 
 .id_ok {
 	font-size: 0.8em;
@@ -132,8 +128,8 @@ label {
 }
 
 .gaip-cancel-btn {
-	margin-left: 240px;
-	margin-top: 10px;
+	margin-left: 63px;
+	margin-top: 20px;
 }
 
 .gaip-btn {

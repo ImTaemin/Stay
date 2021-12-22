@@ -32,7 +32,18 @@
 					<div class="content">
 						<div class="content-top">
 							<b onclick="location.href='content?no=${list.no}&currentPage=${currentPage}'">${list.name}</b>
-							<i roomID="${list.no}" class="bi bi-heart" onclick="heartClick(this)"></i>
+							
+							<c:set var="loop_flag" value="false"/>
+							<c:forEach var="wish" items="${wishList}">
+								<c:if test="${wish.room_no eq list.no}">
+									<i roomID="${list.no}" class="bi bi-heart-fill" onclick="heartClick(this)"></i>
+									<c:set var="loop_flag" value="true"/>
+								</c:if>
+							</c:forEach>
+							
+							<c:if test="${not loop_flag}">
+								<i roomID="${list.no}" class="bi bi-heart" onclick="heartClick(this)"></i>
+							</c:if>
 						</div>
 						
 						<div class="content-middle" onclick="location.href='content?no=${list.no}&currentPage=${currentPage}'">
@@ -40,7 +51,7 @@
 							
 							<hr style="margin: 10px 0;">
 							
-							<label style="font-size: 0.6em;">최대 인원 : ${list.max_per}명</label>
+							<label style="font-size: 0.9em;">최대 인원 : ${list.max_per}명</label>
 						</div>
 						
 						<div class="star-cost" onclick="location.href='content?no=${list.no}&currentPage=${currentPage}'">

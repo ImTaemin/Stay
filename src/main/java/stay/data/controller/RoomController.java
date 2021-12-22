@@ -19,9 +19,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import stay.data.dto.MemberDto;
 import stay.data.dto.RoomDto;
+import stay.data.dto.WishListDto;
 import stay.data.service.GuestCommentService;
 import stay.data.service.MemberService;
 import stay.data.service.RoomService;
+import stay.data.service.WishListService;
 
 @Controller
 @RequestMapping("/room")
@@ -35,9 +37,17 @@ public class RoomController {
 	@Autowired
 	MemberService memberService;
 	
+	@Autowired
+	WishListService wishService;
+	
 	@GetMapping("/main")
-	public ModelAndView roomMain(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage) {
+	public ModelAndView roomMain(
+			@RequestParam(value = "currentPage", defaultValue = "1") int currentPage,
+			HttpSession session) {
 		ModelAndView mview = new ModelAndView();
+		
+		String myid = (String)session.getAttribute("myid");
+		String loginok = (String)session.getAttribute("loginok");
 		
 		// 총 숙소 개수
 		int totalCount = roomService.getRoomCount();
@@ -98,6 +108,13 @@ public class RoomController {
  		
  		if(totalComment == null) {
  			totalComment = 0;
+ 		}
+ 		
+ 		// 위시리스트
+ 		if(loginok != null) {
+ 			List<WishListDto> wishList = wishService.allWishList(myid);
+ 			
+ 			mview.addObject("wishList", wishList);
  		}
 		
 		mview.addObject("avgRating", avgRating);
