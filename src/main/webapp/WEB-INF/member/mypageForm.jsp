@@ -20,7 +20,7 @@
      <span class="glyphicon glyphicon-user" style="cursor: pointer;"></span></h4> -->
 		
 		<div class="photo">
-			<img alt="" src="${root}/photo/memberPhoto/${memberDto.photo}">
+			<img src="${root}/photo/memberPhoto/${memberDto.photo}">
 		</div>
 
 		<!-- 이미지 -->
@@ -28,7 +28,7 @@
     		<!-- <label for="photo">회원프로필 이미지</label> -->
     		<label for="photo"></label>
     		<div class="pfinput">
-    			<input type="file" required id="photo" name="photo" accept=".gif, .jpg, .png" multiple="multiple" style="width: 200px; padding-top: 6px;" maxlength="5">
+    			<input type="file" required id="photo" name="photo" accept=".gif, .jpg, .png" style="width: 200px; padding-top: 6px;" maxlength="5">
     		</div>
     		
     		<div id="pfmainimg"></div>

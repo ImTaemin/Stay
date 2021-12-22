@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import stay.data.dto.MemberDto;
+import stay.data.dto.RoomDto;
 import stay.data.service.MemberService;
 
 @Controller
@@ -27,12 +27,33 @@ public class MypageController {
 	@Autowired
 	MemberService memberService;
 
-	// updatepassform
-	@GetMapping("/updatepassform")
-	public String updatePassForm(@RequestParam String id, Model model) {
-		model.addAttribute("id",id);
-		return "/member/updatepassform";
+	@GetMapping("/mypageform")
+	public ModelAndView member1(HttpSession session) {
+		ModelAndView mview = new ModelAndView();
+		
+		String myid = (String)session.getAttribute("myid");
+		
+		MemberDto memberDto = memberService.getMember(myid);
+		
+		memberDto.setId(myid);
+		
+		mview.addObject("memberDto", memberDto);
+		
+		mview.setViewName("/member/mypageForm");
+		
+		return mview;
 	}
+	
+	
+	
+	
+	
+	// updatepassform
+	/*
+	 * @GetMapping("/updatepassform") public String updatePassForm(@RequestParam
+	 * String id, Model model) { model.addAttribute("id",id); return
+	 * "/member/updatepassform"; }
+	 */
 
 	// 비밀번호 체크 후 updateform or passfail
 	/*
@@ -76,61 +97,7 @@ public class MypageController {
 	 * @GetMapping("/insertform") public String photoInsertForm() { return
 	 * "/member/photoInsertForm"; }
 	 */
-
-	@PostMapping("/photoinsert")
-	public String photoInsert(@ModelAttribute MemberDto memberDto, @RequestParam ArrayList<MultipartFile> upload,
-			HttpSession session) {
-		// 업로드할 폴더 지정
-		String path = session.getServletContext().getRealPath("/photo");
-		System.out.println(path);
-
-		String photo = "";
-
-		if (upload.get(0).getOriginalFilename().equals("")) {
-			photo = "no";
-		} else {
-			for (MultipartFile f : upload) {
-				String fName = f.getOriginalFilename();
-				photo += fName + ",";
-
-				// 업로드
-				try {
-					f.transferTo(new File(path + "\\" + fName));
-				} catch (IllegalStateException | IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-
-			photo = photo.substring(0, photo.length() - 1);
-		}
-
-		// 추후 로그인 아이디 값으로 변경
-		String myid = (String)session.getAttribute("myid");
-
-		memberDto.setId(myid);
-		memberDto.setPhoto(photo);
-
-		memberService.insertPhoto(memberDto);
-
-		return "redirect:main";
-	}
 	
-	@GetMapping("/mypageform")
-	public ModelAndView member1(HttpSession session) {
-		ModelAndView mview = new ModelAndView();
-		
-		String myid = (String)session.getAttribute("myid");
-		
-		MemberDto memberDto = memberService.getMember(myid);
-		
-		memberDto.setId(myid);
-		
-		mview.addObject("memberDto", memberDto);
-		
-		mview.setViewName("/member/mypageForm");
-		
-		return mview;
-	}
+	
 	
 }
