@@ -46,9 +46,9 @@
 		        <!-- Additional required wrapper -->
 		        <div class="swiper-wrapper">
 		            <!-- Slides ::슬라이더 -->
-		            <c:forEach var="list" items="${roomList }">
+		            <c:forEach var="list" items="${bestList }">
 		            	<div class="swiper-slide">
-		            		<div class="guestMain-room"  onclick="location.href='room/content?no=${list.no}&currentPage=${currentPage}'">
+		            		<div class="guestMain-room"  onclick="location.href='room/content?no=${list.no}'">
 									<div class="guestMain-image"><img alt="" src="${root}/photo/roomPhoto/${list.photos}"></div>
 									<div class="guestMain-detail">
 										<div class="guestMain-name">${list.name }</div>
