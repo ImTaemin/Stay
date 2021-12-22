@@ -61,7 +61,7 @@
   	<label for="addr_load">주소</label>
   	  <input type="text" name="addr_load" id="sample4_roadAddress" onclick="sample4_execDaumPostcode()" placeholder="도로명주소" readonly="readonly" style="margin-bottom: 10px;" value="${memberDto.addr_load}">
 	  <input type="hidden" id="sample4_jibunAddress" placeholder="지번주소" size="60">
-	  <span id="guide" style="color:#999; display:none"></span>
+	  <span id="guide" style="color:#999; display:none"></span><br>
 	  <input type="text" name="addr_detail" id="sample4_detailAddress" placeholder="상세주소" size="60" value="${memberDto.addr_detail}">
 	  <input type="hidden" id="sample4_extraAddress" placeholder="참고항목" size="60">
 	  <input type="hidden" id="sample4_engAddress" placeholder="영문주소" size="60">
