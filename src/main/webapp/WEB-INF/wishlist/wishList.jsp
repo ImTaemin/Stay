@@ -34,13 +34,13 @@
 		<div class="list">
 			<c:forEach var="list" items="${roomList}">
 				<div class="room-list-wrap" id="${list.addr_load}">
-					<div class="photo" onclick="location.href='content?no=${list.no}&currentPage=${currentPage}'">
+					<div class="photo" onclick="location.href='/room/content?no=${list.no}'">
 						<img alt="" src="${root}/photo/roomPhoto/${list.photos}">
 					</div>
 					
 					<div class="content">
 						<div class="content-top">
-							<b onclick="location.href='content?no=${list.no}&currentPage=${currentPage}'">${list.name}</b>
+							<b onclick="location.href='/room/content?no=${list.no}'">${list.name}</b>
 							
 							<c:set var="loop_flag" value="false"/>
 							<c:forEach var="wish" items="${wishList}">
@@ -55,7 +55,7 @@
 							</c:if>
 						</div>
 						
-						<div class="content-middle" onclick="location.href='content?no=${list.no}&currentPage=${currentPage}'">
+						<div class="content-middle" onclick="location.href='/room/content?no=${list.no}'">
 							<label style="margin-top: 10px;">${list.addr_load}</label>
 							
 							<hr style="margin: 10px 0;">
@@ -63,7 +63,7 @@
 							<label style="font-size: 0.9em;">최대 인원 : ${list.max_per}명</label>
 						</div>
 						
-						<div class="star-cost" onclick="location.href='content?no=${list.no}&currentPage=${currentPage}'">
+						<div class="star-cost" onclick="location.href='/room/content?no=${list.no}'">
 							<div class="star">
 								<label><i class="bi bi-star-fill" style="font-size: 1.5rem;"></i>
 								<b>${avgRating}</b> ( 후기 ${totalComment}개 )</label>

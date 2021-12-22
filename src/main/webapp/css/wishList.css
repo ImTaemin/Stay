@@ -93,7 +93,7 @@
 	padding-top: 1%;
 }
 
-.room-main-wrap>.list>.room-list-wrap>.content .bi-heart:hover {
+.bi-heart:hover {
 	font-size: 1.5em;
 	color: #EB0000;
 }

@@ -16,11 +16,13 @@
 	justify-content: center;
 	padding-top: 0.4%;
 	margin-right: 1%;
+	cursor: pointer;
 }
 
 .bi-heart:hover {
 	font-size: 3.5em;
 	color: #EB0000;
+	cursor: pointer;
 }
 
 .bi-heart-fill {
@@ -30,6 +32,7 @@
 	padding-top: 0.4%;
 	margin-right: 1%;
 	color: #EB0000;
+	cursor: pointer;
 }
 
 .room-detail>.title-heart>.title {
