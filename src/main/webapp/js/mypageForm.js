@@ -1,3 +1,17 @@
+
+$('#target_img').click(function (e) {
+    document.signform.target_url.value = document.getElementById( 'target_img' ).src;
+    e.preventDefault();
+    $('#file').click();
+}); 
+
+function changeValue(obj){
+    document.signform.submit();
+
+
+}
+
+
 function check_pw(){
             var pw = document.getElementById('pass').value;
             var SC = ["!","@","#","$","%"];
@@ -85,4 +99,72 @@ function sample4_execDaumPostcode() {
 			}
 		}
 	}).open();
+};
+
+
+//비밀번호 일치 확인
+function checkPw(){
+
+    var pw = document.getElementById('pw').value;
+    var SC = ["!","@","#","$","%"];
+    var check_SC = 0;
+ 
+    if(pw.length < 6 || pw.length>16){
+    	$('.glyphicon-ok-sign').css("display", "none");
+        $('.pw_equal').css("display", "none");
+        $('.glyphicon-remove-sign').css("display", "inline-block");
+        $('.pw_not_equal').css("display", "none");
+        $('.pw_not_length').css("display", "inline-block");
+        $('.pw_not_sc').css("display", "none");
+    } else{
+    	$('.glyphicon-ok-sign').css("display", "none");
+        $('.pw_equal').css("display", "none");
+        $('.glyphicon-remove-sign').css("display", "none");
+        $('.pw_not_equal').css("display", "none");
+        $('.pw_not_length').css("display", "none");
+        $('.pw_not_sc').css("display", "none");
+    }
+    
+    
+    for(var i=0;i<SC.length;i++){
+        if(pw.indexOf(SC[i]) != -1){
+            check_SC = 1;
+        }
+    }
+    if(check_SC == 0){
+    	$('.glyphicon-ok-sign').css("display", "none");
+        $('.pw_equal').css("display", "none");
+        $('.glyphicon-remove-sign').css("display", "inline-block");
+        $('.pw_not_equal').css("display", "none");
+        $('.pw_not_length').css("display", "none");
+        $('.pw_not_sc').css("display", "inline-block");
+    }
+
+    
+    if(document.getElementById('pw').value !='' && document.getElementById('pw2').value!=''){
+        if(document.getElementById('pw').value==document.getElementById('pw2').value){
+        	$('.glyphicon-ok-sign').css("display", "inline-block");
+            $('.pw_equal').css("display", "inline-block");
+            $('.glyphicon-remove-sign').css("display", "none");
+        	$('.pw_not_equal').css("display", "none");
+        	$('.pw_not_length').css("display", "none");
+        	$('.pw_not_sc').css("display", "none");
+        }
+        else{
+        	$('.glyphicon-ok-sign').css("display", "none");
+            $('.pw_equal').css("display", "none");
+            $('.glyphicon-remove-sign').css("display", "inline-block");
+        	$('.pw_not_equal').css("display", "inline-block");
+        	$('.pw_not_length').css("display", "none");
+        	$('.pw_not_sc').css("display", "none");
+        }
+    } else if(document.getElementById('pw').value ==''){
+    	$('.glyphicon-ok-sign').css("display", "none");
+        $('.pw_equal').css("display", "none");
+        $('.glyphicon-remove-sign').css("display", "none");
+        $('.pw_not_equal').css("display", "none");
+        $('.pw_not_length').css("display", "none");
+        $('.pw_not_sc').css("display", "none");
+    }
+    
 };

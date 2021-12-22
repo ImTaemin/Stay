@@ -25,6 +25,31 @@
 				</div>
 				<!-- <button type="button" class="modal_btn" style="width: 200px; padding-top: 6px;">신고하기</button> -->
 				<button class="openBtn">신고하기</button>
+
+				<!-- Modal -->
+				<!-- <div class="modal fade" id="myModal" role="dialog">
+					<div class="modal-dialog">
+
+						Modal content
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">댓글 수정</h4>
+							</div>
+
+							<div class="modal-body">
+								<input type="text" id="ucontent" class="form-control">
+							</div>
+
+							<div class="modal-footer">
+								<button type="button" class="btn btn-warning"
+									data-dismiss="modal" id="btnaupdate">신고하기</button>
+							</div>
+						</div>
+
+					</div>
+				</div>
+ -->
 				<div class="modal hidden">
 					<div class="bg"></div>
 					<div class="modalBox">

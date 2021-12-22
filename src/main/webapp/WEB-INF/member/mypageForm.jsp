@@ -19,7 +19,7 @@
      <input type="file" name="photo1" id="photo1" style="display: none;" required="required" multiple="multiple">&nbsp;&nbsp;
      <span class="glyphicon glyphicon-user" style="cursor: pointer;"></span></h4> -->
 		
-		<div class="photo">
+		<%-- <div class="photo">
 			<img src="${root}/photo/memberPhoto/${memberDto.photo}">
 		</div>
 
@@ -29,10 +29,23 @@
     		<label for="photo"></label>
     		<div class="pfinput">
     			<input type="file" required id="photo" name="photo" accept=".gif, .jpg, .png" style="width: 200px; padding-top: 6px;" maxlength="5">
+    			<span class="glyphicon glyphicon-camera photo" style="font-size: 20pt; cursor: pointer;"></span>
     		</div>
     		
     		<div id="pfmainimg"></div>
-    	</div>
+    	</div> --%>
+    	
+ 
+<div  class="photo">
+    <img id = "target_img" src="${root}/photo/memberPhoto/${memberDto.photo}">
+</div>
+ 
+ 
+<form name="signform" method="POST" ENCTYPE="multipart/form-data" action="./design_update.htm">
+    <input type="file" id="file" name="file" style="display:none;" onchange="changeValue(this)">
+    <input type="hidden" name = "target_url">
+</form>
+
      
      <button type="button" class="card-btn" onclick="location.href='../card/insertform'">결제 카드 추가</button>
    
@@ -50,10 +63,24 @@
   
    <div class="input">
    <h2>${memberDto.name}님의 마이페이지</h2>
-    <label for="pass">비밀번호</label>
+    <!-- <label for="pass">비밀번호</label>
       <input type="password" name="userPW" id="pass" minlength="8" maxlength="16" placeholder="비밀번호를 입력하세요(8~16자의 영문·특수문자 조합)" required="required" onchange="check_pw()">
     <label for="pass_check">비밀번호 확인</label>
-      <input type="password" name="userPW2" id="pass_check" placeholder="비밀번호 확인" required="required" onchange="check_pw()">&nbsp;<span id="check"></span>
+      <input type="password" name="userPW2" id="pass_check" placeholder="비밀번호 확인" required="required" onchange="check_pw()">&nbsp;<span id="check"></span> -->
+      
+      <label for="pass">비밀번호</label>
+      <input type="password" id="pw" name="pass" minlength="6" maxlength="16" placeholder="비밀번호를 입력하세요(특수문자 포함 6~16자 입력)" required="required" oninput="checkPw()">
+    <label for="pass_check">비밀번호 확인</label>
+  	<div class="gaip-input-check">
+      <input type="password" id="pw2" placeholder="비밀번호 확인" required="required" oninput="checkPw()">
+  	  <div class="pw_glyphicon"><span class="glyphicon glyphicon-ok-sign"></span></div>
+  	  <div class="pw_check"><span class="pw_equal">비밀번호가 일치합니다.</span></div>
+  	  <div class="pw_glyphicon"><span class="glyphicon glyphicon-remove-sign"></span></div>
+  	  <div class="pw_check"><span class="pw_not_equal">비밀번호가 다릅니다.</span></div>
+  	  <div class="pw_check"><span class="pw_not_length">비밀번호는 6글자 이상, 16글자 이하만 사용 가능합니다.</span></div>
+  	  <div class="pw_check"><span class="pw_not_sc">!,@,#,$,% 의 특수문자가 들어가 있지 않습니다.</span></div>
+  	</div>
+      
   	<label for="name">이름</label>
   	  <input type="text" required="required" value="${memberDto.name}">
   	<label for="brith">생년월일</label>
