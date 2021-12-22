@@ -138,3 +138,8 @@ div .btnmypage {
 	display: flex;
 	flex-wrap: wrap;
 }
+
+.mypage-update-check {
+	display: flex;
+	flex-direction: column;
+}

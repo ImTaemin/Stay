@@ -58,12 +58,21 @@
   	  <input type="text" required="required" value="${memberDto.name}">
   	<label for="brith">생년월일</label>
   	  <input type="date" value="${memberDto.birth}">
-  	<label for="addr">주소</label>
+  	<label for="addr_load">주소</label>
+  	  <input type="text" name="addr_load" id="sample4_roadAddress" onclick="sample4_execDaumPostcode()" placeholder="도로명주소" readonly="readonly" style="margin-bottom: 10px;" value="${memberDto.addr_load}">
+	  <input type="hidden" id="sample4_jibunAddress" placeholder="지번주소" size="60">
+	  <span id="guide" style="color:#999; display:none"></span>
+	  <input type="text" name="addr_detail" id="sample4_detailAddress" placeholder="상세주소" size="60" value="${memberDto.addr_detail}">
+	  <input type="hidden" id="sample4_extraAddress" placeholder="참고항목" size="60">
+	  <input type="hidden" id="sample4_engAddress" placeholder="영문주소" size="60">
+  	
+  	<%-- 
+  	
   	  <div class="mypage-update-addr">
-  	  <input type="text" id="addr1" name="addr1" disabled="disabled" value="${memberDto.addr}">
+  	  <input type="text" id="addr1" name="addr1" disabled="disabled" value="${memberDto.addr_load}">
   	  <button type="button" class="mypage-btn" name="addr_find">주소 찾기</button><br>
   	  </div>
-  	  <input type="text" id="addr2" name="addr2" value="${memberDto.addr}">
+  	  <input type="text" id="addr2" name="addr2" value="${memberDto.addr_detail}"> --%>
   	  
   	<label for="hp">핸드폰 번호</label>
   	  <input type="tel" id="hp" required="required" value="${memberDto.hp}">
@@ -93,5 +102,6 @@
   
   </div>
   <script src="${root}/js/mypageForm.js"></script>
+  <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 </body>
 </html>
