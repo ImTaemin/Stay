@@ -1,5 +1,8 @@
 package stay.data.service;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,5 +16,18 @@ public class WishListService {
 	
 	public void insertWishList(WishListDto wishDto) {
 		mapper.insertWishList(wishDto);
+	}
+	
+	public void deleteWishList(String roomId, String guestId) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		
+		map.put("roomId", roomId);
+		map.put("guestId", guestId);
+		
+		mapper.deleteWishList(map);
+	}
+	
+	public List<WishListDto> allWishList(String guestId) {
+		return mapper.allWishList(guestId);
 	}
 }

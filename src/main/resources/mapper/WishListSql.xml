@@ -5,6 +5,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="stay.data.mapper.WishListMapper">
 	<insert id="insertWishList" parameterType="wldto">
-		insert into wishlist values (null, #{room_no}, #{guest_id})
+		insert into wishlist values (#{room_no}, #{guest_id})
 	</insert>
+	
+	<delete id="deleteWishList" parameterType="HashMap">
+		delete from wishlist where room_no = #{roomId} and guest_id = #{guestId}
+	</delete>
+	
+	<select id="allWishList" parameterType="String" resultType="wldto">
+		select * from wishlist where guest_id = #{guestId}
+	</select>
 </mapper>
