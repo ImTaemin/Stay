@@ -3,7 +3,7 @@
 
 <mapper namespace="stay.data.mapper.MemberMapper">
 <insert id="insertMember" parameterType="mdto">
-		insert into member (id,pass,name,birth,hp,addr,photo,likes,e_mail) values(#{id},#{pass},#{name},#{birth},#{hp},#{addr},#{photo},#{likes},#{e_mail})
+		insert into member (id,pass,name,birth,hp,addr_load,addr_detail,photo,likes,e_mail) values(#{id},#{pass},#{name},#{birth},#{hp},#{addr_load},#{addr_detail},#{photo},#{likes},#{e_mail})
 	</insert>
 	
 	<select id="getAllMembers" resultType="mdto">
@@ -23,7 +23,7 @@
 	</select>
 	
 	<update id="updateMember" parameterType="mdto">
-		update member set name=#{name}, hp=#{hp}, addr=#{addr}, photo=#{photo}, e_mail=#{e_mail} where id=#{id}
+		update member set name=#{name}, hp=#{hp}, #{addr_load}, #{addr_detail}, photo=#{photo}, e_mail=#{e_mail} where id=#{id}
 	</update>
 	
 	<delete id="deleteMember" parameterType="String">
