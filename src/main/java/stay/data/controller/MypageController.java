@@ -5,15 +5,21 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import stay.data.dto.MemberDto;
+import stay.data.mapper.MemberMapper;
 import stay.data.service.MemberService;
 
 @Controller
 @RequestMapping("/mypage")
 public class MypageController {
+	
+	@Autowired
+	MemberMapper mapper;
 	
 	@Autowired
 	MemberService memberService;
@@ -35,7 +41,16 @@ public class MypageController {
 		return mview;
 	}
 	
-	
+	@PostMapping("/update")
+	public String memberUpdate(@ModelAttribute MemberDto dto) {
+
+		//update 호출
+		mapper.updateMember(dto);
+
+		//메인으로
+		return "redirect:/";
+	}
+
 	
 	
 	
