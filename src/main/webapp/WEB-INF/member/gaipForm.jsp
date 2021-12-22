@@ -54,7 +54,7 @@
   	  <input type="email" id="email" name="e_mail" placeholder="이메일을 입력하세요">
   	<div class="gaip-cancel-btn">
   	  <button type="submit" class="gaip-btn">완료</button>
-  	  <button type="button" class="cancel-btn">취소</button>
+  	  <button type="button" class="cancel-btn" onclick="history.back()">취소</button>
   	</div>
   </form>
  </div>
