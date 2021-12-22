@@ -170,3 +170,4 @@ function checkPw(){
 };
 
 
+$("#photo").html("<img src='새로운애'>");
