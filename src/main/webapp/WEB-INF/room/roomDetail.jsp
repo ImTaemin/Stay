@@ -29,8 +29,22 @@
 			<c:set var="roomPrice" value="${roomDto.price}"></c:set>
 			
 			<!-- 숙소 이름 -->
-			<div class="title">
-				<label>${roomDto.name}</label>
+			<div class="title-heart">
+				<div class="title">
+					<label>${roomDto.name}</label>
+				</div>
+				
+				<c:set var="loop_flag" value="false"/>
+				<c:forEach var="wish" items="${wishList}">
+					<c:if test="${wish.room_no eq roomDto.no}">
+						<i roomID="${roomDto.no}" class="bi bi-heart-fill" onclick="heartClick(this)"></i>
+						<c:set var="loop_flag" value="true"/>
+					</c:if>
+				</c:forEach>
+				
+				<c:if test="${not loop_flag}">
+					<i roomID="${roomDto.no}" class="bi bi-heart" onclick="heartClick(this)"></i>
+				</c:if>
 			</div>
 			
 			<!-- 숙소 주소 -->

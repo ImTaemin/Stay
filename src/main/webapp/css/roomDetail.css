@@ -5,11 +5,35 @@
 	padding: 0 5%;
 }
 
-.room-detail>.title {
-	font-size: 2.5em;
+.room-detail>.title-heart {
+	display: flex;
+	justify-content: space-between;
 }
 
-.room-detail>.title>label {
+.bi-heart {
+	font-size: 3.5em;
+	display: flex;
+	justify-content: center;
+	padding-top: 0.4%;
+	margin-right: 1%;
+}
+
+.bi-heart:hover {
+	font-size: 3.5em;
+	color: #EB0000;
+}
+
+.bi-heart-fill {
+	font-size: 3.5em;
+	display: flex;
+	justify-content: center;
+	padding-top: 0.4%;
+	margin-right: 1%;
+	color: #EB0000;
+}
+
+.room-detail>.title-heart>.title {
+	font-size: 2.5em;
 	color: #0B57A2;
 }
 

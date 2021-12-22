@@ -170,7 +170,13 @@ public class RoomController {
 	}
 	
 	@GetMapping("/content")
-	public ModelAndView content(@RequestParam String no, @RequestParam(value = "currentPage", defaultValue = "1") int currentPage) {
+	public ModelAndView content(
+			@RequestParam String no,
+			@RequestParam(value = "currentPage", defaultValue = "1") int currentPage,
+			HttpSession session) {
+		String myid = (String)session.getAttribute("myid");
+		String loginok = (String)session.getAttribute("loginok");
+		
 		ModelAndView mview = new ModelAndView();
 		
 		RoomDto roomDto = roomService.getRoom(no);
@@ -198,6 +204,13 @@ public class RoomController {
 		
 		// 엔터키 입력
 		roomDto.getContent().replaceAll("<br>", "\r\n");
+		
+		// 위시리스트
+ 		if(loginok != null) {
+ 			List<WishListDto> wishList = wishService.allWishList(myid);
+ 			
+ 			mview.addObject("wishList", wishList);
+ 		}
 		
 		mview.addObject("roomDto", roomDto);
 		mview.addObject("memDto", memDto);
