@@ -62,10 +62,7 @@ function heartClick(e) {
 		$.ajax({
 			type: "post",
 			url: "/wish/delete",
-			data: {"roomId" : roomId},
-			error: function(request,error) {
-				console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-			}
+			data: {"roomId" : roomId}
 		});
 	}
 }

@@ -15,4 +15,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="allWishList" parameterType="String" resultType="wldto">
 		select * from wishlist where guest_id = #{guestId}
 	</select>
+	
+	<select id="totalWish" parameterType="String" resultType="int">
+		select count(*) from wishlist where guest_id = #{guestId}
+	</select>
+	
+	<select id="pageWishList" parameterType="HashMap" resultType="wldto">
+		select * from wishlist where guest_id = #{guestId} limit #{start}, #{perPage}
+	</select>
 </mapper>

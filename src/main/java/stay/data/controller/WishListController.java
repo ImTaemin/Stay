@@ -1,5 +1,8 @@
 package stay.data.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +12,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
+import stay.data.dto.RoomDto;
 import stay.data.dto.WishListDto;
+import stay.data.service.GuestCommentService;
+import stay.data.service.RoomService;
 import stay.data.service.WishListService;
 
 @Controller
@@ -19,9 +26,56 @@ public class WishListController {
 	@Autowired
 	WishListService wishService;
 	
+	@Autowired
+	RoomService roomService;
+	
+	@Autowired
+	GuestCommentService gcommentService;
+	
 	@GetMapping("/list")
-	public String wishList() {
-		return "/wishlist/wishList";
+	public ModelAndView wishList(HttpSession session) {
+		ModelAndView mview = new ModelAndView();
+		
+		String myid = (String)session.getAttribute("myid");
+		
+		List<WishListDto> wishList = wishService.allWishList(myid);
+		
+		List<RoomDto> roomList = new ArrayList<RoomDto>();
+		
+		// 숙소 정보
+		for(WishListDto w : wishList) {
+			String roomNo = w.getRoom_no();
+			
+			RoomDto roomDto = roomService.getRoom(roomNo);
+			
+			String photos[] = roomDto.getPhotos().split(",");
+			roomDto.setPhotos(photos[0]);
+			
+			roomList.add(roomDto);
+		}
+		
+		// 방 평균 별점
+		Float avgRating = gcommentService.getRatingAvg();
+		
+		if(avgRating == null) {
+			avgRating = (float) 0;
+		}
+		
+		// 방 댓글 개수
+		Integer totalComment = gcommentService.totalComment();
+		
+		if(totalComment == null) {
+			totalComment = 0;
+		}
+		
+		mview.addObject("wishList", wishList);
+		mview.addObject("roomList", roomList);
+		mview.addObject("avgRating", avgRating);
+		mview.addObject("totalComment", totalComment);
+		
+		mview.setViewName("/wishlist/wishList");
+		
+		return mview;
 	}
 	
 	@PostMapping("/insert")
