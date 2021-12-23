@@ -15,8 +15,12 @@
 </head>
 
 <body>
-	<div class="container-fluid">
-
+	<div class="chat-container">
+		
+		<!-- 채팅방 목록 -->
+		
+	
+		<!-- 채팅화면 -->
 		<div class="row">
 			<div class="col-sm-12">
 				<div id="user_chat_data" class="user_chat_data">
