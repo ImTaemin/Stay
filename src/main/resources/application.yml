@@ -20,11 +20,6 @@ spring:
     username: admin
     password: sist1234
       
-#  db-mongo:
-#    data:
-#      mongodb:
-#        uri: mongodb://localhost:27017/chat
-
 #mybatis
 mybatis:
   type-aliases-package: stay.data.mapper, stay.data.dto
