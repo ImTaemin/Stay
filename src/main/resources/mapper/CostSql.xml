@@ -7,4 +7,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertCard" parameterType="pcdto">
 		insert into pay_card values (#{num}, #{id}, #{name}, #{end_date}, #{cvc}, #{pass})
 	</insert>
+	
+	<select id="getAllCard" parameterType="String" resultType="pcdto">
+		select * from pay_card where id = #{id}
+	</select>
 </mapper>

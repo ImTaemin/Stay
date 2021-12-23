@@ -1,0 +1,133 @@
+@charset "UTF-8";
+
+.pay-wrap {
+	padding: 0 5%;
+	margin: 40px 0;
+	display: flex;
+	flex-direction: column;
+}
+
+.pay-wrap>.title {
+	font-size: 3em;
+	display: flex;
+	width: 100%;
+	margin-bottom: 30px;
+}
+
+.pay-wrap>.title>.back {
+	width: 4%;
+	padding-top: 0.25%;
+}
+
+.pay-wrap>.title>.label {
+	color: #0B57A2;
+	padding-top: 1.1%;
+}
+
+.pay-wrap>.main {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+}
+
+.pay-wrap>.main>.reser-detail {
+	width: 60%;
+	height: 120px;
+}
+
+.pay-wrap>.main>.reser-pay {
+	border: 1px solid;
+	width: 35%;
+	height: 120px;
+}
+
+.info .title {
+	width: 100%;
+	font-size: 1.7em;
+	margin-bottom: 20px;
+	color: #0B57A2;
+}
+
+.info>.day {
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+}
+
+.check-in, .check-out {
+	width: 45%;
+	border: 2px solid #0B57A2;
+	border-radius: 7px;
+	padding: 2%;
+}
+
+.day-title {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	font-size: 1.2em;
+	align-items: center;
+}
+
+.day-title>.update i {
+	cursor: pointer;
+	font-size: 1.2em;
+}
+
+.day hr {
+	color: gray;
+	height: 2%;
+	margin: 5% 0;
+}
+
+.day-info {
+	display: flex;
+	justify-content: center;
+	font-size: 2em;
+	font-weight: bold;
+}
+
+.pay {
+	display: flex;
+	justify-content: space-between;
+}
+
+.pay>.kakao>.kakao-pay>img {
+	width: 13%;
+}
+
+.pay>.check {
+	display: flex;
+	align-items: center;
+}
+
+.pay>.check>.bi-circle {
+	font-size: 1.7em;
+	cursor: pointer;
+}
+
+.pay>.check>.bi-circle:hover {
+	font-size: 1.7em;
+	cursor: pointer;
+	color: #0B57A2;
+}
+
+.pay>.check>.bi-check-circle-fill {
+	font-size: 1.7em;
+	cursor: pointer;
+	color: #0B57A2;
+}
+
+.pay>.card>label {
+	font-size: 1.5em;
+}
+
+.wallet>.wallet-de {
+	margin-top: 20px;
+	border: 2px solid #0B57A2;
+	border-radius: 7px;
+}
+
+.wallet-de {
+	font-size: 1.2em;
+}

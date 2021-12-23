@@ -23,7 +23,15 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="reservation" method="post">
+	<form action="/pay/paymentform" method="post">
+		<!-- hidden -->
+		<input type="hidden" name="roomNo" value="${roomDto.no}">
+		<input type="hidden" name="startDate">
+		<input type="hidden" name="endDate">
+		<input type="hidden" name="betweenDay">
+		<input type="hidden" name="roomPrice">
+		<input type="hidden" name="allPrice">
+		
 		<div class="room-detail">
 			<c:set var="roomAddr" value="${roomDto.addr_load} ${roomDto.addr_detail}"></c:set>
 			<c:set var="roomPrice" value="${roomDto.price}"></c:set>
@@ -148,6 +156,15 @@
 									document.getElementById("check-out").value = '';
 
 									return false;
+								} else if (document.getElementById("check-in").value == '') {
+									Swal.fire({
+										icon: 'error',
+										title: '날짜를 다시 선택해주세요.',
+										text: '체크인 날짜을 입력해주세요.'
+									});
+									
+									s = "";
+									$(".reser").html(s);
 								} else if (document.getElementById("check-out").value == '') {
 									Swal.fire({
 										icon: 'error',
@@ -170,6 +187,12 @@
 
 									var allPrice = calPrice + taxPrice;
 									var commaAll = Number(allPrice).toLocaleString();
+									
+									$('input[name=startDate]').attr('value', startDate);
+									$('input[name=endDate]').attr('value', endDate);
+									$('input[name=betweenDay]').attr('value', betweenDay);
+									$('input[name=roomPrice]').attr('value', roomPrice);
+									$('input[name=allPrice]').attr('value', allPrice);
 									
 									s += "<div class='reser-price'>";
 									s += "<div class='room-price'>";
