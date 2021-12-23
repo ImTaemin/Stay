@@ -74,6 +74,7 @@
 					<span class="glyphicon glyphicon-heart likes"
 						style="width: 30px; cursor: pointer; color: red" num="${num}"></span>
 					<span>LIKE ${memberDto.likes}</span>
+					
 				</div>
 				<div class="profile-message">
 					<span class="glyphicon glyphicon-envelope message"

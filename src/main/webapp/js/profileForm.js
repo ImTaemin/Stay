@@ -32,3 +32,36 @@
 	   
    });
 */
+
+/*
+$(function(){
+	
+	 $("span.likes").click(function(){
+		 
+			var num = $(this).attr("num");
+			//alert(num);
+			var tag = $(this);
+			
+			console.log(num);
+			
+			$.ajax({
+				
+				type: "get",
+				dataType: "json",
+				url: "updatelikes",
+				data: {"num":num},
+				success: function(data){
+					//alert(data.chu);
+					tag.next().text(data.likes);
+					
+						
+					
+				}
+				
+				
+			});
+			 
+		 });
+	
+});
+*/
