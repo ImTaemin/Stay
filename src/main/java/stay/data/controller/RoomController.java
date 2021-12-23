@@ -212,6 +212,7 @@ public class RoomController {
  			mview.addObject("wishList", wishList);
  		}
 		
+ 		mview.addObject("myid", myid);
 		mview.addObject("roomDto", roomDto);
 		mview.addObject("memDto", memDto);
 		mview.addObject("photoList", photoList);

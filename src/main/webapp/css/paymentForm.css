@@ -32,13 +32,6 @@
 
 .pay-wrap>.main>.reser-detail {
 	width: 60%;
-	height: 120px;
-}
-
-.pay-wrap>.main>.reser-pay {
-	border: 1px solid;
-	width: 35%;
-	height: 120px;
 }
 
 .info .title {
@@ -74,7 +67,7 @@
 	font-size: 1.2em;
 }
 
-.day hr {
+hr {
 	color: gray;
 	height: 2%;
 	margin: 5% 0;
@@ -122,12 +115,131 @@
 	font-size: 1.5em;
 }
 
+.wallet {
+	margin-top: 10px;
+	margin-bottom: 40px;
+}
+
 .wallet>.wallet-de {
 	margin-top: 20px;
 	border: 2px solid #0B57A2;
 	border-radius: 7px;
 }
 
-.wallet-de {
+.wallet>#card-list {
 	font-size: 1.2em;
+	padding: 2%;
+}
+
+.wallet select {
+	display: block;
+	width: 100%;
+	height: 65px;
+	padding: 0 12px;
+	border-radius: 7px;
+	font-size: 16px;
+	border: 2px solid #d3dce6;
+	transition: border-color 200ms ease-in-out;
+	margin-bottom: 25px;
+}
+
+.wallet select:focus, select:hover, select:active {
+	width: 100%;
+	outline: none;
+	box-shadow: none;
+	border-color: #0B57A2;
+	margin-bottom: 25px;
+}
+
+.agree {
+	font-size: 0.85em;
+}
+
+.reser-btn {
+	margin-top: 40px;
+	display: flex;
+	justify-content: center;
+}
+
+.reser-btn> button {
+	width: 50%;
+	height: 45px;
+}
+
+.reser-pay-wrap {
+	width: 38%;
+}
+
+.reser-pay-wrap >.reser-pay {
+	border: 2px solid #0B57A2;
+	border-radius: 7px;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	padding: 0 5%;
+	width: 100%;
+}
+
+.reser-pay>.room {
+	width: 100%;
+	display: flex;
+	margin-top: 5%;
+}
+
+.room>.photo {
+	width: 38%;
+	height: 120px;
+	margin-right: 2%;
+}
+
+.room>.photo img {
+	width: 100%;
+	height: 100%;
+	border-radius: 7px;
+}
+
+.room>.detail {
+	width: 65%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.room>.detail>.name {
+	display: flex;
+	flex-direction: column;
+}
+
+.room>.detail>.name>b {
+	font-size: 1.2em;
+	margin-bottom: 5px;
+}
+
+.room>.detail>label {
+	font-weight: normal;
+}
+
+.reser-pay>.title {
+	font-size: 1.7em;
+	display: flex;
+	width: 100%;
+	color: #0B57A2;
+	justify-content: flex-start;
+}
+
+.reser-pay>.room-price {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	margin-top: 15px;
+	font-size: 1.2em;
+}
+
+.reser-pay>.all-price {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	margin-top: 15px;
+	font-size: 1.7em;
+	margin-bottom: 5%;
 }

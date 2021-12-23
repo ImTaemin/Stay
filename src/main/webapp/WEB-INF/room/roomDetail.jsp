@@ -209,7 +209,9 @@
 									s += "<div><b>￦" + commaAll + "</b></div>";
 									s += "</div>";
 									s += "<div class='price-btn'>"
+									s += "<c:if test='${roomDto.host_id != myid}'>"
 									s += "<button class='btn btn-primary' type='submit' id='reser-btn'>예약하기</button>"
+									s += "</c:if>"
 									s += "</div>";
 									s += "</div>";
 									
