@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="stay.data.mapper.ChatMapper">
+
+	<select id="getChattingRooms" parameterType="String" resultType="chatDto">
+		select * from chat, member where chat.sender=member.id and chat.sender=#{sender}
+	</select>
+
+	<select id="chatting" parameterType="HashMap" resultType="chatDto">
+		select * from chat, member where chat.sender=#{sender} and chat.receiver=#{receiver} and chat.sender = member.id
+	</select>
+
+</mapper>
+

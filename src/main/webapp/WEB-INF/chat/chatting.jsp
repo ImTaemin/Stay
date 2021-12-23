@@ -6,73 +6,121 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="../../css/chat.css">
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-	crossorigin="anonymous">
-<link rel="stylesheet" type="text/css"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 </head>
 
 <body>
 	<div class="chat-container">
 		
 		<!-- 채팅방 목록 -->
-		
-	
-		<!-- 채팅화면 -->
-		<div class="row">
-			<div class="col-sm-12">
-				<div id="user_chat_data" class="user_chat_data">
-					<div class="profile_name">
-						&nbsp;&nbsp;&nbsp;&nbsp;
-						<img src="../../photo/profile.png" class="mr-3 rounded-circle"> &nbsp;&nbsp; Sankar Mahadevan
-					</div>
-
-					<div class="container-fluid chat_section" id="chat-box">
-
-						<!-- 받은메시지 시작 -->
-						<div class="incoming_msg">
-							<div class="received_msg">
-								<div class="received_withd_msg">
-									<p>Lorem Ipsum refers to text that the DTP (Desktop
-										Publishing) industry use as replacement text when the real
-										text is not</p>
-									<span class="time_date"> 11:18 | Today</span>
-								</div>
-							</div>
-						</div>
-						<!-- 받은메시지 끝 -->
-
-						<!-- 보낸메시지 시작 -->
-						<div class="outgoing_msg">
-							<div class="sent_msg">
-								<p>Lorem Ipsum refers to text that the DTP (Desktop
-									Publishing) industry use as replacement text when the real text
-									is not</p>
-								<span class="time_date"> 11:18 | Today</span>
-							</div>
-						</div>
-						<!-- 보낸메시지 끝 -->
-
-					</div>
-
-					<div class="type_msg">
-						<div class="input_msg_write">
-							<input id="chat-outgoing-msg" type="text" class="write_msg"
-								placeholder="Type a message" />
-							<button id="chat-send" class="msg_send_btn" type="button">
-								<i class="fa fa-paper-plane" aria-hidden="true"></i>
-							</button>
-						</div>
-					</div>
-
+		<div class="chat-room-list">
+			<div class="chat-title">
+				<span>채팅방 목록</span>
+			</div>
+			<div class="chat-list">
+				<div class="chat-room">
+					<img src="../../photo/profile.png" class="room-photo">
+					유저 아이디
+				</div>
+				<div class="chat-room">
+					<img src="../../photo/profile.png" class="room-photo">
+					유저 아이디
 				</div>
 			</div>
 		</div>
+		
+		<!-- 채팅화면 -->
+		<div class="chatting">
+			<div class="profile">
+				<img src="../../photo/profile.png"> 안수현
+			</div>
+
+			<div class="chat-section">
+				<!-- 받은메시지 -->
+				<div class="receive-msg-box">
+					<div class="receive-msg">
+						<p>수현짱</p>
+						<span class="time_date"> 11:18 | Today</span>
+					</div>
+				</div>
+
+				<!-- 보낸메시지 -->
+				<div class="send-msg-box" >
+					<div class="send_msg">
+						<p>태민짱</p>
+						<span class="time_date" > 11:18 | Today</span>
+					</div>
+				</div>
+			</div>
+
+			<!-- 메시지 입력 -->
+			<div class="input-msg-box">
+				<input type="text" id="input-msg" class="input-msg" placeholder="메시지 입력..." />
+				<button class="send-btn" id="send-btn" type="button">
+					<i class="fa fa-paper-plane" aria-hidden="true"></i>
+				</button>
+			</div>
+			
+		</div>
 	</div>
 
-	<script src="../../js/chat.js"></script>
+	<script type="text/javascript">
+		var eventSource = new EventSource("http://localhost:8080/chat/stay");
+	
+		eventSource.onmessage = (event) => {
+			var data = JSON.parse(event.data);
+			
+			console.log(data);
+		};
+	
+		function initMyMessage(historyMsg) {
+			var chatBox = document.querySelector("#chat-box");
+	
+			var chatOutgoingBox = document.createElement("div");
+			chatOutgoingBox.className = "outgoing_msg";
+			chatOutgoingBox.innerHTML = getSendMsgBox(data.msg, data.day);
+	
+			chatBox.append(chatOutgoingBox);
+		}
+	
+		async function addMessage() {
+			var msgInput = document.querySelector("#input-msg");
+	
+			var chat={
+				sender: username,
+				receiver: "",
+				msg: msgInput.value
+			}
+			
+			//통신이 끝날떄까지 기다려야함
+			var response = await fetch("http://localhost:8080/chat",{
+				method: "post",
+				body: JSON.stringify(chat), //JS->JSON
+				headers: {
+					"Content-Type":"application/json; charset=utf-8"
+				}
+			});
+			
+			var parseResponse = await response.json();
+			
+			chatOutgoingBox.innerHTML = getSendMsgBox(msgInput.value, now);
+	
+			chatBox.append(chatOutgoingBox);
+	
+			msgInput.value = "";
+		}
+	
+		document.querySelector("#send-btn").addEventListener("click", () => {
+			addMessage();
+		});
+	
+		document.querySelector("#input-msg").addEventListener("keydown", () => {
+			//엔터키
+			if (e.keyCode === 13) {
+				addMessage();
+			}
+		});
+	</script>
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

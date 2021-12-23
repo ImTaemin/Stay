@@ -1,9 +1,7 @@
-
-
-const eventSource = new EventSource(`http://localhost:8080/sender/${sender}/receiver/${receiver}`);
+var eventSource = new EventSource(`http://localhost:8080/chat/${sender}/${receiver}`);
 
 eventSource.onmessage = (event) => {
-	const data = JSON.parse(event.data);
+	var data = JSON.parse(event.data);
 	
 	if(data.sender === username){
 		//자기자신
@@ -15,14 +13,10 @@ eventSource.onmessage = (event) => {
 	initMyMessage(data);
 };
 
-function getSendMsgBox(msg, time) {
-	return `<div class="sent-msg"> <p>${msg}</p> <span class="time_date"> ${time} </span> </div>`;
-}
-
 function initMyMessage(historyMsg) {
-	let chatBox = document.querySelector("#chat-box");
+	var chatBox = document.querySelector("#chat-box");
 
-	let chatOutgoingBox = document.createElement("div");
+	var chatOutgoingBox = document.createElement("div");
 	chatOutgoingBox.className = "outgoing_msg";
 	chatOutgoingBox.innerHTML = getSendMsgBox(data.msg, data.day);
 
@@ -30,16 +24,16 @@ function initMyMessage(historyMsg) {
 }
 
 async function addMessage() {
-	let msgInput = document.querySelector("#chat-outgoing-msg");
+	var msgInput = document.querySelector("#input-msg");
 
-	let chat={
+	var chat={
 		sender: username,
 		receiver: "",
 		msg: msgInput.value
 	}
 	
 	//통신이 끝날떄까지 기다려야함
-	let response = await fetch("http://localhost:8080/chat",{
+	var response = await fetch("http://localhost:8080/chat",{
 		method: "post",
 		body: JSON.stringify(chat), //JS->JSON
 		headers: {
@@ -47,7 +41,7 @@ async function addMessage() {
 		}
 	});
 	
-	let parseResponse = await response.json();
+	var parseResponse = await response.json();
 	
 	chatOutgoingBox.innerHTML = getSendMsgBox(msgInput.value, now);
 
@@ -56,12 +50,11 @@ async function addMessage() {
 	msgInput.value = "";
 }
 
-document.querySelector("#chat-outgoing-button").addEventListener("click", () => {
+document.querySelector("#send-btn").addEventListener("click", () => {
 	addMessage();
 });
 
-document.querySelector("#chat-outgoing-msg").addEventListener("keydown", () => {
-
+document.querySelector("#input-msg").addEventListener("keydown", () => {
 	//엔터키
 	if (e.keyCode === 13) {
 		addMessage();

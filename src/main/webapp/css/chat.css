@@ -1,60 +1,114 @@
 @charset "UTF-8";
+@import url('font.css');
 
+/* 채팅방 목록 */
 .chat-container {
+	padding-left: 15%;
+	padding-right: 15%;
+	display: flex;
+	flex-wrap: wrap;
+	font-family: 'WandocleanseaR';
+	font-size: 14px;
+}
+
+.chat-container .chat-room-list{
+	width: 30%;
+	display: flex;
+	flex-direction: column;
+}
+
+.chat-room-list .chat-list{
 	height: 100%;
+	overflow: scroll;
+	overflow-x: visible;
+}
+
+.chat-room-list .chat-room{
+	padding: 10px;
+	cursor: pointer;
+	user-select: none;
+}
+
+.chat-room-list .chat-title{
+	height: 50px;
+	min-height: 50px;
+	border-bottom: 1px solid #716d6d;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.chat-room-list .chat-title span{
+	font-weight: 800;
+	font-size: 18px;
+}
+
+.chat-room .room-photo{
+	width: 50px;
+	border-style: none;
+	border-radius: 50%;
+	vertical-align: middle;
+	margin-right: 5%;
+}
+
+/* 채팅화면 */
+.chat-container .chatting{
 	width: 70%;
 }
 
-.user {
+.chatting .profile{
 	border-bottom: 1px solid #716d6d;
-	padding: 10px;
-	width: 95%;
+	height: 50px;
 }
 
-.user_data {
-	background-color: #f8f9fa !important;
-	border-top: 5px solid #716d6d;
-	max-height: calc(100vh);
+.chatting .profile img{
+	border-radius: 50%;
 }
 
-.profile_name {
-	background-color: #f8f9fa !important;
-	width: 100%;
-	padding: 10px;
-	border-bottom: 5px solid #716d6d;
+.chatting .chat-section{
+	padding: 15px;
+	min-height: 400px;
+	overflow: scroll;
+	overflow-x: visible;
 }
 
-.user a:hover {
-	text-decoration: none;
-	color: #212529;
-}
-
-.user a {
-	color: #212529;
-}
-
-.chat_section {
-	padding-top: 15px;
-}
-
-.incoming_msg_img {
+.chat-section .receive-msg-box{
 	display: inline-block;
-	width: 6%;
-}
-
-.received_msg {
-	display: inline-block;
-	padding: 0 0 0 10px;
+	padding-left: 10px;
 	vertical-align: top;
-	width: 92%;
+	width: 90%;
 }
 
-.received_withd_msg p {
+.receive-msg-box .receive-msg {
+	width: 57%;
+}
+
+.receive-msg p {
 	background: #ebebeb none repeat scroll 0 0;
 	border-radius: 6px;
 	color: #646464;
 	font-size: 14px;
 	margin: 0;
+	padding: 5px 10px 5px 12px;
+	width: 100%;
+}
+
+.send-msg-box {
+	overflow: hidden;
+	margin: 26px 0 26px;
+}
+
+.send-msg-box .send_msg {
+	float: right;
+	width: 60%;
+}
+
+.send-msg-box .send_msg p {
+	background: #AED9DA none repeat scroll 0 0;
+	border-radius: 6px;
+	font-size: 14px;
+	margin: 0;
+	color: #4c4c4c;
 	padding: 5px 10px 5px 12px;
 	width: 100%;
 }
@@ -66,52 +120,26 @@
 	margin: 8px 0 0;
 }
 
-.received_withd_msg {
-	width: 57%;
-}
-
-.mesgs {
-	float: left;
-	padding: 30px 15px 0 25px;
-	width: 60%;
-}
-
-.sent_msg p {
-	background: #050f8f none repeat scroll 0 0;
-	border-radius: 6px;
-	font-size: 14px;
-	margin: 0;
-	color: #fff;
-	padding: 5px 10px 5px 12px;
+/* 입력창 */
+.input-msg-box {
 	width: 100%;
+	border-top: 1px solid #c4c4c4;
+	display: flex;
+	align-items: center;
 }
 
-.outgoing_msg {
-	overflow: hidden;
-	margin: 26px 0 26px;
-}
-
-.sent_msg {
-	float: right;
-	width: 60%;
-}
-
-.input_msg_write input {
+.input-msg-box .input-msg {
 	background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
 	border: medium none;
+	border-radius: 5px;
 	color: #4c4c4c;
 	font-size: 15px;
 	min-height: 48px;
-	width: 100%;
+	width: 95%;
 	padding: 10px;
 }
 
-.type_msg {
-	border-top: 1px solid #c4c4c4;
-	position: relative;
-}
-
-.msg_send_btn {
+.input-msg-box .send-btn {
 	background: #05728f none repeat scroll 0 0;
 	border: medium none;
 	border-radius: 50%;
@@ -119,17 +147,5 @@
 	cursor: pointer;
 	font-size: 17px;
 	height: 33px;
-	position: absolute;
-	right: 0;
-	top: 11px;
 	width: 33px;
-}
-
-.messaging {
-	padding: 0 0 50px 0;
-}
-
-.msg_history {
-	height: 516px;
-	overflow-y: auto;
 }
