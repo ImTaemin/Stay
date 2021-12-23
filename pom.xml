@@ -87,7 +87,16 @@
 			<artifactId>tiles-el</artifactId>
 			<version>3.0.8</version>
 		</dependency>
+		
+		<!-- 카카오로그인 JSON객체 파싱에 유용한 Gson 외부 라이브러리 Dependency 추가 -->
+		<dependency>
+   		 	<groupId>com.google.code.gson</groupId>
+    		<artifactId>gson</artifactId>
+    		<version>2.8.5</version>
+		</dependency>
 	</dependencies>
+	
+	
 
 	<build>
 		<plugins>

@@ -43,10 +43,15 @@
   </form>
   
   <!-- 카카오톡 로그인 -->
-  <!-- kakao login -->
-  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+
+  <a href="https://kauth.kakao.com/oauth/authorize?client_id=caa825a053430f44f87ec4ac4c7e463e&redirect_uri=http://localhost:8080/member/login&response_type=code">
+      <img src="/photo/kakao_login_medium_narrow.png">
+  </a>
 </div>
-  
+
+		<!-- kakao login script-->
+  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+  <!-- js -->
   <script src="/js/loginForm.js"></script>
 </body>
 </html>

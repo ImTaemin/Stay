@@ -27,7 +27,6 @@
     <label for="pass_check">비밀번호 확인</label>
   	<div class="gaip-input-check">
       <input type="password" id="pw2" placeholder="비밀번호 확인" required="required" oninput="checkPw()">
-  	  <span class="id_req"></span>
   	  <div class="pw_glyphicon"><span class="glyphicon glyphicon-ok-sign"></span></div>
   	  <div class="pw_check"><span class="pw_equal">비밀번호가 일치합니다.</span></div>
   	  <div class="pw_glyphicon"><span class="glyphicon glyphicon-remove-sign"></span></div>
