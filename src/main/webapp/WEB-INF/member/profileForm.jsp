@@ -71,8 +71,8 @@
 			</div>
 			<div class="profile-third">
 				<div class="profile-like">
-					<span class="glyphicon glyphicon-heart likes"
-						style="width: 30px; cursor: pointer; color: red" num="${num}"></span>
+					<span class="glyphicon glyphicon-heart likes" onclick="likeClick(this)"
+						style="width: 30px; cursor: pointer; color: red" user_id="${memberDto.id}"></span>
 					<span>LIKE ${memberDto.likes}</span>
 					
 				</div>

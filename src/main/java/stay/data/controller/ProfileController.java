@@ -43,20 +43,21 @@ public class ProfileController {
 		return mview;
 	}
 	
-	/*
+	
 	@GetMapping("/updatelikes")
 	@ResponseBody
 	public HashMap<String, Integer> updatelikes(
-			@RequestParam String num
+			@RequestParam String id
 			){
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
-		mapper.updateLikes(num);
-		int likes = mapper.getData(num).getLikes();
+		mapper.updatelikes(id);
+		int likes = mapper.getMember(id).getLikes();//여기가 널이라는거자
 		map.put("likes", likes);
 		
 		return map;
 		
 	}
+	/*
 	*/
 	
 }
