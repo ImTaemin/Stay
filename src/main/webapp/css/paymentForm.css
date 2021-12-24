@@ -126,7 +126,7 @@ hr {
 	border-radius: 7px;
 }
 
-.wallet>.card-list {
+.wallet>.card_num {
 	font-size: 1.2em;
 	padding: 2%;
 }

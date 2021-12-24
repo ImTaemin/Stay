@@ -129,7 +129,8 @@ public class ReservationController {
 	public ModelAndView payInsert(
 			@ModelAttribute ReservationDto reserDto, @RequestParam String roomNo,
 			@RequestParam String startDate, @RequestParam String endDate, @RequestParam String betweenDay,
-			@RequestParam String calPrice, @RequestParam String taxPrice, @RequestParam String allPrice, HttpSession session) {
+			@RequestParam String calPrice, @RequestParam String taxPrice, @RequestParam String allPrice,
+			@RequestParam String payMethod, @RequestParam String cardNum, HttpSession session) {
 		ModelAndView mview = new ModelAndView();
 		
 		String myid = (String)session.getAttribute("myid");
@@ -138,11 +139,19 @@ public class ReservationController {
 		
 		reserDto.setHost_id(roomDto.getHost_id());
 		reserDto.setGuest_id(myid);
+		reserDto.setRoom_no(roomNo);
 		reserDto.setStart_date(startDate);
 		reserDto.setEnd_date(endDate);
 		reserDto.setPrice(allPrice);
+		reserDto.setPay_method(payMethod);
 		
-		mview.setViewName("/");
+		if(payMethod == "card") {
+			reserDto.setCard_num(cardNum);
+		}
+		
+		reservationService.insertReservation(reserDto);
+		
+		mview.setViewName("redirect:/room/main");
 		
 		return mview;
 	}

@@ -30,6 +30,8 @@
 		<input type="hidden" name="calPrice" value="${calPrice}">
 		<input type="hidden" name="taxPrice" value="${taxPrice}">
 		<input type="hidden" name="allPrice" value="${allPrice}">
+		<input type="hidden" name="payMethod">
+		<input type="hidden" name="cardNum">
 		
 		<div class="title">
 			<div class="back" onclick="history.back()">
@@ -269,7 +271,7 @@
 				$(e).attr("class", "bi bi-check-circle-fill");
 				$(e).attr("check", "1");
 				
-				s += "<select id='card-list' name='card-list'>";
+				s += "<select id='card-list' name='card_num'>";
 				s += "<c:forEach var='card' items='${cardList}'>";
 				s += "<option value='${card.num}'>";
 				s += "${card.name}&nbsp;(${card.num})";
@@ -285,7 +287,7 @@
 				$("#kakao").attr("class", "bi bi-circle");
 				$("#kakao").attr("check", "0");
 
-				s += "<select id='card-list' name='card-list'>";
+				s += "<select id='card-list' name='card_num'>";
 				s += "<c:forEach var='card' items='${cardList}'>";
 				s += "<option value='${card.num}'>";
 				s += "${card.name}&nbsp;(${card.num})";
@@ -304,6 +306,15 @@
 				s = "";
 
 				$(".wallet").html(s);
+			}
+			
+			if (kakao == "1" || $(e).attr("id") == "kakao") {
+				$('input[name=payMethod]').attr('value', 'kakao');
+			} else if (card == "1" || $(e).attr("id") == "card") {
+				var cardNum = $("#card-list").attr("value");
+
+				$('input[name=payMethod]').attr('value', 'card');
+				$('input[name=cardNum]').attr('value', cardNum);
 			}
 		}
 	</script>
