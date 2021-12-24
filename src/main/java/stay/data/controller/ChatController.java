@@ -2,7 +2,6 @@ package stay.data.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -33,7 +32,12 @@ public class ChatController {
 	
 	//채팅방 목록
 	@GetMapping("/{sender}")
-	public @ResponseBody List<ChatDto> getChattingRooms(@PathVariable("sender") String sender) {
+	public @ResponseBody List<ChatDto> getChattingRooms(@PathVariable("sender") String sender, HttpServletResponse response) throws ServletException, IOException{
+		
+		response.setContentType("text/event-stream");
+		response.setCharacterEncoding("UTF-8");
+		
+		PrintWriter writer = response.getWriter();
 		
 		List<ChatDto> roomList = chatService.getChattingRooms(sender);
 		
@@ -41,21 +45,19 @@ public class ChatController {
 		mav.addObject("roomList", roomList);
 		mav.setViewName("/chat/chatting");
 		
+		writer.close();
+
 		return roomList;
 	}
 	
 	//채팅
 	@GetMapping("/{sender}/{receiver}")
-	public @ResponseBody ChatDto chatting(@PathVariable("sender") String sender, @PathVariable("receiver") String receiver, HttpServletResponse response) throws ServletException, IOException{
-		response.setContentType("text/event-stream");
-		response.setCharacterEncoding("UTF-8");
-		
-		
-		PrintWriter writer = response.getWriter();
+	public @ResponseBody ChatDto chatting(@PathVariable("sender") String sender, @PathVariable("receiver") String receiver) {
+
 //		while(true) {
 //			writer.write("data:{\"sender\""+ i +"\"}\n\n");
 //		}
-		writer.close();
+		
 		return new ChatDto();
 	}
 

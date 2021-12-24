@@ -9,6 +9,7 @@ import stay.data.dto.ChatDto;
 @Mapper
 public interface ChatMapper {
 
-	public List<ChatDto> chatting(String sender, String receiver);
 	public List<ChatDto> getChattingRooms(String sender);
+	public List<ChatDto> chatting(String sender, String receiver);
+	
 }
