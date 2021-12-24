@@ -1,9 +1,4 @@
 @charset "UTF-8";
-
-.container{
-	margin-top: 5%;
-}
-
 .hostMain-top{
 	display: flex;
 	justify-content: space-between;

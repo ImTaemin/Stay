@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +12,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 	<!-- css -->
 <link rel="stylesheet" href="../css/guestMain.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -24,20 +26,30 @@
 <body>
 	<div class="guestMain-top">
 		<!-- 검색핉터창 -->
+	  
 		<div class="guestMain-filter">
 			<div class="guestMain-map"><button type="button">위치 검색</button>  |  </div>
-			<div class="guestMain-start"><button type="button">시작 날짜</button>  |  </div>
-			<div class="guestMain-end"><button type="button">종료 날짜</button></div>
+			<div class="guestMain-start">
+								<jsp:useBean id="now" class="java.util.Date"/>
+								<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today"/>
+								<label for="now">체크인</label>
+								<input type="date" id="check-in" min="${today}">  |  
+			</div>
+			<div class="guestMain-end">
+								<label for="now">체크아웃</label>
+								<input type="date" id="check-out" min="${today}">
+			</div>
 		</div>
-		<div class="glyphicon glyphicon-search guestMain-search"></div>
+		<div class="guestMain-search">
+			<button type="button" class="glyphicon glyphicon-search"></button>
+		</div>
+	 
 	</div>
 	
 	<div class="guestMain-bottom">
 		<!-- 인기숙소 -->
 		<div class="guestMain-toproom">
-			<span class="glyphicon glyphicon-heart"></span> 
 			인기 숙소
-			<span class="glyphicon glyphicon-heart"></span> 
 		</div>
 		
 		<div class="guestMain-list">

@@ -1,11 +1,7 @@
 @charset "UTF-8";
-html, body { position: relative; height: 100vh; }
-
-
 .guestMain-top{
 	display: flex;
 	justify-content: center;
-	margin-top: 5%;
 	align-items: center;
 }
 
@@ -16,22 +12,70 @@ html, body { position: relative; height: 100vh; }
 	border-radius: 1em;
 	margin-right: 2%;
 	padding: 1% 10% 1% 10%; 
-	font-size: 1.3em;
 }
+
+.guestMain-start, .guestMain-end{
+	position: relative;
+
+}
+
+.guestMain-start input{ 
+	border: none;
+	height: 30px;
+	width: 105px;
+	margin-top: 1.8%;
+} 
+
+.guestMain-end input{ 
+	border: none;
+	height: 30px;
+	width: 121px;
+	margin-top: 1.8%;
+} 
+
+.guestMain-start label{
+	position: absolute;
+	margin-left: 10%;
+	font-size: 15.3pt;
+	margin-top: 1.2%;
+}
+
+.guestMain-end label{
+	position: absolute;
+	margin-left: 10%;
+	font-size: 15.3pt;
+	margin-top: 1.2%;
+}
+
+/* placeholder 없애기 */
+.guestMain-filter input[type=date]::-webkit-datetime-edit-text { -webkit-appearance: none; display: none; } 
+.guestMain-filter input[type=date]::-webkit-datetime-edit-month-field{ -webkit-appearance: none; display: none; } 
+.guestMain-filter input[type=date]::-webkit-datetime-edit-day-field { -webkit-appearance: none; display: none; } 
+.guestMain-filter input[type=date]::-webkit-datetime-edit-year-field { -webkit-appearance: none; display: none; }
+
 
 .guestMain-filter button{
 	border: 0;
 	outline: 0;
 	background-color: transparent;
-	font-size: 1.2em;
+	cursor: pointer;
+	font-weight: bold;
+	font-size: 15pt;
 }
 
 .guestMain-search{
 	font-size: 2.3em;
+	margin-top: 1%;
+}
+
+.guestMain-search button{
+	background-color: transparent;
+	border:none;
 }
 
 .guestMain-bottom{
 	margin-top: 5%;
+
 }
 
 .guestMain-toproom{
@@ -40,14 +84,11 @@ html, body { position: relative; height: 100vh; }
 	margin-left: 5%;
 }
 
-.guestMain-toproom .glyphicon{
-	color: skyblue;
-}
-
 .guestMain-list{
 	margin-top: 5%;
 	position: relative;
 	overflow: hidden;
+	
 	
 }
 
@@ -58,6 +99,7 @@ html, body { position: relative; height: 100vh; }
 	width: 300px;
 	padding: 3% 3%; 
 	cursor: pointer;
+	
 	
 }
 
