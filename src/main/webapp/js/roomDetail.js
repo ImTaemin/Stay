@@ -87,3 +87,21 @@ function heartClick(e) {
 		});
 	}
 }
+
+
+// 아이디 체크
+function sameId() {
+	Swal.fire({
+		icon: 'error',
+		title: '예약이 불가능합니다.',
+		text: '호스트와 게스트가 동일합니다.'
+	});
+}
+
+function nullId() {
+	Swal.fire({
+		icon: 'error',
+		title: '예약이 불가능합니다.',
+		text: '로그인 후 예약 서비스 이용이 가능합니다.'
+	});
+}

@@ -209,8 +209,14 @@
 									s += "<div><b>￦" + commaAll + "</b></div>";
 									s += "</div>";
 									s += "<div class='price-btn'>"
-									s += "<c:if test='${roomDto.host_id != myid}'>"
+									s += "<c:if test='${loginok == null}'>"
+									s += "<button class='btn btn-primary' type='button' id='reser-btn' onclick='nullId()'>예약하기</button>"
+									s += "</c:if>"
+									s += "<c:if test='${roomDto.host_id != myid && loginok != null}'>"
 									s += "<button class='btn btn-primary' type='submit' id='reser-btn'>예약하기</button>"
+									s += "</c:if>"
+									s += "<c:if test='${roomDto.host_id == myid && loginok != null}'>"
+									s += "<button class='btn btn-primary' type='button' id='reser-btn' onclick='sameId()'>예약하기</button>"
 									s += "</c:if>"
 									s += "</div>";
 									s += "</div>";
@@ -222,7 +228,7 @@
 					</script>
 				</div>
 			</div>
-			
+
 			<hr>
 			
 			<!-- 설명&지도 -->

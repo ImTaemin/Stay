@@ -1,5 +1,5 @@
 <%@page import="java.util.Date"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -23,8 +23,13 @@
 <body>
 	<form action="insert" method="post" class="pay-wrap">
 		<!-- hidden -->
+		<input type="hidden" name="roomNo" value="${roomDto.no}">
 		<input type="hidden" name="startDate" value="${startDate}">
 		<input type="hidden" name="endDate" value="${endDate}">
+		<input type="hidden" name="betweenDay" value="${betweenDay}">
+		<input type="hidden" name="calPrice" value="${calPrice}">
+		<input type="hidden" name="taxPrice" value="${taxPrice}">
+		<input type="hidden" name="allPrice" value="${allPrice}">
 		
 		<div class="title">
 			<div class="back" onclick="history.back()">
@@ -52,7 +57,7 @@
 									<label>체크인 날짜</label>
 								</div>
 
-								<div class="update">
+								<div class="update" data-toggle="modal" data-target="#checkInModal">
 									<i class="bi bi-pencil-square"></i>
 								</div>
 							</div>
@@ -60,7 +65,9 @@
 							<hr>
 
 							<div class="day-info">
-								<label>${start[0]}년 ${start[1]}월 ${start[2]}일</label>
+								<label id="start1">${start[0]}</label>년&nbsp;
+								<label id="start2">${start[1]}</label>월&nbsp;
+								<label id="start3">${start[2]}</label>일
 							</div>
 						</div>
 
@@ -71,7 +78,7 @@
 									<label>체크아웃 날짜</label>
 								</div>
 
-								<div class="update">
+								<div class="update" data-toggle="modal" data-target="#checkOutModal">
 									<i class="bi bi-pencil-square"></i>
 								</div>
 							</div>
@@ -79,11 +86,60 @@
 							<hr>
 
 							<div class="day-info">
-								<label>${end[0]}년 ${end[1]}월 ${end[2]}일</label>
+								<label id="end1">${end[0]}</label>년&nbsp;
+								<label id="end2">${end[1]}</label>월&nbsp;
+								<label id="end3">${end[2]}</label>일
 							</div>
 						</div>
 					</div>
+					
+					<jsp:useBean id="now" class="java.util.Date"/>
+					<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today"/>
+					
+					<!-- Check In Modal -->
+					<div id="checkInModal" class="modal" role="dialog">
+						<div class="modal-dialog modal-dialog-centered">
+							<!-- Modal content -->
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">체크인 날짜 변경하기</h4>
+								</div>
+								
+								<div class="modal-body">
+									<input type="date" id="re-check-in" min="${today}">
+									<button type="button" id="bodyBtn" class="btn btn-primary" onclick="changeCheckIn()" data-dismiss="modal">변경</button>
+								</div>
+								
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<!-- Check Out Modal -->
+					<div id="checkOutModal" class="modal" role="dialog">
+						<div class="modal-dialog modal-dialog-centered">
+							<!-- Modal content -->
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">체크아웃 날짜 변경하기</h4>
+								</div>
+								
+								<div class="modal-body">
+									<input type="date" id="re-check-out" min="${startDate}">
+									<button type="button" id="bodyBtn" class="btn btn-primary" onclick="changeCheckOut()" data-dismiss="modal">변경</button>
+								</div>
 
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					
 					<hr style="margin-top: 40px;">
 
 					<div class="title" style="margin-top: 40px;">
@@ -99,8 +155,7 @@
 						</div>
 
 						<div class="check">
-							<i class="bi bi-circle" id="kakao" check="0"
-								onclick="payClick(this)"></i>
+							<i class="bi bi-circle" id="kakao" name="kakao" check="0" onclick="payClick(this)"></i>
 						</div>
 					</div>
 
@@ -108,13 +163,12 @@
 						<div class="card">
 							<label>카드 결제</label>
 						</div>
-
+						
 						<div class="check">
-							<i class="bi bi-circle" id="card" check="0"
-								onclick="payClick(this)"></i>
+							<i class="bi bi-circle" id="card" name="card" check="0" onclick="payClick(this)"></i>
 						</div>
 					</div>
-
+					
 					<div class="wallet"></div>
 
 					<hr style="margin-top: 40px;">
@@ -133,7 +187,7 @@
 					<hr>
 					
 					<div class="agree">
-						아래 버튼을 선택함으로써, 호스트가 설정한 숙소 이용규칙, 에어비앤비 코로나19 방역 수칙 및 게스트 환불 정책에 동의합니다.
+						아래 버튼을 선택함으로써, 호스트가 설정한 숙소 이용규칙, 쉼의 코로나19 방역 수칙 및 게스트 환불 정책에 동의합니다.
 					</div>
 					
 					<div class="reser-btn">
@@ -200,7 +254,7 @@
 			</div>
 		</div>
 	</form>
-
+	
 	<script type="text/javascript">
 		// 카드 클릭 이벤트
 		function payClick(e) {
@@ -214,10 +268,10 @@
 			} else if (kakao == "0" && card == "0" && $(e).attr("id") == "card") {
 				$(e).attr("class", "bi bi-check-circle-fill");
 				$(e).attr("check", "1");
-
+				
 				s += "<select id='card-list' name='card-list'>";
 				s += "<c:forEach var='card' items='${cardList}'>";
-				s += "<option value='${card.name}'>";
+				s += "<option value='${card.num}'>";
 				s += "${card.name}&nbsp;(${card.num})";
 				s += "</option>";
 				s += "</c:forEach>";
@@ -233,7 +287,7 @@
 
 				s += "<select id='card-list' name='card-list'>";
 				s += "<c:forEach var='card' items='${cardList}'>";
-				s += "<option value='${card.name}'>";
+				s += "<option value='${card.num}'>";
 				s += "${card.name}&nbsp;(${card.num})";
 				s += "</option>";
 				s += "</c:forEach>";
