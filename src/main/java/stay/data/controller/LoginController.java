@@ -60,12 +60,8 @@ public class LoginController {
 
 	@PostMapping("/loginprocess")
 	public String loginProcss(@RequestParam(required = false) String cbsave, @RequestParam String id,
-			@RequestParam String pass, HttpSession session, @RequestParam("code") String code) {
+			@RequestParam String pass, HttpSession session) {
 
-		System.out.println("code : " + code);
-		String access_Token = kakao.getAccessToken(code);
-        System.out.println("controller access_token : " + access_Token);
-		
 		HashMap<String, String> map = new HashMap<String, String>();
 
 		map.put("id", id);
@@ -84,6 +80,17 @@ public class LoginController {
 		} else {
 			return "/member/passfail";
 		}
+	}
+	
+	@PostMapping("/kakaologin")
+	public String kakaoLogin(@RequestParam("code") String code) {
+		
+		System.out.println("code : " + code);
+		String access_Token = kakao.getAccessToken(code);
+        System.out.println("controller access_token : " + access_Token);
+        
+        return "redirect:/";
+		
 	}
 
 	@GetMapping("/logoutprocess")
