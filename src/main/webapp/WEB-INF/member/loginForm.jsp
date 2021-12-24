@@ -51,7 +51,5 @@
 
 		<!-- kakao login script-->
   <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-  <!-- js -->
-  <script src="/js/loginForm.js"></script>
 </body>
 </html>
