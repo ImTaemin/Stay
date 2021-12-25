@@ -2,7 +2,6 @@ package stay.data.controller;
 
 import java.util.HashMap;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,7 +71,7 @@ public class LoginController {
 		if (check == 1) {
 			session.setAttribute("myid", id);
 			session.setAttribute("loginok", "yes");
-			session.setAttribute("cbsave", cbsave);
+			session.setAttribute("saveok", cbsave);
 			session.setAttribute("mode", "guest");
 			
 			// 체크했을때 on, 안하면 null
@@ -82,21 +81,38 @@ public class LoginController {
 		}
 	}
 	
-	@PostMapping("/kakaologin")
-	public String kakaoLogin(@RequestParam("code") String code) {
+	@RequestMapping("/kakaologin")
+	public String kakaoLogin(@RequestParam("code") String code, HttpSession session) {
 		
 		System.out.println("code : " + code);
+		
 		String access_Token = kakao.getAccessToken(code);
         System.out.println("controller access_token : " + access_Token);
         
-        return "redirect:/";
+        HashMap<String, Object> userInfo = kakao.getUserInfo(access_Token);
+        System.out.println("login Controller : " + userInfo);
+        
+        //클라이언트의 이메일이 존재할 때 세션에 해당 이메일과 토큰 등록
+        if (userInfo.get("email") != null) {
+            session.setAttribute("userId", userInfo.get("email"));
+            session.setAttribute("access_Token", access_Token);
+        }
+        
+        return "/member/loginForm";
 		
+	}
+	
+	@RequestMapping("/kakaologout")
+	public String kakaologout(HttpSession session) {
+	    kakao.kakaoLogout((String)session.getAttribute("access_Token"));
+	    session.removeAttribute("access_Token");
+	    session.removeAttribute("userId");
+	    return "/member/loginForm";
 	}
 
 	@GetMapping("/logoutprocess")
 	public String logout(HttpSession session) {
 
-		session.removeAttribute("myid");
 		session.removeAttribute("loginok");
 
 		return "redirect:/";
