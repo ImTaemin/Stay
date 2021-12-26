@@ -7,6 +7,8 @@
 	padding-top: 1.5%;
 	padding-left: 5%;
 	padding-right: 5%;
+
+
 }  
 
 .main-layout > .main {
@@ -20,7 +22,6 @@
 .main-layout > .footer {
 	font-family: 'WandocleanseaR';
 	width: 100%;
-	padding-top: 3%;
-	
+	padding-top: 5%;
 	
 }

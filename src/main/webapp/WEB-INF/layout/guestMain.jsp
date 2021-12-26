@@ -49,7 +49,13 @@
 	<div class="guestMain-bottom">
 		<!-- 인기숙소 -->
 		<div class="guestMain-toproom">
+			<div class="heart">
+				<i class="bi bi-heart-fill"></i>
+			</div>
 			인기 숙소
+			<div class="heart">
+				<i class="bi bi-heart-fill"></i>
+			</div>
 		</div>
 		
 		<div class="guestMain-list">
@@ -73,7 +79,8 @@
 			
 		        <!-- If we need navigation buttons ::양옆 좌우 버튼(선택) -->
 		        <div class="swiper-button-next"></div>
-		        <div class="swiper-button-prev"></div>
+		        <div class="swiper-button-prev"></div> 
+		 
 		    </div>
 	
 		</div>

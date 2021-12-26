@@ -16,7 +16,6 @@
 
 .guestMain-start, .guestMain-end{
 	position: relative;
-
 }
 
 .guestMain-start input{ 
@@ -75,25 +74,32 @@
 
 .guestMain-bottom{
 	margin-top: 5%;
-	
+
 }
 
 .guestMain-toproom{
 	font-size: 2.6em;
 	font-weight: bolder;
 	margin-left: 5%;
+	display: flex;
+}
+
+.guestMain-toproom i{
+	color: red;
+}
+
+.guestMain-toproom div{
+	padding-top: 3px;
 }
 
 .guestMain-list{
-	margin-top: 5%;
+	margin-top: 2%;
 	position: relative;
-	overflow: hidden;
-	
-	
+	overflow: hidden;	
 }
 
 .guestMain-room{
-	border: 2px solid #0B57A2;
+	border: 2px dotted #0B57A2;
 	border-radius: 1em;
 	height: 350px;
 	width: 300px;
@@ -106,7 +112,7 @@
 .guestMain-image img{
 	width: 270px;
 	height: 200px;
-	border: 2px solid #0B57A2;
+	border: 2px none;
 	border-radius: 1em;
 }
 
@@ -147,9 +153,17 @@
       -ms-flex-align: center;
       -webkit-align-items: center;
       align-items: center;
-      
     }
 
+/* 이전 화살표에 마우스 커서가 올라가 있을때 이전 화살표가 살짝 왼쪽으로 이동하는 효과*/
+.swiper-button-prev:hover {
+	transform: translateX(-10px);
+}
+
+/* 다음 화살표에 마우스 커서가 올라가 있을때 이전 화살표가 살짝 오른쪽으로 이동하는 효과*/
+.swiper-button-next:hover {
+	transform: translateX(10px);
+}
 
 
 
