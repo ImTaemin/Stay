@@ -26,7 +26,7 @@
 		<input type="hidden" name="roomNo" value="${roomDto.no}">
 		<input type="hidden" name="startDate" value="${startDate}">
 		<input type="hidden" name="endDate" value="${endDate}">
-		<input type="hidden" name="betweenDay" value="${betweenDay}">
+		<input type="hidden" id="beetweenDay" name="betweenDay" value="${betweenDay}">
 		<input type="hidden" name="calPrice" value="${calPrice}">
 		<input type="hidden" name="taxPrice" value="${taxPrice}">
 		<input type="hidden" name="allPrice" value="${allPrice}">
@@ -98,7 +98,7 @@
 					<jsp:useBean id="now" class="java.util.Date"/>
 					<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today"/>
 					
-					<!-- Check In Modal -->
+					<!-- 체크인 모달 -->
 					<div id="checkInModal" class="modal" role="dialog">
 						<div class="modal-dialog modal-dialog-centered">
 							<!-- Modal content -->
@@ -120,7 +120,7 @@
 						</div>
 					</div>
 					
-					<!-- Check Out Modal -->
+					<!-- 체크아웃 모달 -->
 					<div id="checkOutModal" class="modal" role="dialog">
 						<div class="modal-dialog modal-dialog-centered">
 							<!-- Modal content -->
@@ -147,7 +147,8 @@
 					<div class="title" style="margin-top: 40px;">
 						<label>결제 방식</label>
 					</div>
-
+					
+					<!-- 카카오페이 결제 -->
 					<div class="pay" style="margin-bottom: 20px;">
 						<div class="kakao">
 							<div class="kakao-pay">
@@ -160,7 +161,8 @@
 							<i class="bi bi-circle" id="kakao" name="kakao" check="0" onclick="payClick(this)"></i>
 						</div>
 					</div>
-
+					
+					<!-- 카드 결제 -->
 					<div class="pay">
 						<div class="card">
 							<label>카드 결제</label>
@@ -174,7 +176,8 @@
 					<div class="wallet"></div>
 
 					<hr style="margin-top: 40px;">
-
+					
+					<!-- 환불 안내 -->
 					<div class="title" style="margin-top: 40px;">
 						<label>환불 안내</label>
 					</div>
@@ -201,6 +204,7 @@
 			<!-- 요금 정보 -->
 			<div class="reser-pay-wrap">
 				<div class="reser-pay">
+					<!-- 숙소 정보 -->
 					<div class="room">
 						<div class="photo">
 							<img src="${root}/photo/roomPhoto/${roomDto.photos}">
@@ -225,6 +229,7 @@
 					<c:set var="calPrice" value="${roomDto.price * betweenDay}"/>
 					<c:set var="taxPrice" value="${calPrice * 0.2}"/>
 					
+					<!-- 요금 상세 정보 -->
 					<div class="room-price">
 						<div>
 							<fmt:formatNumber value='${roomDto.price}' type='currency' currencySymbol='￦' /> X ${betweenDay} 박
@@ -274,7 +279,7 @@
 				s += "<select id='card-list' name='card_num'>";
 				s += "<c:forEach var='card' items='${cardList}'>";
 				s += "<option value='${card.num}'>";
-				s += "${card.name}&nbsp;(${card.num})";
+				s += "${card.name}&nbsp;(${card.last_num})";
 				s += "</option>";
 				s += "</c:forEach>";
 				s += "</select>";
@@ -290,7 +295,7 @@
 				s += "<select id='card-list' name='card_num'>";
 				s += "<c:forEach var='card' items='${cardList}'>";
 				s += "<option value='${card.num}'>";
-				s += "${card.name}&nbsp;(${card.num})";
+				s += "${card.name}&nbsp;(${card.last_num})";
 				s += "</option>";
 				s += "</c:forEach>";
 				s += "</select>";

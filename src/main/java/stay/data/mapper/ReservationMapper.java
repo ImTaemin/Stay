@@ -6,5 +6,5 @@ import stay.data.dto.ReservationDto;
 
 @Mapper
 public interface ReservationMapper {
-	public void insertReservation(ReservationDto redto);
+	public void insertReservation(ReservationDto reDto);
 }

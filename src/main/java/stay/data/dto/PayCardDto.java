@@ -19,4 +19,7 @@ public class PayCardDto {
 	private String num2;
 	private String num3;
 	private String num4;
+	
+	// 카드 뒷번호
+	private String last_num;
 }

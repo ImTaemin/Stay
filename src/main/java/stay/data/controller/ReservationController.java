@@ -38,13 +38,11 @@ public class ReservationController {
 	@Autowired
 	ReservationService reservationService;
 	
-	// 결제
 	@PostMapping("/paymentform")
 	public ModelAndView paymentForm(
 			@RequestParam String roomNo, @RequestParam String startDate, @RequestParam String endDate,
 			@RequestParam String betweenDay, @RequestParam String roomPrice, @RequestParam String allPrice,
-			HttpSession session
-			) throws Exception {
+			HttpSession session) throws Exception {
 		ModelAndView mview = new ModelAndView();
 		
 		String myid = (String)session.getAttribute("myid");
@@ -65,7 +63,7 @@ public class ReservationController {
 			String num = p.getNum();
 			String numArray[] = num.split("-");
 			
-			p.setNum(numArray[3]);
+			p.setLast_num(numArray[3]);
 		}
 		
 		// 7일 전 날짜

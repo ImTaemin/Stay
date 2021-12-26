@@ -11,7 +11,7 @@ public class ReservationService {
 	@Autowired
 	ReservationMapper mapper;
 	
-	public void insertReservation(ReservationDto redto) {
-		mapper.insertReservation(redto);
+	public void insertReservation(ReservationDto reDto) {
+		mapper.insertReservation(reDto);
 	}
 }
