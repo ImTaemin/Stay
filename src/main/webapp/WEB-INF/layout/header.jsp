@@ -12,7 +12,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet"> <!--CDN 링크 -->
 
 <!-- css -->
-<link rel="stylesheet" href="../css/title.css">
+<link rel="stylesheet" href="../css/header.css">
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 
 
@@ -124,6 +124,6 @@
 			</c:if>
 		</div>
 	</div>
-  <script src="../js/title.js"></script>
+  <script src="../js/header.js"></script>
 </body>
 </html>

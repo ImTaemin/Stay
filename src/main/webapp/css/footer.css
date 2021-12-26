@@ -1,1 +1,9 @@
 @charset "UTF-8";
+
+.copyright{
+	background: #0B57A2;
+	padding-top: 1%;
+	padding-left: 5%;
+	height: 100px;
+	color: white;
+}

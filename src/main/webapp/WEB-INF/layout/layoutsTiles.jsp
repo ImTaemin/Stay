@@ -11,18 +11,22 @@ Gugi&family=Nanum+Pen+Script&display=Nanum+Gothic&display=swap" rel="stylesheet"
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <!-- css -->
-<link rel="stylesheet" href="../css/layout1.css">
+<link rel="stylesheet" href="../css/layoutsTiles.css">
 
 <title>Insert title here</title>
 </head>
 <body>
 <div class="main-layout">
-	<div class="title">
-		<tiles:insertAttribute name="title"/>
+	<div class="header">
+		<tiles:insertAttribute name="header"/>
 	</div>
 	
 	<div class="main">
 		<tiles:insertAttribute name="main"/>
+	</div>
+	
+	<div class="footer">
+		<tiles:insertAttribute name="footer"/>
 	</div>
 </div>
 </body>
