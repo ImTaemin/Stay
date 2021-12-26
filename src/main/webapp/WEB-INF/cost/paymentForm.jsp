@@ -23,7 +23,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="insert" method="post" class="pay-wrap" id="frm">
+	<form action="insert" method="post" class="pay-wrap" id="frm" accept-charset="euc-kr">
 		<!-- hidden -->
 		<input type="hidden" name="roomNo" value="${roomDto.no}">
 		<input type="hidden" name="startDate" value="${startDate}">
@@ -34,6 +34,43 @@
 		<input type="hidden" name="allPrice" value="${allPrice}">
 		<input type="hidden" name="payMethod">
 		<input type="hidden" name="cardNum">
+		
+		<script type="text/javascript">
+			function formCheck(){
+				var kakao = $("#kakao").attr("check");
+				var card = $("#card").attr("check");
+				
+				if (kakao == "0" && card == "0") {
+					$("#frm").attr("action", "");
+				
+					Swal.fire({
+						icon: 'error',
+						title: '결제 방법을 선택해주세요.'
+					});
+				} else if(kakao == "1" && card == "0"){
+					$.ajax({
+						url:"kakaopay",
+						dataType:"json",
+						data:{"roomNo" : ${roomDto.no}, "allPrice" : ${allPrice}, "startDate" : "${startDate}", "endDate" : "${endDate}" ,  "taxPrice" : ${allPrice * 0.2}},
+						contentType: "application/json; charset=utf-8",
+					}).done(function(resp){
+						if(resp.status === 500){
+							alert("카카오페이결제를 실패하였습니다.")
+						} else{
+							//결제 고유 번호
+							var box = resp.next_redirect_pc_url;
+							// 새창 열기
+							// window.open(box, '_blank', "width=500,height=500");
+							location.href = box;
+						}
+					}).fail(function(error){
+						alert(JSON.stringify(error));
+					});
+				} else {
+					$("#frm").submit();
+				}
+			}
+		</script>
 		
 		<div class="title">
 			<div class="back" onclick="history.back()">
@@ -280,6 +317,9 @@
 			if (kakao == "0" && card == "0" && $(e).attr("id") == "kakao") {
 				$(e).attr("class", "bi bi-check-circle-fill");
 				$(e).attr("check", "1");
+			} else if (kakao == "1" && card == "0" && $(e).attr("id") == "kakao") {
+				$(e).attr("class", "bi bi-circle");
+				$(e).attr("check", "0");
 			} else if (kakao == "0" && card == "0" && $(e).attr("id") == "card") {
 				$(e).attr("class", "bi bi-check-circle-fill");
 				$(e).attr("check", "1");

@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -166,7 +167,26 @@ public class ReservationController {
 	}
 	
 	@GetMapping("/kakaopay")
-	public @ResponseBody String kakaoPay() {
+	public @ResponseBody String kakaoPay(
+			@ModelAttribute ReservationDto reserDto, @RequestParam Map<String, Object> param, HttpSession session) {
+		String myid = (String)session.getAttribute("myid");
+		
+		String roomNo = (String)param.get("roomNo");
+		String allPrice = (String)param.get("allPrice");
+		String taxPrice = (String)param.get("taxPrice");
+		String startDate = (String)param.get("startDate");
+		String endDate = (String)param.get("endDate");
+		
+		RoomDto roomDto = roomService.getRoom(roomNo);
+		
+		reserDto.setGuest_id(myid);
+		reserDto.setHost_id(roomDto.getHost_id());
+		reserDto.setStart_date(startDate);
+		reserDto.setEnd_date(endDate);
+		reserDto.setPrice(allPrice);
+		reserDto.setPay_method("kakao");
+		reserDto.setRoom_no(roomNo);
+		
 		try {
 			URL address = new URL("https://kapi.kakao.com/v1/payment/ready");
 			HttpURLConnection connection = (HttpURLConnection) address.openConnection(); // 서버연결
@@ -177,13 +197,13 @@ public class ReservationController {
 			
 			String parameter = "cid=TC0ONETIME" // 가맹점 코드
 								+ "&partner_order_id=partner_order_id" // 가맹점 주문번호
-								+ "&partner_user_id=partner_user_id" // 가맹점 회원 id
-								+ "&item_name=초코파이"// 상품명
+								+ "&partner_user_id=" + myid // 가맹점 회원 id
+								+ "&item_name=Swim,"// 상품명
 								+ "&quantity=1"// 상품 수량
-								+ "&total_amount=180000" // 총 금액
-								+ "&vat_amount=200" // 부가세
+								+ "&total_amount=" + allPrice // 총 금액
+								+ "&vat_amount=" + taxPrice // 부가세
 								+ "&tax_free_amount=0" // 상품 비과세 금액
-								+ "&approval_url=http://localhost:8080/pay/insert" // 결제 성공 시
+								+ "&approval_url=http://localhost:8080/" // 결제 성공 시
 								+ "&fail_url=http://localhost:8080/" // 결제 실패 시
 								+ "&cancel_url=http://localhost:8080/"; // 결제 취소 시
 			
@@ -197,6 +217,8 @@ public class ReservationController {
 			
 			if (result == 200) {
 				receive = connection.getInputStream();
+				
+				reservationService.insertReservation(reserDto);
 			} else {
 				receive = connection.getErrorStream(); 
 			}
