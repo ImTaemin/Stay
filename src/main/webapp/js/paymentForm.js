@@ -1,23 +1,31 @@
-function changeCheckIn() {
-	var startDate = $('#re-check-in').val();
-
-	var start = startDate.split("-");
-
-	$('label[id=start1]').html(start[0]);
-	$('label[id=start2]').html(start[1]);
-	$('label[id=start3]').html(start[2]);
+function formCheck(){
+	var kakao = $("#kakao").attr("check");
+	var card = $("#card").attr("check");
 	
-	$('input[name=startDate]').attr('value', startDate);
-}
-
-function changeCheckOut() {
-	var endDate = $('#re-check-out').val();
-
-	var end = endDate.split("-");
-
-	$('label[id=end1]').html(end[0]);
-	$('label[id=end2]').html(end[1]);
-	$('label[id=end3]').html(end[2]);
+	if (kakao == "0" && card == "0") {
+		$("#frm").attr("action", "");
 	
-	$('input[name=endDate]').attr('value', endDate);
+		Swal.fire({
+			icon: 'error',
+			title: '결제 방법을 선택해주세요.'
+		});
+	} else if(kakao == "1" && card == "0"){
+		$.ajax({
+			url:"kakaopay",
+			dataType:"json",
+		}).done(function(resp){
+			if(resp.status === 500){
+				alert("카카오페이결제를 실패하였습니다.")
+			} else{
+				 // alert(resp.tid); //결제 고유 번호
+				var box = resp.next_redirect_pc_url;
+				//window.open(box); // 새창 열기
+				location.href = box;
+			}
+		}).fail(function(error){
+			alert(JSON.stringify(error));
+		});
+	} else {
+		$("#frm").submit();
+	}
 }

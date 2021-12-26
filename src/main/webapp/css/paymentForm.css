@@ -70,6 +70,7 @@
 hr {
 	color: gray;
 	height: 2%;
+	width: 100%;
 	margin: 5% 0;
 }
 
@@ -248,11 +249,14 @@ hr {
 	font-size: 1.2em;
 }
 
+#betweenDay {
+	font-weight: normal;
+}
+
 .reser-pay>.all-price {
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
-	margin-top: 15px;
 	font-size: 1.7em;
 	margin-bottom: 5%;
 }
@@ -284,4 +288,9 @@ hr {
 .modal-body>#bodyBtn {
 	width: 25%;
 	height: 35px;
+}
+
+#cardInsert {
+	width: 100%;
+	height: 45px;
 }

@@ -18,15 +18,17 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 <!-- js -->
 <script src="${root}/js/paymentForm.js"></script>
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="insert" method="post" class="pay-wrap">
+	<form action="insert" method="post" class="pay-wrap" id="frm">
 		<!-- hidden -->
 		<input type="hidden" name="roomNo" value="${roomDto.no}">
 		<input type="hidden" name="startDate" value="${startDate}">
 		<input type="hidden" name="endDate" value="${endDate}">
-		<input type="hidden" id="beetweenDay" name="betweenDay" value="${betweenDay}">
+		<input type="hidden" name="betweenDay" value="${betweenDay}">
 		<input type="hidden" name="calPrice" value="${calPrice}">
 		<input type="hidden" name="taxPrice" value="${taxPrice}">
 		<input type="hidden" name="allPrice" value="${allPrice}">
@@ -196,7 +198,7 @@
 					</div>
 					
 					<div class="reser-btn">
-						<button type="submit" class="btn btn-primary">예약 하기</button>
+						<button type="button" onclick="formCheck()" class="btn btn-primary">예약 하기</button>
 					</div>
 				</div>
 			</div>
@@ -232,11 +234,13 @@
 					<!-- 요금 상세 정보 -->
 					<div class="room-price">
 						<div>
-							<fmt:formatNumber value='${roomDto.price}' type='currency' currencySymbol='￦' /> X ${betweenDay} 박
+							<fmt:formatNumber value='${roomDto.price}' type='currency' currencySymbol='￦' />
+							 X <label id="betweenDay">${betweenDay}</label> 박
 						</div>
 						
 						<b>
-							<fmt:formatNumber value='${calPrice}' type='currency' currencySymbol='￦' />
+							<fmt:formatNumber value='${calPrice}' type='currency' currencySymbol='￦' var="calPrice"/>
+							<label id="calPrice">${calPrice}</label>
 						</b>
 					</div>
 					
@@ -244,7 +248,8 @@
 						<div>수수료 및 부과세</div>
 						
 						<b>
-							<fmt:formatNumber value='${taxPrice}' type='currency' currencySymbol='￦' />
+							<fmt:formatNumber value='${taxPrice}' type='currency' currencySymbol='￦' var="taxPrice"/>
+							<label id="taxPrice">${taxPrice}</label>
 						</b>
 					</div>
 					
@@ -254,7 +259,8 @@
 						<label>총 합계</label>
 						
 						<b>
-							<fmt:formatNumber value='${allPrice}' type='currency' currencySymbol='￦' />
+							<fmt:formatNumber value='${allPrice}' type='currency' currencySymbol='￦' var="allPrice"/>
+							<label id="allPrice">${allPrice}</label>
 						</b>
 					</div>
 				</div>
@@ -267,7 +273,9 @@
 		function payClick(e) {
 			var kakao = $("#kakao").attr("check");
 			var card = $("#card").attr("check");
+			
 			var s = "";
+			var n = "";
 
 			if (kakao == "0" && card == "0" && $(e).attr("id") == "kakao") {
 				$(e).attr("class", "bi bi-check-circle-fill");
@@ -276,15 +284,24 @@
 				$(e).attr("class", "bi bi-check-circle-fill");
 				$(e).attr("check", "1");
 				
-				s += "<select id='card-list' name='card_num'>";
-				s += "<c:forEach var='card' items='${cardList}'>";
-				s += "<option value='${card.num}'>";
-				s += "${card.name}&nbsp;(${card.last_num})";
-				s += "</option>";
-				s += "</c:forEach>";
-				s += "</select>";
-
-				$(".wallet").html(s);
+				if(${cardList != "[]"}){
+					s += "<select id='card-list' name='card_num'>";
+					s += "<c:forEach var='card' items='${cardList}'>";
+					s += "<option value='${card.num}'>";
+					s += "${card.name}&nbsp;(${card.last_num})";
+					s += "</option>";
+					s += "</c:forEach>";
+					s += "</select>";
+					s += `<button type='button' id='cardInsert' class='btn btn-primary' onclick='location.href="/card/insertform"'>`;
+					s += "결제 카드 추가</button>";
+					
+					$(".wallet").html(s);
+				} else if(${cardList == "[]"}) {
+					n += `<button type='button' id='cardInsert' class='btn btn-primary' onclick='location.href="/card/insertform"'>`;
+					n += "결제 카드 추가</button>";
+					
+					$(".wallet").html(n);
+				}
 			} else if (kakao == "1" && card == "0") {
 				$(e).attr("class", "bi bi-check-circle-fill");
 				$(e).attr("check", "1");
@@ -292,15 +309,24 @@
 				$("#kakao").attr("class", "bi bi-circle");
 				$("#kakao").attr("check", "0");
 
-				s += "<select id='card-list' name='card_num'>";
-				s += "<c:forEach var='card' items='${cardList}'>";
-				s += "<option value='${card.num}'>";
-				s += "${card.name}&nbsp;(${card.last_num})";
-				s += "</option>";
-				s += "</c:forEach>";
-				s += "</select>";
-
-				$(".wallet").html(s);
+				if(${cardList != "[]"}){
+					s += "<select id='card-list' name='card_num'>";
+					s += "<c:forEach var='card' items='${cardList}'>";
+					s += "<option value='${card.num}'>";
+					s += "${card.name}&nbsp;(${card.last_num})";
+					s += "</option>";
+					s += "</c:forEach>";
+					s += "</select>";
+					s += `<button type='button' id='cardInsert' class='btn btn-primary' onclick='location.href="/card/insertform"'>`;
+					s += "결제 카드 추가</button>";
+					
+					$(".wallet").html(s);
+				} else if(${cardList == "[]"}) {
+					n += `<button type='button' id='cardInsert' class='btn btn-primary' onclick='location.href="/card/insertform"'>`;
+					n += "결제 카드 추가</button>";
+					
+					$(".wallet").html(n);
+				}
 			} else {
 				$(e).attr("class", "bi bi-check-circle-fill");
 				$(e).attr("check", "1");
@@ -320,6 +346,94 @@
 
 				$('input[name=payMethod]').attr('value', 'card');
 				$('input[name=cardNum]').attr('value', cardNum);
+			}
+		}
+		
+		function changeCheckIn() {
+			var startDate = $('#re-check-in').val();
+
+			var start = startDate.split("-");
+
+			var start_date = new Date(start[0], start[1], start[2]);
+			var end_date = new Date(${end[0]}, ${end[1]}, ${end[2]});
+			
+			var betweenMs = end_date.getTime() - start_date.getTime();
+			var betweenDay = betweenMs / (1000 * 60 * 60 * 24);
+			
+			var calPrice = ${roomDto.price} * betweenDay;
+			var commaCal = Number(calPrice).toLocaleString();
+			
+			var taxPrice = calPrice * 0.2;
+			var commaTax = Number(taxPrice).toLocaleString();
+
+			var allPrice = calPrice + taxPrice;
+			var commaAll = Number(allPrice).toLocaleString();
+			
+			if(betweenDay <= 0) {
+				Swal.fire({
+					icon: 'error',
+					title: '날짜를 다시 선택해주세요.',
+					text: '체크인 날짜를 다시 입력해주세요.'
+				});
+			} else {
+				$('label[id=start1]').html(start[0]);
+				$('label[id=start2]').html(start[1]);
+				$('label[id=start3]').html(start[2]);
+				
+				$('label[id=betweenDay]').html(betweenDay);
+				$('label[id=calPrice]').html("￦" + commaCal);
+				$('label[id=taxPrice]').html("￦" + commaTax);
+				$('label[id=allPrice]').html("￦" + commaAll);
+				
+				$('input[name=startDate]').attr('value', startDate);
+				$('input[name=betweenDay]').attr('value', betweenDay);
+				$('input[name=calPrice]').attr('value', calPrice);
+				$('input[name=taxPrice]').attr('value', taxPrice);
+				$('input[name=allPrice]').attr('value', allPrice);
+			}
+		}
+
+		function changeCheckOut() {
+			var endDate = $('#re-check-out').val();
+
+			var end = endDate.split("-");
+
+			var start_date = new Date(${start[0]}, ${start[1]}, ${start[2]});
+			var end_date = new Date(end[0], end[1], end[2]);
+			
+			var betweenMs = end_date.getTime() - start_date.getTime();
+			var betweenDay = betweenMs / (1000 * 60 * 60 * 24);
+			
+			var calPrice = ${roomDto.price} * betweenDay;
+			var commaCal = Number(calPrice).toLocaleString();
+			
+			var taxPrice = calPrice * 0.2;
+			var commaTax = Number(taxPrice).toLocaleString();
+
+			var allPrice = calPrice + taxPrice;
+			var commaAll = Number(allPrice).toLocaleString();
+			
+			if(betweenDay <= 0) {
+				Swal.fire({
+					icon: 'error',
+					title: '날짜를 다시 선택해주세요.',
+					text: '체크아웃 날짜를 다시 입력해주세요.'
+				});
+			} else {
+				$('label[id=end1]').html(end[0]);
+				$('label[id=end2]').html(end[1]);
+				$('label[id=end3]').html(end[2]);
+				
+				$('label[id=betweenDay]').html(betweenDay);
+				$('label[id=calPrice]').html("￦" + commaCal);
+				$('label[id=taxPrice]').html("￦" + commaTax);
+				$('label[id=allPrice]').html("￦" + commaAll);
+				
+				$('input[name=endDate]').attr('value', endDate);
+				$('input[name=betweenDay]').attr('value', betweenDay);
+				$('input[name=calPrice]').attr('value', calPrice);
+				$('input[name=taxPrice]').attr('value', taxPrice);
+				$('input[name=allPrice]').attr('value', allPrice);
 			}
 		}
 	</script>
