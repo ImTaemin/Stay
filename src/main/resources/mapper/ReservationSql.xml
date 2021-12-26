@@ -14,4 +14,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		, null, now(), #{room_no});
 	</insert>
+	
+	<select id="selectReservation" parameterType="String" resultType="redto">
+		select * from reservation where guest_id = #{guest_id}
+	</select>
 </mapper>

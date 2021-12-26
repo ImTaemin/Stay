@@ -22,7 +22,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -36,7 +35,6 @@ import stay.data.service.ReservationService;
 import stay.data.service.RoomService;
 
 @Controller
-@RequestMapping("/pay")
 public class ReservationController {
 	@Autowired
 	CostService costService;
@@ -50,7 +48,7 @@ public class ReservationController {
 	@Autowired
 	ReservationService reservationService;
 	
-	@PostMapping("/paymentform")
+	@PostMapping("/pay/paymentform")
 	public ModelAndView paymentForm(
 			@RequestParam String roomNo, @RequestParam String startDate, @RequestParam String endDate,
 			@RequestParam String betweenDay, @RequestParam String roomPrice, @RequestParam String allPrice,
@@ -135,7 +133,7 @@ public class ReservationController {
 		return dtFormat.format(cal.getTime());
 	}
 
-	@PostMapping("/insert")
+	@PostMapping("/pay/insert")
 	public ModelAndView payInsert(
 			@ModelAttribute ReservationDto reserDto, @RequestParam String roomNo,
 			@RequestParam String startDate, @RequestParam String endDate, @RequestParam String betweenDay,
@@ -166,7 +164,7 @@ public class ReservationController {
 		return mview;
 	}
 	
-	@GetMapping("/kakaopay")
+	@GetMapping("/pay/kakaopay")
 	public @ResponseBody String kakaoPay(
 			@ModelAttribute ReservationDto reserDto, @RequestParam Map<String, Object> param, HttpSession session) {
 		String myid = (String)session.getAttribute("myid");
@@ -235,5 +233,20 @@ public class ReservationController {
 		}
 
 		return "";
+	}
+	
+	@GetMapping("/reser/reservationlist")
+	public ModelAndView reservationList(HttpSession session) {
+		ModelAndView mview = new ModelAndView();
+		
+		String myid = (String)session.getAttribute("myid");
+		
+		List<ReservationDto> reserList = reservationService.selectReservation(myid);
+		
+		mview.addObject("reserList", reserList);
+		
+		mview.setViewName("/reservation/reservationList");
+		
+		return mview;
 	}
 }
