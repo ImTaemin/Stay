@@ -25,12 +25,13 @@
 .tab-content>.active {
 	display: flex !important;
 	flex-wrap: wrap;
-	justify-content: space-around;
 	width: 100%;
+	padding-left: 3%;
 }
 
 .card {
-	border-radius : 7px !important;
+	margin-right: 3.3%;
+	border-radius: 7px !important;
 	width: 30%;
 	height: 500px;
 	margin-bottom: 30px;
