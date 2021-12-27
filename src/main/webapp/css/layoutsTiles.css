@@ -7,8 +7,12 @@
 	padding-top: 1.5%;
 	padding-left: 5%;
 	padding-right: 5%;
-
-
+	position:fixed;
+    left:0px;
+    top:0px;
+    height:135px;
+    z-index: 1;
+    background: white;
 }  
 
 .main-layout > .main {
@@ -17,11 +21,18 @@
 	padding-left: 5%;
 	padding-right: 5%;
 	padding-top: 5%;
-}
+	padding-bottom:5%;
+	margin-top:135px;
+    margin-bottom:100px;
+    z-index: 2;
+ }
 
 .main-layout > .footer {
 	font-family: 'WandocleanseaR';
 	width: 100%;
-	padding-top: 5%;
-	
+	position:fixed;
+    left:0px;
+    bottom:0px;
+    height:100px;
+    z-index: 1;
 }

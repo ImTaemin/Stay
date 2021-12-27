@@ -1,4 +1,4 @@
-const swiper = new Swiper('.swiper-container', {
+  const swiper = new Swiper('.swiper-container', {
   //기본 셋팅
   //방향 셋팅 vertical 수직, horizontal 수평 설정이 없으면 수평
   direction: 'horizontal',
@@ -16,7 +16,6 @@ const swiper = new Swiper('.swiper-container', {
   centeredSlides: true,
   // 페이지 전환효과 slidesPerView효과와 같이 사용 불가
   // effect: 'fade',
-  
   
   //자동 스크를링
   autoplay: {

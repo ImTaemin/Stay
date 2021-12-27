@@ -105,8 +105,7 @@
 	width: 300px;
 	padding: 3% 3%; 
 	cursor: pointer;
-	
-	
+	   
 }
 
 .guestMain-image img{
@@ -122,24 +121,18 @@
 	font-weight: bolder;
 	
 }
+
 .swiper-container{
 	position: static;
-
 }
 
 .guestMain-name{
 	margin-bottom: 7%;
 }
 
-
-
-
-
-    .swiper-slide {
+.swiper-slide {
       text-align: center;
       font-size: 18px;
-      background: #fff;
-
       /* Center slide text vertically */
       display: -webkit-box;
       display: -ms-flexbox;
