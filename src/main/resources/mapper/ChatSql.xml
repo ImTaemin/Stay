@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="stay.data.mapper.ChatMapper">
 
 	<select id="getChattingRooms" parameterType="String" resultType="chatDto">
-		select * from chat where sender=#{sender}
+		select * from chat where sender=#{sender} group by receiver
 	</select>
 
 	<select id="chatting" parameterType="HashMap" resultType="chatDto">

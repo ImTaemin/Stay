@@ -18,21 +18,17 @@
 				<span>채팅방 목록</span>
 			</div>
 			<div class="chat-list">
-				<div class="chat-room">
-					<img src="../../photo/profile.png" class="room-photo">
-					유저 아이디
-				</div>
-				<div class="chat-room">
-					<img src="../../photo/profile.png" class="room-photo">
-					유저 아이디
-				</div>
+<!-- 				<div class="chat-room"> -->
+<!-- 					<img src="../../photo/profile.png" class="room-photo"> -->
+<!-- 					유저 아이디 -->
+<!-- 				</div> -->
 			</div>
 		</div>
 		
 		<!-- 채팅화면 -->
 		<div class="chatting">
 			<div class="profile">
-				<img src="../../photo/profile.png"> 안수현
+				<img src="../../photo/profile.png"> ${sessionScope.myid }
 			</div>
 
 			<div class="chat-section">
@@ -65,60 +61,70 @@
 	</div>
 
 	<script type="text/javascript">
-		var eventSource = new EventSource("http://localhost:8080/chat/stay");
-	
-		eventSource.onmessage = (event) => {
-			var data = JSON.parse(event.data);
-			
-			console.log(data);
-		};
-	
-		function initMyMessage(historyMsg) {
-			var chatBox = document.querySelector("#chat-box");
-	
-			var chatOutgoingBox = document.createElement("div");
-			chatOutgoingBox.className = "outgoing_msg";
-			chatOutgoingBox.innerHTML = getSendMsgBox(data.msg, data.day);
-	
-			chatBox.append(chatOutgoingBox);
-		}
-	
-		async function addMessage() {
-			var msgInput = document.querySelector("#input-msg");
-	
-			var chat={
-				sender: username,
-				receiver: "",
-				msg: msgInput.value
+		$(function(){
+			//채팅방
+			var eventSource = new EventSource("http://localhost:8080/chat/stay");
+			eventSource.onmessage = (event) => {
+				var data = JSON.parse(event.data);
+				initRooms(data);//data.msg로 찾을 수 있음
+			};
+		
+			function initRooms(rooms){
+				var s = `
+				<div class="chat-room">
+					<img src="../../photo/profile.png" class="room-photo">
+					` + rooms.receiver + `
+				</div>
+				`
+				$(".chat-list").append(s);
 			}
-			
-			//통신이 끝날떄까지 기다려야함
-			var response = await fetch("http://localhost:8080/chat",{
-				method: "post",
-				body: JSON.stringify(chat), //JS->JSON
-				headers: {
-					"Content-Type":"application/json; charset=utf-8"
+// 			function initMyMessage(historyMsg) {
+// 				var chatBox = document.querySelector("#chat-box");
+		
+// 				var chatOutgoingBox = document.createElement("div");
+// 				chatOutgoingBox.className = "send-msg-box";
+// 				chatOutgoingBox.innerHTML = getSendMsgBox(data.msg, data.day);
+		
+// 				chatBox.append(chatOutgoingBox);
+// 			}
+		
+// 			function addMessage() {
+// 				var msgInput = document.querySelector("#input-msg");
+		
+// 				var chat={
+// 					sender: username,
+// 					receiver: "",
+// 					msg: msgInput.value
+// 				}
+				
+// 				//통신이 끝날떄까지 기다려야함
+// 				var response = await fetch("http://localhost:8080/chat",{
+// 					method: "post",
+// 					body: JSON.stringify(chat), //JS->JSON
+// 					headers: {
+// 						"Content-Type":"application/json; charset=utf-8"
+// 					}
+// 				});
+				
+// 				var parseResponse = await response.json();
+				
+// 				chatOutgoingBox.innerHTML = getSendMsgBox(msgInput.value, now);
+		
+// 				chatBox.append(chatOutgoingBox);
+		
+// 				msgInput.value = "";
+// 			}
+		
+			document.querySelector("#send-btn").addEventListener("click", () => {
+				addMessage();
+			});
+		
+			document.querySelector("#input-msg").addEventListener("keydown", () => {
+				//엔터키
+				if (e.keyCode === 13) {
+					addMessage();
 				}
 			});
-			
-			var parseResponse = await response.json();
-			
-			chatOutgoingBox.innerHTML = getSendMsgBox(msgInput.value, now);
-	
-			chatBox.append(chatOutgoingBox);
-	
-			msgInput.value = "";
-		}
-	
-		document.querySelector("#send-btn").addEventListener("click", () => {
-			addMessage();
-		});
-	
-		document.querySelector("#input-msg").addEventListener("keydown", () => {
-			//엔터키
-			if (e.keyCode === 13) {
-				addMessage();
-			}
 		});
 	</script>
 

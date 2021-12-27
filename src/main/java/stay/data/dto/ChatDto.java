@@ -1,5 +1,8 @@
 package stay.data.dto;
 
+
+import java.sql.Timestamp;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Data;
@@ -13,7 +16,5 @@ public class ChatDto {
 	private String receiver;
 	
 	@JsonFormat(pattern = "yy/MM/dd HH:mm")
-	private String msgTime;
-	
-
+	private Timestamp msg_time;
 }

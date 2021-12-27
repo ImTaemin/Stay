@@ -1,19 +1,14 @@
 package stay.data.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyEmitter;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import stay.data.dto.ChatDto;
 import stay.data.service.ChatService;
@@ -31,33 +26,18 @@ public class ChatController {
 	}
 	
 	//채팅방 목록
-	@GetMapping("/{sender}")
-	public @ResponseBody List<ChatDto> getChattingRooms(@PathVariable("sender") String sender, HttpServletResponse response) throws ServletException, IOException{
+	@GetMapping(path="/{sender}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+	public @ResponseBody ResponseBodyEmitter getChattingRooms(@PathVariable String sender){
+		SseEmitter emitter = new SseEmitter();
+		chatService.add(emitter, sender);
 		
-		response.setContentType("text/event-stream");
-		response.setCharacterEncoding("UTF-8");
-		
-		PrintWriter writer = response.getWriter();
-		
-		List<ChatDto> roomList = chatService.getChattingRooms(sender);
-		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("roomList", roomList);
-		mav.setViewName("/chat/chatting");
-		
-		writer.close();
-
-		return roomList;
+		return emitter;
 	}
 	
 	//채팅
 	@GetMapping("/{sender}/{receiver}")
 	public @ResponseBody ChatDto chatting(@PathVariable("sender") String sender, @PathVariable("receiver") String receiver) {
 
-//		while(true) {
-//			writer.write("data:{\"sender\""+ i +"\"}\n\n");
-//		}
-		
 		return new ChatDto();
 	}
 
