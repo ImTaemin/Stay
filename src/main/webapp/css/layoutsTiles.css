@@ -1,16 +1,28 @@
 @charset "UTF-8";
 @import url('font.css');
 
+html,body{
+	margin:0;
+	padding:0;
+	height:100%;
+	width: 100%;
+}
+
+.main-layout{
+	height: auto;
+	min-height: 100%;
+	padding-bottom: 100px;
+}
+
 .main-layout > .header {
 	font-family: 'WandocleanseaR';
 	width: 100%;
 	padding-top: 1.5%;
 	padding-left: 5%;
 	padding-right: 5%;
-	position:fixed;
-    left:0px;
+	position: sticky;
+	left:0px;
     top:0px;
-    height:135px;
     z-index: 1;
     background: white;
 }  
@@ -18,21 +30,15 @@
 .main-layout > .main {
 	font-family: 'WandocleanseaR';
 	width: 100%;
-	padding-left: 5%;
-	padding-right: 5%;
-	padding-top: 5%;
-	padding-bottom:5%;
-	margin-top:135px;
-    margin-bottom:100px;
+	padding: 5%;
+	/* min-height:100%; */
     z-index: 2;
  }
 
-.main-layout > .footer {
+.footer {
 	font-family: 'WandocleanseaR';
 	width: 100%;
-	position:fixed;
-    left:0px;
-    bottom:0px;
     height:100px;
-    z-index: 1;
+    position: relative;
+    transform: translateY(-100%);
 }
