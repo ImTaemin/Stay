@@ -24,10 +24,5 @@ public interface MemberMapper {
 	public void insertPhoto(MemberDto memberDto);
 	
 	public void updateImg(MemberDto dto);
-	
-	
-	public MemberDto getData(String id);
-	public void updatelikes(String id);
-	
 
 }
