@@ -2,4 +2,79 @@
 
 .tab-content {
 	margin-top: 40px;
+	font-size: 1.2em;
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+	width: 100%;
+	font-size: 1.2em;
+	color: white !important;
+	background-color: #0B57A2 !important;
+}
+
+.nav-tabs .nav-link {
+	width: 100%;
+	font-size: 1.2em;
+	color: gray !important;
+}
+
+.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
+	background-color: rgb(174, 217, 218, 0.3);	
+}
+
+.tab-content>.active {
+	display: flex !important;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	width: 100%;
+}
+
+.card {
+	border-radius : 7px !important;
+	width: 30%;
+	height: 500px;
+	margin-bottom: 30px;
+	border-radius: 7px !important;
+}
+
+.card>img {
+	border-radius: 7px 7px 0 0 !important;
+	height: 220px;
+}
+
+.card>.top {
+	border-bottom: 1px solid rgba(0, 0, 0, .125);
+	height: 250px;
+}
+
+.card-body>.card-title {
+	margin-bottom: 20px;
+}
+
+.card>.bottom {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	cursor: pointer;
+	padding-left: 5%;
+	padding-right: 5%;
+}
+
+.card>.bottom>label {
+	font-weight: normal;
+	margin-top: 5px;
+}
+
+.card>.bottom:hover {
+	background-color: #0B57A2;
+	border-radius: 0 0 7px 7px;
+	color: white;
+}
+
+.card>.top>b {
+	font-size: 1.5em;
+}
+
+.card>.top>p {
+	margin-top: 10px;
 }

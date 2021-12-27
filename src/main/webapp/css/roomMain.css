@@ -11,13 +11,14 @@
 
 .room-main-wrap>.map-wrap {
 	width: 55%;
-	height: 600px;
+	height: 75%;
 	display: flex;
 	flex-direction: column;
 	padding-left: 1%;
 	position: absolute;
 	right: 0px;
 	padding-right: 5%;
+	overflow : hidden;
 }
 
 .room-main-wrap>.map-wrap>.map {

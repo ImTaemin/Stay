@@ -10,6 +10,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -243,7 +246,46 @@ public class ReservationController {
 		
 		List<ReservationDto> reserList = reservationService.selectReservation(myid);
 		
-		mview.addObject("reserList", reserList);
+		List<ReservationDto> nowList = new ArrayList<ReservationDto>();
+		List<ReservationDto> preList = new ArrayList<ReservationDto>();
+		
+		List<RoomDto> nowRoom = new ArrayList<RoomDto>();
+		List<RoomDto> preRoom = new ArrayList<RoomDto>();
+		
+		LocalDate today = LocalDate.now();
+		
+		for(ReservationDto reser : reserList) {
+			String startDate = reser.getStart_date();
+			
+			LocalDate start = LocalDate.parse(startDate, DateTimeFormatter.ISO_DATE);
+			
+			if(start.isAfter(today) || start.equals(today)) {
+				RoomDto roomDto = roomService.getRoom(reser.getRoom_no());
+				
+				String photos = roomDto.getPhotos();
+				String photo[] = photos.split(",");
+				
+				roomDto.setPhotos(photo[0]);
+				
+				nowList.add(reser);
+				nowRoom.add(roomDto);
+			} else if (start.isBefore(today)) {
+				RoomDto roomDto = roomService.getRoom(reser.getRoom_no());
+				
+				String photos = roomDto.getPhotos();
+				String photo[] = photos.split(",");
+				
+				roomDto.setPhotos(photo[0]);
+				
+				preList.add(reser);
+				preRoom.add(roomDto);
+			}
+		}
+		
+		mview.addObject("nowList", nowList);
+		mview.addObject("preList", preList);
+		mview.addObject("nowRoom", nowRoom);
+		mview.addObject("preRoom", preRoom);
 		
 		mview.setViewName("/reservation/reservationList");
 		
