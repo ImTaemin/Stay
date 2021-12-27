@@ -40,7 +40,12 @@
 	        </ul>
 	        <ul>
 	          <li>
-	            <a href="#">예약정보</a>	
+		           <c:if test="${sessionScope.mode=='guest'}">
+				      <a href="${root}/reser/reservationlist">예약정보</a>
+				   </c:if>
+			       <c:if test="${sessionScope.mode=='host'}">
+				     <a href="${root}/reser/reservationlist">예약정보</a>
+			       </c:if>
 	          </li>
 	          <li>
 		          <c:if test="${sessionScope.mode=='guest'}">

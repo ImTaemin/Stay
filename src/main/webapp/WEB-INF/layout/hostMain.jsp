@@ -9,102 +9,203 @@
 <meta charset="UTF-8">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<!-- css -->
-<link rel="stylesheet" href="../css/hostMain.css">
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<!-- js -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<!-- css -->
+<link rel="stylesheet" href="../css/hostMain.css">
+
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="container">
-		<!-- 선택된 상태의 숙소 정보 -->
+	<div class="hostMain">
 		<div class="hostMain-top">
-			<div class="hostMain-info">
-				<div class="hostMain-image"><img alt="" src="../photo/숙소1_1.jpg"></div>
-				<div class="hostMain-detail">
-					<div class="hostMain-name">스테이지</div>
-					<div class="hostMain-site">경기도 바꿔봐</div>
+			<!-- 선택된 상태의 숙소 카드 -->
+			<!-- <div class="tab-card">
+				<div class="tab-pane active" id="in" role="tabpanel" aria-labelledby="in-tab">
+						<c:forEach var="list" items="${inThreeList}">
+							<c:forEach var="room" items="${inThreeRoom}">
+								<c:if test="${list.room_no == room.no}">
+									<div class="hostMain-info">
+										<div class="hostMain-image"><img alt="" src="../../photo/roomPhoto/${room.photos}"></div>
+										<div class="hostMain-detail">
+											<div class="hostMain-name">${room.name}</div>
+											<div class="hostMain-site">${room.addr_load}</div>
+										</div>
+									</div>
+								</c:if>
+							</c:forEach>
+						</c:forEach>
 				</div>
-			</div>
-			<div class="hostMain-info">
-				<div class="hostMain-image"><img alt="" src="../photo/숙소1_1.jpg"></div>
-				<div class="hostMain-detail">
-					<div class="hostMain-name">행복주택</div>
-					<div class="hostMain-site">경기도 수원시</div>
+				<div class="tab-pane" id="out" role="tabpanel" aria-labelledby="out-tab">
+						<c:forEach var="list" items="${outThreeList}">
+							<c:forEach var="room" items="${outThreeRoom}">
+								<c:if test="${list.room_no == room.no}">
+									<div class="hostMain-info">
+										<div class="hostMain-image"><img alt="" src="../../photo/roomPhoto/${room.photos}"></div>
+										<div class="hostMain-detail">
+											<div class="hostMain-name">${room.name}</div>
+											<div class="hostMain-site">${room.addr_load}</div>
+										</div>
+									</div>
+								</c:if>
+							</c:forEach>
+						</c:forEach>
 				</div>
-			</div>
-			<div class="hostMain-info">
-				<div class="hostMain-image"><img alt="" src="../photo/숙소1_1.jpg"></div>
-				<div class="hostMain-detail">
-					<div class="hostMain-name">행복주택</div>
-					<div class="hostMain-site">경기도 수원시</div>
-				</div>
-			</div>
+				<div class="tab-pane" id="hos" role="tabpanel" aria-labelledby="hos-tab">
+						<c:forEach var="list" items="${hosThreeList}">
+							<c:forEach var="room" items="${hosThreeRoom}">
+								<c:if test="${list.room_no == room.no}">
+									<div class="hostMain-info">
+										<div class="hostMain-image"><img alt="" src="../../photo/roomPhoto/${room.photos}"></div>
+										<div class="hostMain-detail">
+											<div class="hostMain-name">${room.name}</div>
+											<div class="hostMain-site">${room.addr_load}</div>
+										</div>
+									</div>
+								</c:if>
+							</c:forEach>
+						</c:forEach> 
+				</div> --%>
+			<!-- </div> -->
 		</div>
 		
 		<div class="hostMain-middle">
+		
 			<!-- 오늘날짜 출력 -->
 			<c:set var="now" value="<%=new java.util.Date()%>" /> 
 			<fmt:formatDate value="${now}" pattern="yyyy년 MM월 dd일 (E)" var="today" />
 			<div class="hostMain-date">
 				${today }
 			</div>
-			<!-- 상태별 숙소 조회 selectBox -->
+			
+			<!-- 상태탭 -->
 			<div class="hostMain-option">
-				<select class="hostMain-state">
-					<option value="" selected="selected">체크인예정</option>
-					<option value="">체크아웃예정</option>
-					<option value="">현재호스팅</option>
-				</select>
+				<!-- 탭 목록 -->
+				<ul class="nav nav-tabs" id="myTab" role="tablist">
+					<!-- 예정 -->
+					<li class="nav-item" role="presentation">
+						<button class="nav-link active" id="in-tab" data-bs-toggle="tab" data-bs-target="#in" type="button" role="tab" aria-controls="in" aria-selected="true">체크인예정</button>
+					</li>
+					
+					<!-- 이전 -->
+					<li class="nav-item" role="presentation">
+						<button class="nav-link" id="out-tab" data-bs-toggle="tab" data-bs-target="#out" type="button" role="tab" aria-controls="out" aria-selected="false">체크아웃</button>
+					</li>
+					
+					<!-- 취소 -->
+					<li class="nav-item" role="presentation">
+						<button class="nav-link" id="hos-tab" data-bs-toggle="tab" data-bs-target="#hos" type="button" role="tab" aria-controls="hos" aria-selected="false">현재호스팅</button>
+					</li>
+				</ul>
 			</div>
 		</div>
 		
 		<div class="hostMain-bottom">
-			<div class="hostMain-reservation">
-				<div class="hostMain-number">예약번호 : 2112189098</div>
-				<div class="hostMain-content">
-					<div class="content-name">행복주택
-						<div class="content-site">경기도 수원시</div>
-					</div>
-					<div class="content-checkIn">체크인
-						<div class="content-inDate">2020년 12월 12일 (월)</div>
-					</div>
-					<div class="content-bar"></div>
-					<div class="content-checkOut">체크아웃
-						<div class="content-outDate">2020년 12월 13일 (화)</div>
-					</div>
-					<div class="content-guest">게스트
-						<div class="content-number">1명</div>
-					</div>
-					<div class="content-payment">결제세부정보
-						<div class="content-cost">103,000</div>
-					</div>
+			<div class="tab-content">
+				
+				<div class="tab-pane active" id="in" role="tabpanel" aria-labelledby="in-tab">
+					<c:forEach var="list" items="${inList}">
+						<c:forEach var="room" items="${inRoom}">
+							<c:if test="${list.room_no == room.no}">
+								<div class="hostMain-reservation" onclick="location.href='../room/content?no=${list.room_no}'">
+									<div class="hostMain-number">예약번호 : ${list.no}</div>
+									<div class="hostMain-content">
+										<div class="content-name">${room.name}
+											<div class="content-site">${room.addr_load}</div>
+										</div>
+										<div class="content-checkIn">체크인
+											<div class="content-inDate">${list.start_date}</div>
+										</div>
+										<div class="content-bar"></div>
+										<div class="content-checkOut">체크아웃
+											<div class="content-outDate">${list.end_date}</div>
+										</div>
+										<div class="content-guest">게스트
+											<div class="content-number">1명</div>
+										</div>
+										<div class="content-payment">결제세부정보
+											<div class="content-cost">
+												<fmt:formatNumber value="${list.price}" type="currency" currencySymbol="￦"/>
+											</div>
+										</div>
+									</div>
+								</div>
+							</c:if>
+						</c:forEach>
+					</c:forEach>
 				</div>
-			</div>
-			<div class="hostMain-reservation">
-				<div class="hostMain-number">예약번호 : 2112189098</div>
-				<div class="hostMain-content">
-					<div class="content-name">행복주택
-						<div class="content-site">경기도 수원시</div>
-					</div>
-					<div class="content-checkIn">체크인
-						<div class="content-inDate">2020년 12월 12일 (월)</div>
-					</div>
-					<div class="content-bar"></div>
-					<div class="content-checkOut">체크아웃
-						<div class="content-outDate">2020년 12월 13일 (화)</div>
-					</div>
-					<div class="content-guest">게스트
-						<div class="content-number">1명</div>
-					</div>
-					<div class="content-payment">결제세부정보
-						<div class="content-cost">103,000</div>
-					</div>
+			
+				<div class="tab-pane" id="out" role="tabpanel" aria-labelledby="out-tab">
+					<c:forEach var="list" items="${outList}">
+						<c:forEach var="room" items="${outRoom}">
+							<c:if test="${list.room_no == room.no}">
+								<div class="hostMain-reservation" onclick="location.href='../room/content?no=${list.room_no}'">
+									<div class="hostMain-number">예약번호 : ${list.no}</div>
+									<div class="hostMain-content">
+										<div class="content-name">${room.name}
+											<div class="content-site">${room.addr_load}</div>
+										</div>
+										<div class="content-checkIn">체크인
+											<div class="content-inDate">${list.start_date}</div>
+										</div>
+										<div class="content-bar"></div>
+										<div class="content-checkOut">체크아웃
+											<div class="content-outDate">${list.end_date}</div>
+										</div>
+										<div class="content-guest">게스트
+											<div class="content-number">1명</div>
+										</div>
+										<div class="content-payment">결제세부정보
+											<div class="content-cost">
+												<fmt:formatNumber value="${list.price}" type="currency" currencySymbol="￦"/>
+											</div>
+										</div>
+									</div>
+								</div>
+							</c:if>
+						</c:forEach>
+					</c:forEach>
 				</div>
+				
+				<div class="tab-pane" id="hos" role="tabpanel" aria-labelledby="hos-tab">
+					<c:forEach var="list" items="${hosList}">
+						<c:forEach var="room" items="${hosRoom}">
+							<c:if test="${list.room_no == room.no}">
+								<div class="hostMain-reservation" onclick="location.href='../room/content?no=${list.room_no}'">
+									<div class="hostMain-number">예약번호 : ${list.no}</div>
+									<div class="hostMain-content">
+										<div class="content-name">${room.name}
+											<div class="content-site">${room.addr_load}</div>
+										</div>
+										<div class="content-checkIn">체크인
+											<div class="content-inDate">${list.start_date}</div>
+										</div>
+										<div class="content-bar"></div>
+										<div class="content-checkOut">체크아웃
+											<div class="content-outDate">${list.end_date}</div>
+										</div>
+										<div class="content-guest">게스트
+											<div class="content-number">1명</div>
+										</div>
+										<div class="content-payment">결제세부정보
+											<div class="content-cost">
+												<fmt:formatNumber value="${list.price}" type="currency" currencySymbol="￦"/>
+											</div>
+										</div>
+									</div>
+								</div>
+							</c:if>
+						</c:forEach>
+					</c:forEach>
+				</div>
+				
 			</div>
 		</div>
-		
 	</div>
 </body>
 </html>

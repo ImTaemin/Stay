@@ -20,4 +20,12 @@ public class ReservationService {
 	public List<ReservationDto> selectReservation(String guestId) {
 		return mapper.selectReservation(guestId);
 	}
+	
+	public List<ReservationDto> selectHostReservation(String hostId) {
+		return mapper.selectHostReservation(hostId);
+	}
+	
+	public List<ReservationDto> selectHostThreeReservation(String hostId){
+		return mapper.selectHostThreeReservation(hostId);
+	}
 }

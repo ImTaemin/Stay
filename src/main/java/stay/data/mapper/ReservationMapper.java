@@ -10,4 +10,6 @@ import stay.data.dto.ReservationDto;
 public interface ReservationMapper {
 	public void insertReservation(ReservationDto reDto);
 	public List<ReservationDto> selectReservation(String guestId);
+	public List<ReservationDto> selectHostReservation(String hostId);
+	public List<ReservationDto> selectHostThreeReservation(String hostId);
 }
