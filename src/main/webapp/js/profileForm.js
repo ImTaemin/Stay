@@ -1,4 +1,4 @@
-
+/*
   const open = () => {
     document.querySelector(".modal").classList.remove("hidden");
   }
@@ -10,7 +10,7 @@
   document.querySelector(".openBtn").addEventListener("click", open);
   document.querySelector(".closeBtn").addEventListener("click", close);
   document.querySelector(".bg").addEventListener("click", close);
-
+*/
 
 //수정 다이얼로그 띄우기
 /*
