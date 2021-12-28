@@ -29,12 +29,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import stay.data.dto.MemberDto;
 import stay.data.dto.PayCardDto;
 import stay.data.dto.ReservationDto;
 import stay.data.dto.RoomDto;
 import stay.data.service.CostService;
 import stay.data.service.GuestCommentService;
 import stay.data.service.JoinGuestService;
+import stay.data.service.MemberService;
 import stay.data.service.ReservationService;
 import stay.data.service.RoomService;
 
@@ -54,6 +56,9 @@ public class ReservationController {
 	
 	@Autowired
 	JoinGuestService joinGuestService;
+	
+	@Autowired
+	MemberService memberService;
 	
 	@PostMapping("/pay/paymentform")
 	public ModelAndView paymentForm(
@@ -322,6 +327,19 @@ public class ReservationController {
 		// 공동 게스트 출력
 		int joinGuestNum = joinGuestService.countJoinGuest(roomNo) + 1;
 		
+		// 호스트 정보 가져오기
+		String hostId = reserDto.getHost_id();
+		MemberDto hostDto = memberService.getMember(hostId);
+		
+		// 날짜 비교
+		LocalDate today = LocalDate.now();
+		LocalDate startLocal = LocalDate.parse(startDate, DateTimeFormatter.ISO_DATE);
+		Boolean preCheck = false;
+		
+		if (startLocal.isBefore(today)) {
+			preCheck = true;
+		}
+		
 		mview.addObject("reserDto", reserDto);
 		mview.addObject("roomDto", roomDto);
 		mview.addObject("start", start);
@@ -329,6 +347,8 @@ public class ReservationController {
 		mview.addObject("startDayWeek", startDayWeek);
 		mview.addObject("endDayWeek", endDayWeek);
 		mview.addObject("joinGuestNum", joinGuestNum);
+		mview.addObject("hostDto", hostDto);
+		mview.addObject("preCheck", preCheck);
 		
 		mview.setViewName("/reservation/reservationDetail");
 		

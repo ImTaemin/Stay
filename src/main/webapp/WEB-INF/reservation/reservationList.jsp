@@ -63,6 +63,7 @@
 								<label class="card-link">예약 정보 더보기</label>
 								<i class="bi bi-chevron-right"></i>
 							</div>
+							
 							<!-- form -->
 						</div>
 					</c:if>
@@ -75,7 +76,7 @@
 			<c:forEach var="list" items="${preList}">
 				<c:forEach var="room" items="${preRoom}">
 					<c:if test="${list.room_no == room.no}">
-						<form action="reservation" method="post" class="card" id="frm">
+						<div class="card">
 							<img class="card-img-top" src="../../photo/roomPhoto/${room.photos}">
 							
 							<div class="card-body top">
@@ -88,11 +89,13 @@
 								</p>
 							</div>
 							
-							<div class="card-body bottom">
+							<div class="card-body bottom" list-no="${list.no}" onclick="btnClick(this)">
 								<label class="card-link">예약 정보 더보기</label>
 								<i class="bi bi-chevron-right"></i>
 							</div>
-						</form>
+							
+							<!-- form -->
+						</div>
 					</c:if>
 				</c:forEach>
 			</c:forEach>

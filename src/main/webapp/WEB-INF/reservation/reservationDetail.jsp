@@ -78,46 +78,76 @@
 						</div>
 					</div>
 					
-					<div class="price-guest">
-						<!-- 가격 -->
-						<div class="price-wrap">
-							<div class="price-title">
-								<label>결제 세부 정보</label>
-							</div>
-							
-							<hr>
-							
-							<div class="price-de">
-								<div class="price">
-									<fmt:formatNumber value="${reserDto.price}" type="currency"/>
-								</div>
-								
-								<div class="receipt">
-									<span>영수증 보기</span>
-									<span class="bi bi-receipt-cutoff"></span>
-								</div>
-							</div>
+					<!-- 가격 -->
+					<div class="price-wrap">
+						<div class="price-title">
+							<label>결제 세부 정보</label>
 						</div>
 						
-						<!-- 공동 게스트 -->
-						<div class="guest-wrap">
-							<div class="guest-title">
-								<label>공동 게스트</label>
+						<hr>
+						
+						<div class="price-de">
+							<div class="price">
+								<fmt:formatNumber value="${reserDto.price}" type="currency"/>
 							</div>
 							
-							<hr>
-							
-							<div class="guest">
-								<span>${joinGuestNum}명</span>
+							<div class="receipt">
+								<span>영수증 보기</span>
+								<span class="bi bi-receipt-cutoff"></span>
 							</div>
 						</div>
 					</div>
 					
-					<div>
-						<button class="btn btn-danger">예약 취소</button>
+					<!-- 공동 게스트 -->
+					<div class="guest-wrap">
+						<div class="guest-title">
+							<label>공동 게스트</label>
+						</div>
+						
+						<hr>
+						
+						<div class="guest">
+							<span>${joinGuestNum}명</span>
+							
+							<c:if test="${preCheck == false}">
+								<span class="bi bi-plus-circle"></span>
+							</c:if>
+							
+							<c:if test="${preCheck == true}">
+								<span class="bi bi-three-dots"></span>
+							</c:if>
+						</div>
 					</div>
 				</div>
 			</div>
+			
+			<hr>
+			
+			<!-- 호스트 정보 -->
+			<div class="host-wrap">
+				<div class="photo">
+					<img alt="" src="../photo/memberPhoto/${hostDto.photo}">
+				</div>
+				
+				<div class="content">
+					<label class="name">호스트 : ${hostDto.id} 님</label>
+					<br>
+					<label class="email">${hostDto.e_mail}</label>
+				</div>
+				
+				<div class="message">
+					<button type="button" class="btn btn-default" id="message-btn">호스트에게 연락하기</button>
+				</div>
+			</div>
+			
+			<c:if test="${preCheck == false}">
+				<hr>
+				
+				<!-- 취소 버튼 -->
+				<div class="btn-wrap">
+					<button class="btn btn-danger" id="can-reser">예약 취소</button>
+				</div>
+			</c:if>
 		</div>
 	</div>
 	

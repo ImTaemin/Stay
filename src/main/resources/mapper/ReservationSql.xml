@@ -18,7 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<select id="selectGuestReservation" parameterType="String" resultType="redto">
-		select * from reservation where guest_id = #{guest_id}
+		select * from reservation where guest_id = #{guest_id} order by start_date
 	</select>
 	
 	<select id="selectHostReservation" parameterType="String" resultType="redto">
