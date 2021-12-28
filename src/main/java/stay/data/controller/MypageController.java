@@ -53,7 +53,7 @@ public class MypageController {
 		mapper.updateMember(dto);
 
 		//메인으로
-		return "redirect:/member/mypageForm";
+		return "redirect:/mypage/mypageform";
 	}
 
 

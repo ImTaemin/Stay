@@ -15,25 +15,20 @@
 </head>
 <body>
 <div class="cardbtn">
-     <!-- <h4>프로필 이미지
-     <input type="file" name="photo1" id="photo1" style="display: none;" required="required" multiple="multiple">&nbsp;&nbsp;
-     <span class="glyphicon glyphicon-user" style="cursor: pointer;"></span></h4> -->
-		
-		<%-- <div class="photo">
+		<div class="photo">
 			<img src="${root}/photo/memberPhoto/${memberDto.photo}">
-		</div> --%>
+		</div>
 
 		 <!-- 이미지 -->
-	   <!-- <div class="pfimg-div">
+	   <div class="pfimg-div">
     		<label for="photo">회원프로필 이미지</label>
     		<label for="photo"></label>
     		<div class="pfinput">
     			<input type="file" required id="photo" name="photo" accept=".gif, .jpg, .png" style="width: 200px; padding-top: 6px;" maxlength="5">
-    			<span class="glyphicon glyphicon-camera photo" style="font-size: 20pt; cursor: pointer;"></span>
     		</div>
     		
     		<div id="pfmainimg"></div>
-    	</div> -->
+    	</div>
 
 
 		<div class="photo">
@@ -85,9 +80,9 @@
   	</div>
       
   	<label for="name">이름</label>
-  	  <input type="text" value="${memberDto.name}">
+  	  <input type="text" name="name" value="${memberDto.name}">
   	<label for="brith">생년월일</label>
-  	  <input type="date" value="${memberDto.birth}">
+  	  <input type="date" name="birth" value="${memberDto.birth}">
   	<label for="addr_load">주소</label>
   	  <input type="text" name="addr_load" id="sample4_roadAddress" onclick="sample4_execDaumPostcode()" placeholder="도로명주소" readonly="readonly" style="margin-bottom: 10px;" value="${memberDto.addr_load}">
 	  <input type="hidden" id="sample4_jibunAddress" placeholder="지번주소" size="60">
@@ -105,9 +100,9 @@
   	  <input type="text" id="addr2" name="addr2" value="${memberDto.addr_detail}"> --%>
   	  
   	<label for="hp">핸드폰 번호</label>
-  	  <input type="tel" id="hp" required="required" value="${memberDto.hp}">
-  	<label for="email">이메일</label>
-  	   <input type="email" id="email" value="${memberDto.e_mail}"> 
+  	  <input type="tel" name="hp" id="hp" required="required" value="${memberDto.hp}">
+  	<label for="e_mail">이메일</label>
+  	   <input type="email" name="e_mail" id="e_mail" value="${memberDto.e_mail}"> 
   	 <!-- <input type="text" name="email1" class="form-control"
   	  		required="required" style="width: 80px;" value="${email1}">
 		<b>@</b>
