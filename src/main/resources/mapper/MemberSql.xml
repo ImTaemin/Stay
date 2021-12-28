@@ -23,7 +23,11 @@
 	</select>
 	
 	<update id="updateMember" parameterType="mdto">
-		update member set pass=#{pass}, name=#{name}, hp=#{hp}, addr_load=#{addr_load}, addr_detail=#{addr_detail}, photo=#{photo}, e_mail=#{e_mail} where id=#{id}
+		update member set pass=#{pass}, name=#{name}, hp=#{hp}, addr_load=#{addr_load}, addr_detail=#{addr_detail}, e_mail=#{e_mail}
+		<if test="photo != null">
+			, photo=#{photo}
+		</if>
+		where id=#{id}
 	</update>
 	
 	<update id="updateImg" parameterType="mdto">

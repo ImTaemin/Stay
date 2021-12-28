@@ -1,5 +1,8 @@
 package stay.data.controller;
 
+import java.io.File;
+import java.io.IOException;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,21 +44,113 @@ public class MypageController {
 		return mview;
 	}
 	
+	/*
 	@PostMapping("/update")
-	public String memberUpdate(@ModelAttribute MemberDto dto, HttpSession session) {
+	public String memberUpdate(@ModelAttribute MemberDto dto,
+			@RequestParam String id,
+			HttpSession session,
+			@RequestParam ArrayList<MultipartFile> upload) {
 
-		String loginok = (String)session.getAttribute("loginok");
-		if(loginok==null) {
+		String loginok = (String) session.getAttribute("loginok");
+		if (loginok == null) {
+			return "/member/login";
+		}
+
+		// 업로드할 폴더 지정
+		String path = session.getServletContext().getRealPath("/photo/memberPhoto");
+		System.out.println(path);
+		String photo = "";
+
+		if (upload.get(0).getOriginalFilename().equals("")) {
+			photo = null;
+		} else {
+			String photos = memberService.getMember(id).getPhoto();
+			String photoArray[] = photos.split(",");
+
+			for (int i = 0; i < photoArray.length; i++) {
+				File file = new File(path + "/" + photoArray[i]);
+				file.delete();
+			}
+
+			for (MultipartFile f : upload) {
+				String fName = f.getOriginalFilename();
+				photo += fName + ",";
+
+				// 업로드
+				try {
+					f.transferTo(new File(path + "\\" + fName));
+				} catch (IllegalStateException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			photo = photo.substring(0, photo.length() - 1);
+		}
+
+		// 엔터키 입력
+		dto.setPhoto(photo);
+
+		memberService.updateMember(dto);
+		// update 호출
+		mapper.updateMember(dto);
+
+		// 메인으로
+		return "redirect:/mypage/mypageform";
+		
+	
+		
+		
+		 * String path = session.getServletContext().getRealPath("/photo/memberPhoto");
+		 * System.out.println(path); if(upload.get(0).getOriginalFilename().equals(""))
+		 * { photo = null; } else { String photo =
+		 * memberService.getMember(id).getPhoto(); dto.setPhoto(photo);
+		 * 
+		 * try { f.transferTo(new File(path + "\\" + fName)); } catch
+		 * (IllegalStateException | IOException e) { // TODO Auto-generated catch block
+		 * e.printStackTrace(); } } service.updateBoard(dto); return
+		 * "redirect:content?num="+dto.getNum()+"&currentPage="+currentPage;
+		 
+	}*/
+	
+	@PostMapping("/update")
+	public String memberUpdate(@ModelAttribute MemberDto dto,
+			HttpSession session) {
+
+		String loginok = (String) session.getAttribute("loginok");
+		if (loginok == null) {
 			return "/member/login";
 		}
 		
-		//update 호출
+		
+		String myid = (String)session.getAttribute("myid");
+		
+		dto = memberService.getMember(myid);
+		
+		dto.setId(myid);
+		
+		String path = session.getServletContext().getRealPath("/photo/memberPhoto");
+		if(dto.getUpload().getOriginalFilename().equals("")) {
+			dto.setPhoto("no");
+		} else {
+			String photo = dto.getUpload().getOriginalFilename();
+			dto.setPhoto(photo);
+			
+			try {
+				dto.getUpload().transferTo(new File(path+"\\"+photo));
+			} catch (IllegalStateException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		memberService.updateMember(dto);
+		// update 호출
 		mapper.updateMember(dto);
 
-		//메인으로
+		// 메인으로
 		return "redirect:/mypage/mypageform";
 	}
-
 
 
 	
