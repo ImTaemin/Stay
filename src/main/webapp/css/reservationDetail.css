@@ -4,12 +4,205 @@
 	padding: 0 5%;
 }
 
+.reser-detail-wrap hr {
+	width: 100%;
+	margin: 10px 0;
+}
+
 .room-detail>.title {
 	font-size: 2.5em;
 	color: #0B57A2;
+}
+
+.room-detail>.addr {
+	display: flex;
+	justify-content: space-between;
 }
 
 .room-detail>.addr>label {
 	margin-top: 10px;
 	font-size: 1.2em;
 }
+
+.room-detail>.photo-reser {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 40px;
+	margin-bottom: 30px;
+}
+
+/* 이미지 슬라이드 */
+#slideShow {
+	width: 55%;
+	height: 430px;
+	position: relative;
+	overflow: hidden;
+}
+
+.slides {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 2500px; /* 슬라이드할 사진과 마진 총 넓이 */
+	transition: left 0.5s ease-out; /*ease-out: 처음에는 느렸다가 점점 빨라짐*/
+}
+
+/* 첫 번째 슬라이드 가운데에 정렬하기위해 첫번째 슬라이드만 margin-left조정 */
+.slides li:first-child {
+	margin-left: 0px;
+}
+
+/* 슬라이드들 옆으로 정렬 */
+.slides li:not(:last-child) {
+	float: left;
+	margin-right: 100px;
+}
+
+.slides li {
+	float: left;
+	list-style: none;
+}
+
+.controller span {
+	position: absolute;
+	background-color: transparent;
+	color: #3d2a26;
+	text-align: center;
+	border-radius: 50%;
+	padding: 10px 20px;
+	top: 50%;
+	font-size: 1.3em;
+	cursor: pointer;
+}
+
+/* 이전, 다음 화살표에 마우스 커서가 올라가 있을때 */
+.controller span:hover {
+	background-color: rgb(169, 169, 169, 0.5);
+}
+
+.prev {
+	left: 10px;
+}
+
+/* 이전 화살표에 마우스 커서가 올라가 있을때 이전 화살표가 살짝 왼쪽으로 이동하는 효과*/
+.prev:hover {
+	transform: translateX(-10px);
+}
+
+.next {
+	right: 10px;
+}
+
+/* 다음 화살표에 마우스 커서가 올라가 있을때 이전 화살표가 살짝 오른쪽으로 이동하는 효과*/
+.next:hover {
+	transform: translateX(10px);
+}
+
+.slides>li>img {
+	width: 600px;
+	height: 430px;
+	border-radius: 7px;
+}
+
+.photo-reser>.reser {
+	width: 44.5%;
+	height: 430px;
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
+	border-radius: 7px;
+}
+
+.reser>.check-wrap {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.check-wrap>.check-in {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	width: 48.5%;
+	border: 2px solid #0B57A2;
+	border-radius: 7px;
+	padding: 3%;
+}
+
+.check-wrap>.check-out {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	width: 48.5%;
+	border: 2px solid #0B57A2;
+	border-radius: 7px;
+	padding: 3%;
+}
+
+.check-title, .date {
+	display: flex;
+	justify-content: center;
+	font-size: 1.5em;
+}
+
+.reser>.price-guest {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.price-guest>.price-wrap {
+	display: flex;
+	flex-direction: column;
+	width: 48.5%;
+	border: 2px solid #0B57A2;
+	border-radius: 7px;
+	padding: 3%;
+}
+
+.price-wrap>.price-title {
+	display: flex;
+	justify-content: center;
+	font-size: 1.5em;
+}
+
+.price-wrap>.price-de {
+	display: flex;
+	justify-content: space-between;
+	flex-direction: row;
+}
+
+.price-wrap>.price-de>.price {
+	width: 60%;
+	font-size: 1.6em;
+}
+
+/* .price-wrap>.price-de>.receipt { */
+/* 	width: 40%; */
+/* 	display: flex; */
+/* 	justify-content: flex-end; */
+/* 	align-items: center; */
+/* } */
+
+/* .receipt>span { */
+/* 	margin-right: 10px; */
+/* 	font-size: 1.2em; */
+/* } */
+
+/* .receipt>.bi { */
+/* 	margin-top: 2px; */
+/* 	cursor: pointer; */
+/* } */
+
+.price-guest>.guest-wrap {
+	display: flex;
+	flex-direction: column;
+	width: 48.5%;
+	border: 2px solid #0B57A2;
+	border-radius: 7px;
+	padding: 5%;
+}
+
+/* .guest-wrap>.guest-title { */
+/* 	font-size: 1.5em; */
+/* } */

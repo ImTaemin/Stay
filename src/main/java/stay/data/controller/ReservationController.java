@@ -34,6 +34,7 @@ import stay.data.dto.ReservationDto;
 import stay.data.dto.RoomDto;
 import stay.data.service.CostService;
 import stay.data.service.GuestCommentService;
+import stay.data.service.JoinGuestService;
 import stay.data.service.ReservationService;
 import stay.data.service.RoomService;
 
@@ -50,6 +51,9 @@ public class ReservationController {
 	
 	@Autowired
 	ReservationService reservationService;
+	
+	@Autowired
+	JoinGuestService joinGuestService;
 	
 	@PostMapping("/pay/paymentform")
 	public ModelAndView paymentForm(
@@ -292,22 +296,80 @@ public class ReservationController {
 		return mview;
 	}
 	
-	@GetMapping("/reser/reservation")
-	public ModelAndView reservation(@RequestParam String reserNo, HttpSession session) {
+	@PostMapping("/reser/reservation")
+	public ModelAndView reservation(@RequestParam String reserNo, HttpSession session) throws Exception {
 		ModelAndView mview = new ModelAndView();
 		
 		String myid = (String)session.getAttribute("myid");
 		
 		ReservationDto reserDto = reservationService.selectGuestOneReservation(reserNo, myid);
 		
-		String roomNo = reserDto.getNo();
+		// 숙소 정보 가져오기
+		String roomNo = reserDto.getRoom_no();
 		RoomDto roomDto = roomService.getRoom(roomNo);
+		
+		// 날짜 split
+		String startDate = reserDto.getStart_date();
+		String start[] = startDate.split("-");
+		
+		String endDate = reserDto.getEnd_date();
+		String end[] = endDate.split("-");
+		
+		// 요일 구하기
+		String startDayWeek = getDateDay(startDate); 
+		String endDayWeek = getDateDay(endDate);
+		
+		// 공동 게스트 출력
+		int joinGuestNum = joinGuestService.countJoinGuest(roomNo) + 1;
 		
 		mview.addObject("reserDto", reserDto);
 		mview.addObject("roomDto", roomDto);
+		mview.addObject("start", start);
+		mview.addObject("end", end);
+		mview.addObject("startDayWeek", startDayWeek);
+		mview.addObject("endDayWeek", endDayWeek);
+		mview.addObject("joinGuestNum", joinGuestNum);
 		
 		mview.setViewName("/reservation/reservationDetail");
 		
 		return mview;
+	}
+	
+	public String getDateDay(String date) throws Exception {
+		String day = "";
+
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date nDate = dateFormat.parse(date);
+
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(nDate);
+
+		int dayNum = cal.get(Calendar.DAY_OF_WEEK);
+
+		switch (dayNum) {
+			case 1:
+				day = "일";
+				break;
+			case 2:
+				day = "월";
+				break;
+			case 3:
+				day = "화";
+				break;
+			case 4:
+				day = "수";
+				break;
+			case 5:
+				day = "목";
+				break;
+			case 6:
+				day = "금";
+				break;
+			case 7:
+				day = "토";
+				break;
+		}
+
+		return day;
 	}
 }

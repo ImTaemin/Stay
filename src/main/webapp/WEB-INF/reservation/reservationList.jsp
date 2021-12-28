@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <!-- js -->
+<script src="${root}/js/reservationList.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <title>Insert title here</title>
 </head>
@@ -58,25 +59,23 @@
 								</p>
 							</div>
 							
-							<!-- hidden -->
-							<input type="hidden" name="reserNo" value="=${list.no}">
-							
-							<div class="card-body bottom" onclick="location.href='/reser/reservation?reserNo=${list.no}'">
+							<div class="card-body bottom" list-no="${list.no}" onclick="btnClick(this)">
 								<label class="card-link">예약 정보 더보기</label>
 								<i class="bi bi-chevron-right"></i>
 							</div>
+							<!-- form -->
 						</div>
 					</c:if>
 				</c:forEach>
 			</c:forEach>
 		</div>
-		
+							
 		<!-- 이전 -->
 		<div class="tab-pane" id="pre" role="tabpanel" aria-labelledby="pre-tab">
 			<c:forEach var="list" items="${preList}">
 				<c:forEach var="room" items="${preRoom}">
 					<c:if test="${list.room_no == room.no}">
-						<div class="card">
+						<form action="reservation" method="post" class="card" id="frm">
 							<img class="card-img-top" src="../../photo/roomPhoto/${room.photos}">
 							
 							<div class="card-body top">
@@ -90,10 +89,10 @@
 							</div>
 							
 							<div class="card-body bottom">
-								<label class="card-link" onclick="location.href=''">예약 정보 더보기</label>
+								<label class="card-link">예약 정보 더보기</label>
 								<i class="bi bi-chevron-right"></i>
 							</div>
-						</div>
+						</form>
 					</c:if>
 				</c:forEach>
 			</c:forEach>

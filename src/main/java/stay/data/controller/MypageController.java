@@ -124,30 +124,26 @@ public class MypageController {
 		
 		//만료됐을 수도 있으므로 다시 loginok 얻음
 		String loginok = (String) session.getAttribute("loginok");
-		
 		String myid = (String)session.getAttribute("myid");
 		
 		//업로드할 폴더 지정
 		String path = session.getServletContext().getRealPath("/photo/memberPhoto");
 		System.out.println(path);
 		
-		String photo = "";
-		
 		if(upload.getOriginalFilename().equals("")) {
-			photo=null;
+			dto.setPhoto(null);
 		} else {
-			photo = memberService.getMember(myid).getPhoto();
+			String fname = upload.getOriginalFilename();
+			dto.setPhoto(fname);
 			
 			try {
-				upload.transferTo(new File(path+"\\"+ photo));
+				upload.transferTo(new File(path+"\\"+ fname));
 			} catch (IllegalStateException | IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		
-		dto.setPhoto(photo);
-
 		memberService.updateMember(dto);
 
 		// 메인으로
