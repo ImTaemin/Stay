@@ -14,76 +14,53 @@
 <title>프로필 화면</title>
 </head>
 <body>
-
-<div class="container">
-  <h2>Modal Example</h2>
-  <!-- Trigger the modal with a button -->
-  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
-
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modal Header</h4>
-        </div>
-        <div class="modal-body">
-          <p>Some text in the modal.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-      
-    </div>
-  </div>
-  
-</div>
-
 	<div class="profile-main">
 		<div class="profile-top">
 			<div class="profile-first">
-     			<div class="photo">
+				<div class="photo">
 					<img alt="" src="${root}/photo/memberPhoto/${memberDto.photo}">
 				</div>
 				<button class="openBtn">신고하기</button>
 
-				<div class="modal hidden">
+				<!-- <div class="modal hidden"> -->
+				<div class="modal">
 					<div class="bg"></div>
 					<div class="modalBox">
 						<p></p>
 						<label for="id">신고 할 아이디&nbsp;</label>
-  	 						<input type="text" required="required" value="${sessionScope.myid }"><br><br>
-  	 					<label for="content">&nbsp;&nbsp;&nbsp;&nbsp;신고 사유&nbsp;&nbsp;&nbsp;&nbsp;</label>
-  	 						<input type="text" required="required">
+						<input type="text" required="required" value="${sessionScope.myid }"><br><br>
+						<label for="content">&nbsp;&nbsp;&nbsp;&nbsp;신고사유&nbsp;&nbsp;&nbsp;&nbsp;</label>
+						<input type="text" required="required">
 						<button class="closeBtn">✖</button>
 					</div>
 				</div>
-				
 			</div>
+
 			<div class="profile-second">
 				<c:if test="${sessionScope.loginok!=null }">
-				<h2><b>${sessionScope.myid } 님의<br><br>프로필입니다.😊</b></h2>
+					<h2>
+						<b>${sessionScope.myid } 님의<br>
+						<br>프로필입니다.😊
+						</b>
+					</h2>
 				</c:if>
 			</div>
+			
 			<div class="profile-third">
 				<div class="profile-like">
 					<%-- <span class="glyphicon glyphicon-heart likes"
 						style="width: 30px; cursor: pointer; color: red" num="${num}"></span> --%>
 					<span class="glyphicon glyphicon-heart likes" onclick="likeClick(this)"
 						style="width: 30px; cursor: pointer; color: red" user_id="${memberDto.id}"></span>
-					<span>LIKE &nbsp; ${memberDto.likes}</span>
+					<span>LIKE &nbsp;${memberDto.likes}</span>
 				</div>
 				<div class="profile-message">
-					<span class="glyphicon glyphicon-envelope message"
-						style="width: 30px; cursor: pointer;"></span>
-					<span>MESSAGE ${message}</span>
+					<span class="glyphicon glyphicon-envelope message" style="width: 30px; cursor: pointer;"></span>
+					<span>MESSAGE &nbsp;${message}</span>
 				</div>
 			</div>
 		</div>
+		
 		<div class="profile-review">
 			<h2>숙소 후기</h2>
 		</div>
