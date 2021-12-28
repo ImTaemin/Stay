@@ -5,7 +5,8 @@ create table member(
 	name varchar(20) not null,
 	birth date not null,
 	hp varchar(20) not null,
-	addr varchar(100) not null,
+	addr_load varchar(100) not null,
+	addr_detail varchar(100) not null,
 	photo varchar(100),
 	likes int default 0,
 	e_mail varchar(100) not null
@@ -76,9 +77,10 @@ create table receive_account(
 
 #예약
 create table reservation(
-	no int not null auto_increment primary key,
+	no varchar(20) not null primary key,
 	guest_id varchar(20) not null,
 	host_id varchar(20) not null,
+	room_no int not null,
 	start_date date not null,
 	end_date date not null,
 	price int not null,
@@ -88,6 +90,7 @@ create table reservation(
 	pay_date date not null,
 	foreign key (guest_id) references member(id) on update cascade,
 	foreign key (host_id) references member(id) on update cascade,
+	foreign key (room_no) references room(no) on delete cascade,
 	foreign key (card_num) references pay_card(num),
 	foreign key (account_num) references receive_account(account)
 );
@@ -95,14 +98,14 @@ create table reservation(
 #예약영수증
 create table receipt(
 	id int auto_increment not null,
-	no int not null,
+	no varchar(20) not null,
 	primary key (id, no),
 	foreign key (no) references reservation(no)
 );
 
 #예약취소
 create table can_reservation(
-	no int primary key not null,
+	no varchar(20) primary key not null,
 	can_date date not null,
 	refund int not null,
 	refund_check varchar(20) default "ing",
@@ -112,14 +115,14 @@ create table can_reservation(
 #예약취소영수증
 create table can_receipt(
 	id int auto_increment not null,
-	no int not null,
+	no varchar(20) not null,
 	primary key (id, no),
 	foreign key (no) references can_reservation(no)
 );
 
 #공동게스트
 create table join_guest(
-	no int not null,
+	no varchar(20) not null,
 	id varchar(20) not null,
 	primary key (no, id),
 	foreign key (no) references reservation(no),
@@ -128,7 +131,7 @@ create table join_guest(
 
 #게스트댓글
 create table guest_comment(
-	no int not null,
+	no varchar(20) not null,
 	guest_id varchar(20) not null,
 	content varchar(500) not null,
 	rating float not null,
@@ -140,7 +143,7 @@ create table guest_comment(
 
 #호스트답글
 create table host_comment(
-	no int not null,
+	no varchar(20) not null,
 	guest_id varchar(20) not null,
 	host_id varchar(20) not null,
 	content varchar(500) not null,
@@ -152,19 +155,18 @@ create table host_comment(
 
 #위시리스트
 create table wishlist(
+	no int auto_increment not null,
 	room_no int not null,
 	guest_id varchar(20) not null,
-	primary key (room_no, guest_id),
+	primary key (no),
 	foreign key (room_no) references room(no),
 	foreign key (guest_id) references member(id)
 );
 
 #채팅
 create table chat(
-	id int auto_increment primary key,
+	id varchar(255) primary key,
 	msg varchar(5000),
-	sender varchar(20),
-	receiver varchar(20),
-	foreign key (sender) references member(id),
-	foreign key (receiver) references member(id)
+	sender varchar(50),
+	receiver varchar(50)
 );

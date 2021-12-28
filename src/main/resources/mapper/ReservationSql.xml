@@ -5,7 +5,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="stay.data.mapper.ReservationMapper">
 	<insert id="insertReservation" parameterType="redto">
-		insert into reservation values (null, #{guest_id}, #{host_id}, #{start_date}, #{end_date}, #{price}, #{pay_method}
+		insert into reservation values (
+		(SELECT distinct CONCAT(date_format(now(),'%y%m%d'), (SELECT LPAD(COUNT(*)+1,5,'0') from reservation a)) from reservation b),
+		#{guest_id}, #{host_id}, #{start_date}, #{end_date}, #{price}, #{pay_method}
 		<if test="card_num != null">
 			, #{card_num}
 		</if>
