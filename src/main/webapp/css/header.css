@@ -7,13 +7,13 @@
 }  
 
 #main-menu{
-	font-size: 45px;
+	font-size: 30px;
 	cursor: pointer;
 }
 
   .dropdown {
     position: relative;
-    width: 30%;
+    width: 45%;
   }
   
   .dropdown-button {
@@ -129,4 +129,14 @@
 	font-weight: bold;
 }
 
+.main-logo {
+	width: 10%;
+}
 
+.main-logo>a>img {
+	width: 100%;
+}
+
+.main-buttons {
+	width: 45%;
+}

@@ -17,13 +17,12 @@ html,body{
 .main-layout > .header {
 	font-family: 'WandocleanseaR';
 	width: 100%;
-	padding-top: 1.5%;
+	padding-top: 0.5%;
 	padding-left: 5%;
 	padding-right: 5%;
 	position: sticky;
 	left:0px;
     top:0px;
-    z-index: 1;
     background: white;
     z-index: 10;
 }  
