@@ -28,25 +28,25 @@
 		<!-- 채팅화면 -->
 		<div class="chatting">
 			<div class="profile">
-				<img src="../../photo/profile.png"> ${sessionScope.myid }
+				<img src="../../photo/profile.png">
 			</div>
 
 			<div class="chat-section">
 				<!-- 받은메시지 -->
-				<div class="receive-msg-box">
+				<!-- <div class="receive-msg-box">
 					<div class="receive-msg">
 						<p>수현짱</p>
 						<span class="time_date"> 11:18 | Today</span>
 					</div>
-				</div>
+				</div> -->
 
 				<!-- 보낸메시지 -->
-				<div class="send-msg-box" >
+				<!-- <div class="send-msg-box" >
 					<div class="send_msg">
 						<p>태민짱</p>
 						<span class="time_date" > 11:18 | Today</span>
 					</div>
-				</div>
+				</div> -->
 			</div>
 
 			<!-- 메시지 입력 -->
@@ -62,22 +62,79 @@
 
 	<script type="text/javascript">
 		$(function(){
-			//채팅방
-			var eventSource = new EventSource("http://localhost:8080/chat/stay");
-			eventSource.onmessage = (event) => {
-				var data = JSON.parse(event.data);
-				initRooms(data);//data.msg로 찾을 수 있음
+			//채팅방 요청
+			var eventSourceRoom = new EventSource("http://localhost:8080/chat/stay");
+			
+			eventSourceRoom.onmessage = (event) => {
+				var dataRooms = JSON.parse(event.data);
+
+				createRooms(dataRooms);//dataRooms.msg로 찾을 수 있음
 			};
-		
-			function initRooms(rooms){
+			
+			//채팅방 생성
+			function createRooms(rooms){
+				'use strict';
 				var s = `
-				<div class="chat-room">
+				<div class="chat-room" receiver="` + rooms.receiver + `">
 					<img src="../../photo/profile.png" class="room-photo">
 					` + rooms.receiver + `
 				</div>
 				`
 				$(".chat-list").append(s);
 			}
+			
+			//채팅방 클릭시 채팅
+			$(document).on("click", ".chat-room", function(){
+				$(".profile").append($(this).attr("receiver"));
+				$(".chat-section").html("");
+				var eventSourceChat = new EventSource("http://localhost:8080/chat/stay/jenny");
+			
+				eventSourceChat.onmessage = (event) => {
+					var dataChats = JSON.parse(event.data);
+					console.log(dataChats);
+
+					createChats(dataChats);//dataChats.msg로 찾을 수 있음
+				};
+			});
+			
+			//채팅내용 생성
+			function createChats(chats){
+				'use strict';
+				if(chats.sender == "stay" /*`${sessionScope.myid}`*/){
+					//보낸내용
+					var s=`
+						<div class="send-msg-box" >
+							<div class="send_msg">
+								<p>` + chats.msg + `</p>
+								<span class="time_date" >` + chats.msg_time + `</span>
+							</div>
+						</div>
+					`;
+					$(".chat-section").append(s);
+				} else {
+					//받은 내용
+					var s=`
+						<div class="receive-msg-box">
+							<div class="receive-msg">
+								<p>` + chats.msg + `</p>
+								<span class="time_date">` + chats.msg_time + `</span>
+							</div>
+						</div>
+					`;
+					$(".chat-section").append(s);
+				}
+			}
+
+			// 새로고침시 재연결을 위한 eventSourceRoom.close
+			window.addEventListener("beforeunload", (event)=>{
+				event.preventDefault();
+				
+				eventSourceRoom.close();
+				eventSourceChat.close();
+				
+				event.returnValue="";
+			});
+			
 // 			function initMyMessage(historyMsg) {
 // 				var chatBox = document.querySelector("#chat-box");
 		
@@ -102,7 +159,9 @@
 // 					method: "post",
 // 					body: JSON.stringify(chat), //JS->JSON
 // 					headers: {
-// 						"Content-Type":"application/json; charset=utf-8"
+// 						"Content-Type":"application/json; charset=utf-8",
+// 						"Connection":"keep-alive",
+//						"Cache-Control":"no-cache"
 // 					}
 // 				});
 				
@@ -115,16 +174,16 @@
 // 				msgInput.value = "";
 // 			}
 		
-			document.querySelector("#send-btn").addEventListener("click", () => {
-				addMessage();
-			});
+// 			document.querySelector("#send-btn").addEventListener("click", () => {
+// 				addMessage();
+// 			});
 		
-			document.querySelector("#input-msg").addEventListener("keydown", () => {
-				//엔터키
-				if (e.keyCode === 13) {
-					addMessage();
-				}
-			});
+// 			document.querySelector("#input-msg").addEventListener("keydown", () => {
+// 				//엔터키
+// 				if (e.keyCode === 13) {
+// 					addMessage();
+// 				}
+// 			});
 		});
 	</script>
 
