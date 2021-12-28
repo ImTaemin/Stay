@@ -28,7 +28,8 @@
 		<!-- 채팅화면 -->
 		<div class="chatting">
 			<div class="profile">
-				<img src="../../photo/profile.png">
+				<img id="profile-img">
+				<span id="profile-name"></span>
 			</div>
 
 			<div class="chat-section">
@@ -63,7 +64,8 @@
 	<script type="text/javascript">
 		$(function(){
 			//채팅방 요청
-			var eventSourceRoom = new EventSource("http://localhost:8080/chat/stay");
+			var eventSourceRoom = new EventSource("http://localhost:8080/chat/${sessionScope.myid}");
+// 			var eventSourceRoom = new EventSource("http://localhost:8080/chat/stay");
 			
 			eventSourceRoom.onmessage = (event) => {
 				var dataRooms = JSON.parse(event.data);
@@ -75,9 +77,9 @@
 			function createRooms(rooms){
 				'use strict';
 				var s = `
-				<div class="chat-room" receiver="` + rooms.receiver + `">
+				<div class="chat-room" id="` + rooms.receiver + `"receiver="` + rooms.receiver + `">
 					<img src="../../photo/profile.png" class="room-photo">
-					` + rooms.receiver + `
+					<span>` + rooms.receiver + `</span>
 				</div>
 				`
 				$(".chat-list").append(s);
@@ -85,10 +87,31 @@
 			
 			//채팅방 클릭시 채팅
 			$(document).on("click", ".chat-room", function(){
-				$(".profile").append($(this).attr("receiver"));
-				$(".chat-section").html("");
-				var eventSourceChat = new EventSource("http://localhost:8080/chat/stay/jenny");
+				//한번만 클릭할 수 있게
+				if($(this).attr("receiver") == $("#profile-name").text()){
+					return;
+				}
+				
+				if($("#profile-name").text() != ""){
+					var tmp = $("#profile-name").text();
+					document.getElementById(tmp).style.cursor = "pointer";
+				}
+				
+				var eventSourceChat;
 			
+// 				$(".profile").append($(this).attr("receiver"));
+
+				//채팅방 타이틀
+				$("#profile-img").attr("src","../../photo/profile.png");
+				$("#profile-name").text($(this).attr("receiver"));
+				
+				$(this).css("cursor","default");
+				$(".chat-section").html("");
+				
+				if(eventSourceChat != null){eventSourceChat.close();}
+				
+				eventSourceChat = new EventSource("http://localhost:8080/chat/${sessionScope.myid}/" + $(this).attr("receiver"));
+				
 				eventSourceChat.onmessage = (event) => {
 					var dataChats = JSON.parse(event.data);
 					console.log(dataChats);
@@ -125,16 +148,6 @@
 				}
 			}
 
-			// 새로고침시 재연결을 위한 eventSourceRoom.close
-			window.addEventListener("beforeunload", (event)=>{
-				event.preventDefault();
-				
-				eventSourceRoom.close();
-				eventSourceChat.close();
-				
-				event.returnValue="";
-			});
-			
 // 			function initMyMessage(historyMsg) {
 // 				var chatBox = document.querySelector("#chat-box");
 		

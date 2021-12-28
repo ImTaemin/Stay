@@ -63,6 +63,7 @@ public class ChatService {
 			try {
 				for(Map.Entry<String, String> chatMap : entry.getValue().entrySet()) { // HashMap<String,String>
 					for(ChatDto chatDto : chatMapper.chatting(chatMap.getKey(), chatMap.getValue())) {
+						
 						if(historyChat.contains(chatDto)) {
 							//채팅이 있으면 채팅내역 전송X
 						}else {
