@@ -29,14 +29,14 @@
 	 -->
 	
 	<div class="cardbtn">
-		<%-- <div class="photo">
+		 <div class="photo">
 			<img src="${root}/photo/memberPhoto/${memberDto.photo}">
 		</div>
- --%>
 		 <!-- 이미지 -->
 	   <div class="pfimg-div">
     		<label for="photo"></label>
     		<div id="pfmainimg"></div>
+    		
     		<div class="pfinput">
     			<input type="file" required id="photo" name="photo" accept=".gif, .jpg, .png" style="width: 200px; padding-top: 6px;" maxlength="5">
     		</div>

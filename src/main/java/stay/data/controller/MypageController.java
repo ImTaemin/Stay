@@ -122,12 +122,16 @@ public class MypageController {
 			return "/member/login";
 		}
 		
-		String id = (String) session.getAttribute("id");
-		dto.setId(id);
+		
+		String myid = (String)session.getAttribute("myid");
+		
+		dto = memberService.getMember(myid);
+		
+		dto.setId(myid);
 		
 		String path = session.getServletContext().getRealPath("/photo/memberPhoto");
 		if(dto.getUpload().getOriginalFilename().equals("")) {
-			dto.setPhoto(null);
+			dto.setPhoto("no");
 		} else {
 			String photo = dto.getUpload().getOriginalFilename();
 			dto.setPhoto(photo);
@@ -142,7 +146,7 @@ public class MypageController {
 
 		memberService.updateMember(dto);
 		// update 호출
-	//	mapper.updateMember(dto);
+		mapper.updateMember(dto);
 
 		// 메인으로
 		return "redirect:/mypage/mypageform";

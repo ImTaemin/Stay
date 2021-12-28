@@ -1,4 +1,4 @@
-
+/*
 $('#target_img').click(function (e) {
     document.signform.target_url.value = document.getElementById( 'target_img' ).src;
     e.preventDefault();
@@ -10,7 +10,7 @@ function changeValue(obj){
 
 
 }
-
+*/
 
 // 이미지 미리보기 출력
 $(document).ready(function (e){
