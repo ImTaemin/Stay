@@ -16,7 +16,6 @@ public class MemberDto {
 	private String addr_load;
 	private String addr_detail;
 	private String photo;
-	private MultipartFile upload;
 	private int likes;
 	private String e_mail;
 }

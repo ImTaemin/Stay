@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import stay.data.dto.MemberDto;
@@ -114,39 +116,39 @@ public class MypageController {
 	}*/
 	
 	@PostMapping("/update")
-	public String memberUpdate(@ModelAttribute MemberDto dto,
-			HttpSession session) {
-
-		String loginok = (String) session.getAttribute("loginok");
-		if (loginok == null) {
-			return "/member/login";
-		}
+	public String memberUpdate(
+			@ModelAttribute MemberDto dto,
+			@RequestParam MultipartFile upload,
+			HttpSession session) 
+	{
 		
+		//만료됐을 수도 있으므로 다시 loginok 얻음
+		String loginok = (String) session.getAttribute("loginok");
 		
 		String myid = (String)session.getAttribute("myid");
 		
-		dto = memberService.getMember(myid);
-		
-		dto.setId(myid);
-		
+		//업로드할 폴더 지정
 		String path = session.getServletContext().getRealPath("/photo/memberPhoto");
-		if(dto.getUpload().getOriginalFilename().equals("")) {
-			dto.setPhoto("no");
+		System.out.println(path);
+		
+		String photo = "";
+		
+		if(upload.getOriginalFilename().equals("")) {
+			photo=null;
 		} else {
-			String photo = dto.getUpload().getOriginalFilename();
-			dto.setPhoto(photo);
+			photo = memberService.getMember(myid).getPhoto();
 			
 			try {
-				dto.getUpload().transferTo(new File(path+"\\"+photo));
+				upload.transferTo(new File(path+"\\"+ photo));
 			} catch (IllegalStateException | IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
+		
+		dto.setPhoto(photo);
 
 		memberService.updateMember(dto);
-		// update 호출
-		mapper.updateMember(dto);
 
 		// 메인으로
 		return "redirect:/mypage/mypageform";

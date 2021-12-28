@@ -17,7 +17,7 @@
 
 
   <div class="mypage-form">
-  <form action="update" method="post">
+  <form action="update" method="post" enctype="multipart/form-data">
 <!--    <form action="mypageform" method="post" enctype="multipart/form-data" onsubmit="return check(this)"> -->
   
     <input type="hidden" name="id" value="${sessionScope.myid}">
@@ -30,17 +30,13 @@
 	
 	<div class="cardbtn">
 		 <div class="photo">
-			<img src="${root}/photo/memberPhoto/${memberDto.photo}">
+			<img src="${root }/photo/memberPhoto/${memberDto.photo}">
 		</div>
 		 <!-- 이미지 -->
-	   <div class="pfimg-div">
-    		<label for="photo"></label>
-    		<div id="pfmainimg"></div>
-    		
+	   <div class="pfimg-div">	
     		<div class="pfinput">
-    			<input type="file" required id="photo" name="photo" accept=".gif, .jpg, .png" style="width: 200px; padding-top: 6px;" maxlength="5">
+    			<input type="file" name="upload">
     		</div>
-    		
     	</div>
 
 
