@@ -16,7 +16,7 @@
 /*
    $(document).on("click","span.amod",function(){
 	  
-	   idx=$(this).attr("idx");
+	   id=$(this).attr("id");
 	   
 	   $.ajax({
 		  type:"get",
