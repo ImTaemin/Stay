@@ -49,4 +49,8 @@
 	<select id="login" parameterType="HashMap" resultType="int">
 		select count(*) from member where id=#{id} and pass=#{pass}
 	</select>
+	
+	<update id="updatelikes" parameterType="String">
+		update member set likes=likes+1 where id=#{id}
+	</update>
 </mapper>
