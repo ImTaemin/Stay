@@ -14,38 +14,7 @@
 <title>마이페이지</title>
 </head>
 <body>
-<div class="cardbtn">
-		<div class="photo">
-			<img src="${root}/photo/memberPhoto/${memberDto.photo}">
-		</div>
 
-		 <!-- 이미지 -->
-	   <div class="pfimg-div">
-    		<label for="photo">회원프로필 이미지</label>
-    		<label for="photo"></label>
-    		<div class="pfinput">
-    			<input type="file" required id="photo" name="photo" accept=".gif, .jpg, .png" style="width: 200px; padding-top: 6px;" maxlength="5">
-    		</div>
-    		
-    		<div id="pfmainimg"></div>
-    	</div>
-
-
-		<div class="photo">
-			<img id="target_img" src="${root}/photo/memberPhoto/${memberDto.photo}">
-		</div>
-
-
-		<form name="signform" method="POST" ENCTYPE="multipart/form-data">
-			<input type="file" id="photo" name="photo" style="display: none;" onchange="changeValue(this)">
-			<input type="hidden"
-				name="target_url">
-		</form>
-
-
-		<button type="button" class="card-btn" onclick="location.href='../card/insertform'">결제 카드 추가</button>
-
-   </div>
 
   <div class="mypage-form">
   <form action="update" method="post">
@@ -58,6 +27,39 @@
     <input type="hidden" name="id" value="${sessionScope.myid}">
 	</c:if>
 	 -->
+	
+	<div class="cardbtn">
+		<%-- <div class="photo">
+			<img src="${root}/photo/memberPhoto/${memberDto.photo}">
+		</div>
+ --%>
+		 <!-- 이미지 -->
+	   <div class="pfimg-div">
+    		<label for="photo"></label>
+    		<div id="pfmainimg"></div>
+    		<div class="pfinput">
+    			<input type="file" required id="photo" name="photo" accept=".gif, .jpg, .png" style="width: 200px; padding-top: 6px;" maxlength="5">
+    		</div>
+    		
+    	</div>
+
+
+		<%-- <div class="photo">
+			<img id="target_img" src="${root}/photo/memberPhoto/${memberDto.photo}">
+		</div>
+
+
+		<form name="signform" method="POST" ENCTYPE="multipart/form-data">
+			<input type="file" id="photo" name="photo" style="display: none;" onchange="changeValue(this)">
+			<input type="hidden"
+				name="target_url">
+		</form> --%>
+
+
+		<button type="button" class="card-btn" onclick="location.href='../card/insertform'">결제 카드 추가</button>
+
+   </div>
+	
 	
    <div class="input">
    <h2>${memberDto.name}님의 마이페이지</h2>
