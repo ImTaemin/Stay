@@ -23,7 +23,7 @@
 	margin-left: 20px;
 }
 
-/* .warn-btn {
+.warn-btn {
 	display: inline;
 	width: 100px;
 	height: 40px;
@@ -33,7 +33,7 @@
 	color: #fff;
 	box-shadow: 2px;
 	margin-top: 15px;
-} */
+}
 
 .profile-main>.profile-top>.profile-second {
 	display: flex;
@@ -125,6 +125,7 @@
 .hidden {
 	display: none;
 }
+
 
 /* @charset "UTF-8";
 

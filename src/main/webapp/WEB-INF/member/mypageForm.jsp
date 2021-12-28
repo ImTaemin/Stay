@@ -49,7 +49,7 @@
 
 
 		<button type="button" class="card-btn" onclick="location.href='../card/insertform'">결제 카드 추가</button>
-   
+
    </div>
 
   <div class="mypage-form">
