@@ -26,10 +26,6 @@ public class ReservationService {
 		return mapper.selectHostReservation(hostId);
 	}
 	
-	public List<ReservationDto> selectHostThreeReservation(String hostId){
-		return mapper.selectHostThreeReservation(hostId);
-	}
-	
 	public ReservationDto selectGuestOneReservation(String no, String guestId) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		
