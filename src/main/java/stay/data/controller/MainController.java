@@ -148,8 +148,8 @@ public class MainController {
 				
 				roomDto.setPhotos(photo[0]);
 				
-				inList.add(reser);
-				inRoom.add(roomDto);
+				inThreeList.add(reser);
+				inThreeRoom.add(roomDto);
 			
 		}
 		

@@ -22,81 +22,38 @@
 <title>Insert title here</title>
 </head>
 <body>
-<c:forEach var="list" items="${inThreeList}">
-							<c:forEach var="room" items="${inThreeRoom}">
-								<c:if test="${list.room_no == room.no}">
-
-									<div class="host">${room.name}</div>
-								</c:if>
-							</c:forEach>
-</c:forEach>
-<%-- <div class="dd">
-
-		<c:forEach var="list" items="${inThreeList}">
-							<c:forEach var="room" items="${inThreeRoom}">
-								<c:if test="${list.room_no == room.no}">
-									<div class="hostMain-info">
-										<div class="hostMain-image"><img alt="" src="../../photo/roomPhoto/${room.photos}"></div>
-										<div class="hostMain-detail">
-											<div class="hostMain-name">${room.name}</div>
-											<div class="hostMain-site">${room.addr_load}</div>
-										</div>
-									</div>
-								</c:if>
-							</c:forEach>
-							</c:forEach>
-</div> --%>
 	<div class="hostMain">
 		<div class="hostMain-top">
 		
 			<!-- 선택된 상태의 숙소 카드 -->
-			<!-- <div class="tab-card">
-				<div class="tab-pane active" id="in" role="tabpanel" aria-labelledby="in-tab">
-						<c:forEach var="list" items="${inThreeList}">
-							<c:forEach var="room" items="${inThreeRoom}">
-								<c:if test="${list.room_no == room.no}">
-									<div class="hostMain-info">
-										<div class="hostMain-image"><img alt="" src="../../photo/roomPhoto/${room.photos}"></div>
-										<div class="hostMain-detail">
-											<div class="hostMain-name">${room.name}</div>
-											<div class="hostMain-site">${room.addr_load}</div>
-										</div>
-									</div>
-								</c:if>
-							</c:forEach>
-						</c:forEach>
-				</div>
-				<div class="tab-pane" id="out" role="tabpanel" aria-labelledby="out-tab">
-						<c:forEach var="list" items="${outThreeList}">
-							<c:forEach var="room" items="${outThreeRoom}">
-								<c:if test="${list.room_no == room.no}">
-									<div class="hostMain-info">
-										<div class="hostMain-image"><img alt="" src="../../photo/roomPhoto/${room.photos}"></div>
-										<div class="hostMain-detail">
-											<div class="hostMain-name">${room.name}</div>
-											<div class="hostMain-site">${room.addr_load}</div>
-										</div>
-									</div>
-								</c:if>
-							</c:forEach>
-						</c:forEach>
-				</div>
-				<div class="tab-pane" id="hos" role="tabpanel" aria-labelledby="hos-tab">
-						<c:forEach var="list" items="${hosThreeList}">
-							<c:forEach var="room" items="${hosThreeRoom}">
-								<c:if test="${list.room_no == room.no}">
-									<div class="hostMain-info">
-										<div class="hostMain-image"><img alt="" src="../../photo/roomPhoto/${room.photos}"></div>
-										<div class="hostMain-detail">
-											<div class="hostMain-name">${room.name}</div>
-											<div class="hostMain-site">${room.addr_load}</div>
-										</div>
-									</div>
-								</c:if>
-							</c:forEach>
-						</c:forEach> 
-				</div> --%>
-			<!-- </div> -->
+			<c:forEach var="list" items="${inThreeList}">
+				<c:forEach var="room" items="${inThreeRoom}">
+					<c:if test="${list.room_no == room.no}">
+						<div class="card">
+							<img class="card-img-top" src="../../photo/roomPhoto/${room.photos}">
+							
+							<div class="card-body top">
+								<h5 class="card-title">${list.start_date} ~ ${list.end_date}</h5>
+								<b class="card-text">
+									${room.name}
+								</b>
+								<p class="card-text">
+									${room.addr_load}
+								</p>
+							</div>
+							
+							<!-- hidden -->
+							<input type="hidden" name="reserNo" value="=${list.no}">
+							
+							<div class="card-body bottom" onclick="location.href='/reser/reservation?reserNo=${list.no}'">
+								<label class="card-link">예약 정보 더보기</label>
+								<i class="bi bi-chevron-right"></i>
+							</div>
+						</div>
+					</c:if>
+				</c:forEach>
+			</c:forEach>
+			 
 		</div>
 		
 		<div class="hostMain-middle">
@@ -146,7 +103,6 @@
 										<div class="content-checkIn">체크인
 											<div class="content-inDate">${list.start_date}</div>
 										</div>
-										<div class="content-bar"></div>
 										<div class="content-checkOut">체크아웃
 											<div class="content-outDate">${list.end_date}</div>
 										</div>

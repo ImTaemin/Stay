@@ -1,29 +1,59 @@
 @charset "UTF-8";
 
-/* hostMain-top : 선택된 상태의 숙소카드 */
-/* .hostMain .tab-card>.active {
-	display: flex !important;
-	justify-content: space-between;
-	width: 100%;
-} */
-
 .hostMain-top{
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-around;
 } 
-
-.hostMain-info{
-	border: 2px solid #0B57A2;
-	border-radius: 1em;
+.hostMain .card {
+	margin-right: 3.3%;
+	border-radius: 7px !important;
 	width: 30%;
-	height: 280px;
+	height: 450px;
+	margin-bottom: 30px;
+	border-radius: 7px !important;
 }
 
-/* .hostMain .hostMain-info {
-	border: 2px solid #0B57A2 !important;
-	width: 30%;
-	border-radius: 1em !important;
-} */
+.hostMain .card>img {
+	border-radius: 7px 7px 0 0 !important;
+	height: 220px;
+}
+
+.hostMain .card>.top {
+	border-bottom: 1px solid rgba(0, 0, 0, .125);
+	height: 250px;
+}
+
+.hostMain .card-body>.card-title {
+	margin-bottom: 20px;
+}
+
+.hostMain .card>.bottom {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	cursor: pointer;
+	padding-left: 5%;
+	padding-right: 5%;
+}
+
+.hostMain .card>.bottom>label {
+	font-weight: normal;
+	margin-top: 5px;
+}
+
+.hostMain .card>.bottom:hover {
+	background-color: #0B57A2;
+	border-radius: 0 0 7px 7px;
+	color: white;
+}
+
+.hostMain .card>.top>b {
+	font-size: 1.5em;
+}
+
+.hostMain .card>.top>p {
+	margin-top: 10px;
+}
 
 .hostMain .hostMain-image>img {
 	width: 100%;
@@ -96,13 +126,9 @@
 .hostMain .hostMain-content{
 	margin-top: 1%;
 	display: flex;
-	justify-content: space-between;
 	font-weight: bolder;
 	font-size: 12pt;
-}
-
-.hostMain .hostMain-content > div{
-	margin-right: 1%;
+	width: 100%;
 }
 
 .hostMain .content-bar{
@@ -111,6 +137,19 @@
 	height: 45px;
 }
 
+.content-name{
+	width: 30%;
+}
+.content-checkIn, .content-checkOut{
+	width: 20%;
+}
+.content-guest{
+	width: 15%;
+}
+
+.content-payment{
+	width: 15%;
+}
 .hostMain .content-name{
 	font-size: 16pt;
 	font-weight: bolder;
