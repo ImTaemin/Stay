@@ -21,7 +21,7 @@
 		<div class="room-detail">
 			<!-- 숙소 이름 -->
 			<div class="title">
-				<label>${roomDto.name}</label>
+				<a href="/room/content?no=${roomDto.no}">${roomDto.name}</a>
 			</div>
 			
 			<!-- 숙소 주소, 예약 번호 -->
@@ -29,6 +29,8 @@
 				<label>주소 | ${roomDto.addr_load} ${roomDto.addr_detail}</label>	
 				<label>예약번호 | ${reserDto.no}</label>
 			</div>
+			
+			<hr style="margin: 20px 0;">
 			
 			<div class="photo-reser">
 				<!-- 숙소 이미지 -->
@@ -140,9 +142,16 @@
 				</div>
 			</div>
 			
+			<hr>
+			
+			<c:if test="${preCheck == true}">
+				<!-- 후기 버튼 -->
+				<div class="btn-wrap">
+					<button class="btn btn-info" id="reser-comment">후기 작성하기</button>
+				</div>
+			</c:if>
+			
 			<c:if test="${preCheck == false}">
-				<hr>
-				
 				<!-- 취소 버튼 -->
 				<div class="btn-wrap">
 					<button class="btn btn-danger" id="can-reser">예약 취소</button>

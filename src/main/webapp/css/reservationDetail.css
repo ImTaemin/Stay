@@ -15,7 +15,17 @@
 
 .room-detail>.title {
 	font-size: 2.5em;
+}
+
+.room-detail>.title>a{
+	text-decoration:none;
 	color: #0B57A2;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+.room-detail>.title>a:hover {
+	color: rgb(174, 217, 218);
 }
 
 .room-detail>.addr {
@@ -31,7 +41,7 @@
 .room-detail>.photo-reser {
 	display: flex;
 	justify-content: space-between;
-	margin-top: 40px;
+	margin-top: 20px;
 	margin-bottom: 30px;
 }
 
@@ -249,7 +259,9 @@
 	justify-content: center;
 }
 
-.btn-wrap>#can-reser {
+.btn-wrap>#can-reser, #reser-comment {
 	width: 45%;
 	height: 60px;
+	font-size: 1.5em;
+	font-weight: bold;
 }
