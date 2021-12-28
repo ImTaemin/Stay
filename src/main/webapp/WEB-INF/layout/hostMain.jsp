@@ -22,8 +22,33 @@
 <title>Insert title here</title>
 </head>
 <body>
+<c:forEach var="list" items="${inThreeList}">
+							<c:forEach var="room" items="${inThreeRoom}">
+								<c:if test="${list.room_no == room.no}">
+
+									<div class="host">${room.name}</div>
+								</c:if>
+							</c:forEach>
+</c:forEach>
+<%-- <div class="dd">
+
+		<c:forEach var="list" items="${inThreeList}">
+							<c:forEach var="room" items="${inThreeRoom}">
+								<c:if test="${list.room_no == room.no}">
+									<div class="hostMain-info">
+										<div class="hostMain-image"><img alt="" src="../../photo/roomPhoto/${room.photos}"></div>
+										<div class="hostMain-detail">
+											<div class="hostMain-name">${room.name}</div>
+											<div class="hostMain-site">${room.addr_load}</div>
+										</div>
+									</div>
+								</c:if>
+							</c:forEach>
+							</c:forEach>
+</div> --%>
 	<div class="hostMain">
 		<div class="hostMain-top">
+		
 			<!-- 선택된 상태의 숙소 카드 -->
 			<!-- <div class="tab-card">
 				<div class="tab-pane active" id="in" role="tabpanel" aria-labelledby="in-tab">
