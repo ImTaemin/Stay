@@ -15,41 +15,13 @@
 </head>
 <body>
 	<div class="profile-main">
-		<%-- <c:forEach var="memlist" items="${memList}"> --%>
 		<div class="profile-top">
 			<div class="profile-first">
-				<!-- <input type="file" name="photo" id="photo" style="display: none;" required="required" multiple="multiple">
-     			<span class="glyphicon glyphicon-user" style="cursor: pointer;"></span> -->
      			<div class="photo">
 					<img alt="" src="${root}/photo/memberPhoto/${memberDto.photo}">
 				</div>
-				<!-- <button type="button" class="modal_btn" style="width: 200px; padding-top: 6px;">신고하기</button> -->
 				<button class="openBtn">신고하기</button>
 
-				<!-- Modal -->
-				<!-- <div class="modal fade" id="myModal" role="dialog">
-					<div class="modal-dialog">
-
-						Modal content
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h4 class="modal-title">댓글 수정</h4>
-							</div>
-
-							<div class="modal-body">
-								<input type="text" id="ucontent" class="form-control">
-							</div>
-
-							<div class="modal-footer">
-								<button type="button" class="btn btn-warning"
-									data-dismiss="modal" id="btnaupdate">신고하기</button>
-							</div>
-						</div>
-
-					</div>
-				</div>
- -->
 				<div class="modal hidden">
 					<div class="bg"></div>
 					<div class="modalBox">
@@ -61,10 +33,9 @@
 						<button class="closeBtn">✖</button>
 					</div>
 				</div>
-
+				
 			</div>
 			<div class="profile-second">
-				<%-- <h2>${name}님의 프로필입니다.😊</h2> --%>
 				<c:if test="${sessionScope.loginok!=null }">
 				<h2><b>${sessionScope.myid } 님의<br><br>프로필입니다.😊</b></h2>
 				</c:if>
@@ -85,7 +56,6 @@
 		<div class="profile-review">
 			<h2>숙소 후기</h2>
 		</div>
-		<%-- </c:forEach> --%>
 	</div>
 	<script src="/js/profileForm.js"></script>
 </body>
