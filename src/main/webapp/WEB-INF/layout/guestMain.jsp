@@ -49,12 +49,14 @@
 	<div class="guestMain-bottom">
 		<!-- 인기숙소 -->
 		<div class="guestMain-toproom">
-			<div class="heart">
-				<i class="bi bi-heart-fill"></i>
-			</div>
-			인기 숙소
-			<div class="heart">
-				<i class="bi bi-heart-fill"></i>
+			<div class="title">
+				<div class="heart">
+					<i class="bi bi-heart-fill"></i>
+				</div>
+				인기 숙소
+				<div class="heart">
+					<i class="bi bi-heart-fill"></i>
+				</div>
 			</div>
 		</div>
 		
@@ -68,9 +70,17 @@
 		            	<div class="swiper-slide">
 		            		<div class="guestMain-room"  onclick="location.href='room/content?no=${list.no}'">
 									<div class="guestMain-image"><img alt="" src="${root}/photo/roomPhoto/${list.photos}"></div>
+									
 									<div class="guestMain-detail">
-										<div class="guestMain-name">${list.name }</div>
-										<div class="guestMain-site">${list.addr_load }</div>
+										<hr>
+									
+										<div class="guestMain-name">
+											<span>${list.name}</span>
+										</div>
+										
+										<div class="guestMain-site">
+											<span>${list.addr_load}</span>
+										</div>
 									</div>
 							</div>
 		            	</div>
@@ -78,9 +88,8 @@
 		        </div>
 			
 		        <!-- If we need navigation buttons ::양옆 좌우 버튼(선택) -->
-		        <div class="swiper-button-next"></div>
 		        <div class="swiper-button-prev"></div> 
-		 
+		        <div class="swiper-button-next"></div>
 		    </div>
 	
 		</div>
