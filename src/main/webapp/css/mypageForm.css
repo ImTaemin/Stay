@@ -1,19 +1,5 @@
 @charset "UTF-8";
 
-div .main {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-    margin-top: 50px; 
-}
-
-div .mypage-title {
-	display: flex;
-	justify-content: center;
-	margin-left: -320px;
-	margin-bottom: 15px;
-}
-
 div .mypage-form {
 	display: flex;
 	justify-content: center;
@@ -21,11 +7,24 @@ div .mypage-form {
 }
 
 div .input {
-	width: 100%;
+	margin-left: 30px;
+	/* width: 100%; */
 	height: auto;
 }
 
-input {
+div .input> input {
+    display: inline;
+    width: 360px;
+    height: 44px;
+    padding: 0 12px;
+    border-radius: 7px;
+    margin-bottom: 12px;
+    font-size: 14px;
+    border: 2px solid #d3dce6;
+    transition: border-color 200ms ease-in-out;
+}
+
+div .input> .gaip-input-check> input {
     display: inline;
     width: 360px;
     height: 44px;
@@ -43,35 +42,34 @@ input:focus, input:hover, input:active {
    border-color: #0B57A2;
 }
 
-label {
+div .input> label {
     display: block;
     width: 100%;
     font-size: 12px;
     line-height: 16px;
 }
 
-.input-btn {
-	display: inline;
-	margin-left: 10px;
-	width: 100px;
-	height: 36px;
-	border: none;
-	border-radius: 5px;
-	background-color: #0B57A2;
-	color: #fff;
-	box-shadow: 2px;
-}
-
 div .cardbtn {
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
-	/* margin-left: 30px; */
 	margin-right: 35px;
 	margin-top: 20px;
 	width: 230px;
 	align-items: center;
 }
+
+/* div .cardbtn> .pfimg-div> .pfinput> input {
+    display: inline;
+    width: 360px;
+    height: 44px;
+    padding: 0 12px;
+    border-radius: 7px;
+    margin-bottom: 12px;
+    font-size: 14px;
+    border: 2px solid #d3dce6;
+    transition: border-color 200ms ease-in-out;
+} */
 
 div .btnmypage {
 	display: flex;
@@ -115,11 +113,6 @@ div .btnmypage {
 	box-shadow: 2px;
 }
 
-.pfimg-div>#pfmainimg {
-	display: flex;
-	justify-content: flex-start;
-}
-
 .cardbtn> .photo {
 	display: flex;
 	justify-content: center;
@@ -128,19 +121,10 @@ div .btnmypage {
 }
 
 .cardbtn> .photo> img {
+	margin-bottom: 20px;
 	width: 200px;
 	height: 200px;
 	border-radius: 100%;
-}
-
-.mypage-update-addr {
-	display: flex;
-	flex-wrap: wrap;
-}
-
-.mypage-update-check {
-	display: flex;
-	flex-direction: column;
 }
 
 .pw_glyphicon {
@@ -164,7 +148,7 @@ div .btnmypage {
 	font-size: 0.8em;
 	color: green;
 	display: none;
-	margin-top: -23px;
+	margin-top: 5px;
     margin-left: 27px;
     margin-bottom: 10px;
 }
@@ -183,7 +167,7 @@ div .btnmypage {
 	font-size: 0.8em;
 	color: red;
 	display: none;
-	margin-top: -23px;
+	margin-top: 5px;
     margin-left: 27px;
     margin-bottom: 10px;
 }
