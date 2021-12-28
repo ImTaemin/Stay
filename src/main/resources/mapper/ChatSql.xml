@@ -10,7 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="chatting" parameterType="HashMap" resultType="chatDto">
-		select * from chat, member where chat.sender=#{sender} and chat.receiver=#{receiver} and chat.sender = member.id
+		select * from chat where sender=#{sender} and receiver=#{receiver}
 	</select>
 
 </mapper>

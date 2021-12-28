@@ -29,16 +29,18 @@ public class ChatController {
 	@GetMapping(path="/{sender}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
 	public @ResponseBody ResponseBodyEmitter getChattingRooms(@PathVariable String sender){
 		SseEmitter emitter = new SseEmitter();
-		chatService.add(emitter, sender);
+		chatService.roomAdd(emitter, sender);
 		
 		return emitter;
 	}
 	
 	//채팅
-	@GetMapping("/{sender}/{receiver}")
-	public @ResponseBody ChatDto chatting(@PathVariable("sender") String sender, @PathVariable("receiver") String receiver) {
-
-		return new ChatDto();
+	@GetMapping(path="/{sender}/{receiver}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+	public @ResponseBody ResponseBodyEmitter chatting(@PathVariable("sender") String sender, @PathVariable("receiver") String receiver) {
+		SseEmitter emitter = new SseEmitter();
+		chatService.chatAdd(emitter, sender, receiver);
+		
+		return emitter;
 	}
 
 }
