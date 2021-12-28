@@ -25,6 +25,7 @@ html,body{
     top:0px;
     z-index: 1;
     background: white;
+    z-index: 10;
 }  
 
 .main-layout > .main {

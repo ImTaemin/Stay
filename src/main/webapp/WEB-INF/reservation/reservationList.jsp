@@ -58,8 +58,11 @@
 								</p>
 							</div>
 							
-							<div class="card-body bottom">
-								<label class="card-link" onclick="location.href=''">예약 정보 더보기</label>
+							<!-- hidden -->
+							<input type="hidden" name="reserNo" value="=${list.no}">
+							
+							<div class="card-body bottom" onclick="location.href='/reser/reservation?reserNo=${list.no}'">
+								<label class="card-link">예약 정보 더보기</label>
 								<i class="bi bi-chevron-right"></i>
 							</div>
 						</div>

@@ -244,7 +244,7 @@ public class ReservationController {
 		
 		String myid = (String)session.getAttribute("myid");
 		
-		List<ReservationDto> reserList = reservationService.selectReservation(myid);
+		List<ReservationDto> reserList = reservationService.selectGuestReservation(myid);
 		
 		List<ReservationDto> nowList = new ArrayList<ReservationDto>();
 		List<ReservationDto> preList = new ArrayList<ReservationDto>();
@@ -288,6 +288,25 @@ public class ReservationController {
 		mview.addObject("preRoom", preRoom);
 		
 		mview.setViewName("/reservation/reservationList");
+		
+		return mview;
+	}
+	
+	@GetMapping("/reser/reservation")
+	public ModelAndView reservation(@RequestParam String reserNo, HttpSession session) {
+		ModelAndView mview = new ModelAndView();
+		
+		String myid = (String)session.getAttribute("myid");
+		
+		ReservationDto reserDto = reservationService.selectGuestOneReservation(reserNo, myid);
+		
+		String roomNo = reserDto.getNo();
+		RoomDto roomDto = roomService.getRoom(roomNo);
+		
+		mview.addObject("reserDto", reserDto);
+		mview.addObject("roomDto", roomDto);
+		
+		mview.setViewName("/reservation/reservationDetail");
 		
 		return mview;
 	}
