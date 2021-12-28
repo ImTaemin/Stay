@@ -138,27 +138,20 @@ public class MainController {
 		}
 		
 		//호스트모드 예약상태별 예약 목록중 최근 3개
-		for(int i = 0; i < 3)
-		
-		for(ReservationDto reserThree : reserList) {
-			  
-			  String startDate = reserThree.getStart_date(); 
-			  String endDate = reserThree.getEnd_date();
-			  
-			  LocalDate start = LocalDate.parse(startDate, DateTimeFormatter.ISO_DATE);
-			  LocalDate end = LocalDate.parse(endDate, DateTimeFormatter.ISO_DATE);
-			  
-			  if(start.isAfter(today)) { 
-				  RoomDto roomDto =roomService.getRoom(reserThree.getRoom_no());
-			  
-				  String photos = roomDto.getPhotos(); String photo[] = photos.split(",");
-			  
-				  roomDto.setPhotos(photo[0]);
-			  
-				  inThreeList.add(reserThree); 
-				  inThreeRoom.add(roomDto); 
-			  }  
-		} 
+		for(ReservationDto reser : reserThreeList) {
+			
+
+				RoomDto roomDto = roomService.getRoom(reser.getRoom_no());
+				
+				String photos = roomDto.getPhotos();
+				String photo[] = photos.split(",");
+				
+				roomDto.setPhotos(photo[0]);
+				
+				inList.add(reser);
+				inRoom.add(roomDto);
+			
+		}
 		
 		//호스트모드 예약상태별 예약 목록
 		mview.addObject("inList", inList);

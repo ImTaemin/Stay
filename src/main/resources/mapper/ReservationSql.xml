@@ -25,6 +25,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from reservation where host_id = #{host_id}
 	</select>
 	
+	<select id="selectHostThreeReservation" parameterType="String" resultType="redto">
+		select * from reservation where host_id = #{host_id} and start_date > now() order by start_date limit 3
+	</select>
+	
 	<select id="selectGuestOneReservation" parameterType="HashMap" resultType="redto">
 		select * from reservation where no = #{no} and guest_id = #{guestId}
 	</select>

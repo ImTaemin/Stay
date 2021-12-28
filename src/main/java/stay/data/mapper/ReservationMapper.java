@@ -11,6 +11,7 @@ import stay.data.dto.ReservationDto;
 public interface ReservationMapper {
 	public void insertReservation(ReservationDto reDto);
 	public List<ReservationDto> selectGuestReservation(String guestId);
+	public List<ReservationDto> selectHostThreeReservation(String hostId);
 	public List<ReservationDto> selectHostReservation(String hostId);
 	public ReservationDto selectGuestOneReservation(HashMap<String, String> map);
 }
