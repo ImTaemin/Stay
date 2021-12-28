@@ -1,11 +1,5 @@
 package stay.data.controller;
 
-
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import stay.data.dto.MemberDto;
@@ -49,13 +42,18 @@ public class MypageController {
 	}
 	
 	@PostMapping("/update")
-	public String memberUpdate(@ModelAttribute MemberDto dto) {
+	public String memberUpdate(@ModelAttribute MemberDto dto, HttpSession session) {
 
+		String loginok = (String)session.getAttribute("loginok");
+		if(loginok==null) {
+			return "/member/login";
+		}
+		
 		//update 호출
 		mapper.updateMember(dto);
 
 		//메인으로
-		return "redirect:main";
+		return "redirect:/member/mypageForm";
 	}
 
 

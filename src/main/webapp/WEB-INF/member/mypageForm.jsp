@@ -53,13 +53,17 @@
    </div>
 
   <div class="mypage-form">
-  <form action="mypageform" method="post">
+  <form action="update" method="post">
 <!--    <form action="mypageform" method="post" enctype="multipart/form-data" onsubmit="return check(this)"> -->
   
-    <c:if test="${sessionScope.loginok!=null }">
+    <input type="hidden" name="id" value="${sessionScope.myid}">
+	
+	<!-- 
+	 <c:if test="${sessionScope.loginok!=null }">
     <input type="hidden" name="id" value="${sessionScope.myid}">
 	</c:if>
-  
+	 -->
+	
    <div class="input">
    <h2>${memberDto.name}님의 마이페이지</h2>
     <!-- <label for="pass">비밀번호</label>
@@ -81,7 +85,7 @@
   	</div>
       
   	<label for="name">이름</label>
-  	  <input type="text" required="required" value="${memberDto.name}">
+  	  <input type="text" value="${memberDto.name}">
   	<label for="brith">생년월일</label>
   	  <input type="date" value="${memberDto.birth}">
   	<label for="addr_load">주소</label>
