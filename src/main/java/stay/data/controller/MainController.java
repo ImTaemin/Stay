@@ -76,6 +76,7 @@ public class MainController {
 		
 		String myid = (String)session.getAttribute("myid");
 		
+		//호스트모드 예약상태별 예약 목록
 		List<ReservationDto> reserList = reservationService.selectHostReservation(myid);
 		
 		List<ReservationDto> inList = new ArrayList<ReservationDto>();
@@ -86,18 +87,15 @@ public class MainController {
 		List<RoomDto> outRoom = new ArrayList<RoomDto>();
 		List<RoomDto> hosRoom = new ArrayList<RoomDto>();
 		
+		//호스트모드 체크인예정 목록중 최근 3개
 		List<ReservationDto> reserThreeList = reservationService.selectHostThreeReservation(myid);
 		
 		List<ReservationDto> inThreeList = new ArrayList<ReservationDto>();
-		List<ReservationDto> outThreeList = new ArrayList<ReservationDto>();
-		List<ReservationDto> hosThreeList = new ArrayList<ReservationDto>(); 
-		
 		List<RoomDto> inThreeRoom = new ArrayList<RoomDto>();
-		List<RoomDto> outThreeRoom = new ArrayList<RoomDto>();
-		List<RoomDto> hosThreeRoom = new ArrayList<RoomDto>();
 		
 		LocalDate today = LocalDate.now();
 		
+		//호스트모드 예약상태별 예약 목록
 		for(ReservationDto reser : reserList) {
 			
 			String startDate = reser.getStart_date();
@@ -139,47 +137,30 @@ public class MainController {
 			}
 		}
 		
-for(ReservationDto reser : reserThreeList) {
-			
-			String startDate = reser.getStart_date();
-			String endDate = reser.getEnd_date();
-			
-			LocalDate start = LocalDate.parse(startDate, DateTimeFormatter.ISO_DATE);
-			LocalDate end = LocalDate.parse(endDate, DateTimeFormatter.ISO_DATE);
-			
-			if(start.isAfter(today)) {
-				RoomDto roomDto = roomService.getRoom(reser.getRoom_no());
-				
-				String photos = roomDto.getPhotos();
-				String photo[] = photos.split(",");
-				
-				roomDto.setPhotos(photo[0]);
-				
-				inThreeList.add(reser);
-				inThreeRoom.add(roomDto);
-			} else if (end.isBefore(today)) {
-				RoomDto roomDto = roomService.getRoom(reser.getRoom_no());
-				
-				String photos = roomDto.getPhotos();
-				String photo[] = photos.split(",");
-				
-				roomDto.setPhotos(photo[0]);
-				
-				outThreeList.add(reser);
-				outThreeRoom.add(roomDto);
-			} else if ((start.isBefore(today) || start.equals(today)) && (end.isAfter(today) || end.equals(today))) {
-				RoomDto roomDto = roomService.getRoom(reser.getRoom_no());
-				
-				String photos = roomDto.getPhotos();
-				String photo[] = photos.split(",");
-				
-				roomDto.setPhotos(photo[0]);
-				
-				hosThreeList.add(reser);
-				hosThreeRoom.add(roomDto);
-			}
-		}
+		//호스트모드 예약상태별 예약 목록중 최근 3개
+		for(int i = 0; i < 3)
 		
+		for(ReservationDto reserThree : reserList) {
+			  
+			  String startDate = reserThree.getStart_date(); 
+			  String endDate = reserThree.getEnd_date();
+			  
+			  LocalDate start = LocalDate.parse(startDate, DateTimeFormatter.ISO_DATE);
+			  LocalDate end = LocalDate.parse(endDate, DateTimeFormatter.ISO_DATE);
+			  
+			  if(start.isAfter(today)) { 
+				  RoomDto roomDto =roomService.getRoom(reserThree.getRoom_no());
+			  
+				  String photos = roomDto.getPhotos(); String photo[] = photos.split(",");
+			  
+				  roomDto.setPhotos(photo[0]);
+			  
+				  inThreeList.add(reserThree); 
+				  inThreeRoom.add(roomDto); 
+			  }  
+		} 
+		
+		//호스트모드 예약상태별 예약 목록
 		mview.addObject("inList", inList);
 		mview.addObject("outList", outList);
 		mview.addObject("hosList", hosList);
@@ -187,12 +168,10 @@ for(ReservationDto reser : reserThreeList) {
 		mview.addObject("outRoom", outRoom);
 		mview.addObject("hosRoom", hosRoom);
 		
+		//호스트모드 예약상태별 예약 목록중 최근 3개
 		mview.addObject("inThreeList", inThreeList);
-		mview.addObject("outThreeList", outThreeList);
-		mview.addObject("hosThreeList", hosThreeList);
 		mview.addObject("inThreeRoom", inThreeRoom);
-		mview.addObject("outThreeRoom", outThreeRoom);
-		mview.addObject("hosThreeRoom", hosThreeRoom);
+
 		
 		mview.setViewName("/layout/hostMain");
 		
