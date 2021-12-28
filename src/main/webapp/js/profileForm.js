@@ -103,3 +103,122 @@ $(function(){
 	
 	
 }); */
+
+/*
+function likeClick(e){
+	var id = $(e).attr("user_id");
+	//alert(id);
+	var tag = $(e);
+	
+	console.log(id);
+	
+	$.ajax({
+		
+		type: "get",
+		dataType: "json",
+		url: "updatelikes",
+		data: {"id":id},
+		success: function(data){
+			//alert(data.chu);
+			tag.next().text(data.likes);
+			
+				
+			
+		}
+		
+		
+	});
+}
+
+$(function(){
+	
+	 $("span.likes").click(function(){
+		 
+			var num = $(this).attr("num");
+			//alert(num);
+			var id = $(this).attr("id");
+			//alert(id);
+			var tag = $(this);
+			
+			console.log(num);
+			console.log(id);
+			
+			$.ajax({
+				
+				type: "get",
+				dataType: "json",
+				url: "updatelikes",
+				data: {"num":num},
+				data: {"id":id},
+				success: function(data){
+					//alert(data.chu);
+					tag.next().text(data.likes);
+					
+						
+					
+				}
+				
+				
+			});
+			 
+		 });
+	
+});
+*/
+
+function likeClick(e){
+	var id = $(e).attr("user_id");
+	//alert(id);
+	var tag = $(e);
+	
+	console.log(id);
+	
+	$.ajax({
+		
+		type: "get",
+		dataType: "json",
+		url: "updatelikes",
+		data: {"id":id},
+		success: function(data){
+			//alert(data.chu);
+			tag.next().text(data.likes);
+			
+				
+			
+		}
+		
+		
+	});
+}
+
+
+$(function(){
+	
+	 $("span.likes").click(function(){
+		 
+			var id = $(this).attr("id");
+			//alert(id);
+			var tag = $(this);
+			
+			console.log(id);
+			
+			$.ajax({
+				
+				type: "get",
+				dataType: "json",
+				url: "updatelikes",
+				data: {"id":id},
+				success: function(data){
+					//alert(data.chu);
+					tag.next().text(data.likes);
+					
+						
+					
+				}
+				
+				
+			});
+			 
+		 });
+	
+});
