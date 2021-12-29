@@ -50,3 +50,12 @@ function getStarNum(e) {
 	
 	$('input[name=rate]').attr('value', rating);
 }
+
+// 엔터값 변경
+$("#btn-comment").click(function() {
+	var content = $('.content-input').val();
+	content = content.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+	$(".content-input").val(content);
+
+	document.commentInsert.submit();
+});

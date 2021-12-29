@@ -146,7 +146,7 @@
 			
 			<c:if test="${preCheck == true}">
 				<!-- 후기 작성 -->
-				<form action="/comment/insert" method="post" class="comment-wrap">
+				<form action="/comment/insert" method="post" name="commentInsert" class="comment-wrap">
 					<c:if test="${gCommentDto != null}">
 						
 					</c:if>
@@ -177,7 +177,7 @@
 						
 						<div class="comment">
 							<textarea class="content-input" name="content"></textarea>
-							<button id="btn-comment" class="btn btn-primary">후기 저장</button>
+							<button type="button" id="btn-comment" class="btn btn-primary">후기 저장</button>
 						</div>
 					</c:if>
 				</form>
