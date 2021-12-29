@@ -1,5 +1,10 @@
 package stay.data.controller;
 
+import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
@@ -83,7 +88,7 @@ public class LoginController {
 	}
 	
 	@RequestMapping("/kakaologin")
-	public String kakaoLogin(@RequestParam("code") String code, HttpSession session) {
+	public String kakaoLogin(@RequestParam("code") String code, HttpSession session) throws ParseException {
 		
 		//System.out.println("code : " + code);
 		
@@ -94,21 +99,38 @@ public class LoginController {
         System.out.println("login Controller : " + userInfo);
 
         String name=(String)userInfo.get("nickname");
-        String birth=(String)userInfo.get("birthday");
+        String birthday=(String)userInfo.get("birthday");
         String photo=(String)userInfo.get("profile_image");
         String e_mail=(String)userInfo.get("email");
         
-        MemberDto mdto=new MemberDto();
-        mdto.setId(e_mail);
-        mdto.setName(name);
-        mdto.setBirth(birth);
-        mdto.setPhoto(photo);
-        mdto.setE_mail(e_mail);
-        mapper.insertMember(mdto);
+        Calendar date=Calendar.getInstance();
+        int nowyear=date.get(Calendar.YEAR);
+        
+        String birth=Integer.toString(nowyear)+birthday;
+        
+        //현재 날짜의 타입 
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+        //Date로 파싱
+        Date processDate = dateFormat.parse(birth);
+        //변경할 타입으로의 형 변환
+        String realbirthday = new SimpleDateFormat("yyyy-MM-dd").format(processDate);
+        
+        
+        if(mapper.getEmailCheck(e_mail)==0) {
+        	MemberDto mdto=new MemberDto();
+        	mdto.setId(e_mail);
+        	mdto.setName(name);
+        	mdto.setBirth(realbirthday);
+        	mdto.setPhoto(photo);
+        	mdto.setE_mail(e_mail);
+        	mapper.insertMember(mdto);
+        }
         
         session.setAttribute("myid", name);
         session.setAttribute("loginok", "yes");
         session.setAttribute("mode", "guest");
+        session.setAttribute("kakaologin", "yes");
+        session.setAttribute("profile", photo);
         
         //클라이언트의 이메일이 존재할 때 세션에 해당 이메일과 토큰 등록
         if (userInfo.get("email") != null) {

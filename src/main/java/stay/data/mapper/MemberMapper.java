@@ -13,6 +13,7 @@ public interface MemberMapper {
 	public void insertMember(MemberDto dto);
 	public List<MemberDto> getAllMembers();
 	public int getIdCheck(String id);
+	public int getEmailCheck(String e_mail);
 	public int getCheckPass(HashMap<String, String> map);
 	public MemberDto getMember(String id);
 	public void updateMember(MemberDto dto);

@@ -13,6 +13,10 @@
 	<select id="getIdCheck" parameterType="String" resultType="int">
 		select count(id) from member where id=#{id}
 	</select>
+	
+	<select id="getEmailCheck" parameterType="String" resultType="int">
+		select count(e_mail) from member where e_mail=#{e_mail}
+	</select>
 
 	<select id="getCheckPass" parameterType="HashMap" resultType="int">
 		select count(*) from member where id=#{id} and pass=#{pass}

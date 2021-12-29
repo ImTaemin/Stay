@@ -126,7 +126,12 @@
 			<c:if test="${sessionScope.loginok!=null }">
 				<b>${sessionScope.myid } 님</b>
 				<div class="mypage-img" onclick="location.href='/mypage/mypageform'">
+				  <c:if test="${sessionScope.kakaologin==null }">
 					<img id="img" src="${root}/photo/memberPhoto/${photo}">
+				  </c:if>
+				  <c:if test="${sessionScope.kakaologin!=null }">
+					<img id="img" src="${sessionScope.profile}">
+				  </c:if>
 				</div>
 				<button type="button" class="btn btn-danger" id="logoutbtn"  onclick="location.href='/member/logoutprocess'">Logout</button>
 			</c:if>

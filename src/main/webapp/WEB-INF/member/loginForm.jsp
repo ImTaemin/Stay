@@ -22,11 +22,11 @@
   <div class="idsave">
     <input type="checkbox" id="save" name="cbsave" ${sessionScope.saveok==null?"":"checked"}>아이디 저장하기
   </div>
-   <div class="input-form">
+   <div class="login-input-form">
     <label for="id">ID</label>
       <input type="text" id="id" name="id" placeholder="아이디 입력" required="required" autofocus="autofocus" value="${sessionScope.saveok==null?"":sessionScope.myid }"><br>
    </div>
-   <div class="input-form">
+   <div class="login-input-form">
     <label for="pass">PW</label>
       <input type="password" id="pass" name="pass" placeholder="비밀번호 입력" required="required"><br>
    </div>
