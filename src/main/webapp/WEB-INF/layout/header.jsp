@@ -44,7 +44,7 @@
 				      <a href="${root}/reser/reservationlist">예약정보</a>
 				   </c:if>
 			       <c:if test="${sessionScope.mode=='host'}">
-				     <a href="${root}/reser/reservationlist">예약정보</a>
+				     <a href="${root}/reser/hostreservationlist">예약정보</a>
 			       </c:if>
 	          </li>
 	          <li>
@@ -64,8 +64,11 @@
 	            <a href="${root}/mypage/mypageform">마이페이지</a>
 	          </li>
 	          <li>
+	        	  <c:if test="${sessionScope.mode=='guest'}">
+			            <a href="/card/insertform">결제카드 추가</a>
+		          </c:if>
 		          <c:if test="${sessionScope.mode=='host'}">
-			            <a href="/card/insertform">수금 계좌번호 등록</a>
+			            <a href="#">수금 계좌번호 등록</a>
 		          </c:if>
 	          </li>
 	        </ul>
