@@ -147,6 +147,46 @@
 					$(".chat-section").append(s);
 				}
 			}
+	
+// 			function addMessage() {
+// 				var msgInput = document.querySelector("#input-msg");
+	
+// 				var chat={
+// 					sender: ${sessionScope.myid},
+// 					receiver: "",
+// 					msg: msgInput.value
+// 				}
+			
+// 				//통신이 끝날떄까지 기다려야함
+// 				var response = await fetch("http://localhost:8080/chat/insert",{
+// 					method: "post",
+// 					body: JSON.stringify(chat), //JS->JSON
+// 					headers: {
+// 						"Content-Type":"application/json; charset=utf-8",
+// 						"Connection":"keep-alive",
+// 					"Cache-Control":"no-cache"
+// 					}
+// 				});
+			
+// 				var parseResponse = await response.json();
+			
+// 				chatOutgoingBox.innerHTML = getSendMsgBox(msgInput.value, now);
+	
+// 				chatBox.append(chatOutgoingBox);
+	
+// 				msgInput.value = "";
+// 			}
+	
+// 			document.querySelector("#send-btn").addEventListener("click", () => {
+// 				addMessage();
+// 			});
+	
+// 			document.querySelector("#input-msg").addEventListener("keydown", () => {
+// 				//엔터키
+// 				if (e.keyCode === 13) {
+// 					addMessage();
+// 				}
+// 			});
 
 // 			function initMyMessage(historyMsg) {
 // 				var chatBox = document.querySelector("#chat-box");
@@ -157,46 +197,14 @@
 		
 // 				chatBox.append(chatOutgoingBox);
 // 			}
+		});
 		
-// 			function addMessage() {
-// 				var msgInput = document.querySelector("#input-msg");
-		
-// 				var chat={
-// 					sender: username,
-// 					receiver: "",
-// 					msg: msgInput.value
-// 				}
-				
-// 				//통신이 끝날떄까지 기다려야함
-// 				var response = await fetch("http://localhost:8080/chat",{
-// 					method: "post",
-// 					body: JSON.stringify(chat), //JS->JSON
-// 					headers: {
-// 						"Content-Type":"application/json; charset=utf-8",
-// 						"Connection":"keep-alive",
-//						"Cache-Control":"no-cache"
-// 					}
-// 				});
-				
-// 				var parseResponse = await response.json();
-				
-// 				chatOutgoingBox.innerHTML = getSendMsgBox(msgInput.value, now);
-		
-// 				chatBox.append(chatOutgoingBox);
-		
-// 				msgInput.value = "";
-// 			}
-		
-// 			document.querySelector("#send-btn").addEventListener("click", () => {
-// 				addMessage();
-// 			});
-		
-// 			document.querySelector("#input-msg").addEventListener("keydown", () => {
-// 				//엔터키
-// 				if (e.keyCode === 13) {
-// 					addMessage();
-// 				}
-// 			});
+		window.addEventListener("beforeunload", (event)=>{
+			eventSourceChat.close();
+			eventSourceRoom.close();
+			
+			event.preventDefault();
+			event.returnValue="";
 		});
 	</script>
 

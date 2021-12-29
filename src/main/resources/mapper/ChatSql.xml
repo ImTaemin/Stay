@@ -12,6 +12,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="chatting" parameterType="HashMap" resultType="chatDto">
 		select * from chat where sender=#{sender} and receiver=#{receiver} union select * from chat where sender=#{receiver} and receiver=#{sender} order by msg_time;
 	</select>
+	
+	<insert id="insertChat" parameterType="HashMap">
+		insert into chat values(null, #{sender}, #{receiver}, #{msg}, now())
+	</insert>
 
 </mapper>
 
