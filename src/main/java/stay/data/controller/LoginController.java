@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import stay.data.dto.MemberDto;
 import stay.data.mapper.MemberMapper;
 import stay.data.service.KakaoLogin;
 
@@ -84,13 +85,30 @@ public class LoginController {
 	@RequestMapping("/kakaologin")
 	public String kakaoLogin(@RequestParam("code") String code, HttpSession session) {
 		
-		System.out.println("code : " + code);
+		//System.out.println("code : " + code);
 		
 		String access_Token = kakao.getAccessToken(code);
-        System.out.println("controller access_token : " + access_Token);
+        //System.out.println("controller access_token : " + access_Token);
         
         HashMap<String, Object> userInfo = kakao.getUserInfo(access_Token);
         System.out.println("login Controller : " + userInfo);
+
+        String name=(String)userInfo.get("nickname");
+        String birth=(String)userInfo.get("birthday");
+        String photo=(String)userInfo.get("profile_image");
+        String e_mail=(String)userInfo.get("email");
+        
+        MemberDto mdto=new MemberDto();
+        mdto.setId(e_mail);
+        mdto.setName(name);
+        mdto.setBirth(birth);
+        mdto.setPhoto(photo);
+        mdto.setE_mail(e_mail);
+        mapper.insertMember(mdto);
+        
+        session.setAttribute("myid", name);
+        session.setAttribute("loginok", "yes");
+        session.setAttribute("mode", "guest");
         
         //클라이언트의 이메일이 존재할 때 세션에 해당 이메일과 토큰 등록
         if (userInfo.get("email") != null) {

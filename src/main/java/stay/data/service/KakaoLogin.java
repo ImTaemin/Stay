@@ -9,14 +9,20 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+
+import stay.data.mapper.MemberMapper;
  
 @Service
 public class KakaoLogin {
+	
+	@Autowired
+	MemberMapper mapper;
     
     public String getAccessToken (String authorize_code) {
         String access_Token = "";
@@ -43,7 +49,7 @@ public class KakaoLogin {
             
             //    결과 코드가 200이라면 성공
             int responseCode = conn.getResponseCode();
-            System.out.println("responseCode : " + responseCode);
+            //System.out.println("responseCode : " + responseCode);
  
             //    요청을 통해 얻은 JSON타입의 Response 메세지 읽어오기
             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -53,17 +59,17 @@ public class KakaoLogin {
             while ((line = br.readLine()) != null) {
                 result += line;
             }
-            System.out.println("response body : " + result);
+            //System.out.println("response body : " + result);
             
-            //    Gson 라이브러리에 포함된 클래스로 JSON파싱 객체 생성
+            //Gson 라이브러리에 포함된 클래스로 JSON파싱 객체 생성
             JsonParser parser = new JsonParser();
             JsonElement element = parser.parse(result);
             
             access_Token = element.getAsJsonObject().get("access_token").getAsString();
             refresh_Token = element.getAsJsonObject().get("refresh_token").getAsString();
             
-            System.out.println("access_token : " + access_Token);
-            System.out.println("refresh_token : " + refresh_Token);
+            //System.out.println("access_token : " + access_Token);
+            //System.out.println("refresh_token : " + refresh_Token);
             
             br.close();
             bw.close();
@@ -91,7 +97,7 @@ public class KakaoLogin {
     		conn.setRequestProperty("Authorization", "Bearer " + access_Token);
     		
     		int responseCode = conn.getResponseCode();
-    		System.out.println("responseCode : " + responseCode);
+    		//System.out.println("responseCode : " + responseCode);
     		
     		BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
     		
@@ -101,7 +107,9 @@ public class KakaoLogin {
     		while ((line = br.readLine()) != null) {
     			result += line;
     		}
-    		System.out.println("response body : " + result);
+    		//System.out.println("response body : " + result);
+    		
+    		
     		
     		JsonParser parser = new JsonParser();
     		JsonElement element = parser.parse(result);
@@ -110,10 +118,15 @@ public class KakaoLogin {
     		JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
     		
     		String nickname = properties.getAsJsonObject().get("nickname").getAsString();
+    		String profile_image = properties.getAsJsonObject().get("profile_image").getAsString();
     		String email = kakao_account.getAsJsonObject().get("email").getAsString();
+    		String birthday = kakao_account.getAsJsonObject().get("birthday").getAsString();
     		
     		userInfo.put("nickname", nickname);
+    		userInfo.put("profile_image", profile_image);
     		userInfo.put("email", email);
+    		userInfo.put("birthday", birthday);
+    		
     		
     	} catch (IOException e) {
     		// TODO Auto-generated catch block
