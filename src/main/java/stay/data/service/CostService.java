@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import stay.data.dto.PayCardDto;
+import stay.data.dto.ReceiveAccountDto;
 import stay.data.mapper.CostMapper;
 
 @Service
@@ -23,4 +24,11 @@ public class CostService {
 	}
 	
 	// 계좌
+	public void insertAccount(ReceiveAccountDto receiveAccountDto) {
+		mapper.insertAccount(receiveAccountDto);
+	}
+	
+	public List<ReceiveAccountDto> getAllAccount(String id){
+		return mapper.getAllAccount(id);
+	}
 }

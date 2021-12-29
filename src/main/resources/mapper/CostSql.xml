@@ -11,4 +11,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getAllCard" parameterType="String" resultType="pcdto">
 		select * from pay_card where id = #{id}
 	</select>
+	
+	<insert id="insertAccount" parameterType="radto">
+		insert into receive_account values (#{account}, #{id}, #{bank})
+	</insert>
+	
+	<select id="getAllAccount" parameterType="String" resultType="radto">
+		select * from receive_account where id = #{id}
+	</select>
 </mapper>

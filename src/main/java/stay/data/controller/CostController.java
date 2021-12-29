@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import stay.data.dto.PayCardDto;
+import stay.data.dto.ReceiveAccountDto;
 import stay.data.service.CostService;
 import stay.data.service.GuestCommentService;
 import stay.data.service.RoomService;
@@ -45,4 +46,22 @@ public class CostController {
 	}
 
 	// 계좌
+	@GetMapping("/account/insertform")
+	public String accountInsertForm() {
+		return "/cost/accountInsertForm";
+	}
+	
+	@PostMapping("/account/insert")
+	public String accountInsert(@ModelAttribute ReceiveAccountDto receiveAccountDto, HttpSession session) {
+		String myid = (String) session.getAttribute("myid");
+
+		String accountNum = receiveAccountDto.getAccount1() + "-" + receiveAccountDto.getAccount2() + "-" + receiveAccountDto.getAccount3();
+
+		receiveAccountDto.setId(myid);
+		receiveAccountDto.setAccount(accountNum);
+
+		costService.insertAccount(receiveAccountDto);
+		
+		return "redirect:/";
+	}
 }
