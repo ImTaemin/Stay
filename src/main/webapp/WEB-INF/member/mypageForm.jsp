@@ -30,7 +30,15 @@
 	
 	<div class="cardbtn"  style="float: left;">
 		 <div class="photo">
-			<img src="${root }/photo/memberPhoto/${memberDto.photo}">
+			<%-- <img src="${root }/photo/memberPhoto/${memberDto.photo}"> --%>
+				  <!-- 일반 로그인 -->
+				  <c:if test="${sessionScope.kakaologin==null }">
+					<img src="${root }/photo/memberPhoto/${memberDto.photo}">
+				  </c:if>
+				  <!-- 카카오 로그인 -->
+				  <c:if test="${sessionScope.kakaologin!=null }">
+					<img src="${sessionScope.profile}">
+				  </c:if>
 		</div>
 		 <!-- 이미지 -->
 	   <div class="pfimg-div">	

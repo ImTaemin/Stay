@@ -18,7 +18,15 @@
 		<div class="profile-top">
 			<div class="profile-first">
 				<div class="photo">
+					<%-- <img alt="" src="${root}/photo/memberPhoto/${memberDto.photo}"> --%>
+				  <!-- 일반 로그인 -->
+				  <c:if test="${sessionScope.kakaologin==null }">
 					<img alt="" src="${root}/photo/memberPhoto/${memberDto.photo}">
+				  </c:if>
+				  <!-- 카카오 로그인 -->
+				  <c:if test="${sessionScope.kakaologin!=null }">
+					<img src="${sessionScope.profile}">
+				  </c:if>
 				</div>
 				<button class="openBtn">신고하기</button>
 
@@ -38,11 +46,26 @@
 
 			<div class="profile-second">
 				<c:if test="${sessionScope.loginok!=null }">
-					<h2>
+					<%-- <h2>
 						<b>${sessionScope.myid } 님의<br>
 						<br>프로필입니다.😊
 						</b>
-					</h2>
+					</h2> --%>
+					
+					<c:if test="${sessionScope.kakaologin == null }">
+						<h2>
+							<b>${sessionScope.myid } 님의<br>
+								<br>프로필입니다.😊
+							</b>
+						</h2>
+					</c:if>
+					<c:if test="${sessionScope.kakaologin!=null }">
+						<h2>
+							<b>${sessionScope.kakaoName } 님의<br>
+								<br>프로필입니다.😊
+							</b>
+						</h2>
+					</c:if>
 				</c:if>
 			</div>
 			
