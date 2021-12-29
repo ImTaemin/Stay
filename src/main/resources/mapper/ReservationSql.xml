@@ -17,33 +17,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		, null, now(), #{room_no});
 	</insert>
 	
-	<!-- 예약정보 리스트 -->
-	<resultMap type="redto" id="reserDetail">
-		<id column="no" property="no"/>
-		<result column="guest_id" property="guest_id"/>
-		<result column="host_id" property="host_id"/>
-		<result column="start_date" property="start_date"/>
-		<result column="end_date" property="end_date"/>
-		<result column="price" property="price"/>
-		<result column="pay_method" property="pay_method"/>
-		<result column="card_num" property="card_num"/>
-		<result column="account_num" property="account_num"/>
-		<result column="pay_date" property="pay_date"/>
-		<result column="room_no" property="room_no"/>
-		
-		<association property="rdto" column="no" javaType="rdto" columnPrefix="r">
-			<id column="no" property="no"/>
-			<result column="host_id" property="host_id"/>
-			<result column="addr_load" property="addr_load"/>
-			<result column="addr_detail" property="addr_detail"/>
-			<result column="name" property="name"/>
-			<result column="photos" property="photos"/>
-			<result column="price" property="price"/>
-		</association>
-	</resultMap>
-	
-	<select id="selectGuestReservation" parameterType="String" resultMap="reserDetail">
-		select * from reservation res, room r where res.guest_id = #{guest_id} and res.room_no = r.no and res.start_date > now() order by res.start_date
+	<select id="selectGuestReservation" parameterType="String" resultType="redto">
+		select * from reservation where guest_id = #{guest_id} order by start_date
 	</select>
 	
 	<select id="selectHostReservation" parameterType="String" resultType="redto">
@@ -65,4 +40,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getRoomNo" parameterType="String" resultType="String">
 		select room_no from reservation where no = #{no}
 	</select>
+	
+	
 </mapper>

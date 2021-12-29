@@ -20,6 +20,4 @@ public class ReservationDto {
 	private String account_num;
 	private Timestamp pay_date;
 	private String room_no;
-
-	private RoomDto roomDto;
 }
