@@ -1,5 +1,5 @@
 function btnClick(e) {
-	var s = "<form action='hostreservation' method='post'>";
+	var s = "<form action='../reser/hostreservation' method='post'>";
 	s += "<input type='hidden' name='reserNo' value='" + $(e).attr("list-no") + "'>";
 	s += "</form>";
 	
