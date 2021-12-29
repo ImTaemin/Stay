@@ -1,7 +1,6 @@
 package stay.data.dto;
 
-
-import java.sql.Timestamp;
+import java.security.Timestamp;
 
 import org.apache.ibatis.type.Alias;
 

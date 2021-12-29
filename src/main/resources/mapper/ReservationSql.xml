@@ -17,51 +17,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		, null, now(), #{room_no});
 	</insert>
 	
-	<!-- 예약정보 리스트 -->
-	<resultMap type="stay.data.dto.ReservationDto" id="resMap">
-		<id column="no" property="no"/>
-		<id column="guest_id" property="guest_id"/>
-		<id column="host_id" property="host_id"/>
-		<id column="start_date" property="start_date"/>
-		<id column="end_date" property="end_date"/>
-		<id column="price" property="price"/>
-		<id column="pay_method" property="pay_method"/>
-		<id column="card_num" property="card_num"/>
-		<id column="account_num" property="account_num"/>
-		<id column="pay_date" property="pay_date" typeHandler=""/>
-		<id column="room_no" property="room_no"/>
-<!-- 		<association property="rdto" column="no" javaType="rdto" columnPrefix="r"> -->
-<!-- 			<id column="no" property="no"/> -->
-<!-- 			<result column="host_id" property="host_id"/> -->
-<!-- 			<result column="addr_load" property="addr_load"/> -->
-<!-- 			<result column="addr_detail" property="addr_detail"/> -->
-<!-- 			<result column="name" property="name"/> -->
-<!-- 			<result column="photos" property="photos"/> -->
-<!-- 			<result column="price" property="price"/> -->
-<!-- 		</association> -->
-	</resultMap>
-	
-	<resultMap type="stay.data.dto.RoomDto" id="roomMap">
-		<id column="no" property="no"/>
-		<id column="host_id" property="host_id"/>
-		<id column="type" property="type"/>
-		<id column="addr_load" property="addr_load"/>
-		<id column="addr_detail" property="addr_detail"/>
-		<id column="max_per" property="max_per"/>
-		<id column="content" property="content"/>
-		<id column="name" property="name"/>
-		<id column="photos" property="photos"/>
-		<id column="price" property="price"/>
-		<id column="hosting" property="hosting"/>
-	</resultMap>
-	
-	<resultMap type="stay.data.dto.RoomReservationDto" id="roomResMap">
-		<collection property="resDto" resultMap="resMap"></collection>
-		<collection property="roomDto" resultMap="roomMap"></collection>
-	</resultMap>
-	
-	<select id="selectGuestReservation" parameterType="String" resultMap="roomResMap">
-		select * from reservation res, room r where res.guest_id = #{guest_id} and res.room_no = r.no and res.start_date > now() order by res.start_date
+	<select id="selectGuestReservation" parameterType="String" resultType="redto">
+		select * from reservation where guest_id = #{guest_id} order by start_date
 	</select>
 	
 	<select id="selectHostReservation" parameterType="String" resultType="redto">
