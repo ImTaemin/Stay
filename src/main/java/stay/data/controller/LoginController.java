@@ -1,6 +1,5 @@
 package stay.data.controller;
 
-import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -126,36 +125,43 @@ public class LoginController {
         	mapper.insertMember(mdto);
         }
         
-        session.setAttribute("myid", name);
+        session.setAttribute("myid", e_mail);
+        session.setAttribute("kakaoName", name);
         session.setAttribute("loginok", "yes");
         session.setAttribute("mode", "guest");
         session.setAttribute("kakaologin", "yes");
         session.setAttribute("profile", photo);
+        session.setAttribute("access_Token", access_Token);
         
         //클라이언트의 이메일이 존재할 때 세션에 해당 이메일과 토큰 등록
-        if (userInfo.get("email") != null) {
-            session.setAttribute("userId", userInfo.get("email"));
-            session.setAttribute("access_Token", access_Token);
-        }
+//        if (userInfo.get("email") != null) {
+//            session.setAttribute("userId", userInfo.get("email"));
+//            session.setAttribute("access_Token", access_Token);
+//        }
         
-        return "/member/loginForm";
+        return "redirect:/";
 		
 	}
 	
 	@RequestMapping("/kakaologout")
 	public String kakaologout(HttpSession session) {
+	    if(session.getAttribute("kakaologin")==null) {
+	    	session.removeAttribute("myid");
+	    	session.removeAttribute("loginok");
+	    	session.removeAttribute("mode");
+	    	return "/member/loginForm";
+	    }
+	    
 	    kakao.kakaoLogout((String)session.getAttribute("access_Token"));
 	    session.removeAttribute("access_Token");
 	    session.removeAttribute("userId");
-	    return "/member/loginForm";
-	}
-
-	@GetMapping("/logoutprocess")
-	public String logout(HttpSession session) {
-
-		session.removeAttribute("loginok");
-
-		return "redirect:/";
+	    session.removeAttribute("kakaologin");
+	    session.removeAttribute("kakaoName");
+	    session.removeAttribute("profile");
+	    session.removeAttribute("mode");
+	    session.removeAttribute("loginok");
+	    
+	    return "redirect:/";
 	}
 
 }

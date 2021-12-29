@@ -124,16 +124,23 @@
 				<button type="button" class="btn btn-default"  id="signupbtn" onclick="location.href='${root}/member/gaip'">Sign Up</button>
 			</c:if>
 			<c:if test="${sessionScope.loginok!=null }">
-				<b>${sessionScope.myid } 님</b>
+				<c:if test="${sessionScope.kakaologin == null }">
+					<b>${sessionScope.myid } 님</b>
+				</c:if>
+				<c:if test="${sessionScope.kakaologin!=null }">
+					<b>${sessionScope.kakaoName } 님</b>
+				</c:if>
 				<div class="mypage-img" onclick="location.href='/mypage/mypageform'">
+				  <!-- 일반 로그인 -->
 				  <c:if test="${sessionScope.kakaologin==null }">
 					<img id="img" src="${root}/photo/memberPhoto/${photo}">
 				  </c:if>
+				  <!-- 카카오 로그인 -->
 				  <c:if test="${sessionScope.kakaologin!=null }">
 					<img id="img" src="${sessionScope.profile}">
 				  </c:if>
 				</div>
-				<button type="button" class="btn btn-danger" id="logoutbtn"  onclick="location.href='/member/logoutprocess'">Logout</button>
+				<button type="button" class="btn btn-danger" id="logoutbtn"  onclick="location.href='/member/kakaologout'">Logout</button>
 			</c:if>
 		</div>
 	</div>

@@ -43,15 +43,15 @@
   </form>
   
   <!-- 카카오톡 로그인 -->
-	<c:if test="${userId eq null}">
+	<c:if test="${sessionScope.kakaologin eq null}">
         <a href="https://kauth.kakao.com/oauth/authorize?client_id=caa825a053430f44f87ec4ac4c7e463e&redirect_uri=http://localhost:8080/member/kakaologin&response_type=code">
       		<img src="/photo/kakao_login_medium_narrow.png">
   		</a>
     </c:if>
-    <c:if test="${userId ne null}">
-        <h1>로그인 성공입니다</h1>
-        <input type="button" value="로그아웃" onclick="location.href='/member/kakaologout'">
-    </c:if>
+<%--     <c:if test="${userId ne null}"> --%>
+<!--         <h1>로그인 성공입니다</h1> -->
+<!--         <input type="button" value="로그아웃" onclick="location.href='/member/kakaologout'"> -->
+<%--     </c:if> --%>
 </div>
 
   <!-- kakao login script-->
