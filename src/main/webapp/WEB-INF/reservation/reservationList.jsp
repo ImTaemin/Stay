@@ -43,31 +43,27 @@
 	<div class="tab-content">
 		<!-- 예정 -->
 		<div class="tab-pane active" id="now" role="tabpanel" aria-labelledby="now-tab">
-			<c:forEach var="list" items="${nowList}">
-				<c:forEach var="room" items="${nowRoom}">
-					<c:if test="${list.room_no == room.no}">
-						<div class="card">
-							<img class="card-img-top" src="../../photo/roomPhoto/${room.photos}">
-							
-							<div class="card-body top">
-								<h5 class="card-title">${list.start_date} ~ ${list.end_date}</h5>
-								<b class="card-text" id="roomTitle" onclick="location.href='/room/content?no=${room.no}'">
-									${room.name}
-								</b>
-								<p class="card-text">
-									${room.addr_load}
-								</p>
-							</div>
-							
-							<div class="card-body bottom" list-no="${list.no}" onclick="btnClick(this)">
-								<label class="card-link">예약 정보 더보기</label>
-								<i class="bi bi-chevron-right"></i>
-							</div>
-							
-							<!-- form -->
-						</div>
-					</c:if>
-				</c:forEach>
+			<c:forEach var="list" items="${reserList}">
+				<div class="card">
+<%-- 					<img class="card-img-top" src="../../photo/roomPhoto/${list.photos}"> --%>
+					
+					<div class="card-body top">
+						<h5 class="card-title">${list.start_date} ~ ${list.end_date}</h5>
+						<b class="card-text" id="roomTitle" onclick="location.href='/room/content?no=${list.no}'">
+							${list.name}
+						</b>
+						<p class="card-text">
+							${list.addr_load}
+						</p>
+					</div>
+					
+					<div class="card-body bottom" list-no="${list.no}" onclick="btnClick(this)">
+						<label class="card-link">예약 정보 더보기</label>
+						<i class="bi bi-chevron-right"></i>
+					</div>
+					
+					<!-- form -->
+				</div>
 			</c:forEach>
 		</div>
 							
