@@ -34,6 +34,7 @@ import stay.data.dto.MemberDto;
 import stay.data.dto.PayCardDto;
 import stay.data.dto.ReservationDto;
 import stay.data.dto.RoomDto;
+import stay.data.dto.RoomReservationDto;
 import stay.data.service.CostService;
 import stay.data.service.GuestCommentService;
 import stay.data.service.JoinGuestService;
@@ -254,48 +255,33 @@ public class ReservationController {
 		
 		String myid = (String)session.getAttribute("myid");
 		
-		List<ReservationDto> reserList = reservationService.selectGuestReservation(myid);
+		List<RoomReservationDto> nowList = reservationService.selectNowGuestReservation(myid);
+		List<RoomReservationDto> preList = reservationService.selectPreGuestReservation(myid);
 		
-		List<ReservationDto> nowList = new ArrayList<ReservationDto>();
-		List<ReservationDto> preList = new ArrayList<ReservationDto>();
-		
-		List<RoomDto> nowRoom = new ArrayList<RoomDto>();
-		List<RoomDto> preRoom = new ArrayList<RoomDto>();
-		
-		LocalDate today = LocalDate.now();
-		
-		for(ReservationDto reser : reserList) {
-			String startDate = reser.getStart_date();
+		for(RoomReservationDto dto : nowList) {
+			String photos = dto.getRoomDto().getPhotos();
+			String photo[] = photos.split(",");
 			
-			LocalDate start = LocalDate.parse(startDate, DateTimeFormatter.ISO_DATE);
+			String roomNo = dto.getResDto().getRoom_no();
+			RoomDto rdto = roomService.getRoom(roomNo);
+			rdto.setPhotos(photo[0]);
 			
-			if(start.isAfter(today) || start.equals(today)) {
-				RoomDto roomDto = roomService.getRoom(reser.getRoom_no());
-				
-				String photos = roomDto.getPhotos();
-				String photo[] = photos.split(",");
-				
-				roomDto.setPhotos(photo[0]);
-				
-				nowList.add(reser);
-				nowRoom.add(roomDto);
-			} else if (start.isBefore(today)) {
-				RoomDto roomDto = roomService.getRoom(reser.getRoom_no());
-				
-				String photos = roomDto.getPhotos();
-				String photo[] = photos.split(",");
-				
-				roomDto.setPhotos(photo[0]);
-				
-				preList.add(reser);
-				preRoom.add(roomDto);
-			}
+			dto.setRoomDto(rdto);
+		}
+		
+		for(RoomReservationDto dto : preList) {
+			String photos = dto.getRoomDto().getPhotos();
+			String photo[] = photos.split(",");
+			
+			String roomNo = dto.getResDto().getRoom_no();
+			RoomDto rdto = roomService.getRoom(roomNo);
+			rdto.setPhotos(photo[0]);
+			
+			dto.setRoomDto(rdto);
 		}
 		
 		mview.addObject("nowList", nowList);
 		mview.addObject("preList", preList);
-		mview.addObject("nowRoom", nowRoom);
-		mview.addObject("preRoom", preRoom);
 		
 		mview.setViewName("/reservation/reservationList");
 		
