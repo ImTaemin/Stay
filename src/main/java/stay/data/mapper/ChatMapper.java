@@ -11,4 +11,5 @@ public interface ChatMapper {
 
 	public List<ChatDto> getChattingRooms(String sender);
 	public List<ChatDto> chatting(String sender, String receiver);
+	public void insertChat(ChatDto dto);
 }

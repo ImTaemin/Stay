@@ -148,25 +148,26 @@
 				}
 			}
 	
-// 			function addMessage() {
-// 				var msgInput = document.querySelector("#input-msg");
+			function addMessage() {
+				var msgInput = document.querySelector("#input-msg");
 	
-// 				var chat={
-// 					sender: ${sessionScope.myid},
-// 					receiver: "",
-// 					msg: msgInput.value
-// 				}
+				var chat={
+					sender: "${sessionScope.myid}",
+					receiver: $("#profile-name").text(),
+					msg: msgInput.value
+				}
 			
-// 				//통신이 끝날떄까지 기다려야함
-// 				var response = await fetch("http://localhost:8080/chat/insert",{
-// 					method: "post",
-// 					body: JSON.stringify(chat), //JS->JSON
-// 					headers: {
-// 						"Content-Type":"application/json; charset=utf-8",
-// 						"Connection":"keep-alive",
-// 					"Cache-Control":"no-cache"
-// 					}
-// 				});
+				//통신이 끝날떄까지 기다려야함
+				/*var response = await */
+				fetch("http://localhost:8080/chat/insert",{
+					method: "post",
+					body: JSON.stringify(chat), //JS->JSON
+					headers: {
+						"Content-Type":"application/json; charset=utf-8",
+						"Connection":"keep-alive",
+						"Cache-Control":"no-cache"
+					}
+				});
 			
 // 				var parseResponse = await response.json();
 			
@@ -174,19 +175,19 @@
 	
 // 				chatBox.append(chatOutgoingBox);
 	
-// 				msgInput.value = "";
-// 			}
+				msgInput.value = "";
+			}
 	
-// 			document.querySelector("#send-btn").addEventListener("click", () => {
-// 				addMessage();
-// 			});
+			document.querySelector("#send-btn").addEventListener("click", (e) => {
+				addMessage();
+			});
 	
-// 			document.querySelector("#input-msg").addEventListener("keydown", () => {
-// 				//엔터키
-// 				if (e.keyCode === 13) {
-// 					addMessage();
-// 				}
-// 			});
+			document.querySelector("#input-msg").addEventListener("keydown", (e) => {
+				//엔터키
+				if (e.keyCode === 13) {
+					addMessage();
+				}
+			});
 
 // 			function initMyMessage(historyMsg) {
 // 				var chatBox = document.querySelector("#chat-box");

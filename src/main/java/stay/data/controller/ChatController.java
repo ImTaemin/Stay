@@ -5,6 +5,8 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyEmitter;
@@ -43,5 +45,8 @@ public class ChatController {
 		return emitter;
 	}
 
-//	@PostMapping(path="insert")
+	@PostMapping("/insert")
+	public void insertChat(@RequestBody ChatDto chatDto) {
+		chatService.insertChat(chatDto);
+	}
 }

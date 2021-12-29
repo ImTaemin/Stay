@@ -3,7 +3,6 @@ package stay.data.service;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,6 +90,10 @@ public class ChatService {
 		map.put(sender, receiver);
 		
 		emitterChatMap.put(emitter, map);
+	}
+	
+	public void insertChat(ChatDto dto) {
+		chatMapper.insertChat(dto);
 	}
 
 }
