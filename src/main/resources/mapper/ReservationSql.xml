@@ -33,7 +33,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from reservation where no = #{no} and guest_id = #{guestId}
 	</select>
 	
+	<select id="selectHostOneReservation" parameterType="HashMap" resultType="redto">
+		select * from reservation where no = #{no} and host_id = #{hostId}
+	</select>
+	
 	<select id="getRoomNo" parameterType="String" resultType="String">
 		select room_no from reservation where no = #{no}
 	</select>
+	
+	
 </mapper>

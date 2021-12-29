@@ -171,6 +171,7 @@ public class MainController {
 		return mview;
 	}
    
+   //header의 메뉴 아이콘_게스트모드 전환, 호스트모드 전환
    @GetMapping("/changeMode")
    public String modeChange(HttpSession session) {
 	   if(((String)session.getAttribute("mode")).equals("guest")) {

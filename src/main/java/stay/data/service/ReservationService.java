@@ -39,6 +39,15 @@ public class ReservationService {
 		return mapper.selectGuestOneReservation(map);
 	}
 	
+	public ReservationDto selectHostOneReservation(String no, String hostId) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		
+		map.put("no", no);
+		map.put("hostId", hostId);
+		
+		return mapper.selectHostOneReservation(map);
+	}
+	
 	public String getRoomNo(String reserNo) {
 		return mapper.getRoomNo(reserNo);
 	}
