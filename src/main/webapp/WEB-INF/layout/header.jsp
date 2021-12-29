@@ -68,7 +68,7 @@
 			            <a href="/card/insertform">결제카드 추가</a>
 		          </c:if>
 		          <c:if test="${sessionScope.mode=='host'}">
-			            <a href="#">수금 계좌번호 등록</a>
+			            <a href="/account/insertform">수금 계좌번호 등록</a>
 		          </c:if>
 	          </li>
 	        </ul>
