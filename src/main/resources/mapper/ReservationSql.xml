@@ -28,7 +28,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<id column="pay_method" property="pay_method"/>
 		<id column="card_num" property="card_num"/>
 		<id column="account_num" property="account_num"/>
-		<id column="pay_date" property="pay_date" typeHandler=""/>
+		<id column="pay_date" property="pay_date"/>
 		<id column="room_no" property="room_no"/>
 <!-- 		<association property="rdto" column="no" javaType="rdto" columnPrefix="r"> -->
 <!-- 			<id column="no" property="no"/> -->
@@ -83,6 +83,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getRoomNo" parameterType="String" resultType="String">
 		select room_no from reservation where no = #{no}
 	</select>
-	
 	
 </mapper>
