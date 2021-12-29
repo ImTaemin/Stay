@@ -11,7 +11,6 @@ slideWidth = 800;
 slideMargin = 100;
 slides.style.width = (slideWidth + slideMargin) * slideCount + "px";
 
-
 function moveSlide(num) {
 	// 왼쪽으로 400px씩 이동
 	slides.style.left = -num * 700 + "px";
@@ -31,3 +30,23 @@ next.addEventListener('click', function() {
 	// currentIdx !==slideCount - 1 일때만 moveSlide 함수 불러옴
 	if (currentIdx !== slideCount - 1) moveSlide(currentIdx + 1);
 });
+
+// 별점 주기
+function getStarNum(e) {
+	var clickId = $(e).attr("id");
+	var rating = "0.00";
+	
+	if(clickId == "star-1") {
+		rating = "1.00";
+	} else if (clickId == "star-2") {
+		rating = "2.00";
+	} else if (clickId == "star-3") {
+		rating = "3.00";
+	} else if (clickId == "star-4") {
+		rating = "4.00";
+	} else if (clickId == "star-5") {
+		rating = "5.00";
+	}
+	
+	$('input[name=rate]').attr('value', rating);
+}

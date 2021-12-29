@@ -145,10 +145,42 @@
 			<hr>
 			
 			<c:if test="${preCheck == true}">
-				<!-- 후기 버튼 -->
-				<div class="btn-wrap">
-					<button class="btn btn-info" id="reser-comment">후기 작성하기</button>
-				</div>
+				<!-- 후기 작성 -->
+				<form action="/comment/insert" method="post" class="comment-wrap">
+					<c:if test="${gCommentDto != null}">
+						
+					</c:if>
+					
+					<c:if test="${gCommentDto == null}">
+						<div class="rating">
+						    <input type="radio" name="rate" id="star-1" onclick="getStarNum(this)">
+						    <input type="radio" name="rate" id="star-2" onclick="getStarNum(this)">
+						    <input type="radio" name="rate" id="star-3" onclick="getStarNum(this)">
+						    <input type="radio" name="rate" id="star-4" onclick="getStarNum(this)">
+						    <input type="radio" name="rate" id="star-5" onclick="getStarNum(this)">
+						    
+						    <div class="content">
+						        <div class="stars">
+						            <label for="star-1" class="star-1 fas fa-star"></label>
+						            <label for="star-2" class="star-2 fas fa-star"></label>
+						            <label for="star-3" class="star-3 fas fa-star"></label>
+						            <label for="star-4" class="star-4 fas fa-star"></label>
+						            <label for="star-5" class="star-5 fas fa-star"></label>
+						        </div>
+						    </div>
+						    
+						    <!-- hidden -->
+						    <input type="hidden" name="reserNo" value="${reserDto.no}">
+						    
+						    <span class="numb">점</span>
+						</div>
+						
+						<div class="comment">
+							<textarea class="content-input" name="content"></textarea>
+							<button id="btn-comment" class="btn btn-primary">후기 저장</button>
+						</div>
+					</c:if>
+				</form>
 			</c:if>
 			
 			<c:if test="${preCheck == false}">

@@ -34,8 +34,7 @@ public class CostController {
 	public String cardInsert(@ModelAttribute PayCardDto cardDto, HttpSession session) {
 		String myid = (String) session.getAttribute("myid");
 
-		String cardNum = cardDto.getNum1() + "-" + cardDto.getNum2() + "-" + cardDto.getNum3() + "-"
-				+ cardDto.getNum4();
+		String cardNum = cardDto.getNum1() + "-" + cardDto.getNum2() + "-" + cardDto.getNum3() + "-" + cardDto.getNum4();
 
 		cardDto.setId(myid);
 		cardDto.setNum(cardNum);

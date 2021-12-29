@@ -79,9 +79,16 @@
 				</div>
 				
 				<div class="price-cal">
-					<div class="price">
-						<fmt:formatNumber value="${roomDto.price}" type="currency" currencySymbol="￦"/>
-						<label> / 1박</label>			
+					<div class="price-wrap">
+						<div class="price">
+							<fmt:formatNumber value="${roomDto.price}" type="currency" currencySymbol="￦"/>
+							<label> / 1박</label>
+						</div>
+						
+						<div class="rating">
+							<i class="bi bi-star-fill"></i>
+							${avgRating} 점
+						</div>
 					</div>
 					
 					<div class="calendar">

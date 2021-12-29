@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import stay.data.dto.GuestCommentDto;
 import stay.data.dto.MemberDto;
 import stay.data.dto.PayCardDto;
 import stay.data.dto.ReservationDto;
@@ -46,7 +47,7 @@ public class ReservationController {
 	CostService costService;
 	
 	@Autowired
-	GuestCommentService gcommentService;
+	GuestCommentService gCommentService;
 	
 	@Autowired
 	RoomService roomService;
@@ -97,14 +98,14 @@ public class ReservationController {
 		String monthArray[] = beforeMonth.split("-");
 		
 		// 방 평균 별점
- 		Float avgRating = gcommentService.getRatingAvg();
+ 		Float avgRating = gCommentService.getRatingAvg();
  		
  		if(avgRating == null) {
  			avgRating = (float) 0;
  		}
  		
  		// 방 댓글 개수
- 		Integer totalComment = gcommentService.totalComment();
+ 		Integer totalComment = gCommentService.totalComment();
  		
  		if(totalComment == null) {
  			totalComment = 0;
@@ -340,6 +341,9 @@ public class ReservationController {
 			preCheck = true;
 		}
 		
+		// 후기 작성
+		GuestCommentDto gCommentDto = gCommentService.getOneComment(roomNo, myid);
+		
 		mview.addObject("reserDto", reserDto);
 		mview.addObject("roomDto", roomDto);
 		mview.addObject("start", start);
@@ -349,6 +353,7 @@ public class ReservationController {
 		mview.addObject("joinGuestNum", joinGuestNum);
 		mview.addObject("hostDto", hostDto);
 		mview.addObject("preCheck", preCheck);
+		mview.addObject("gCommentDto", gCommentDto);
 		
 		mview.setViewName("/reservation/reservationDetail");
 		

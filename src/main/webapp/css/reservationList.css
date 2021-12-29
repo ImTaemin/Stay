@@ -52,6 +52,14 @@
 	margin-bottom: 20px;
 }
 
+#roomTitle {
+	cursor: pointer;
+}
+
+#roomTitle:hover {
+	color: #0B57A2;
+}
+
 .card>.bottom {
 	display: flex;
 	justify-content: space-between;

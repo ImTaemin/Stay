@@ -131,16 +131,38 @@
 	border-radius: 7px;
 }
 
-.price-cal>.price {
-	font-weight: bold;
-	font-size: 2.0em;
-	color: #0B57A2;
+.price-cal>.price-wrap {
+	display: flex;
+	justify-content: space-between;
 	margin-bottom: 15px;
 }
 
-.price-cal>.price>label {
+.price-wrap>.price {
+	font-weight: bold;
+	font-size: 2.0em;
+	color: #0B57A2;
+	width: 50%;
+}
+
+.price-wrap>.price>label {
 	font-size: 0.6em;
 	color: black;
+}
+
+.price-wrap>.rating {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	width: 50%;
+	font-size: 2.0em;
+	font-weight: bold;
+}
+
+.price-wrap>.rating>i {
+	color: #FFCD28;
+	padding-right: 0.5%;
+	margin-top: 1.5%;
+	margin-right: 3%;
 }
 
 .price-cal>.calendar {

@@ -51,7 +51,7 @@
 							
 							<div class="card-body top">
 								<h5 class="card-title">${list.start_date} ~ ${list.end_date}</h5>
-								<b class="card-text">
+								<b class="card-text" id="roomTitle" onclick="location.href='/room/content?no=${room.no}'">
 									${room.name}
 								</b>
 								<p class="card-text">

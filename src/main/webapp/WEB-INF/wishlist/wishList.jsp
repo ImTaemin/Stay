@@ -66,7 +66,7 @@
 						<div class="star-cost" onclick="location.href='/room/content?no=${list.no}'">
 							<div class="star">
 								<label><i class="bi bi-star-fill" style="font-size: 1.5rem;"></i>
-								<b>${avgRating}</b> ( 후기 ${totalComment}개 )</label>
+<%-- 								<b>${avgRating}</b> ( 후기 ${totalComment}개 )</label> --%>
 							</div>
 							
 							<div class="cost">

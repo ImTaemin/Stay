@@ -38,4 +38,8 @@ public class ReservationService {
 		
 		return mapper.selectGuestOneReservation(map);
 	}
+	
+	public String getRoomNo(String reserNo) {
+		return mapper.getRoomNo(reserNo);
+	}
 }
