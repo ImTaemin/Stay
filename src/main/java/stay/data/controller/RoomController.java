@@ -17,8 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import stay.data.dto.AvgTotalDto;
+import stay.data.dto.GuestCommentDto;
 import stay.data.dto.MemberDto;
 import stay.data.dto.RoomDto;
+import stay.data.dto.RoomReserGcomDto;
 import stay.data.dto.WishListDto;
 import stay.data.service.GuestCommentService;
 import stay.data.service.MemberService;
@@ -81,12 +84,16 @@ public class RoomController {
 		start = (currentPage - 1) * perPage;
 
 		// 각 페이지에서 필요한 게시글 가져오기
-		List<RoomDto> roomList = roomService.getRooms(start, perPage);
+		List<RoomReserGcomDto> roomList = roomService.getRoomRate(start, perPage);
  		
- 		for(RoomDto dto : roomList) {
- 			String photos[] = dto.getPhotos().split(",");
+ 		for(RoomReserGcomDto dto : roomList) {
+ 			// 이미지 분리
+ 			String photos[] = dto.getRoomDto().getPhotos().split(",");
  			
- 			dto.setPhotos(photos[0]);
+ 			RoomDto roomDto = roomService.getRoom(dto.getRoomDto().getNo());
+ 			roomDto.setPhotos(photos[0]);
+ 			
+ 			dto.setRoomDto(roomDto);
  		}
  		
  		mview.addObject("totalCount", totalCount);
@@ -96,19 +103,6 @@ public class RoomController {
 		mview.addObject("endPage", endPage);
 		mview.addObject("currentPage", currentPage);
  		
- 		// 방 평균 별점
- 		Float avgRating = gcommentService.getRatingAvg();
- 		
- 		if(avgRating == null) {
- 			avgRating = (float) 0;
- 		}
- 		
- 		// 방 댓글 개수
- 		Integer totalComment = gcommentService.totalComment();
- 		
- 		if(totalComment == null) {
- 			totalComment = 0;
- 		}
  		
  		// 위시리스트
  		if(loginok != null) {
@@ -116,9 +110,6 @@ public class RoomController {
  			
  			mview.addObject("wishList", wishList);
  		}
-		
-		mview.addObject("avgRating", avgRating);
-		mview.addObject("totalComment", totalComment);
 		
 		mview.setViewName("/room/roomMain");
 		

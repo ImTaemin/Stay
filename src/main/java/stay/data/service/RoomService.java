@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import stay.data.dto.RoomDto;
+import stay.data.dto.RoomReserGcomDto;
 import stay.data.mapper.RoomMapper;
 
 @Service
@@ -26,17 +27,17 @@ public class RoomService {
 		mapper.insertRoom(roomDto);
 	}
 	
-	public List<RoomDto> getRooms(int start, int perPage) {
+	public RoomDto getRoom(String no) {
+		return mapper.getRoom(no);
+	}
+	
+	public List<RoomReserGcomDto> getRoomRate(int start, int perPage) {
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		
 		map.put("start", start);
 		map.put("perPage", perPage);
 		
-		return mapper.getRooms(map);
-	}
-	
-	public RoomDto getRoom(String no) {
-		return mapper.getRoom(no);
+		return mapper.getRoomRate(map);
 	}
 	
 	public void updateRoom(RoomDto roomDto) {
