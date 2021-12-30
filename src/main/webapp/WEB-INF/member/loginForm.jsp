@@ -32,9 +32,9 @@
    </div>
    
     <span class="find">
-	  <a href="findid">아이디 찾기</a>
+	  <a href="findId">아이디 찾기</a>
 	  <span class="or">|</span>
-	  <a href="findpw">비밀번호 찾기</a>
+	  <a href="findPw">비밀번호 찾기</a>
     </span><br>
 	    
     <span class="sign-up">회원이 아니신가요?&nbsp;&nbsp;<a href="gaip" class="sign-up-link">Sign up</a></span>

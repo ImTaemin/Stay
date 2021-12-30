@@ -1,5 +1,6 @@
 package stay.data.service;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +37,18 @@ public class MemberService {
 	
 	public void updateImg(MemberDto memberDto) {
 		mapper.updateImg(memberDto);
+	}
+	
+	//아이디 찾기
+	public String findId(String e_mail) throws Exception{
+		
+		return mapper.findId(e_mail);
+	}
+	
+	//비밀번호 찾기
+	public void findPw(String e_mail) throws Exception{
+		
+		mapper.findPw(e_mail);
 	}
 	
 }

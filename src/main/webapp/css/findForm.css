@@ -1,0 +1,81 @@
+@charset "UTF-8";
+
+div .find-form {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	margin-top: 20px;
+}
+
+h1 {
+	margin-left: -225px;
+	margin-bottom: 20px;
+}
+
+form {
+	display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    flex-wrap: wrap;
+    width: 450px;
+}
+
+label{
+	display: inline-block;
+    width: 50px;
+    text-align: right;
+    margin-bottom: 5px;
+    margin-right: 10px;
+    font-weight: 700;
+}
+
+input {
+    display: inline-block;
+    width: 360px;
+    height: 44px;
+    padding: 0 12px;
+    border-radius: 7px;
+    margin-top: 15px !important;
+    margin-bottom: 5px !important;
+    font-size: 14px;
+    border: 2px solid #d3dce6;
+    transition: border-color 200ms ease-in-out;
+}
+
+input:focus, input:hover, input:active {
+   outline: none;
+   box-shadow: none;
+   border-color: #0B57A2;
+}
+
+.find-input-check {
+	display: flex;
+	flex-direction: column;
+}
+
+.find-btn {
+	display: inline;
+	margin-left: 115px;
+    margin-top: 10px;
+	width: 100px;
+	height: 40px;
+	border: none;
+	border-radius: 5px;
+	background-color: #0B57A2;
+	color: #fff;
+	box-shadow: 1px 1px 2px grey;
+}
+
+.cancel-btn {
+	display: inline;
+	margin-left: 10px;
+	width: 100px;
+	height: 40px;
+	border: none;
+	border-radius: 5px;
+	background-color: #DB0000;
+	color: #fff;
+	box-shadow: 1px 1px 2px grey;
+}

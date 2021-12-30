@@ -57,4 +57,12 @@
 	<update id="updatelikes" parameterType="String">
 		update member set likes=likes+1 where id=#{id}
 	</update>
+	
+	<select id="findId" parameterType="String" resultType="String">
+		select id from member where e_mail=#{e_mail}
+	</select>
+	
+	<update id="findPw" parameterType="mdto">
+		update member set pass=#{pass} where id=#{id}
+	</update>
 </mapper>

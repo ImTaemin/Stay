@@ -1,11 +1,13 @@
 package stay.data.controller;
 
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -162,6 +164,40 @@ public class LoginController {
 	    session.removeAttribute("loginok");
 	    
 	    return "redirect:/";
+	}
+	
+	//아이디 찾기
+	@GetMapping("findId")
+	public String findIdForm() throws Exception{
+		
+		return "/member/findIdForm";
+	}
+	
+	@PostMapping("findIdprocess")
+	public String findId(HttpServletResponse response, @RequestParam String email, Model model) throws Exception {
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		String id = mapper.findId(email);
+		
+		if (id == null) {
+			out.println("<script>");
+			out.println("alert('가입된 아이디가 없습니다.');");
+			out.println("history.go(-1);");
+			out.println("</script>");
+			out.close();
+			return null;
+		} else {
+			return id;
+		}
+		
+		//model.addAttribute("id", id);
+	}
+	
+	//비밀번호 찾기
+	@GetMapping("findPw")
+	public String findPwForm() throws Exception{
+		
+		return "/member/findPwForm";
 	}
 
 }
