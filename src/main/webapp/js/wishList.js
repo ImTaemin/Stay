@@ -30,7 +30,7 @@ $(document).ready(function() {
 	$(window).scroll(function() {
 		// 현재 스크롤 위치를 가져온다.
 		var scrollTop = $(window).scrollTop();
-		var newPosition = scrollTop + (floatPosition - 110) + "px";
+		var newPosition = scrollTop + (floatPosition - 80) + "px";
 
 		if (scrollTop != 0) {
 			$(".map-wrap").css('top', newPosition);

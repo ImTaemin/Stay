@@ -230,10 +230,7 @@ public class RoomController {
 	public ModelAndView roomUpdateForm(String no) {
 		ModelAndView mview = new ModelAndView();
 		
-		RoomDto roomDto = roomService.getRoom(no);
-		
-		// 엔터키 입력
-		roomDto.getContent().replaceAll("<br>", "\r\n");
+		RoomDto roomDto = roomService.getRoom("7");
 		
 		mview.addObject("roomDto", roomDto);
 		

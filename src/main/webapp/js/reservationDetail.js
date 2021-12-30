@@ -88,3 +88,11 @@ $("#update-btn").click(function() {
 
 	document.commentUpdate.submit();
 });
+
+//엔터값 출력
+$(document).ready(function(){
+  var content = $(".content-input").val();
+	result = content.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
+	
+	$(".content-input").val(result);
+})

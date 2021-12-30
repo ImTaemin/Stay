@@ -329,9 +329,6 @@ public class ReservationController {
 		// 후기 작성
 		GuestCommentDto gCommentDto = gCommentService.getOneComment(reserNo, myid);
 		
-		// 엔터키 입력
-		gCommentDto.getContent().replaceAll("<br>", "\r\n");
-		
 		mview.addObject("reserDto", reserDto);
 		mview.addObject("roomDto", roomDto);
 		mview.addObject("start", start);

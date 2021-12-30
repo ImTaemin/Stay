@@ -134,11 +134,17 @@ $(document).ready(function (e){
 		});
     }
     
+    //엔터값 출력
+	var content = $("#content").val();
+	result = content.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
+
+	$("#content").val(result);
+    
     // 엔터값 변경
 	$("#room-insert").click(function(){
-		var content = $('#content').val();
-		content = content.replace(/(?:\r\n|\r|\n)/g, '<br/>');
-		$("#content").val(content);
+		var reContent = $('#content').val();
+		reContent = reContent.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+		$("#content").val(reContent);
 		
 		document.updateForm.submit();
 	});
