@@ -28,9 +28,12 @@
 					<img src="${sessionScope.profile}">
 				  </c:if>
 				</div>
-				<button class="openBtn">신고하기</button>
+				
+				<div class="update" data-toggle="modal" data-target="#singoModal">
+					<button class="openBtn">신고하기</button>
+				</div>
 
-				<!-- <div class="modal hidden"> -->
+				<!-- <div class="modal hidden"> 
 				<div class="modal">
 					<div class="bg"></div>
 					<div class="modalBox">
@@ -40,6 +43,33 @@
 						<label for="content">&nbsp;&nbsp;&nbsp;&nbsp;신고사유&nbsp;&nbsp;&nbsp;&nbsp;</label>
 						<input type="text" required="required">
 						<button class="closeBtn">✖</button>
+					</div>
+				</div>-->
+
+				<!-- 신고하기 모달 -->
+				<div id="singoModal" class="modal" role="dialog">
+					<div class="modal-dialog modal-dialog-centered">
+						<!-- Modal content -->
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">신고하기</h4>
+							</div>
+
+							<div class="modal-body">
+								<label for="id-singo">신고 할 아이디&nbsp;</label>
+								<input type="text" id="singo-id" required="required" value="${sessionScope.myid }"><br>
+								<label for="reason-singo">신고사유</label>
+								<input type="text" id="singo-reason" required="required">
+							</div>
+
+							<div class="modal-footer">
+								<button type="button" id="bodyBtn" class="btn btn-primary"
+									onclick="singoBtn()" data-dismiss="modal">신고하기</button>
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">Close</button>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
