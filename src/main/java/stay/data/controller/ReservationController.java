@@ -32,9 +32,8 @@ import stay.data.dto.GuestCommentDto;
 import stay.data.dto.MemberDto;
 import stay.data.dto.PayCardDto;
 import stay.data.dto.ReservationDto;
+import stay.data.dto.ResultMapDto;
 import stay.data.dto.RoomDto;
-import stay.data.dto.RoomReserGcomDto;
-import stay.data.dto.RoomReservationDto;
 import stay.data.service.CostService;
 import stay.data.service.GuestCommentService;
 import stay.data.service.JoinGuestService;
@@ -71,7 +70,7 @@ public class ReservationController {
 		
 		String myid = (String)session.getAttribute("myid");
 		
-		RoomReserGcomDto dto = roomService.getOneRoom(roomNo);
+		ResultMapDto dto = roomService.getOneRoom(roomNo);
 		
 		// 이미지 분리
 		RoomDto roomDto = roomService.getRoom(roomNo);
@@ -244,10 +243,10 @@ public class ReservationController {
 		
 		String myid = (String)session.getAttribute("myid");
 		
-		List<RoomReservationDto> nowList = reservationService.selectNowGuestReservation(myid);
-		List<RoomReservationDto> preList = reservationService.selectPreGuestReservation(myid);
+		List<ResultMapDto> nowList = reservationService.selectNowGuestReservation(myid);
+		List<ResultMapDto> preList = reservationService.selectPreGuestReservation(myid);
 		
-		for(RoomReservationDto dto : nowList) {
+		for(ResultMapDto dto : nowList) {
 			String photos = dto.getRoomDto().getPhotos();
 			String photo[] = photos.split(",");
 			
@@ -258,7 +257,7 @@ public class ReservationController {
 			dto.setRoomDto(rdto);
 		}
 		
-		for(RoomReservationDto dto : preList) {
+		for(ResultMapDto dto : preList) {
 			String photos = dto.getRoomDto().getPhotos();
 			String photo[] = photos.split(",");
 			

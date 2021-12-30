@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import stay.data.dto.ReservationDto;
-import stay.data.dto.RoomReservationDto;
+import stay.data.dto.ResultMapDto;
 import stay.data.mapper.ReservationMapper;
 
 @Service
@@ -19,11 +19,11 @@ public class ReservationService {
 		mapper.insertReservation(reDto);
 	}
 	
-	public List<RoomReservationDto> selectNowGuestReservation(String guestId) {
+	public List<ResultMapDto> selectNowGuestReservation(String guestId) {
 		return mapper.selectNowGuestReservation(guestId);
 	}
 	
-	public List<RoomReservationDto> selectPreGuestReservation(String guestId) {
+	public List<ResultMapDto> selectPreGuestReservation(String guestId) {
 		return mapper.selectPreGuestReservation(guestId);
 	}
 	

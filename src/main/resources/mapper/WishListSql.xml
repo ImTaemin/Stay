@@ -16,7 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from wishlist where guest_id = #{guestId}
 	</select>
 	
-	<resultMap type="stay.data.dto.RoomWishResGcoDto" id="roomWishResGcoMap">
+	<resultMap type="stay.data.dto.ResultMapDto" id="resultMap">
 		<collection property="roomDto" resultMap="roomMap"></collection>
 		<collection property="wishDto" resultMap="wishMap"></collection>
 		<collection property="resDto" resultMap="resMap"></collection>
@@ -24,12 +24,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<collection property="atDto" resultMap="atMap"></collection>
 	</resultMap>
 	
-	<select id="getWishList" parameterType="String" resultMap="roomWishResGcoMap">
+	<select id="getWishList" parameterType="String" resultMap="resultMap">
 		select *, ifnull(t, 0) total, ifnull(a, 0) avg from room a right join (
 			select count(g.rating) t, round(avg(g.rating), 1) a, r.no
 			from room r, wishlist w, reservation res, guest_comment g
-			where r.no = w.room_no and res.no = g.no and w.guest_id = #{guest_id}
-			group by r.no
+			where r.no = w.room_no and res.no = g.no and w.guest_id = #{guest_id} group by r.no
 		) b on a.no = b.no
 	</select>
 	
@@ -77,6 +76,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<id column="content" property="content"/>
 		<id column="rating" property="rating"/>
 		<id column="likes" property="likes"/>
+		<id column="write_day" property="write_day"/>
 	</resultMap>
 	
 	<!-- avg total -->

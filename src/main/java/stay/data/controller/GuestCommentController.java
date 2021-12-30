@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -65,5 +66,12 @@ public class GuestCommentController {
 		mview.setViewName("redirect:/reser/reservationlist");
 		
 		return mview;
+	}
+	
+	@GetMapping("/delete")
+	public String commentDelete(@RequestParam String no) {
+		gCommentService.deleteGuestComment(no);
+		
+		return "redirect:/reser/reservationlist";
 	}
 }

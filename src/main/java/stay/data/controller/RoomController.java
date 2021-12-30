@@ -18,8 +18,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import stay.data.dto.MemberDto;
+import stay.data.dto.ResultMapDto;
 import stay.data.dto.RoomDto;
-import stay.data.dto.RoomReserGcomDto;
 import stay.data.dto.WishListDto;
 import stay.data.service.GuestCommentService;
 import stay.data.service.MemberService;
@@ -82,9 +82,9 @@ public class RoomController {
 		start = (currentPage - 1) * perPage;
 
 		// 각 페이지에서 필요한 게시글 가져오기
-		List<RoomReserGcomDto> roomList = roomService.getAllRoom(start, perPage);
+		List<ResultMapDto> roomList = roomService.getAllRoom(start, perPage);
  		
- 		for(RoomReserGcomDto dto : roomList) {
+ 		for(ResultMapDto dto : roomList) {
  			// 이미지 분리
  			String photos[] = dto.getRoomDto().getPhotos().split(",");
  			
@@ -167,7 +167,7 @@ public class RoomController {
 		
 		ModelAndView mview = new ModelAndView();
 		
-		RoomReserGcomDto dto = roomService.getOneRoom(no);
+		ResultMapDto dto = roomService.getOneRoom(no);
 		
 		String photoList[] = dto.getRoomDto().getPhotos().split(",");
 		
@@ -183,10 +183,17 @@ public class RoomController {
  			mview.addObject("wishList", wishList);
  		}
 		
+ 		// 게스트 댓글
+ 		List<ResultMapDto> gCoDto = gcommentService.getRoomComment(no);
+ 		
+ 		// 게스트 정보
+// 		List<MemberDto> coMemList = memberService.getCommentMember(hostId)
+ 		
  		mview.addObject("myid", myid);
  		mview.addObject("loginok", loginok);
 		mview.addObject("dto", dto);
 		mview.addObject("memDto", memDto);
+		mview.addObject("gCoDto", gCoDto);
 		mview.addObject("photoList", photoList);
 		mview.addObject("currentPage", currentPage);
 		

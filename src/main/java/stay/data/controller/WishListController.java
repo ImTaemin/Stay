@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import stay.data.dto.RoomDto;
-import stay.data.dto.RoomWishResGcoDto;
+import stay.data.dto.ResultMapDto;
 import stay.data.dto.WishListDto;
 import stay.data.service.GuestCommentService;
 import stay.data.service.RoomService;
@@ -38,9 +38,9 @@ public class WishListController {
 		
 		String myid = (String)session.getAttribute("myid");
 		
-		List<RoomWishResGcoDto> allList = wishService.getWishList(myid);
+		List<ResultMapDto> allList = wishService.getWishList(myid);
 		
-		for(RoomWishResGcoDto dto : allList) {
+		for(ResultMapDto dto : allList) {
 			String photos = dto.getRoomDto().getPhotos();
 			String photo[] = photos.split(",");
 			

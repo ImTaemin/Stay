@@ -103,7 +103,7 @@
 					<!-- 공동 게스트 -->
 					<div class="guest-wrap">
 						<div class="guest-title">
-							<label>공동 게스트</label>
+							<label>공동 게스트 (최대 ${roomDto.max_per}명)</label>
 						</div>
 						
 						<hr>
@@ -182,39 +182,51 @@
 				<form action="/comment/update" method="post" name="commentUpdate" class="comment-wrap">
 					<c:if test="${gCommentDto != null}">
 						<div class="rating">
-							<input type="radio" name="rate" id="star-1" value="${gCommentDto.rating}"
-							 ${gCommentDto.rating == '1.0' ? 'checked="checked"' : ''} onclick="changeStarNum(this)">
-						    <input type="radio" name="rate" id="star-2" value="${gCommentDto.rating}"
-						     ${gCommentDto.rating == '2.0' ? 'checked="checked"' : ''} onclick="changeStarNum(this)">
-						    <input type="radio" name="rate" id="star-3" value="${gCommentDto.rating}"
-						     ${gCommentDto.rating == '3.0' ? 'checked="checked"' : ''} onclick="changeStarNum(this)">
-						    <input type="radio" name="rate" id="star-4" value="${gCommentDto.rating}"
-						     ${gCommentDto.rating == '4.0' ? 'checked="checked"' : ''} onclick="changeStarNum(this)">
-						    <input type="radio" name="rate" id="star-5" value="${gCommentDto.rating}"
-						     ${gCommentDto.rating == '5.0' ? 'checked="checked"' : ''} onclick="changeStarNum(this)">
+							<div class="rate-part">
+								<input type="radio" name="rate" id="star-1" value="${gCommentDto.rating}"
+								 ${gCommentDto.rating == '1.0' ? 'checked="checked"' : ''} onclick="changeStarNum(this)">
+							    <input type="radio" name="rate" id="star-2" value="${gCommentDto.rating}"
+							     ${gCommentDto.rating == '2.0' ? 'checked="checked"' : ''} onclick="changeStarNum(this)">
+							    <input type="radio" name="rate" id="star-3" value="${gCommentDto.rating}"
+							     ${gCommentDto.rating == '3.0' ? 'checked="checked"' : ''} onclick="changeStarNum(this)">
+							    <input type="radio" name="rate" id="star-4" value="${gCommentDto.rating}"
+							     ${gCommentDto.rating == '4.0' ? 'checked="checked"' : ''} onclick="changeStarNum(this)">
+							    <input type="radio" name="rate" id="star-5" value="${gCommentDto.rating}"
+							     ${gCommentDto.rating == '5.0' ? 'checked="checked"' : ''} onclick="changeStarNum(this)">
+							    
+							    <div class="content">
+							        <div class="stars">
+							            <label for="star-1" class="star-1 fas fa-star"></label>
+							            <label for="star-2" class="star-2 fas fa-star"></label>
+							            <label for="star-3" class="star-3 fas fa-star"></label>
+							            <label for="star-4" class="star-4 fas fa-star"></label>
+							            <label for="star-5" class="star-5 fas fa-star"></label>
+							        </div>
+							    </div>
+							    
+							    <!-- hidden -->
+						    	<input type="hidden" name="reserNo" value="${reserDto.no}">
+						    	
+							    <fmt:parseNumber var="star" value="${gCommentDto.rating}" integerOnly="true" />
+							    
+							    <span class="numa" id="starNum">${star}</span>
+							    <span class="numa" style="margin-left: 0;">점</span>
+							</div>
 						    
-						    <div class="content">
-						        <div class="stars">
-						            <label for="star-1" class="star-1 fas fa-star"></label>
-						            <label for="star-2" class="star-2 fas fa-star"></label>
-						            <label for="star-3" class="star-3 fas fa-star"></label>
-						            <label for="star-4" class="star-4 fas fa-star"></label>
-						            <label for="star-5" class="star-5 fas fa-star"></label>
-						        </div>
+						    <div class="date-part">
+						    	<fmt:formatDate var="writeDay" value="${gCommentDto.write_day}" pattern="yyyy년 MM월 dd일"/>
+						    	<span class="date">작성일 | ${writeDay}</span>
 						    </div>
-						    
-						    <!-- hidden -->
-					    	<input type="hidden" name="reserNo" value="${reserDto.no}">
-					    	
-						    <fmt:parseNumber var="star" value="${gCommentDto.rating}" integerOnly="true" />
-						    
-						    <span class="numa" id="starNum">${star}</span>
-						    <span class="numa" style="margin-left: 0;">점</span>
 						</div>
 						
 						<div class="comment">
 							<textarea class="content-input" name="content">${gCommentDto.content}</textarea>
-							<button type="button" id="update-btn" class="btn btn-primary">후기 수정</button>
+							
+							<div class="btn-wrap">
+								<button type="button" id="update-btn" class="btn btn-primary">후기 수정</button>
+								<button type="button" id="delete-btn" class="btn btn-danger"
+								onclick="location.href='/comment/delete?no=${reserDto.no}'">후기 삭제</button>
+							</div>
 						</div>
 					</c:if>
 				</form>
@@ -222,7 +234,7 @@
 			
 			<c:if test="${preCheck == false}">
 				<!-- 취소 버튼 -->
-				<div class="btn-wrap">
+				<div class="can-wrap">
 					<button class="btn btn-danger" id="can-reser">예약 취소</button>
 				</div>
 			</c:if>

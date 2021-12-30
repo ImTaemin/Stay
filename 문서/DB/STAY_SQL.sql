@@ -1,10 +1,10 @@
 #회원
 create table member(
 	id varchar(20) not null primary key,
-	pass varchar(20) not null,
+	pass varchar(20),
 	name varchar(20) not null,
 	birth date not null,
-	hp varchar(20) not null,
+	hp varchar(20),
 	addr_load varchar(100) not null,
 	addr_detail varchar(100) not null,
 	photo varchar(100),
@@ -136,6 +136,7 @@ create table guest_comment(
 	content varchar(500) not null,
 	rating float not null,
 	likes int default 0,
+	write_day date not null,
 	primary key (no, guest_id),
 	foreign key (no) references reservation(no),
 	foreign key (guest_id) references member(id)

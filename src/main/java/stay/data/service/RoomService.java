@@ -6,8 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import stay.data.dto.ResultMapDto;
 import stay.data.dto.RoomDto;
-import stay.data.dto.RoomReserGcomDto;
 import stay.data.mapper.RoomMapper;
 
 @Service
@@ -27,7 +27,7 @@ public class RoomService {
 		mapper.insertRoom(roomDto);
 	}
 	
-	public List<RoomReserGcomDto> getAllRoom(int start, int perPage) {
+	public List<ResultMapDto> getAllRoom(int start, int perPage) {
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		
 		map.put("start", start);
@@ -40,7 +40,7 @@ public class RoomService {
 		return mapper.getRoom(no);
 	}
 	
-	public RoomReserGcomDto getOneRoom(String no) {
+	public ResultMapDto getOneRoom(String no) {
 		return mapper.getOneRoom(no);
 	}
 	

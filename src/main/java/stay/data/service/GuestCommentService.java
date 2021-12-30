@@ -7,16 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import stay.data.dto.GuestCommentDto;
+import stay.data.dto.ResultMapDto;
 import stay.data.mapper.GuestCommentMapper;
 
 @Service
 public class GuestCommentService {
 	@Autowired
 	GuestCommentMapper mapper;
-	
-	public List<GuestCommentDto> getAllComment() {
-		return mapper.getAllComment();
-	}
 	
 	public GuestCommentDto getOneComment(String no, String guest_id) {
 		HashMap<String, String> map = new HashMap<String, String>();
@@ -27,11 +24,19 @@ public class GuestCommentService {
 		return mapper.getOneComment(map);
 	}
 	
+	public List<ResultMapDto> getRoomComment(String roomNo) {
+		return mapper.getRoomComment(roomNo);
+	}
+	
 	public void insertGuestComment(GuestCommentDto gcdto) {
 		mapper.insertGuestComment(gcdto);
 	}
 	
 	public void updateGuestComment(GuestCommentDto gcdto) {
 		mapper.updateGuestComment(gcdto);
+	}
+	
+	public void deleteGuestComment(String no) {
+		mapper.deleteGuestComment(no);
 	}
 }

@@ -1,10 +1,12 @@
 package stay.data.service;
 
-import org.apache.ibatis.session.SqlSession;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import stay.data.dto.MemberDto;
+import stay.data.dto.ResultMapDto;
 import stay.data.mapper.MemberMapper;
 import stay.data.repository.MemberRepository;
 
@@ -51,4 +53,7 @@ public class MemberService {
 		mapper.findPw(e_mail);
 	}
 	
+	public List<ResultMapDto> getCommentMember(String roomNo) {
+		return mapper.getCommentMember(roomNo);
+	}
 }

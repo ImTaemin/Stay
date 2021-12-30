@@ -1,5 +1,7 @@
 package stay.data.dto;
 
+import java.sql.Timestamp;
+
 import org.apache.ibatis.type.Alias;
 
 import lombok.Data;
@@ -12,4 +14,5 @@ public class GuestCommentDto {
 	private String content;
 	private double rating;
 	private int likes;
+	private Timestamp write_day;
 }

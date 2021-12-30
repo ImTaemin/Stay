@@ -284,11 +284,26 @@
 				
 				<div class="comment">
 					<c:if test="${dto.atDto.total == 0}">
-						<div>등록된 후기가 없습니다.</div>
+						<div class="empty">등록된 후기가 없습니다.</div>
 					</c:if>
 					
 					<c:if test="${dto.atDto.total > 0}">
-						
+						<div class="co-wrap">
+							<c:forEach var="co" items="${gCoDto}" varStatus="i">
+								<div class="co-detail">
+									<div class="mem-detail">
+										<div class="mem-img">
+											<img src="${root}/photo/memberPhoto/jenny.jpg">
+										</div>
+										
+										<div class="mem-content">
+											<span>아이디</span>
+										</div>
+									</div>
+<%-- 									<span>${i.count} ${co.gcoDto.content}</span> --%>
+								</div>
+							</c:forEach>
+						</div>
 					</c:if>
 				</div>
 			</div>

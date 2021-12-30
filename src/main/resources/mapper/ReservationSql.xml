@@ -17,17 +17,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		, null, now(), #{room_no});
 	</insert>
 	
-	<resultMap type="stay.data.dto.RoomReservationDto" id="roomResMap">
+	<resultMap type="stay.data.dto.ResultMapDto" id="resultMap">
 		<collection property="roomDto" resultMap="roomMap"></collection>
 		<collection property="resDto" resultMap="resMap"></collection>
 	</resultMap>
 	
-	<select id="selectNowGuestReservation" parameterType="String" resultMap="roomResMap">
+	<select id="selectNowGuestReservation" parameterType="String" resultMap="resultMap">
 		select * from reservation res, room r where res.guest_id = #{guest_id} and res.room_no = r.no
 		and res.start_date >= date_format(now(), "%y-%m-%d") order by res.start_date
 	</select>
 	
-	<select id="selectPreGuestReservation" parameterType="String" resultMap="roomResMap">
+	<select id="selectPreGuestReservation" parameterType="String" resultMap="resultMap">
 		select * from reservation res, room r where res.guest_id = #{guest_id} and res.room_no = r.no
 		and date_format(now(), "%y-%m-%d") > res.start_date order by res.start_date
 	</select>
