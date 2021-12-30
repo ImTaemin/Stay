@@ -30,7 +30,7 @@ public interface MemberMapper {
 	public MemberDto getData(String id);
 	public void updatelikes(String id);
 	
-	public String findId(String e_mail);
+	public String findId(String inputName, String inputHp);
 	public void findPw(String e_mail);
 	
 	public List<ResultMapDto> getCommentMember(String roomNo);

@@ -26,7 +26,7 @@
     <input type="text" id="email" name="e_mail" placeholder="가입시 등록한 이메일을 입력하세요" required="required" autofocus="autofocus"><br>
    
     <div class="find-cancel-btn">
-  	  <button type="submit" class="find-btn">찾기</button>
+  	  <button type="button" id="searchBtn2" class="find-btn">찾기</button>
   	  <button type="button" class="cancel-btn" onclick="history.back()">취소</button>
   	</div>
   </form>

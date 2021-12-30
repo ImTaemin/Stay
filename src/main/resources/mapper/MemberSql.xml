@@ -59,7 +59,7 @@
 	</update>
 	
 	<select id="findId" parameterType="String" resultType="String">
-		select id from member where e_mail=#{e_mail}
+		select id from member where name=#{inputName} and hp=#{inputHp}
 	</select>
 	
 	<update id="findPw" parameterType="mdto">

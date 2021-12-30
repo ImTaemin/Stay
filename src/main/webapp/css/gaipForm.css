@@ -6,7 +6,6 @@ div .gaip-form {
 	justify-content: center;
 	align-items: center;
 	width: 100%;
-	margin-top: 20px;
 }
 
 h1 {
@@ -123,6 +122,10 @@ label {
     font-size: 12px;
     line-height: 16px;
     margin-top: 10px;
+}
+
+.required{
+	color: orange;
 }
 
 .input-btn {

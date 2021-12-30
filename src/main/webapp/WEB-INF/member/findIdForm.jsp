@@ -20,13 +20,27 @@
  <h1>아이디 찾기</h1>
  
   <form action="findIdprocess" method="post">
-  	<label for="name">이름</label>
-    <input type="text" id="name" name="name" placeholder="이름을 입력하세요" required="required" autofocus="autofocus"><br>
-  	<label for="hp">연락처</label>
-    <input type="tel" id="hp" name="hp" placeholder="'-'를 제외한 핸드폰 번호를 입력하세요" required="required" autofocus="autofocus"><br>
+  	<label for="inputName">이름</label>
+    <input type="text" id="inputName" name="inputName" placeholder="이름을 입력하세요" required="required" autofocus="autofocus"><br>
+  	<label for="inputHp">연락처</label>
+    <input type="tel" class="phoneNumber" id="inputHp" name="inputHp" placeholder="핸드폰 번호를 입력하세요" required="required" autofocus="autofocus"><br>
    
     <div class="find-cancel-btn">
-  	  <button type="submit" class="find-btn">찾기</button>
+  	  <!-- <button type="button" id="searchBtn" class="find-btn" onclick="idSearch_click()">찾기</button> -->
+  	  <button type="button" id="searchBtn" class="find-btn">찾기</button>
+  	  <div class="modal">
+  	    <div id="background_modal" class="background_modal">
+		  <div class="modal_contents">
+			<h4>
+				<b>회원님의 아이디는</b><span class="close">&times;</span>
+			</h4><br>
+				<h2 id="id_value"></h2>
+			<br>
+			<button type="button" id="pwSearch_btn" class="btn blue-gradient btn-rounded waves-effect">비밀번호 찾기</button>
+		  </div>
+	    </div>
+	  </div>
+  	  
   	  <button type="button" class="cancel-btn" onclick="history.back()">취소</button>
   	</div>
   </form>
@@ -34,5 +48,7 @@
 
 <!-- js -->
 <script src="/js/findForm.js"></script>
+
+<%-- <%@ include file="/member/userIdModal.jsp" %> --%>
 </body>
 </html>

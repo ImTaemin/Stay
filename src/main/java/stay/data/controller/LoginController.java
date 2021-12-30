@@ -17,10 +17,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import stay.data.dto.MemberDto;
 import stay.data.mapper.MemberMapper;
 import stay.data.service.KakaoLogin;
+import stay.data.service.MemberService;
 
 @Controller
 @RequestMapping("/member")
@@ -28,6 +30,9 @@ public class LoginController {
 
 	@Autowired
 	MemberMapper mapper;
+	
+	@Autowired
+	MemberService service;
 	
 	@Autowired
 	private KakaoLogin kakao;
@@ -174,23 +179,11 @@ public class LoginController {
 	}
 	
 	@PostMapping("findIdprocess")
-	public String findId(HttpServletResponse response, @RequestParam String email, Model model) throws Exception {
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out = response.getWriter();
-		String id = mapper.findId(email);
-		
-		if (id == null) {
-			out.println("<script>");
-			out.println("alert('가입된 아이디가 없습니다.');");
-			out.println("history.go(-1);");
-			out.println("</script>");
-			out.close();
-			return null;
-		} else {
-			return id;
-		}
-		
-		//model.addAttribute("id", id);
+	@ResponseBody
+	public String findId(@RequestParam(value="inputName", required=false) String inputName, @RequestParam(value="inputHp", required=false) String inputHp){
+		String result = service.findId(inputName, inputHp);
+
+		return result;
 	}
 	
 	//비밀번호 찾기
@@ -199,5 +192,15 @@ public class LoginController {
 		
 		return "/member/findPwForm";
 	}
+	
+	/*
+	 * @GetMapping("findPwprocess")
+	 * 
+	 * @ResponseBody public String findPw(HttpServletResponse
+	 * response, @RequestParam("inputName") String name, @RequestParam("inputHp")
+	 * String hp){ String result = service.findId(name, hp);
+	 * 
+	 * return result; }
+	 */
 
 }
