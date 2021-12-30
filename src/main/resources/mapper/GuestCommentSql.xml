@@ -4,20 +4,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="stay.data.mapper.GuestCommentMapper">
-	<select id="getRatingAvg" parameterType="String" resultType="Float">
-		select avg(rating) from guest_comment
-		<if test="no != null">
-			where no = #{no}
-		</if>
-	</select>
-	
-	<select id="totalComment" parameterType="String" resultType="Integer">
-		select count(*) from guest_comment
-		<if test="no != null">
-			where no = #{no}
-		</if>
-	</select>
-	
 	<select id="getAllComment" resultType="gcdto">
 		select * from guest_comment
 	</select>

@@ -27,17 +27,21 @@ public class RoomService {
 		mapper.insertRoom(roomDto);
 	}
 	
-	public RoomDto getRoom(String no) {
-		return mapper.getRoom(no);
-	}
-	
-	public List<RoomReserGcomDto> getRoomRate(int start, int perPage) {
+	public List<RoomReserGcomDto> getAllRoom(int start, int perPage) {
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		
 		map.put("start", start);
 		map.put("perPage", perPage);
 		
-		return mapper.getRoomRate(map);
+		return mapper.getAllRoom(map);
+	}
+	
+	public RoomDto getRoom(String no) {
+		return mapper.getRoom(no);
+	}
+	
+	public RoomReserGcomDto getOneRoom(String no) {
+		return mapper.getOneRoom(no);
 	}
 	
 	public void updateRoom(RoomDto roomDto) {

@@ -25,7 +25,7 @@
 <body>
 	<form action="/pay/paymentform" method="post">
 		<!-- hidden -->
-		<input type="hidden" name="roomNo" value="${roomDto.no}">
+		<input type="hidden" name="roomNo" value="${dto.roomDto.no}">
 		<input type="hidden" name="startDate">
 		<input type="hidden" name="endDate">
 		<input type="hidden" name="betweenDay">
@@ -33,38 +33,38 @@
 		<input type="hidden" name="allPrice">
 		
 		<div class="room-detail">
-			<c:set var="roomAddr" value="${roomDto.addr_load} ${roomDto.addr_detail}"></c:set>
-			<c:set var="roomPrice" value="${roomDto.price}"></c:set>
+			<c:set var="roomAddr" value="${dto.roomDto.addr_load} ${dto.roomDto.addr_detail}"></c:set>
+			<c:set var="roomPrice" value="${dto.roomDto.price}"></c:set>
 			
 			<!-- 숙소 이름 -->
 			<div class="title-heart">
 				<div class="title">
-					<label>${roomDto.name}</label>
+					<label>${dto.roomDto.name}</label>
 				</div>
 				
 				<c:set var="loop_flag" value="false"/>
 				<c:forEach var="wish" items="${wishList}">
-					<c:if test="${wish.room_no eq roomDto.no}">
-						<i roomID="${roomDto.no}" class="bi bi-heart-fill" onclick="heartClick(this)"></i>
+					<c:if test="${wish.room_no eq dto.roomDto.no}">
+						<i roomID="${dto.roomDto.no}" class="bi bi-heart-fill" onclick="heartClick(this)"></i>
 						<c:set var="loop_flag" value="true"/>
 					</c:if>
 				</c:forEach>
 				
 				<c:if test="${not loop_flag}">
-					<i roomID="${roomDto.no}" class="bi bi-heart" onclick="heartClick(this)"></i>
+					<i roomID="${dto.roomDto.no}" class="bi bi-heart" onclick="heartClick(this)"></i>
 				</c:if>
 			</div>
 			
 			<!-- 숙소 주소 -->
 			<div class="addr">
-				<label>주소 | ${roomDto.addr_load} ${roomDto.addr_detail}</label>	
+				<label>주소 | ${dto.roomDto.addr_load} ${dto.roomDto.addr_detail}</label>	
 			</div>
 			
 			<!-- 이미지 & 결제 -->
 			<div class="photo-reser">
 				<div id="slideShow">
 					<ul class="slides">
-						<c:forEach var="img" items="${roomDto.photos}">
+						<c:forEach var="img" items="${dto.roomDto.photos}">
 							<li>
 								<img src="../photo/roomPhoto/${img}">
 							</li>
@@ -81,13 +81,13 @@
 				<div class="price-cal">
 					<div class="price-wrap">
 						<div class="price">
-							<fmt:formatNumber value="${roomDto.price}" type="currency" currencySymbol="￦"/>
+							<fmt:formatNumber value="${dto.roomDto.price}" type="currency" currencySymbol="￦"/>
 							<label> / 1박</label>
 						</div>
 						
 						<div class="rating">
 							<i class="bi bi-star-fill"></i>
-							${avgRating} 점
+							${dto.atDto.avg} 점
 						</div>
 					</div>
 					
@@ -203,7 +203,7 @@
 									
 									s += "<div class='reser-price'>";
 									s += "<div class='room-price'>";
-									s += "<div><fmt:formatNumber value='${roomDto.price}' type='currency' currencySymbol='￦'/> X " + betweenDay + "박</div>";
+									s += "<div><fmt:formatNumber value='${dto.roomDto.price}' type='currency' currencySymbol='￦'/> X " + betweenDay + "박</div>";
 									s += "<div><b>￦" + commaCal + "</b></div>";
 									s += "</div>";
 									s += "<div class='tax-price'>";
@@ -246,13 +246,13 @@
 						<div class="content-detail">
 							<i class="bi bi-person-fill"></i>
 							<label class="title">최대 인원</label>
-							<label class="content">${roomDto.max_per}명</label>
+							<label class="content">${dto.roomDto.max_per}명</label>
 						</div>
 						
 						<div class="content-detail">
 							<i class="bi bi-house-fill"></i>
 							<label class="title">숙소 타입</label>
-							<label class="content">${roomDto.type}</label>
+							<label class="content">${dto.roomDto.type}</label>
 						</div>
 					</div>
 					
@@ -261,7 +261,7 @@
 							<i class="bi bi-journal-text" style="margin-right: 5px;"></i>
 							숙소 설명
 						</label>
-						<label class="content">${roomDto.content}</label>
+						<label class="content">${dto.roomDto.content}</label>
 					</div>
 				</div>
 				
@@ -279,15 +279,15 @@
 			<div class="comment-wrap">
 				<div class="comment-title">
 					<i class="bi bi-star-fill" style="font-size: 2.0rem;"></i>
-					<label class="title">${avgRating} 점  |  후기  ${totalComment} 개</label>
+					<label class="title">${dto.atDto.avg} 점  |  후기  ${dto.atDto.total} 개</label>
 				</div>
 				
 				<div class="comment">
-					<c:if test="${totalComment == 0}">
+					<c:if test="${dto.atDto.total == 0}">
 						<div>등록된 후기가 없습니다.</div>
 					</c:if>
 					
-					<c:if test="${totalCount > 0}">
+					<c:if test="${dto.atDto.total > 0}">
 						
 					</c:if>
 				</div>

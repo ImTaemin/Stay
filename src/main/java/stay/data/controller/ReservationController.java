@@ -33,6 +33,7 @@ import stay.data.dto.MemberDto;
 import stay.data.dto.PayCardDto;
 import stay.data.dto.ReservationDto;
 import stay.data.dto.RoomDto;
+import stay.data.dto.RoomReserGcomDto;
 import stay.data.dto.RoomReservationDto;
 import stay.data.service.CostService;
 import stay.data.service.GuestCommentService;
@@ -70,10 +71,15 @@ public class ReservationController {
 		
 		String myid = (String)session.getAttribute("myid");
 		
+		RoomReserGcomDto dto = roomService.getOneRoom(roomNo);
+		
+		// 이미지 분리
 		RoomDto roomDto = roomService.getRoom(roomNo);
 		
 		String photos[] = roomDto.getPhotos().split(",");
 		roomDto.setPhotos(photos[0]);
+		
+		dto.setRoomDto(roomDto);
 		
 		// 날짜 분리
 		String start[] = startDate.split("-");
@@ -97,21 +103,7 @@ public class ReservationController {
 		String beforeMonth = AddDate(startDate, 0, -1, 0);
 		String monthArray[] = beforeMonth.split("-");
 		
-		// 방 평균 별점
- 		Float avgRating = gCommentService.getRatingAvg();
- 		
- 		if(avgRating == null) {
- 			avgRating = (float) 0;
- 		}
- 		
- 		// 방 댓글 개수
- 		Integer totalComment = gCommentService.totalComment();
- 		
- 		if(totalComment == null) {
- 			totalComment = 0;
- 		}
-		
-		mview.addObject("roomDto", roomDto);
+		mview.addObject("dto", dto);
 		mview.addObject("startDate", startDate);
 		mview.addObject("endDate", endDate);
 		mview.addObject("start", start);
@@ -122,8 +114,6 @@ public class ReservationController {
 		mview.addObject("cardList", cardList);
 		mview.addObject("weekArray", weekArray);
 		mview.addObject("monthArray", monthArray);
-		mview.addObject("avgRating", avgRating);
-		mview.addObject("totalComment", totalComment);
 		
 		mview.setViewName("/cost/paymentForm");
 		

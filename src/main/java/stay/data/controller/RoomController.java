@@ -82,7 +82,7 @@ public class RoomController {
 		start = (currentPage - 1) * perPage;
 
 		// 각 페이지에서 필요한 게시글 가져오기
-		List<RoomReserGcomDto> roomList = roomService.getRoomRate(start, perPage);
+		List<RoomReserGcomDto> roomList = roomService.getAllRoom(start, perPage);
  		
  		for(RoomReserGcomDto dto : roomList) {
  			// 이미지 분리
@@ -167,31 +167,14 @@ public class RoomController {
 		
 		ModelAndView mview = new ModelAndView();
 		
-		RoomDto roomDto = roomService.getRoom(no);
+		RoomReserGcomDto dto = roomService.getOneRoom(no);
 		
-		String photoList[] = roomDto.getPhotos().split(",");
-		
-		// 방 평균 별점
-		Float avgRating = gcommentService.getRatingAvg();
-		
-		if(avgRating == null) {
-			avgRating = (float) 0;
-		}
-		
-		// 방 댓글 개수
-		Integer totalComment = gcommentService.totalComment();
-		
-		if(totalComment == null) {
-			totalComment = 0;
-		}
+		String photoList[] = dto.getRoomDto().getPhotos().split(",");
 		
 		// 호스트 정보
-		String hostId = roomDto.getHost_id();
+		String hostId = dto.getRoomDto().getHost_id();
 		
 		MemberDto memDto = memberService.getMember(hostId);
-		
-		// 엔터키 입력
-		roomDto.getContent().replaceAll("<br>", "\r\n");
 		
 		// 위시리스트
  		if(loginok != null) {
@@ -202,12 +185,10 @@ public class RoomController {
 		
  		mview.addObject("myid", myid);
  		mview.addObject("loginok", loginok);
-		mview.addObject("roomDto", roomDto);
+		mview.addObject("dto", dto);
 		mview.addObject("memDto", memDto);
 		mview.addObject("photoList", photoList);
 		mview.addObject("currentPage", currentPage);
-		mview.addObject("avgRating", avgRating);
-		mview.addObject("totalComment", totalComment);
 		
 		mview.setViewName("/room/roomDetail");
 		

@@ -14,14 +14,6 @@ public class GuestCommentService {
 	@Autowired
 	GuestCommentMapper mapper;
 	
-	public Float getRatingAvg() {
-		return mapper.getRatingAvg();
-	}
-	
-	public Integer totalComment() {
-		return mapper.totalComment();
-	}
-	
 	public List<GuestCommentDto> getAllComment() {
 		return mapper.getAllComment();
 	}

@@ -17,7 +17,6 @@
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 <!-- js -->
-<script src="${root}/js/paymentForm.js"></script>
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <title>Insert title here</title>
@@ -25,7 +24,7 @@
 <body>
 	<form action="insert" method="post" class="pay-wrap" id="frm" accept-charset="euc-kr">
 		<!-- hidden -->
-		<input type="hidden" name="roomNo" value="${roomDto.no}">
+		<input type="hidden" name="roomNo" value="${dto.roomDto.no}">
 		<input type="hidden" name="startDate" value="${startDate}">
 		<input type="hidden" name="endDate" value="${endDate}">
 		<input type="hidden" name="betweenDay" value="${betweenDay}">
@@ -51,7 +50,7 @@
 					$.ajax({
 						url:"kakaopay",
 						dataType:"json",
-						data:{"roomNo" : ${roomDto.no}, "allPrice" : ${allPrice}, "startDate" : "${startDate}", "endDate" : "${endDate}" ,  "taxPrice" : ${allPrice * 0.2}},
+						data:{"roomNo" : ${dto.roomDto.no}, "allPrice" : ${allPrice}, "startDate" : "${startDate}", "endDate" : "${endDate}" ,  "taxPrice" : ${allPrice * 0.2}},
 						contentType: "application/json; charset=utf-8",
 					}).done(function(resp){
 						if(resp.status === 500){
@@ -246,16 +245,16 @@
 					<!-- 숙소 정보 -->
 					<div class="room">
 						<div class="photo">
-							<img src="${root}/photo/roomPhoto/${roomDto.photos}">
+							<img src="${root}/photo/roomPhoto/${dto.roomDto.photos}">
 						</div>
 		
 						<div class="detail">
 							<div class="name">
-								<b>${roomDto.name}</b>
-								<label>${roomDto.host_id} 님의 숙소</label>
+								<b>${dto.roomDto.name}</b>
+								<label>${dto.roomDto.host_id} 님의 숙소</label>
 							</div>
 							
-							<label>⭐ ${avgRating} 점 (후기 ${totalComment}개)</label>
+							<label>⭐ ${dto.atDto.avg} 점 (후기 ${dto.atDto.total}개)</label>
 						</div>
 					</div>
 		
@@ -265,13 +264,13 @@
 						<label>요금 세부정보</label>
 					</div>
 					
-					<c:set var="calPrice" value="${roomDto.price * betweenDay}"/>
+					<c:set var="calPrice" value="${dto.roomDto.price * betweenDay}"/>
 					<c:set var="taxPrice" value="${calPrice * 0.2}"/>
 					
 					<!-- 요금 상세 정보 -->
 					<div class="room-price">
 						<div>
-							<fmt:formatNumber value='${roomDto.price}' type='currency' currencySymbol='￦' />
+							<fmt:formatNumber value='${dto.roomDto.price}' type='currency' currencySymbol='￦' />
 							 X <label id="betweenDay">${betweenDay}</label> 박
 						</div>
 						
@@ -400,7 +399,7 @@
 			var betweenMs = end_date.getTime() - start_date.getTime();
 			var betweenDay = betweenMs / (1000 * 60 * 60 * 24);
 			
-			var calPrice = ${roomDto.price} * betweenDay;
+			var calPrice = ${dto.roomDto.price} * betweenDay;
 			var commaCal = Number(calPrice).toLocaleString();
 			
 			var taxPrice = calPrice * 0.2;
@@ -444,7 +443,7 @@
 			var betweenMs = end_date.getTime() - start_date.getTime();
 			var betweenDay = betweenMs / (1000 * 60 * 60 * 24);
 			
-			var calPrice = ${roomDto.price} * betweenDay;
+			var calPrice = ${dto.roomDto.price} * betweenDay;
 			var commaCal = Number(calPrice).toLocaleString();
 			
 			var taxPrice = calPrice * 0.2;
