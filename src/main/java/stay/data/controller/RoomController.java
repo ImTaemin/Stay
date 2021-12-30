@@ -232,6 +232,9 @@ public class RoomController {
 		
 		RoomDto roomDto = roomService.getRoom(no);
 		
+		// 엔터키 입력
+		roomDto.getContent().replaceAll("<br>", "\r\n");
+		
 		mview.addObject("roomDto", roomDto);
 		
 		mview.setViewName("/room/roomUpdateForm");
@@ -278,8 +281,6 @@ public class RoomController {
 			photo = photo.substring(0, photo.length() - 1);
 		}
 		
-		// 엔터키 입력
-		roomDto.getContent().replaceAll("<br>", "\r\n");
 		roomDto.setPhotos(photo);
 		
 		roomService.updateRoom(roomDto);

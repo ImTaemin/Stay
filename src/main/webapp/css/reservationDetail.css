@@ -307,7 +307,7 @@
     color: #FFCD28;
 }
 
-.numb {
+.numa, .numb {
 	display: flex;
 	align-items: center;
 	font-size: 1.5em;
@@ -370,7 +370,7 @@ input[type="radio"] {
 	margin-bottom: 25px;
 }
 
-.comment>#btn-comment {
+.comment>#insert-btn, #update-btn {
 	width: 14%;
 	height: 150px;
 	font-size: 1.5em;

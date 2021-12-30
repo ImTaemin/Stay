@@ -34,28 +34,57 @@ next.addEventListener('click', function() {
 // 별점 주기
 function getStarNum(e) {
 	var clickId = $(e).attr("id");
-	var rating = "0.00";
+	var rating = "0.0";
 	
 	if(clickId == "star-1") {
-		rating = "1.00";
+		rating = "1.0";
 	} else if (clickId == "star-2") {
-		rating = "2.00";
+		rating = "2.0";
 	} else if (clickId == "star-3") {
-		rating = "3.00";
+		rating = "3.0";
 	} else if (clickId == "star-4") {
-		rating = "4.00";
+		rating = "4.0";
 	} else if (clickId == "star-5") {
-		rating = "5.00";
+		rating = "5.0";
 	}
 	
 	$('input[name=rate]').attr('value', rating);
 }
 
+// 별점 수정
+function changeStarNum(e) {
+	var clickId = $(e).attr("id");
+	var rating = "0";
+	
+	if(clickId == "star-1") {
+		rating = "1";
+	} else if (clickId == "star-2") {
+		rating = "2";
+	} else if (clickId == "star-3") {
+		rating = "3";
+	} else if (clickId == "star-4") {
+		rating = "4";
+	} else if (clickId == "star-5") {
+		rating = "5";
+	}
+	
+	$('input[name=rate]').attr('value', rating);
+	$('span[id=starNum]').html(rating);
+}
+
 // 엔터값 변경
-$("#btn-comment").click(function() {
+$("#insert-btn").click(function() {
 	var content = $('.content-input').val();
 	content = content.replace(/(?:\r\n|\r|\n)/g, '<br/>');
 	$(".content-input").val(content);
 
 	document.commentInsert.submit();
+});
+
+$("#update-btn").click(function() {
+	var content = $('.content-input').val();
+	content = content.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+	$(".content-input").val(content);
+
+	document.commentUpdate.submit();
 });

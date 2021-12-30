@@ -35,7 +35,11 @@ public class GuestCommentService {
 		return mapper.getOneComment(map);
 	}
 	
-	public void insertGuestCommet(GuestCommentDto gcdto) {
-		mapper.insertGuestCommet(gcdto);
+	public void insertGuestComment(GuestCommentDto gcdto) {
+		mapper.insertGuestComment(gcdto);
+	}
+	
+	public void updateGuestComment(GuestCommentDto gcdto) {
+		mapper.updateGuestComment(gcdto);
 	}
 }

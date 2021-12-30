@@ -26,7 +26,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from guest_comment where no = #{no} and guest_id = #{guest_id}
 	</select>
 	
-	<insert id="insertGuestCommet" parameterType="gcdto">
+	<insert id="insertGuestComment" parameterType="gcdto">
 		insert into guest_comment values (#{no}, #{guest_id}, #{content}, #{rating}, null)
 	</insert>
+	
+	<update id="updateGuestComment" parameterType="gcdto">
+		update guest_comment set content = #{content}, rating = #{rating} where no = #{no}
+	</update>
 </mapper>

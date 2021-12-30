@@ -41,9 +41,28 @@ public class GuestCommentController {
 		gCommentDto.setGuest_id(myid);
 		gCommentDto.setRating(rating);
 		
-		gCommentService.insertGuestCommet(gCommentDto);
+		gCommentService.insertGuestComment(gCommentDto);
 		
 		mview.setViewName("redirect:/room/content?no=" + roomNo);
+		
+		return mview;
+	}
+	
+	@PostMapping("/update")
+	public ModelAndView commentUpdate(
+			@ModelAttribute GuestCommentDto gCommentDto,
+			@RequestParam String reserNo, @RequestParam String content, @RequestParam String rate) {
+		ModelAndView mview = new ModelAndView();
+		
+		double rating = Double.parseDouble(rate);
+		
+		gCommentDto.setNo(reserNo);
+		gCommentDto.setContent(content);
+		gCommentDto.setRating(rating);
+		
+		gCommentService.updateGuestComment(gCommentDto);
+		
+		mview.setViewName("redirect:/reser/reservationlist");
 		
 		return mview;
 	}

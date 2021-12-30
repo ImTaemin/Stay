@@ -12,7 +12,6 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -328,7 +327,10 @@ public class ReservationController {
 		}
 		
 		// 후기 작성
-		GuestCommentDto gCommentDto = gCommentService.getOneComment(roomNo, myid);
+		GuestCommentDto gCommentDto = gCommentService.getOneComment(reserNo, myid);
+		
+		// 엔터키 입력
+		gCommentDto.getContent().replaceAll("<br>", "\r\n");
 		
 		mview.addObject("reserDto", reserDto);
 		mview.addObject("roomDto", roomDto);

@@ -13,5 +13,6 @@ public interface GuestCommentMapper {
 	public Integer totalComment();
 	public List<GuestCommentDto> getAllComment();
 	public GuestCommentDto getOneComment(HashMap<String, String> map);
-	public void insertGuestCommet(GuestCommentDto gcdto);
+	public void insertGuestComment(GuestCommentDto gcdto);
+	public void updateGuestComment(GuestCommentDto gcdto);
 }
