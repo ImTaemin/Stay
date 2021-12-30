@@ -15,56 +15,63 @@ h1 {
 }
 
 .gaip-input-check {
+	position: relative;
 	display: flex;
 	flex-direction: column;
+	margin-bottom: 14px;
 }
 
 
 .id_ok {
+	position: absolute;
 	font-size: 0.8em;
 	color: blue;
 	display: none;
-	margin-top: -7px;
+	margin-top: 47px;
     margin-left: 10px;
     margin-bottom: 10px;
 }
 
 .id_already {
+	position: absolute;
 	font-size: 0.8em;
 	color: red;
 	display: none;
-	margin-top: -7px;
+	margin-top: 47px;
     margin-left: 10px;
     margin-bottom: 10px;
 }
 
-.pw_glyphicon {
-	display: flex;
-}
-
+.pw_glyphicon,
 .pw_check {
-	display: flex;
+    position: absolute;
+	display: none;
+	margin-top: 53px;
 }
 
 .glyphicon-ok-sign{
+	position: absolute;
 	font-size: 0.8em;
 	color: green;
-	display: none;
+	display: none; 
 	margin-top: -5px;
     margin-left: 10px;
     margin-bottom: 10px;
 }
 
 .pw_equal {
+	position: absolute;
+    width: 360px;
 	font-size: 0.8em;
 	color: green;
 	display: none;
-	margin-top: -23px;
+    margin-top: -7px;
     margin-left: 27px;
     margin-bottom: 10px;
 }
 
 .glyphicon-remove-sign{
+	position: absolute;
 	font-size: 0.8em;
 	color: red;
 	display: none;
@@ -75,10 +82,12 @@ h1 {
 .pw_not_equal,
 .pw_not_length,
 .pw_not_sc {
+	position: absolute;
+    width: 360px;
 	font-size: 0.8em;
 	color: red;
 	display: none;
-	margin-top: -23px;
+	margin-top: -7px;
     margin-left: 27px;
     margin-bottom: 10px;
 }
@@ -113,6 +122,7 @@ label {
     width: 100%;
     font-size: 12px;
     line-height: 16px;
+    margin-top: 10px;
 }
 
 .input-btn {

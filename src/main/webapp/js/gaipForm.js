@@ -33,6 +33,8 @@ function checkPw(){
     var check_SC = 0;
  
     if(pw.length < 6 || pw.length>16){
+    	$('.pw_glyphicon').css("display", "flex");
+    	$('.pw_check').css("display", "flex");
     	$('.glyphicon-ok-sign').css("display", "none");
         $('.pw_equal').css("display", "none");
         $('.glyphicon-remove-sign').css("display", "inline-block");

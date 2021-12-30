@@ -21,9 +21,9 @@
  
   <form action="findIdprocess" method="post">
   	<label for="name">이름</label>
-    <input type="text" id="name" name="name" placeholder="이름 입력" required="required" autofocus="autofocus"><br>
+    <input type="text" id="name" name="name" placeholder="이름을 입력하세요" required="required" autofocus="autofocus"><br>
   	<label for="hp">연락처</label>
-    <input type="text" id="hp" name="hp" placeholder="연락처 입력" required="required" autofocus="autofocus"><br>
+    <input type="tel" id="hp" name="hp" placeholder="'-'를 제외한 핸드폰 번호를 입력하세요" required="required" autofocus="autofocus"><br>
    
     <div class="find-cancel-btn">
   	  <button type="submit" class="find-btn">찾기</button>
@@ -31,5 +31,8 @@
   	</div>
   </form>
 </div>
+
+<!-- js -->
+<script src="/js/findForm.js"></script>
 </body>
 </html>

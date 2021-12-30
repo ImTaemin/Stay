@@ -9,9 +9,30 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<!-- css -->
+<link rel="stylesheet" href="/css/findForm.css">
+
 <title>비밀번호 찾기</title>
 </head>
 <body>
+<div class="find-form">
+ <h1>비밀번호 찾기</h1>
+ 
+  <form action="findIdprocess" method="post">
+  	<label for="id">아이디</label>
+    <input type="text" id="id" name="id" placeholder="아이디를 입력하세요" required="required" autofocus="autofocus"><br>
+  	<label for="email">이메일</label>
+    <input type="text" id="email" name="e_mail" placeholder="가입시 등록한 이메일을 입력하세요" required="required" autofocus="autofocus"><br>
+   
+    <div class="find-cancel-btn">
+  	  <button type="submit" class="find-btn">찾기</button>
+  	  <button type="button" class="cancel-btn" onclick="history.back()">취소</button>
+  	</div>
+  </form>
+</div>
 
+<!-- js -->
+<script src="/js/findForm.js"></script>
 </body>
 </html>
