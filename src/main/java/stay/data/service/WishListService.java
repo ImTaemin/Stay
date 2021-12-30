@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import stay.data.dto.RoomWishResGcoDto;
 import stay.data.dto.WishListDto;
 import stay.data.mapper.WishListMapper;
 
@@ -27,7 +28,11 @@ public class WishListService {
 		mapper.deleteWishList(map);
 	}
 	
-	public List<WishListDto> allWishList(String guestId) {
-		return mapper.allWishList(guestId);
+	public List<WishListDto> onlyWishList(String guestId) {
+		return mapper.onlyWishList(guestId);
+	}
+	
+	public List<RoomWishResGcoDto> getWishList(String guestId) {
+		return mapper.getWishList(guestId);
 	}
 }

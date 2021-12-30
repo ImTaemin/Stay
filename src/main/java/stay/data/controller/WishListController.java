@@ -1,6 +1,5 @@
 package stay.data.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import stay.data.dto.RoomDto;
+import stay.data.dto.RoomWishResGcoDto;
 import stay.data.dto.WishListDto;
 import stay.data.service.GuestCommentService;
 import stay.data.service.RoomService;
@@ -38,40 +38,23 @@ public class WishListController {
 		
 		String myid = (String)session.getAttribute("myid");
 		
-		List<WishListDto> wishList = wishService.allWishList(myid);
+		List<RoomWishResGcoDto> allList = wishService.getWishList(myid);
 		
-		List<RoomDto> roomList = new ArrayList<RoomDto>();
-		
-		// 숙소 정보
-		for(WishListDto w : wishList) {
-			String roomNo = w.getRoom_no();
+		for(RoomWishResGcoDto dto : allList) {
+			String photos = dto.getRoomDto().getPhotos();
+			String photo[] = photos.split(",");
 			
-			RoomDto roomDto = roomService.getRoom(roomNo);
+			RoomDto roomDto = dto.getRoomDto();
 			
-			String photos[] = roomDto.getPhotos().split(",");
-			roomDto.setPhotos(photos[0]);
+			roomDto.setPhotos(photo[0]);
 			
-			roomList.add(roomDto);
+			dto.setRoomDto(roomDto);
 		}
 		
-		// 방 평균 별점
-		Float avgRating = gcommentService.getRatingAvg();
+		List<WishListDto> wishList = wishService.onlyWishList(myid);
 		
-		if(avgRating == null) {
-			avgRating = (float) 0;
-		}
-		
-		// 방 댓글 개수
-		Integer totalComment = gcommentService.totalComment();
-		
-		if(totalComment == null) {
-			totalComment = 0;
-		}
-		
+		mview.addObject("allList", allList);
 		mview.addObject("wishList", wishList);
-		mview.addObject("roomList", roomList);
-		mview.addObject("avgRating", avgRating);
-		mview.addObject("totalComment", totalComment);
 		
 		mview.setViewName("/wishlist/wishList");
 		

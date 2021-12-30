@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import stay.data.dto.AvgTotalDto;
-import stay.data.dto.GuestCommentDto;
 import stay.data.dto.MemberDto;
 import stay.data.dto.RoomDto;
 import stay.data.dto.RoomReserGcomDto;
@@ -103,10 +101,9 @@ public class RoomController {
 		mview.addObject("endPage", endPage);
 		mview.addObject("currentPage", currentPage);
  		
- 		
  		// 위시리스트
  		if(loginok != null) {
- 			List<WishListDto> wishList = wishService.allWishList(myid);
+ 			List<WishListDto> wishList = wishService.onlyWishList(myid);
  			
  			mview.addObject("wishList", wishList);
  		}
@@ -198,7 +195,7 @@ public class RoomController {
 		
 		// 위시리스트
  		if(loginok != null) {
- 			List<WishListDto> wishList = wishService.allWishList(myid);
+ 			List<WishListDto> wishList = wishService.onlyWishList(myid);
  			
  			mview.addObject("wishList", wishList);
  		}

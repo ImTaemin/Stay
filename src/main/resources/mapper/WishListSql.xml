@@ -12,15 +12,76 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from wishlist where room_no = #{roomId} and guest_id = #{guestId}
 	</delete>
 	
-	<select id="allWishList" parameterType="String" resultType="wldto">
+	<select id="onlyWishList" parameterType="String" resultType="wldto">
 		select * from wishlist where guest_id = #{guestId}
 	</select>
 	
-	<select id="totalWish" parameterType="String" resultType="int">
-		select count(*) from wishlist where guest_id = #{guestId}
+	<resultMap type="stay.data.dto.RoomWishResGcoDto" id="roomWishResGcoMap">
+		<collection property="roomDto" resultMap="roomMap"></collection>
+		<collection property="wishDto" resultMap="wishMap"></collection>
+		<collection property="resDto" resultMap="resMap"></collection>
+		<collection property="gcoDto" resultMap="gcoMap"></collection>
+		<collection property="atDto" resultMap="atMap"></collection>
+	</resultMap>
+	
+	<select id="getWishList" parameterType="String" resultMap="roomWishResGcoMap">
+		select *, ifnull(t, 0) total, ifnull(a, 0) avg from room a right join (
+			select count(g.rating) t, round(avg(g.rating), 1) a, r.no
+			from room r, wishlist w, reservation res, guest_comment g
+			where r.no = w.room_no and res.no = g.no and w.guest_id = #{guest_id}
+			group by r.no
+		) b on a.no = b.no
 	</select>
 	
-	<select id="pageWishList" parameterType="HashMap" resultType="wldto">
-		select * from wishlist where guest_id = #{guestId} limit #{start}, #{perPage}
-	</select>
+	<!-- join -->
+	<!-- room -->
+	<resultMap type="stay.data.dto.RoomDto" id="roomMap">
+		<id column="no" property="no"/>
+		<id column="host_id" property="host_id"/>
+		<id column="type" property="type"/>
+		<id column="addr_load" property="addr_load"/>
+		<id column="addr_detail" property="addr_detail"/>
+		<id column="max_per" property="max_per"/>
+		<id column="content" property="content"/>
+		<id column="name" property="name"/>
+		<id column="photos" property="photos"/>
+		<id column="price" property="price"/>
+		<id column="hosting" property="hosting"/>
+	</resultMap>
+	
+	<!-- wish list -->
+	<resultMap type="stay.data.dto.WishListDto" id="wishMap">
+		<id column="room_no" property="room_no"/>
+		<id column="guest_id" property="guest_id"/>
+	</resultMap>
+	
+	<!-- reservation -->
+	<resultMap type="stay.data.dto.ReservationDto" id="resMap">
+		<id column="no" property="no"/>
+		<id column="guest_id" property="guest_id"/>
+		<id column="host_id" property="host_id"/>
+		<id column="start_date" property="start_date"/>
+		<id column="end_date" property="end_date"/>
+		<id column="price" property="price"/>
+		<id column="pay_method" property="pay_method"/>
+		<id column="card_num" property="card_num"/>
+		<id column="account_num" property="account_num"/>
+		<id column="pay_date" property="pay_date"/>
+		<id column="room_no" property="room_no"/>
+	</resultMap>
+	
+	<!-- guest comment -->
+	<resultMap type="stay.data.dto.GuestCommentDto" id="gcoMap">
+		<id column="no" property="no"/>
+		<id column="guest_id" property="guest_id"/>
+		<id column="content" property="content"/>
+		<id column="rating" property="rating"/>
+		<id column="likes" property="likes"/>
+	</resultMap>
+	
+	<!-- avg total -->
+	<resultMap type="stay.data.dto.AvgTotalDto" id="atMap">
+		<id column="avg" property="avg"/>
+		<id column="total" property="total"/>
+	</resultMap>
 </mapper>

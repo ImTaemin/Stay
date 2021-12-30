@@ -60,7 +60,7 @@
 							<div class="star">
 								<label>
 									<i class="bi bi-star-fill" style="font-size: 1.5rem;"></i>
-									<b>${list.acDto.avg}</b> ( 후기 ${list.acDto.total}개 )
+									<b>${list.atDto.avg}</b> ( 후기 ${list.atDto.total}개 )
 								</label>
 							</div>
 							
