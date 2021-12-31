@@ -17,10 +17,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import stay.data.dto.GuestCommentDto;
 import stay.data.dto.MemberDto;
 import stay.data.dto.ResultMapDto;
 import stay.data.dto.RoomDto;
 import stay.data.dto.WishListDto;
+import stay.data.service.CommentLikeService;
 import stay.data.service.GuestCommentService;
 import stay.data.service.MemberService;
 import stay.data.service.RoomService;
@@ -40,6 +42,9 @@ public class RoomController {
 	
 	@Autowired
 	WishListService wishService;
+	
+	@Autowired
+	CommentLikeService likeService;
 	
 	@GetMapping("/main")
 	public ModelAndView roomMain(
@@ -187,11 +192,23 @@ public class RoomController {
  		List<ResultMapDto> commentList = gcommentService.getRoomComment(no);
  		
  		for(ResultMapDto c : commentList) {
+ 			// 회원 정보
  			String guestId = c.getGcoDto().getGuest_id();
  			
  			MemberDto gMemDto = memberService.getMember(guestId);
  			
  			c.setMemDto(gMemDto);
+ 			
+ 			// 좋아요 개수
+ 			String reserNo = c.getGcoDto().getNo();
+ 			
+ 			int likes = likeService.countLike(reserNo, guestId);
+ 			
+ 			GuestCommentDto gCoDto = gcommentService.getOneComment(reserNo, guestId);
+ 			
+ 			gCoDto.setCountLike(likes);
+ 			
+ 			c.setGcoDto(gCoDto);
  		}
  		
  		mview.addObject("currentPage", currentPage);

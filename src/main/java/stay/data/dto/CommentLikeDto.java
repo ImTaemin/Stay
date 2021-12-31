@@ -7,5 +7,7 @@ import lombok.Data;
 @Data
 @Alias("cldto")
 public class CommentLikeDto {
-
+	private String no;
+	private String guest_id;
+	private String id;
 }

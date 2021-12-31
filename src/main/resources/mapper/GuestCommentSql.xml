@@ -12,6 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<collection property="roomDto" resultMap="roomMap"></collection>
 		<collection property="resDto" resultMap="resMap"></collection>
 		<collection property="gcoDto" resultMap="gcoMap"></collection>
+		<collection property="likeDto" resultMap="likeMap"></collection>
 	</resultMap>
 	
 	<select id="getRoomComment" parameterType="String" resultMap="resultMap">
@@ -73,5 +74,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<id column="rating" property="rating"/>
 		<id column="likes" property="likes"/>
 		<id column="write_day" property="write_day"/>
+	</resultMap>
+	
+	<!-- comment like -->
+	<resultMap type="stay.data.dto.CommentLikeDto" id="likeMap">
+		<id column="no" property="no"/>
+		<id column="guest_id" property="guest_id"/>
+		<id column="id" property="id"/>
 	</resultMap>
 </mapper>

@@ -13,6 +13,7 @@ public class GuestCommentDto {
 	private String guest_id;
 	private String content;
 	private double rating;
-	private int likes;
 	private Timestamp write_day;
+	
+	private int countLike;
 }
