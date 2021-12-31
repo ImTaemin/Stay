@@ -52,8 +52,4 @@ public class MemberService {
 		
 		mapper.findPw(e_mail);
 	}
-	
-	public List<ResultMapDto> getCommentMember(String roomNo) {
-		return mapper.getCommentMember(roomNo);
-	}
 }

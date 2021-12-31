@@ -12,6 +12,6 @@ import stay.data.dto.WishListDto;
 public interface WishListMapper {
 	public void insertWishList(WishListDto wishDto);
 	public void deleteWishList(HashMap<String, String> map);
-	public List<WishListDto> onlyWishList(String guestId);
-	public List<ResultMapDto> getWishList(String guestId);
+	public List<WishListDto> getWishList(String guestId);
+//	public List<ResultMapDto> getWishList(String guestId);
 }

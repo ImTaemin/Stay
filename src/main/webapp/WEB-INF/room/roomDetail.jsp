@@ -289,11 +289,11 @@
 					
 					<c:if test="${dto.atDto.total > 0}">
 						<div class="co-wrap">
-							<c:forEach var="co" items="${gCoDto}" varStatus="i">
+							<c:forEach var="coList" items="${commentList}">
 								<div class="co-detail">
 									<div class="mem-detail">
 										<div class="mem-img">
-											<img src="${root}/photo/memberPhoto/jenny.jpg">
+											<img src="${root}/photo/memberPhoto/${coList.memDto.photo}">
 										</div>
 										
 										<div class="mem-content">

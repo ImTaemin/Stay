@@ -13,7 +13,7 @@ public interface RoomMapper {
 	public int getRoomCount();
 	public int getRoomMaxNo();
 	public void insertRoom(RoomDto roomDto);
-	public List<ResultMapDto> getAllRoom(HashMap<String, Integer> map);
+	public List<ResultMapDto> getPageRoom(HashMap<String, Integer> map);
 	public RoomDto getRoom(String no);
 	public ResultMapDto getOneRoom(String no);
 	public void updateRoom(RoomDto roomDto);

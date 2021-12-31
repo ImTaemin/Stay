@@ -32,7 +32,7 @@
 	<div class="wish-wrap">
 		<!-- 숙소 상세 목록 -->
 		<div class="list">
-			<c:forEach var="list" items="${allList}">
+			<c:forEach var="list" items="${roomList}">
 				<div class="room-list-wrap" id="${list.roomDto.addr_load}">
 					<div class="photo" onclick="location.href='/room/content?no=${list.roomDto.no}'">
 						<img alt="" src="${root}/photo/roomPhoto/${list.roomDto.photos}">
