@@ -42,9 +42,9 @@ public class MemberService {
 	}
 	
 	//아이디 찾기
-	public String findId(String e_mail) throws Exception{
+	public String findId(String inputName, String inputHp) {
 		
-		return mapper.findId(e_mail);
+		return mapper.findId(inputName, inputHp);
 	}
 	
 	//비밀번호 찾기
