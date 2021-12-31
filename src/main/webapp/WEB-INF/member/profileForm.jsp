@@ -60,7 +60,7 @@
 						$.ajax({
 							  type:"post",
 							  dataType:"text",
-							  url:"profile/singo",
+							  url:"singo",
 							  data:{"black_id":black_id,"reason":reason},
 							  success:function(data) {
 								location.reload();							  
@@ -88,7 +88,7 @@
 
 							<div class="modal-footer">
 								<button type="button" id="bodyBtn" class="btn btn-primary"
-									onclick="'singoBtn'" data-dismiss="modal">신고하기</button>
+									onclick="'singoBtn()'" data-dismiss="modal">신고하기</button>
 								<button type="button" class="btn btn-default"
 									data-dismiss="modal">Close</button>
 							</div>
