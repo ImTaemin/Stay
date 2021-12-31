@@ -179,11 +179,13 @@ public class LoginController {
 	}
 	
 	@PostMapping("findIdprocess")
-	@ResponseBody
-	public String findId(@RequestParam(value="inputName", required=false) String inputName, @RequestParam(value="inputHp", required=false) String inputHp){
+	public @ResponseBody HashMap findId(@RequestParam(value="name", required=false) String inputName, @RequestParam(value="hp", required=false) String inputHp){
 		String result = service.findId(inputName, inputHp);
-
-		return result;
+		
+		HashMap<String, String> m = new HashMap<String,String>();
+		m.put("id", result);
+		
+		return m;
 	}
 	
 	//비밀번호 찾기
