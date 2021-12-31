@@ -50,6 +50,5 @@
 <!-- js -->
 <script src="/js/findForm.js"></script>
 
-<%-- <%@ include file="/member/userIdModal.jsp" %> --%>
 </body>
 </html>
