@@ -311,6 +311,7 @@
 
 .co-wrap>.co-detail {
 	display: flex;
+	flex-direction: column;
 	width: 49%;
 	margin-bottom: 1.5%;
 	padding: 1%;
@@ -319,6 +320,7 @@
 .co-detail>.mem-detail {
 	width: 100%;
 	display: flex;
+	justify-content: space-between;
 }
 
 .mem-detail>.mem-img {
@@ -335,7 +337,36 @@
 
 .mem-detail>.mem-content {
 	display: flex;
-	width: 85%;
+	flex-direction: column;
+	justify-content: space-evenly;
+	width: 68%;	
+}
+
+.mem-content>.mem-id {
+	font-size: 1.5em;
+	font-weight: bold;
+}
+
+.mem-detail>.co-heart-wrap {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	width: 15%;
+}
+
+.co-heart-wrap>.co-heart {
+	font-size: 2em;
+	padding-top: 4%;
+}
+
+.co-heart-wrap>.heart-count {
+	font-size: 1.3em;
+	font-weight: bold;
+}
+
+.co-detail>.co-content {
+	margin-top: 3.5%;
+	padding: 0 5%;
 }
 
 .host-wrap {

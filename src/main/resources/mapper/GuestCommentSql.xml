@@ -12,13 +12,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<collection property="roomDto" resultMap="roomMap"></collection>
 		<collection property="resDto" resultMap="resMap"></collection>
 		<collection property="gcoDto" resultMap="gcoMap"></collection>
+		<collection property="likeDto" resultMap="likeMap"></collection>
 	</resultMap>
 	
 	<select id="getRoomComment" parameterType="String" resultMap="resultMap">
-		select * from guest_comment a left join (
-			select res.room_no, res.no from room r, reservation res, guest_comment g
+		select *, ifnull(b.h, 0) heart from guest_comment a left join (
+			select res.room_no, res.no, g.write_day day, g.likes h
+			from room r, reservation res, guest_comment g
 			where r.no = res.room_no and res.no = g.no
-		) b on a.no = b.no where room_no = #{room_no}
+		) b on a.no = b.no where room_no = #{room_no} order by b.day desc
 	</select>
 	
 	<insert id="insertGuestComment" parameterType="gcdto">
@@ -72,5 +74,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<id column="rating" property="rating"/>
 		<id column="likes" property="likes"/>
 		<id column="write_day" property="write_day"/>
+	</resultMap>
+	
+	<!-- likes -->
+	<resultMap type="stay.data.dto.GuestCommentLikesDto" id="likeMap">
+		<id column="heart" property="heart"/>
 	</resultMap>
 </mapper>
