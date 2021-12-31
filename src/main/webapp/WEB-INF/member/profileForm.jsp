@@ -45,7 +45,7 @@
 						<button class="closeBtn">✖</button>
 					</div>
 				</div>-->
-
+<!-- gd -->
 				<script type="text/javascript">
 				$(function(){
 					   loginok="${sessionScope.loginok}";
