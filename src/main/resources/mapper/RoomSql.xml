@@ -57,6 +57,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from room r, (select room_no, count(*) cnt from wishlist group by room_no order by cnt desc limit 5) w
 		where r.no = w.room_no
 	</select>
+
+	<select id="getRoomSite" resultType="rdto" parameterType="HashMap">
+		select * from room where addr_load like '#{search}%'
+	</select>
 	
 	<!-- join -->
 	<!-- room -->

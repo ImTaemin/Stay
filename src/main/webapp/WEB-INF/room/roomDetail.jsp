@@ -305,20 +305,8 @@
 										<c:set var="heart_flag" value="false"/>
 										<div class="co-heart-wrap">
 											<i class="bi bi-heart co-heart"></i>
-<%-- 											<span class="heart-count">${coList.gcoDto.likes}</span> --%>
+											<span class="heart-count">${coList.gcoDto.countLike}</span>
 										</div>
-										
-<%-- 										<c:set var="loop_flag" value="false"/> --%>
-<%-- 										<c:forEach var="wish" items="${wishList}"> --%>
-<%-- 											<c:if test="${wish.room_no eq dto.roomDto.no}"> --%>
-<%-- 												<i roomID="${dto.roomDto.no}" class="bi bi-heart-fill" onclick="heartClick(this)"></i> --%>
-<%-- 												<c:set var="loop_flag" value="true"/> --%>
-<%-- 											</c:if> --%>
-<%-- 										</c:forEach> --%>
-										
-<%-- 										<c:if test="${not loop_flag}"> --%>
-<%-- 											<i roomID="${dto.roomDto.no}" class="bi bi-heart" onclick="heartClick(this)"></i> --%>
-<%-- 										</c:if> --%>
 									</div>
 									
 									<div class="co-content">

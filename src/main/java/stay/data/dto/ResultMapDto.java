@@ -9,5 +9,6 @@ public class ResultMapDto {
 	private WishListDto wishDto;
 	private ReservationDto resDto;
 	private GuestCommentDto gcoDto;
+	private CommentLikeDto likeDto;
 	private AvgTotalDto atDto;
 }
