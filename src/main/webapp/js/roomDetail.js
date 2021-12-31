@@ -63,26 +63,26 @@ var tmp = true;
 
 function heartClick(e) {
 	var roomId = $(e).attr("roomID");
-	
-	if(tmp) {
+
+	if (tmp) {
 		$(e).attr("class", "bi bi-heart-fill");
 		tmp = false;
-		
+
 		$.ajax({
 			type: "post",
 			url: "/wish/insert",
-			data: {"roomId" : roomId}
+			data: { "roomId": roomId }
 		});
 	} else {
 		$(e).attr("class", "bi bi-heart");
 		tmp = true;
-		
+
 		$.ajax({
 			type: "post",
 			url: "/wish/delete",
-			data: {"roomId" : roomId},
-			error: function(request,error) {
-				console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			data: { "roomId": roomId },
+			error: function(request, error) {
+				console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
 			}
 		});
 	}
@@ -110,28 +110,27 @@ function nullId() {
 var flag = true;
 
 function coHeartClick(e) {
-	var roomId = $(e).attr("roomID");
-	
-	if(flag) {
-		$(e).attr("class", "bi bi-heart-fill");
+	var reserNo = $(e).attr("reserNo");
+	var guestId = $(e).attr("guestId");
+	var id = $(e).attr("id");
+
+	if (flag) {
+		$(e).attr("class", "bi bi-heart-fill co-heart");
 		flag = false;
-		
+
 		$.ajax({
 			type: "post",
-			url: "/wish/insert",
-			data: {"roomId" : roomId}
+			url: "/like/insert",
+			data: { "reserNo": reserNo, "guestId": guestId }
 		});
 	} else {
-		$(e).attr("class", "bi bi-heart");
+		$(e).attr("class", "bi bi-heart co-heart");
 		flag = true;
-		
+
 		$.ajax({
 			type: "post",
-			url: "/wish/delete",
-			data: {"roomId" : roomId},
-			error: function(request,error) {
-				console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-			}
+			url: "/like/delete",
+			data: { "reserNo": reserNo, "guestId": guestId}
 		});
 	}
 }

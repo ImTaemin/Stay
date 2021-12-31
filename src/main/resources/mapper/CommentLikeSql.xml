@@ -5,4 +5,16 @@
 	<select id="countLike" parameterType="HashMap" resultType="int">
 		select count(*) from comment_like where no = #{no} and guest_id = #{guest_id}
 	</select>
+	
+	<insert id="insertLike" parameterType="cldto">
+		insert into comment_like values (#{no}, #{guest_id}, #{id})
+	</insert>
+	
+	<delete id="deleteLike" parameterType="HashMap">
+		delete from comment_like where no = #{no} and guest_id = #{guest_id} and id = #{id}
+	</delete>
+	
+	<select id="getLike" parameterType="String" resultType="cldto">
+		select * from comment_like where id = #{id}
+	</select>
 </mapper>

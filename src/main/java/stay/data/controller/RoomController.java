@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import stay.data.dto.CommentLikeDto;
 import stay.data.dto.GuestCommentDto;
 import stay.data.dto.MemberDto;
 import stay.data.dto.ResultMapDto;
@@ -211,6 +212,9 @@ public class RoomController {
  			c.setGcoDto(gCoDto);
  		}
  		
+ 		// 좋아요한 댓글 리스트
+ 		List<CommentLikeDto> likeList = likeService.getLike(myid);
+ 		
  		mview.addObject("currentPage", currentPage);
  		mview.addObject("myid", myid);
  		mview.addObject("loginok", loginok);
@@ -218,6 +222,7 @@ public class RoomController {
 		mview.addObject("photoList", photoList);
 		mview.addObject("memDto", memDto);
 		mview.addObject("commentList", commentList);
+		mview.addObject("likeList", likeList);
 		
 		mview.setViewName("/room/roomDetail");
 		

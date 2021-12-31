@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import stay.data.dto.ResultMapDto;
 import stay.data.dto.WishListDto;
 import stay.data.mapper.WishListMapper;
 
