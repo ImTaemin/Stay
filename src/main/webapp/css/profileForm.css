@@ -82,7 +82,7 @@
 	border-radius: 100%;
 }
 
-.profile-main>.profile-top>.profile-first>.openBtn {
+.profile-main>.profile-top>.profile-first>.update>.openBtn {
 	background-color: #F9B514;
 	padding: 5px 10px;
 	border-radius: 4px;
@@ -91,7 +91,7 @@
     width: 150px;
 }
 
-.modal {
+/* .modal {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -120,6 +120,36 @@
 	display: block;
 	width: 80px;
 	margin: 0 auto;
+} */
+
+.modal-body {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modal-body input {
+	display: block;
+	width: 70%;
+	height: 35px;
+	padding: 0 12px;
+	border-radius: 7px;
+	font-size: 16px;
+	border: 2px solid #d3dce6;
+	transition: border-color 200ms ease-in-out;
+}
+
+.modal-body input:focus, input:hover, input:active {
+	width: 70%;
+	outline: none;
+	box-shadow: none;
+	border-color: #0B57A2;
+}
+
+.modal-footer>#bodyBtn {
+	width: 25%;
+	height: 35px;
 }
 
 /* .hidden {
