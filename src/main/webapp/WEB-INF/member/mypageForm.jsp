@@ -105,10 +105,10 @@
   	  </div>
   	  <input type="text" id="addr2" name="addr2" value="${memberDto.addr_detail}"> --%>
   	  
-  	<label for="hp">핸드폰 번호</label>
-  	  <input type="tel" name="hp" id="hp" required="required" value="${memberDto.hp}">
-  	<label for="e_mail">이메일</label>
-  	   <input type="email" name="e_mail" id="e_mail" value="${memberDto.e_mail}"> 
+  	<label for="hp">연락처</label>
+  	  <input type="tel" class="phoneNumber" name="hp" id="hp" required="required" value="${memberDto.hp}">
+  	<label for="email">이메일</label>
+  	   <input type="email" name="e_mail" id="email" value="${memberDto.e_mail}"> 
   	 <!-- <input type="text" name="email1" class="form-control"
   	  		required="required" style="width: 80px;" value="${email1}">
 		<b>@</b>

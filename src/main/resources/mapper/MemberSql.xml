@@ -65,4 +65,12 @@
 	<update id="findPw" parameterType="mdto">
 		update member set pass=#{pass} where id=#{id}
 	</update>
+	
+	<insert id="insertSingoMem" parameterType="rmdto">
+		insert into report_member values (#{no}, #{black_id}, #{report_id}, #{reason})
+	</insert>
+	
+	<select id="getSingoMem" parameterType="String" resultType="rmdto">
+		select * from report_member where black_id = #{black_id}
+	</select>	
 </mapper>
