@@ -53,11 +53,6 @@ public class RoomService {
 	}
 	
 	public List<RoomDto> getRoomSite(String search){
-		
-		HashMap<String, String> map = new HashMap<String, String>();
-		
-		map.put("search", search);
-		
-		return mapper.getRoomSite(map);
+		return mapper.getRoomSite(search);
 	}
 }

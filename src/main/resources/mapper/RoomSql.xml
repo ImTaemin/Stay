@@ -58,8 +58,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where r.no = w.room_no
 	</select>
 
-	<select id="getRoomSite" resultType="rdto" parameterType="HashMap">
-		select * from room where addr_load like '#{search}%'
+	<select id="getRoomSite" resultType="rdto" parameterType="String">
+		select * from room where addr_load like concat(#{search},"%")
 	</select>
 	
 	<!-- join -->

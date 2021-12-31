@@ -18,5 +18,5 @@ public interface RoomMapper {
 	public ResultMapDto getOneRoom(String no);
 	public void updateRoom(RoomDto roomDto);
 	public List<RoomDto> getBestRoom();
-	public List<RoomDto> getRoomSite(HashMap<String, String> map);
+	public List<RoomDto> getRoomSite(String search);
 }

@@ -191,14 +191,10 @@ public class MainController {
    }
    
    @GetMapping("/searchRoomSite")
-	public @ResponseBody HashMap<String, String> searchRoomSite(@RequestParam String search){
+	public @ResponseBody List<RoomDto> searchRoomSite(@RequestParam String search){
 
-		HashMap<String, String> map=new HashMap<String, String>();
-		
-		map.put("search",search);
+		List<RoomDto> rdtoList = roomService.getRoomSite(search);
 
-		roomService.getRoomSite(search);
-
-		return map;
+		return rdtoList;
 	}
 }

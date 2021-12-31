@@ -32,8 +32,20 @@
 				<div class="guestMain-siteBtn"><button type="button" class="guestMain-site">위치 검색</button></div>
 				<div class="bar">|</div>
 				<div class="site-search">
-					<input class="search" type="text" placeholder="위치를 검색하세요.">
+					<input class="search" onchange="함수이름()" type="text" placeholder="위치를 검색하세요.">
 					<hr>
+					<!-- 
+						function 함수이름(){
+							success:function(data){
+								.forEach(item, ){
+									s="";
+									
+								}
+								$("#search-result").html(s);
+							}
+						}
+					 -->
+					<div id="search-result"></div>
 				</div>
 			</div>
 			<div class="guestMain-start">  
