@@ -105,3 +105,33 @@ function nullId() {
 		text: '로그인 후 예약 서비스 이용이 가능합니다.'
 	});
 }
+
+// 후기 좋아요 클릭 이벤트
+var flag = true;
+
+function coHeartClick(e) {
+	var roomId = $(e).attr("roomID");
+	
+	if(flag) {
+		$(e).attr("class", "bi bi-heart-fill");
+		flag = false;
+		
+		$.ajax({
+			type: "post",
+			url: "/wish/insert",
+			data: {"roomId" : roomId}
+		});
+	} else {
+		$(e).attr("class", "bi bi-heart");
+		flag = true;
+		
+		$.ajax({
+			type: "post",
+			url: "/wish/delete",
+			data: {"roomId" : roomId},
+			error: function(request,error) {
+				console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	}
+}

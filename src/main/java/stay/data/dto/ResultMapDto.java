@@ -10,5 +10,4 @@ public class ResultMapDto {
 	private ReservationDto resDto;
 	private GuestCommentDto gcoDto;
 	private AvgTotalDto atDto;
-	private GuestCommentLikesDto likeDto;
 }

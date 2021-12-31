@@ -135,7 +135,6 @@ create table guest_comment(
 	guest_id varchar(20) not null,
 	content varchar(500) not null,
 	rating float not null,
-	likes int default 0,
 	write_day date not null,
 	primary key (no, guest_id),
 	foreign key (no) references reservation(no),
@@ -170,4 +169,15 @@ create table chat(
 	msg varchar(5000),
 	sender varchar(50),
 	receiver varchar(50)
+);
+
+#게스트 댓글 좋아요
+create table comment_like(
+	no varchar(20) not null,
+	guest_id varchar(20) not null,
+	id varchar(20) not null,
+	primary key (no, guest_id, id),
+	foreign key (no) references reservation(no),
+	foreign key (guest_id) references reservation(guest_id),
+	foreign key (id) references member(id)
 );

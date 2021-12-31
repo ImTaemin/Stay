@@ -39,4 +39,13 @@ public class GuestCommentService {
 	public void deleteGuestComment(String no) {
 		mapper.deleteGuestComment(no);
 	}
+	
+	public void updateLikes(String no, String guest_id) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		
+		map.put("no", no);
+		map.put("guest_id", guest_id);
+		
+		mapper.updateLikes(map);
+	}
 }
