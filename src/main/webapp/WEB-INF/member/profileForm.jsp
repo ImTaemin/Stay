@@ -7,7 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="/css/profileForm.css">
+<link rel="stylesheet" href="${root}/css/profileForm.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
@@ -55,7 +56,7 @@
 					});
 					
 					 $(".singoBtn").click(function(){
-						var black_id = $("#report_id").text();
+						var black_id = $('#report_id').text();
 						$.ajax({
 							  type:"post",
 							  dataType:"text",
@@ -87,7 +88,7 @@
 
 							<div class="modal-footer">
 								<button type="button" id="bodyBtn" class="btn btn-primary"
-									onclick="singoBtn" data-dismiss="modal">신고하기</button>
+									onclick="'singoBtn'" data-dismiss="modal">신고하기</button>
 								<button type="button" class="btn btn-default"
 									data-dismiss="modal">Close</button>
 							</div>

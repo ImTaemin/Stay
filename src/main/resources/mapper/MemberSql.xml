@@ -67,7 +67,7 @@
 	</update>
 	
 	<insert id="insertSingoMem" parameterType="rmdto">
-		insert into report_member values (#{no}, #{black_id}, #{report_id}, #{reason})
+		insert into report_member values (#{black_id}, #{report_id}, #{reason})
 	</insert>
 	
 	<select id="getSingoMem" parameterType="String" resultType="rmdto">
