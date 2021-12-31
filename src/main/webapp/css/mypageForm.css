@@ -12,15 +12,8 @@ div .input {
 	height: auto;
 }
 
-.gaip-input-check {
-	position: relative;
-	display: flex;
-	flex-direction: column;
-	margin-bottom: 14px;
-}
-
 div .input> input {
-    display: inline-block;
+    display: inline;
     width: 360px;
     height: 44px;
     padding: 0 12px;
@@ -32,7 +25,7 @@ div .input> input {
 }
 
 div .input> .gaip-input-check> input {
-    display: inline-block;
+    display: inline;
     width: 360px;
     height: 44px;
     padding: 0 12px;
@@ -54,7 +47,6 @@ div .input> label {
     width: 100%;
     font-size: 12px;
     line-height: 16px;
-    margin-top: 10px;
 }
 
 div .cardbtn {
@@ -106,7 +98,7 @@ div .btnmypage {
 	border-radius: 5px;
 	background-color: #0B57A2;
 	color: #fff;
-	box-shadow: 1px 1px 2px grey;
+	box-shadow: 2px;
 }
 
 .cancel-btn {
@@ -118,7 +110,7 @@ div .btnmypage {
 	border-radius: 5px;
 	background-color: #DB0000;
 	color: #fff;
-	box-shadow: 1px 1px 2px grey;
+	box-shadow: 2px;
 }
 
 .cardbtn> .photo {

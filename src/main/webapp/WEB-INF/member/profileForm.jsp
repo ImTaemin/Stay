@@ -45,6 +45,7 @@
 						<button class="closeBtn">✖</button>
 					</div>
 				</div>-->
+<<<<<<< HEAD
 <!-- gd -->
 				<script type="text/javascript">
 				$(function(){
@@ -68,6 +69,9 @@
 				});
 				</script>
 				
+=======
+
+>>>>>>> parent of f336e64 (21.12.31 수정중)
 				<!-- 신고하기 모달 -->
 				<div id="singoModal" class="modal" role="dialog">
 					<div class="modal-dialog modal-dialog-centered">
@@ -80,7 +84,7 @@
 
 							<div class="modal-body">
 								<label for="id-singo">신고 할 아이디&nbsp;</label>
-								<input type="text" id="singo-id" required="required"><br>
+								<input type="text" id="singo-id" required="required" value="${sessionScope.myid }"><br>
 								<label for="reason-singo">신고사유</label>
 								<input type="text" id="singo-reason" required="required">
 							</div>
@@ -106,14 +110,16 @@
 					
 					<c:if test="${sessionScope.kakaologin == null }">
 						<h2>
-							<b id="report-id">${sessionScope.myid }</b>
-							<b>님의<br><br>프로필입니다.😊</b>
+							<b>${sessionScope.myid } 님의<br>
+								<br>프로필입니다.😊
+							</b>
 						</h2>
 					</c:if>
 					<c:if test="${sessionScope.kakaologin!=null }">
 						<h2>
-							<b id="report-id">${sessionScope.kakaoName }</b>
-							<b>님의<br><br>프로필입니다.😊</b>
+							<b>${sessionScope.kakaoName } 님의<br>
+								<br>프로필입니다.😊
+							</b>
 						</h2>
 					</c:if>
 				</c:if>
