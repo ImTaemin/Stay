@@ -3,6 +3,7 @@ package stay.data.controller;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import stay.data.dto.MemberDto;
@@ -188,5 +190,15 @@ public class MainController {
 	   
    }
    
-  
+   @GetMapping("/searchRoomSite")
+	public @ResponseBody HashMap<String, String> searchRoomSite(@RequestParam String search){
+
+		HashMap<String, String> map=new HashMap<String, String>();
+		
+		map.put("search",search);
+
+		roomService.getRoomSite(search);
+
+		return map;
+	}
 }

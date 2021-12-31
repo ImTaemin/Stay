@@ -113,9 +113,25 @@
 		</div>
 		<!-- 로고_클릭시 메인페이지로 이동 -->
 		<div class="main-logo">
-			<a href="${root }/">
-				<img alt="" src="../photo/logo_sm.png">
-			</a>
+			<c:if test="${sessionScope.loginok==null }">
+				<a href="${root }/">
+		      		<img alt="" src="../photo/logo_sm.png">
+		   		</a>
+			</c:if>
+			<c:if test="${sessionScope.loginok!=null }">
+				<c:if test="${sessionScope.mode=='guest'}">
+		   		<a href="${root }/">
+		      		<img alt="" src="../photo/logo_sm.png">
+		   		</a>
+		   </c:if>
+			
+		   <c:if test="${sessionScope.mode=='host'}">
+		   		<a href="${root }/host/main">
+		      		<img alt="" src="../photo/logo_sm.png">
+		   		</a>
+		   </c:if>
+			</c:if>
+			
 		</div>
 		<!-- 로그인, 회원가입, 로그아웃버튼, 로그인중 표시-->
 		<div class="main-buttons">

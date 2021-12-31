@@ -8,6 +8,7 @@
 }
 
 .guestMain-filter {
+	position: relative;
 	display: flex;
 	justify-content: space-around;
 	border: 2pt solid #0B57A2;
@@ -97,20 +98,15 @@
 	font-weight: bolder;
 	margin-left: 5%;
 	display: flex;
-}
-
-.title {
-	display: flex;
-	width: 20%;
-	justify-content: space-between;
+	min-width: 10%;
 }
 
 .guestMain-toproom i {
 	color: red;
 }
 
-.guestMain-toproom div {
-	padding-top: 3px;
+.guestMain-toproom .heart {
+	padding-top: 2px;
 }
 
 .guestMain-list {
@@ -166,11 +162,56 @@
 	text-align: justify;
 }
 
+.guestMain-map{
+	display: flex;
+	height: 100%;
+	padding-top: 1px;
+}
+
+.guestMain-map .bar{
+	padding-left: 7px;
+	padding-top: 6px;
+}
+
 .guestMain-site {
 	display: flex;
 	justify-content: flex-start;
-	text-align: justify
+	text-align: justify;
+	padding: 0;
+    border: none;
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: transparent;
+    cursor: pointer;
+    
 }
+
+.site-search{
+/* 	display: none; */
+	visibility:hidden;
+	position: absolute;
+	height: 100px;
+    top: 65%;
+    z-index: 15;
+    width: 200px;
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: 0 1px 15px rgba(27, 31, 35, 0.15);
+    transition: transform 200ms ease-in;
+    padding: 1%;
+    text-align: center;	
+}
+  
+  guestMain-site:focus,
+  guestMain-site:active {
+    box-shadow: none;
+    outline: none;
+  } 
+  
+  guestMain-site > div {
+    width: 100%;
+    height: auto;
+  }
 
 .swiper-slide {
 	text-align: center;
@@ -203,3 +244,13 @@
 .swiper-button-next:hover {
 	transform: translateX(10px);
 }
+
+
+  
+
+  
+
+  
+
+
+  

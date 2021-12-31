@@ -28,8 +28,15 @@
 		<!-- 검색핉터창 -->
 	  
 		<div class="guestMain-filter">
-			<div class="guestMain-map"><button type="button">위치 검색</button>  |  </div>
-			<div class="guestMain-start">
+			<div class="guestMain-map">
+				<div class="guestMain-siteBtn"><button type="button" class="guestMain-site">위치 검색</button></div>
+				<div class="bar">|</div>
+				<div class="site-search">
+					<input class="search" type="text" placeholder="위치를 검색하세요.">
+					<hr>
+				</div>
+			</div>
+			<div class="guestMain-start">  
 								<jsp:useBean id="now" class="java.util.Date"/>
 								<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today"/>
 								<label for="now">체크인</label>
@@ -49,15 +56,13 @@
 	<div class="guestMain-bottom">
 		<!-- 인기숙소 -->
 		<div class="guestMain-toproom">
-			<div class="title">
 				<div class="heart">
 					<i class="bi bi-heart-fill"></i>
 				</div>
-				인기 숙소
+				<div class="title">인기 숙소</div>
 				<div class="heart">
 					<i class="bi bi-heart-fill"></i>
 				</div>
-			</div>
 		</div>
 		
 		<div class="guestMain-list">
