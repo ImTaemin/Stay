@@ -45,7 +45,33 @@
 						<button class="closeBtn">✖</button>
 					</div>
 				</div>-->
+<<<<<<< HEAD
+<!-- gd -->
+				<script type="text/javascript">
+				$(function(){
+					   loginok="${sessionScope.loginok}";
+					   
+					$(".openBtn").click(function(){
+						$("#singo-id").val($("#report-id").text());
+					});
+					
+					$(".singoBtn()").click(function(){
+						$.ajax({
+							  type:"post",
+							  dataType:"text",
+							  url:"singo",
+							  data:{"no":no,"reason":reason},
+							  success:function(data) {
+								  list();
+							  }
+						   });
+					});
+				});
+				</script>
+				
+=======
 
+>>>>>>> parent of f336e64 (21.12.31 수정중)
 				<!-- 신고하기 모달 -->
 				<div id="singoModal" class="modal" role="dialog">
 					<div class="modal-dialog modal-dialog-centered">
