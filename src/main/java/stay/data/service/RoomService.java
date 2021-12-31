@@ -27,13 +27,13 @@ public class RoomService {
 		mapper.insertRoom(roomDto);
 	}
 	
-	public List<ResultMapDto> getAllRoom(int start, int perPage) {
+	public List<ResultMapDto> getPageRoom(int start, int perPage) {
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		
 		map.put("start", start);
 		map.put("perPage", perPage);
 		
-		return mapper.getAllRoom(map);
+		return mapper.getPageRoom(map);
 	}
 	
 	public RoomDto getRoom(String no) {

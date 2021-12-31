@@ -82,7 +82,7 @@ public class RoomController {
 		start = (currentPage - 1) * perPage;
 
 		// 각 페이지에서 필요한 게시글 가져오기
-		List<ResultMapDto> roomList = roomService.getAllRoom(start, perPage);
+		List<ResultMapDto> roomList = roomService.getPageRoom(start, perPage);
  		
  		for(ResultMapDto dto : roomList) {
  			// 이미지 분리
@@ -103,7 +103,7 @@ public class RoomController {
  		
  		// 위시리스트
  		if(loginok != null) {
- 			List<WishListDto> wishList = wishService.onlyWishList(myid);
+ 			List<WishListDto> wishList = wishService.getWishList(myid);
  			
  			mview.addObject("wishList", wishList);
  		}
@@ -178,24 +178,29 @@ public class RoomController {
 		
 		// 위시리스트
  		if(loginok != null) {
- 			List<WishListDto> wishList = wishService.onlyWishList(myid);
+ 			List<WishListDto> wishList = wishService.getWishList(myid);
  			
  			mview.addObject("wishList", wishList);
  		}
 		
  		// 게스트 댓글
- 		List<ResultMapDto> gCoDto = gcommentService.getRoomComment(no);
+ 		List<ResultMapDto> commentList = gcommentService.getRoomComment(no);
  		
- 		// 게스트 정보
-// 		List<MemberDto> coMemList = memberService.getCommentMember(hostId)
+ 		for(ResultMapDto c : commentList) {
+ 			String guestId = c.getGcoDto().getGuest_id();
+ 			
+ 			MemberDto gMemDto = memberService.getMember(guestId);
+ 			
+ 			c.setMemDto(gMemDto);
+ 		}
  		
+ 		mview.addObject("currentPage", currentPage);
  		mview.addObject("myid", myid);
  		mview.addObject("loginok", loginok);
 		mview.addObject("dto", dto);
-		mview.addObject("memDto", memDto);
-		mview.addObject("gCoDto", gCoDto);
 		mview.addObject("photoList", photoList);
-		mview.addObject("currentPage", currentPage);
+		mview.addObject("memDto", memDto);
+		mview.addObject("commentList", commentList);
 		
 		mview.setViewName("/room/roomDetail");
 		

@@ -289,18 +289,28 @@
 					
 					<c:if test="${dto.atDto.total > 0}">
 						<div class="co-wrap">
-							<c:forEach var="co" items="${gCoDto}" varStatus="i">
+							<c:forEach var="coList" items="${commentList}">
 								<div class="co-detail">
 									<div class="mem-detail">
 										<div class="mem-img">
-											<img src="${root}/photo/memberPhoto/jenny.jpg">
+											<img src="${root}/photo/memberPhoto/${coList.memDto.photo}">
 										</div>
 										
 										<div class="mem-content">
-											<span>아이디</span>
+											<fmt:formatDate var="wirteDay" value="${coList.gcoDto.write_day}" pattern="yyyy년 MM월 dd일"/>
+											<span class="mem-id">${coList.memDto.id}</span>
+											<span class="write-day">${wirteDay}</span>
+										</div>
+										
+										<div class="co-heart-wrap">
+											<i class="bi bi-heart co-heart"></i>
+											<span class="heart-count">${coList.likeDto.heart}</span>
 										</div>
 									</div>
-<%-- 									<span>${i.count} ${co.gcoDto.content}</span> --%>
+									
+									<div class="co-content">
+										<span>${coList.gcoDto.content}</span>
+									</div>
 								</div>
 							</c:forEach>
 						</div>

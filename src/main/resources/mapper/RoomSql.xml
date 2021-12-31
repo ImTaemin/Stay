@@ -24,7 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<collection property="atDto" resultMap="atMap"></collection>
 	</resultMap>
 	
-	<select id="getAllRoom" parameterType="HashMap" resultMap="resultMap">
+	<select id="getPageRoom" parameterType="HashMap" resultMap="resultMap">
 		select *, ifnull(a, 0) avg, ifnull(t, 0) total from room a left join (
    			select round(avg(g.rating), 1) a, count(g.rating) t, r.no
 			from room r, reservation res, guest_comment g

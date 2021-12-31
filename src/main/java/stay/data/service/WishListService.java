@@ -28,11 +28,11 @@ public class WishListService {
 		mapper.deleteWishList(map);
 	}
 	
-	public List<WishListDto> onlyWishList(String guestId) {
-		return mapper.onlyWishList(guestId);
-	}
-	
-	public List<ResultMapDto> getWishList(String guestId) {
+	public List<WishListDto> getWishList(String guestId) {
 		return mapper.getWishList(guestId);
 	}
+	
+//	public List<ResultMapDto> getWishList(String guestId) {
+//		return mapper.getWishList(guestId);
+//	}
 }
