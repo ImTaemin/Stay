@@ -117,6 +117,75 @@ function check_pw(){
         }
 */
 
+//비밀번호 일치 확인
+function checkPw(){
+
+    var pw = document.getElementById('pw').value;
+    var SC = ["!","@","#","$","%"];
+    var check_SC = 0;
+ 
+    if(pw.length < 6 || pw.length>16){
+    	$('.pw_glyphicon').css("display", "flex");
+    	$('.pw_check').css("display", "flex");
+    	$('.glyphicon-ok-sign').css("display", "none");
+        $('.pw_equal').css("display", "none");
+        $('.glyphicon-remove-sign').css("display", "inline-block");
+        $('.pw_not_equal').css("display", "none");
+        $('.pw_not_length').css("display", "inline-block");
+        $('.pw_not_sc').css("display", "none");
+    } else{
+    	$('.glyphicon-ok-sign').css("display", "none");
+        $('.pw_equal').css("display", "none");
+        $('.glyphicon-remove-sign').css("display", "none");
+        $('.pw_not_equal').css("display", "none");
+        $('.pw_not_length').css("display", "none");
+        $('.pw_not_sc').css("display", "none");
+    }
+    
+    
+    for(var i=0;i<SC.length;i++){
+        if(pw.indexOf(SC[i]) != -1){
+            check_SC = 1;
+        }
+    }
+    if(check_SC == 0){
+    	$('.glyphicon-ok-sign').css("display", "none");
+        $('.pw_equal').css("display", "none");
+        $('.glyphicon-remove-sign').css("display", "inline-block");
+        $('.pw_not_equal').css("display", "none");
+        $('.pw_not_length').css("display", "none");
+        $('.pw_not_sc').css("display", "inline-block");
+    }
+
+    
+    if(document.getElementById('pw').value !='' && document.getElementById('pw2').value!=''){
+        if(document.getElementById('pw').value==document.getElementById('pw2').value){
+        	$('.glyphicon-ok-sign').css("display", "inline-block");
+            $('.pw_equal').css("display", "inline-block");
+            $('.glyphicon-remove-sign').css("display", "none");
+        	$('.pw_not_equal').css("display", "none");
+        	$('.pw_not_length').css("display", "none");
+        	$('.pw_not_sc').css("display", "none");
+        }
+        else{
+        	$('.glyphicon-ok-sign').css("display", "none");
+            $('.pw_equal').css("display", "none");
+            $('.glyphicon-remove-sign').css("display", "inline-block");
+        	$('.pw_not_equal').css("display", "inline-block");
+        	$('.pw_not_length').css("display", "none");
+        	$('.pw_not_sc').css("display", "none");
+        }
+    } else if(document.getElementById('pw').value ==''){
+    	$('.glyphicon-ok-sign').css("display", "none");
+        $('.pw_equal').css("display", "none");
+        $('.glyphicon-remove-sign').css("display", "none");
+        $('.pw_not_equal').css("display", "none");
+        $('.pw_not_length').css("display", "none");
+        $('.pw_not_sc').css("display", "none");
+    }
+    
+};
+
 // 카카오 주소 API
 // 본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
 function sample4_execDaumPostcode() {
@@ -245,3 +314,8 @@ function checkPw(){
 
 
 $("#photo").html("<img src='새로운애'>");
+
+//핸드폰 번호 하이픈(-) 자동 입력
+$(document).on("keyup", ".phoneNumber", function() { 
+	$(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") ); 
+});
