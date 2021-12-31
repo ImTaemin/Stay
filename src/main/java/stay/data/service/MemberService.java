@@ -1,12 +1,13 @@
 package stay.data.service;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import stay.data.dto.MemberDto;
-import stay.data.dto.ResultMapDto;
+import stay.data.dto.ReportMemberDto;
 import stay.data.mapper.MemberMapper;
 import stay.data.repository.MemberRepository;
 
@@ -51,5 +52,13 @@ public class MemberService {
 	public void findPw(String e_mail) throws Exception{
 		
 		mapper.findPw(e_mail);
+	}
+	
+	public void insertSingoMem(ReportMemberDto rmDto) {
+		mapper.insertSingoMem(rmDto);
+	}
+	
+	public List<ReportMemberDto> getSingoMem(String black_id) {
+		return mapper.getSingoMem(black_id);
 	}
 }

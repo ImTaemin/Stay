@@ -1,18 +1,22 @@
 package stay.data.controller;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import stay.data.dto.MemberDto;
+import stay.data.dto.ReportMemberDto;
 import stay.data.mapper.MemberMapper;
 import stay.data.service.MemberService;
 
@@ -33,15 +37,33 @@ public class ProfileController {
 		String myid = (String)session.getAttribute("myid");
 		
 		MemberDto memberDto = memberService.getMember(myid);
+		List<ReportMemberDto> rmList = memberService.getSingoMem(myid);
 		
 		memberDto.setId(myid);
 		
 		mview.addObject("memberDto", memberDto);
+		mview.addObject("rmList", rmList);
 		
 		mview.setViewName("/member/profileForm");
 		
 		return mview;
 	}
+	
+	@PostMapping("/singo")
+	public void singoInsert(
+			@ModelAttribute ReportMemberDto rmDto,
+			@RequestParam String black_id,
+			@RequestParam String reason,
+			HttpSession session) {
+		String myid = (String)session.getAttribute("myid");
+		
+		rmDto.setReport_id(myid);
+		rmDto.setBlack_id(black_id);
+		rmDto.setReason(reason);
+		
+		memberService.insertSingoMem(rmDto);
+	}
+	
 	
 	@GetMapping("/updatelikes")
 	@ResponseBody

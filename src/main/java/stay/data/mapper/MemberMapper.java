@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import stay.data.dto.MemberDto;
+import stay.data.dto.ReportMemberDto;
 
 @Mapper
 public interface MemberMapper {
@@ -31,4 +32,7 @@ public interface MemberMapper {
 	
 	public String findId(String inputName, String inputHp);
 	public void findPw(String e_mail);
+	
+	public void insertSingoMem(ReportMemberDto rmDto);
+	public List<ReportMemberDto> getSingoMem(String black_id);
 }
