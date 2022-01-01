@@ -12,6 +12,19 @@ spring:
     livereload:
       enabled: true
       
+  #mail    
+  mail:
+   host: smtp.gmail.com
+   port: 587
+   username: staySwim@gmail.com
+   password: stay1234!
+   properties:
+    mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+      
   #mysql
 #  db-mysql:
   datasource:
@@ -25,3 +38,5 @@ mybatis:
   type-aliases-package: stay.data.mapper, stay.data.dto
   mapper-locations:
   - /mapper/**/*.xml
+  
+   

@@ -22,8 +22,8 @@
   <form action="findIdprocess" method="post">
   	<label for="id">아이디</label>
     <input type="text" id="id" name="id" placeholder="아이디를 입력하세요" required="required" autofocus="autofocus"><br>
-  	<label for="email">이메일</label>
-    <input type="text" id="email" name="e_mail" placeholder="가입시 등록한 이메일을 입력하세요" required="required" autofocus="autofocus"><br>
+  	<label for="e_mail">이메일</label>
+    <input type="text" id="e_mail" name="e_mail" placeholder="가입시 등록한 이메일을 입력하세요" required="required" autofocus="autofocus"><br>
    
     <div class="find-cancel-btn">
   	  <button type="button" id="searchBtn2" class="find-btn">찾기</button>
@@ -31,6 +31,21 @@
   	</div>
   </form>
 </div>
+
+	<!-- 결과 모달 -->
+  	  <div class="modal">
+  	    <div id="background_modal" class="background_modal">
+		  <div class="modal_contents">
+		  <div class="close">&times;</div>
+			<h2>
+				<b id="id_user"></b>
+			</h2><br>
+				<h1><b id="id_value"></b></h1>
+			<br>
+			<button type="button" id="pwSearch_btn" class="findPw-btn">비밀번호 찾기</button>
+		  </div>
+	    </div>
+	  </div>
 
 <!-- js -->
 <script src="/js/findForm.js"></script>

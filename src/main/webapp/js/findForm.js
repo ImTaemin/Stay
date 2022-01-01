@@ -31,13 +31,57 @@ $(document).on('click','#searchBtn',function(inputName, inputHp){
 		success:function(data){
 			console.log(data);
 			var findId=data.id;
-			if(data == 0){
-				$('#id_value').text("회원 정보를 확인해주세요");	
+			if(findId == null){
+				$('#id_user').text();	
+				$('#id_value').html("일치하는 회원정보가<br> 없습니다");
 			} else {
+				$('#id_user').text("회원님의 아이디는");
 				$('#id_value').text(findId);
 			}
 		}
 	});
  });
+ 
+ 
+//*****비밀번호 찾기*****
+$(document).on('click','#searchBtn2',function(id, e_mail){
+
+  var id=$('#id').val();
+  var e_mail=$('#e_mail').val();
+  
+  var postdata={'id':id,'e_mail':e_mail};
+  
+  //정보 일치 확인 ajax
+	$.ajax({
+		url:"/member/findPwprocess",
+		type:"get",
+		data:postdata,
+		dataType : "json",
+		success:function(res){
+			if (res['check']) {
+	                swal("발송 완료!", "입력하신 이메일로 임시비밀번호가 발송되었습니다.", "success").then((OK) = > {
+	                    if(OK) {
+	                        $.ajax({
+	                            type: "POST",
+	                            url: "/member/findPwprocess/sendEmail",
+	                            data: {
+	                                "id": id,
+	                                "e_mail": e_mail
+	                            }
+	                        })
+	                        window.location = "/login";
+	                    }
+	
+	
+	                }
+	            )
+	                $('#id_value').html();
+	            } else {
+	                $('#id_user').html();	
+					$('#id_value').html("일치하는 회원정보가<br> 없습니다");
+	            }
+       	   }
+    });
+});
 	
 	

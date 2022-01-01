@@ -16,4 +16,11 @@ public class MemberRepositoryImpl implements MemberRepository {
 	        int cnt = sqlSession.selectOne(NAMESPACE+".idCheck", id);
 	        return cnt;
 	    }
+	    
+	    // 아이디,이메일 체크
+	    @Override
+	    public int emailCheck(String id, String e_mail) {
+	    	int cnt = sqlSession.selectOne(NAMESPACE+".emailCheck", e_mail);
+	    	return cnt;
+	    }
 }

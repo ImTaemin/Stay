@@ -26,14 +26,20 @@
     <input type="tel" class="phoneNumber" id="inputHp" name="inputHp" placeholder="핸드폰 번호를 입력하세요" required="required" autofocus="autofocus"><br>
    
     <div class="find-cancel-btn">
-  	  <!-- <button type="button" id="searchBtn" class="find-btn" onclick="idSearch_click()">찾기</button> -->
   	  <button type="button" id="searchBtn" class="find-btn">찾기</button>
+  	  
+  	  <button type="button" class="cancel-btn" onclick="history.back()">취소</button>
+  	</div>
+</form>
+</div>
+
+	<!-- 결과 모달 -->
   	  <div class="modal">
   	    <div id="background_modal" class="background_modal">
 		  <div class="modal_contents">
 		  <div class="close">&times;</div>
 			<h2>
-				<b>회원님의 아이디는</b>
+				<b id="id_user"></b>
 			</h2><br>
 				<h1><b id="id_value"></b></h1>
 			<br>
@@ -41,12 +47,7 @@
 		  </div>
 	    </div>
 	  </div>
-  	  
-  	  <button type="button" class="cancel-btn" onclick="history.back()">취소</button>
-  	</div>
-</form>
-</div>
-
+	  
 <!-- js -->
 <script src="/js/findForm.js"></script>
 

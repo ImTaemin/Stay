@@ -1,13 +1,12 @@
 package stay.data.controller;
 
-import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -195,14 +194,39 @@ public class LoginController {
 		return "/member/findPwForm";
 	}
 	
+	//이메일, 아이디 일치 여부 check
+	 @GetMapping("findPwprocess")
+	 public @ResponseBody Map<String, Boolean> findPw(String e_mail, String id){ 
+		 
+		  Map<String,Boolean> json = new HashMap<>();
+	      //boolean pwFindCheck = service.userEmailCheck(userEmail,userName);
+
+	      //System.out.println(pwFindCheck);
+	      //json.put("check", pwFindCheck);
+	      
+	      return json;
+	 }
+	 
+	
+	
+	
 	/*
-	 * @GetMapping("findPwprocess")
+	 * // 비밀번호 찾기
 	 * 
-	 * @ResponseBody public String findPw(HttpServletResponse
-	 * response, @RequestParam("inputName") String name, @RequestParam("inputHp")
-	 * String hp){ String result = service.findId(name, hp);
+	 * @RequestMapping(value = "/user/searchPassword", method = RequestMethod.GET)
 	 * 
-	 * return result; }
+	 * @ResponseBody public String passwordSearch(@RequestParam("userId")String
+	 * user_id,
+	 * 
+	 * @RequestParam("userEmail")String user_email, HttpServletRequest request) {
+	 * 
+	 * mailsender.mailSendWithPassword(user_id, user_email, request);
+	 * 
+	 * return "user/userSearchPassword"; }
 	 */
+	
+	
+
+
 
 }
