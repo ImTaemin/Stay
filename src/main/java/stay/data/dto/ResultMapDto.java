@@ -8,6 +8,7 @@ public class ResultMapDto {
 	private MemberDto memDto;
 	private WishListDto wishDto;
 	private ReservationDto resDto;
+	private CanReservationDto canDto;
 	private GuestCommentDto gcoDto;
 	private CommentLikeDto likeDto;
 	private AvgTotalDto atDto;

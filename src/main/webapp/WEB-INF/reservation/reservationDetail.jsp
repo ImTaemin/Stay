@@ -14,6 +14,8 @@
 <!-- css -->
 <link rel="stylesheet" href="${root}/css/reservationDetail.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+<!-- js -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -235,7 +237,22 @@
 			<c:if test="${preCheck == false}">
 				<!-- 취소 버튼 -->
 				<div class="can-wrap">
-					<button class="btn btn-danger" id="can-reser">예약 취소</button>
+					<c:if test="${canReserDto == null}">
+						<button class="btn btn-danger" id="can-reser" no="${reserDto.no}" price="${reserDto.price}"
+						onclick="reserCan(this)">예약 취소</button>
+					</c:if>
+					
+					<c:if test="${canReserDto.refund_check == 'ing'}">
+						<button class="btn btn-secondary can-btn" id="can-reser" style="pointer-events: none;">예약 취소가 진행 중입니다.</button>
+					</c:if>
+					
+					<c:if test="${canReserDto.refund_check == 'end'}">
+						<button class="btn btn-secondary can-btn" id="can-reser" style="pointer-events: none;">결제 환불이 진행 중입니다.</button>
+					</c:if>
+					
+					<c:if test="${canReserDto.refund_check == 'can'}">
+						<button class="btn btn-warning can-btn" id="can-reser" style="pointer-events: none;">예약 취소가 완료되었습니다.</button>
+					</c:if>
 				</div>
 			</c:if>
 		</div>

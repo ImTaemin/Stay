@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="stay.data.mapper.CanReservationMapper">
+	<insert id="insertCanReser" parameterType="crdto">
+		insert into can_reservation values (#{no}, now(), #{refund}, 'ing')
+	</insert>
+	
+	<select id="getOneCanReser" parameterType="String" resultType="crdto">
+		select * from can_reservation where no = #{no}
+	</select>
+	
+	<resultMap type="stay.data.dto.ResultMapDto" id="resultMap">
+		<collection property="resDto" resultMap="resMap"></collection>
+		<collection property="canDto" resultMap="canMap"></collection>
+	</resultMap>
+	
+	<select id="getAllCanReser" parameterType="String" resultMap="resultMap">
+		select * from can_reservation can, reservation res where can.no = res.no and res.guest_id = #{guest_id};
+	</select>
+	
+	<!-- join -->
+	<!-- reservation -->
+	<resultMap type="stay.data.dto.ReservationDto" id="resMap">
+		<id column="no" property="no"/>
+		<id column="guest_id" property="guest_id"/>
+		<id column="host_id" property="host_id"/>
+		<id column="start_date" property="start_date"/>
+		<id column="end_date" property="end_date"/>
+		<id column="price" property="price"/>
+		<id column="pay_method" property="pay_method"/>
+		<id column="card_num" property="card_num"/>
+		<id column="account_num" property="account_num"/>
+		<id column="pay_date" property="pay_date"/>
+		<id column="room_no" property="room_no"/>
+	</resultMap>
+	
+	<!-- room -->
+	<resultMap type="stay.data.dto.CanReservationDto" id="canMap">
+		<id column="no" property="no"/>
+		<id column="can_date" property="can_date"/>
+		<id column="refund" property="refund"/>
+		<id column="refund_check" property="refund_check"/>
+	</resultMap>
+</mapper>

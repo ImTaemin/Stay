@@ -95,7 +95,28 @@
 		
 		<!-- 취소 -->
 		<div class="tab-pane" id="can" role="tabpanel" aria-labelledby="can-tab">
-			취소
+			<c:forEach var="list" items="${canList}">
+				<div class="card">
+					<img class="card-img-top" src="../../photo/roomPhoto/${list.roomDto.photos}">
+					
+					<div class="card-body top">
+						<h5 class="card-title">${list.resDto.start_date} ~ ${list.resDto.end_date}</h5>
+						<b class="card-text" id="roomTitle" onclick="location.href='/room/content?no=${list.roomDto.no}'">
+							${list.roomDto.name}
+						</b>
+						<p class="card-text">
+							${list.roomDto.addr_load}
+						</p>
+					</div>
+					
+					<div class="card-body bottom" list-no="${list.resDto.no}" onclick="btnClick(this)">
+						<label class="card-link">예약 취소 정보 더보기</label>
+						<i class="bi bi-chevron-right"></i>
+					</div>
+					
+					<!-- form -->
+				</div>
+			</c:forEach>
 		</div>
 	</div>
 </body>

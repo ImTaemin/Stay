@@ -28,12 +28,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import stay.data.dto.CanReservationDto;
 import stay.data.dto.GuestCommentDto;
 import stay.data.dto.MemberDto;
 import stay.data.dto.PayCardDto;
 import stay.data.dto.ReservationDto;
 import stay.data.dto.ResultMapDto;
 import stay.data.dto.RoomDto;
+import stay.data.service.CanReservationService;
 import stay.data.service.CostService;
 import stay.data.service.GuestCommentService;
 import stay.data.service.JoinGuestService;
@@ -60,6 +62,9 @@ public class ReservationController {
 	
 	@Autowired
 	MemberService memberService;
+	
+	@Autowired
+	CanReservationService canReserService;
 	
 	@PostMapping("/pay/paymentform")
 	public ModelAndView paymentForm(
@@ -245,7 +250,9 @@ public class ReservationController {
 		
 		List<ResultMapDto> nowList = reservationService.selectNowGuestReservation(myid);
 		List<ResultMapDto> preList = reservationService.selectPreGuestReservation(myid);
+		List<ResultMapDto> canList = canReserService.getAllCanReser(myid);
 		
+		// 예정된 예약
 		for(ResultMapDto dto : nowList) {
 			String photos = dto.getRoomDto().getPhotos();
 			String photo[] = photos.split(",");
@@ -257,6 +264,7 @@ public class ReservationController {
 			dto.setRoomDto(rdto);
 		}
 		
+		// 이전 예약
 		for(ResultMapDto dto : preList) {
 			String photos = dto.getRoomDto().getPhotos();
 			String photo[] = photos.split(",");
@@ -268,8 +276,22 @@ public class ReservationController {
 			dto.setRoomDto(rdto);
 		}
 		
+		// 취소된 예약
+		for(ResultMapDto dto : canList) {
+			String roomNo = dto.getResDto().getRoom_no();
+			RoomDto rdto = roomService.getRoom(roomNo);
+			
+			String photos = rdto.getPhotos();
+			String photo[] = photos.split(",");
+			
+			rdto.setPhotos(photo[0]);
+			
+			dto.setRoomDto(rdto);
+		}
+		
 		mview.addObject("nowList", nowList);
 		mview.addObject("preList", preList);
+		mview.addObject("canList", canList);
 		
 		mview.setViewName("/reservation/reservationList");
 		
@@ -318,6 +340,9 @@ public class ReservationController {
 		// 후기 작성
 		GuestCommentDto gCommentDto = gCommentService.getOneComment(reserNo, myid);
 		
+		// 예약 취소 여부
+		CanReservationDto canReserDto = canReserService.getOneCanReser(reserNo);
+		
 		mview.addObject("reserDto", reserDto);
 		mview.addObject("roomDto", roomDto);
 		mview.addObject("start", start);
@@ -328,6 +353,7 @@ public class ReservationController {
 		mview.addObject("hostDto", hostDto);
 		mview.addObject("preCheck", preCheck);
 		mview.addObject("gCommentDto", gCommentDto);
+		mview.addObject("canReserDto", canReserDto);
 		
 		mview.setViewName("/reservation/reservationDetail");
 		

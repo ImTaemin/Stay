@@ -35,8 +35,8 @@ next.addEventListener('click', function() {
 function getStarNum(e) {
 	var clickId = $(e).attr("id");
 	var rating = "0.0";
-	
-	if(clickId == "star-1") {
+
+	if (clickId == "star-1") {
 		rating = "1.0";
 	} else if (clickId == "star-2") {
 		rating = "2.0";
@@ -47,7 +47,7 @@ function getStarNum(e) {
 	} else if (clickId == "star-5") {
 		rating = "5.0";
 	}
-	
+
 	$('input[name=rate]').attr('value', rating);
 }
 
@@ -55,8 +55,8 @@ function getStarNum(e) {
 function changeStarNum(e) {
 	var clickId = $(e).attr("id");
 	var rating = "0";
-	
-	if(clickId == "star-1") {
+
+	if (clickId == "star-1") {
 		rating = "1";
 	} else if (clickId == "star-2") {
 		rating = "2";
@@ -67,7 +67,7 @@ function changeStarNum(e) {
 	} else if (clickId == "star-5") {
 		rating = "5";
 	}
-	
+
 	$('input[name=rate]').attr('value', rating);
 	$('span[id=starNum]').html(rating);
 }
@@ -90,9 +90,59 @@ $("#update-btn").click(function() {
 });
 
 //엔터값 출력
-$(document).ready(function(){
-  var content = $(".content-input").val();
+$(document).ready(function() {
+	var content = $(".content-input").val();
 	result = content.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
-	
+
 	$(".content-input").val(result);
 })
+
+// 예약 취소
+function reserCan(e) {
+	var no = $(e).attr("no");
+	var price = $(e).attr("price");
+
+	const swalWithBootstrapButtons = Swal.mixin({
+		customClass: {
+			confirmButton: 'btn btn-success',
+			cancelButton: 'btn btn-danger'
+		},
+		buttonsStyling: false
+	})
+
+	swalWithBootstrapButtons.fire({
+		title: '예약을 취소하시겠습니까?',
+		text: "취소 후 숙소 재예약이 어려울 수 있습니다.",
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonText: '확인',
+		cancelButtonText: '취소',
+	}).then((result) => {
+		if (result.isConfirmed) {
+			swalWithBootstrapButtons.fire(
+				'예약이 취소되었습니다.',
+				'환불 규정에 맞춰 환불이 진행될 예정입니다.',
+				'success'
+			)
+			
+			$(e).attr("class", "btn btn-secondary");
+			$(e).attr("onclick", "");
+			$(e).attr("style", "pointer-events: none;");
+			$(e).html("예약 취소가 진행 중입니다.");
+
+			$.ajax({
+				type: "post",
+				url: "/reser/delete",
+				data: { "no": no, "price": price }
+			});
+		} else if (
+			result.dismiss === Swal.DismissReason.cancel
+		) {
+			swalWithBootstrapButtons.fire(
+				'예약이 취소되지 않았습니다.',
+				'예약 취소가 진행되지 않았습니다.',
+				'error'
+			)
+		}
+	})
+}
