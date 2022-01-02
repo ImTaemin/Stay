@@ -45,13 +45,13 @@
 				<c:set var="loop_flag" value="false"/>
 				<c:forEach var="wish" items="${wishList}">
 					<c:if test="${wish.room_no eq dto.roomDto.no}">
-						<i roomID="${dto.roomDto.no}" class="bi bi-heart-fill" onclick="heartClick(this)"></i>
+						<i roomID="${dto.roomDto.no}" myId="${myid}" class="bi bi-heart-fill" onclick="heartClick(this)"></i>
 						<c:set var="loop_flag" value="true"/>
 					</c:if>
 				</c:forEach>
 				
 				<c:if test="${not loop_flag}">
-					<i roomID="${dto.roomDto.no}" class="bi bi-heart" onclick="heartClick(this)"></i>
+					<i roomID="${dto.roomDto.no}" myId="${myid}" class="bi bi-heart" onclick="heartClick(this)"></i>
 				</c:if>
 			</div>
 			
@@ -306,18 +306,18 @@
 										<div class="co-heart-wrap">
 											<c:forEach var="like" items="${likeList}">
 												<c:if test="${like.no eq coList.gcoDto.no}">
-													<i reserNo="${coList.gcoDto.no}" guestId="${coList.gcoDto.guest_id}"
+													<i reserNo="${coList.gcoDto.no}" guestId="${coList.gcoDto.guest_id}" myId="${myid}"
 													onclick="coHeartClick(this)" class="bi bi-heart-fill co-heart"></i>
 													<c:set var="heart_flag" value="true"/>
 												</c:if>
 											</c:forEach>
 											
 											<c:if test="${not heart_flag}">
-												<i reserNo="${coList.gcoDto.no}" guestId="${coList.gcoDto.guest_id}"
+												<i reserNo="${coList.gcoDto.no}" guestId="${coList.gcoDto.guest_id}" myId="${myid}"
 												onclick="coHeartClick(this)" class="bi bi-heart co-heart"></i>
 											</c:if>
 											
-											<span class="heart-count">${coList.gcoDto.countLike}</span>
+											<span class="heart-count" id="heartNum">${coList.gcoDto.countLike}</span>
 										</div>
 									</div>
 									

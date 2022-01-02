@@ -45,24 +45,33 @@ var tmp = true;
 
 function heartClick(e) {
 	var roomId = $(e).attr("roomID");
+	var myId = $(e).attr("myid");
 	
-	if(tmp) {
-		$(e).attr("class", "bi bi-heart-fill");
-		tmp = false;
-		
-		$.ajax({
-			type: "post",
-			url: "/wish/insert",
-			data: {"roomId" : roomId}
+	if (myId == "") {
+		Swal.fire({
+			icon: 'error',
+			title: '로그인이 필요합니다.',
+			text: '로그인 후 이용가능한 서비스입니다.'
 		});
 	} else {
-		$(e).attr("class", "bi bi-heart");
-		tmp = true;
-		
-		$.ajax({
-			type: "post",
-			url: "/wish/delete",
-			data: {"roomId" : roomId}
-		});
+		if (tmp) {
+			$(e).attr("class", "bi bi-heart-fill");
+			tmp = false;
+
+			$.ajax({
+				type: "post",
+				url: "/wish/insert",
+				data: { "roomId": roomId }
+			});
+		} else {
+			$(e).attr("class", "bi bi-heart");
+			tmp = true;
+
+			$.ajax({
+				type: "post",
+				url: "/wish/delete",
+				data: { "roomId": roomId }
+			});
+		}
 	}
 }

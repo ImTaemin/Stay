@@ -63,28 +63,37 @@ var tmp = true;
 
 function heartClick(e) {
 	var roomId = $(e).attr("roomID");
-
-	if (tmp) {
-		$(e).attr("class", "bi bi-heart-fill");
-		tmp = false;
-
-		$.ajax({
-			type: "post",
-			url: "/wish/insert",
-			data: { "roomId": roomId }
+	var myId = $(e).attr("myid");
+	
+	if (myId == "") {
+		Swal.fire({
+			icon: 'error',
+			title: '로그인이 필요합니다.',
+			text: '로그인 후 이용가능한 서비스입니다.'
 		});
 	} else {
-		$(e).attr("class", "bi bi-heart");
-		tmp = true;
+		if (tmp) {
+			$(e).attr("class", "bi bi-heart-fill");
+			tmp = false;
 
-		$.ajax({
-			type: "post",
-			url: "/wish/delete",
-			data: { "roomId": roomId },
-			error: function(request, error) {
-				console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-			}
-		});
+			$.ajax({
+				type: "post",
+				url: "/wish/insert",
+				data: { "roomId": roomId }
+			});
+		} else {
+			$(e).attr("class", "bi bi-heart");
+			tmp = true;
+
+			$.ajax({
+				type: "post",
+				url: "/wish/delete",
+				data: { "roomId": roomId },
+				error: function(request, error) {
+					console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+				}
+			});
+		}
 	}
 }
 
@@ -112,25 +121,33 @@ var flag = true;
 function coHeartClick(e) {
 	var reserNo = $(e).attr("reserNo");
 	var guestId = $(e).attr("guestId");
-	var id = $(e).attr("id");
-
-	if (flag) {
-		$(e).attr("class", "bi bi-heart-fill co-heart");
-		flag = false;
-
-		$.ajax({
-			type: "post",
-			url: "/like/insert",
-			data: { "reserNo": reserNo, "guestId": guestId }
+	var myId = $(e).attr("myid");
+	
+	if(myId == "") {
+		Swal.fire({
+			icon: 'error',
+			title: '로그인이 필요합니다.',
+			text: '로그인 후 이용가능한 서비스입니다.'
 		});
 	} else {
-		$(e).attr("class", "bi bi-heart co-heart");
-		flag = true;
+		if (flag) {
+			$(e).attr("class", "bi bi-heart-fill co-heart");
+			flag = false;
 
-		$.ajax({
-			type: "post",
-			url: "/like/delete",
-			data: { "reserNo": reserNo, "guestId": guestId}
-		});
+			$.ajax({
+				type: "post",
+				url: "/like/insert",
+				data: { "reserNo": reserNo, "guestId": guestId }
+			});
+		} else {
+			$(e).attr("class", "bi bi-heart co-heart");
+			flag = true;
+
+			$.ajax({
+				type: "post",
+				url: "/like/delete",
+				data: { "reserNo": reserNo, "guestId": guestId }
+			});
+		}
 	}
 }

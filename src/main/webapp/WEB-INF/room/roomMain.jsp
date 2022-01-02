@@ -18,6 +18,7 @@
 <!-- js -->
 <!-- 카카오 지도 API -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=05c1abb954049537a223eedcab5c9b64&libraries=services"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </head>
 <body>
 	<div class="room-main-wrap">
@@ -38,13 +39,13 @@
 							<c:set var="loop_flag" value="false"/>
 							<c:forEach var="wish" items="${wishList}">
 								<c:if test="${wish.room_no eq list.roomDto.no}">
-									<i roomID="${list.roomDto.no}" class="bi bi-heart-fill" onclick="heartClick(this)"></i>
+									<i roomID="${list.roomDto.no}" myid="${myid}" class="bi bi-heart-fill" onclick="heartClick(this)"></i>
 									<c:set var="loop_flag" value="true"/>
 								</c:if>
 							</c:forEach>
 							
 							<c:if test="${not loop_flag}">
-								<i roomID="${list.roomDto.no}" class="bi bi-heart" onclick="heartClick(this)"></i>
+								<i roomID="${list.roomDto.no}" myid="${myid}" class="bi bi-heart" onclick="heartClick(this)"></i>
 							</c:if>
 						</div>
 						
