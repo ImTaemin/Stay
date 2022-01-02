@@ -116,12 +116,64 @@
 							<div class="guest-btn">
 								<c:if test="${roomDto.max_per > joinGuestNum}">
 									<c:if test="${preCheck == false and canCheck == false}">
-										<span class="bi bi-plus-circle" no="${reserDto.no}" joinNum="${joinGuestNum}"
-										onclick="addGuest(this)" style="margin-right: 20%"></span>
+										<span class="bi bi-plus-circle" onclick="addGuest(this)" style="margin-right: 20%"
+										no="${reserDto.no}" joinNum="${joinGuestNum}" hostId="${hostDto.id}"
+										maxPer="${roomDto.max_per}" id="addGuest"></span>
 									</c:if>
 								</c:if>
-							
-								<span class="bi bi-three-dots" onclick="getGuest(this)"></span>
+								
+								<div data-toggle="modal" data-target="#guestList">
+									<span class="bi bi-three-dots"></span>
+								</div>
+							</div>
+						</div>
+						
+						<!-- 게스트리스트 모달 -->
+						<div id="guestList" class="modal">
+							<div class="modal-dialog modal-dialog-centered">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+										<h4 class="modal-title">게스트 상세 목록</h4>
+									</div>
+									
+									<div class="modal-body">
+										<div class="main-guest-wrap">
+											<div class="main-guest-img">
+												<img src="${root}/photo/memberPhoto/${guestDto.photo}">
+											</div>
+											
+											<label>${guestDto.id}</label>
+											
+											<button type="button" class="btn btn-default" style="pointer-events: none;">메인 게스트</button>
+										</div>
+										
+										<div class="join-guest-wrap" id="${join.memDto.id}">
+										</div>
+										
+										<c:forEach var="join" items="${joinList}">
+											<div class="join-guest-wrap" id="${join.memDto.id}">
+												<hr>
+												
+												<div class="join-guest-de">
+													<div class="join-guest-img">
+														<img src="${root}/photo/memberPhoto/${join.memDto.photo}">
+													</div>
+													
+													<label>${join.memDto.id}</label>
+												
+													<button type="button" id="joinDel" class="btn btn-danger" onclick="delGuest(this)"
+													resNo="${join.joinDto.no}" guestId="${join.memDto.id}" joinNum="${joinGuestNum}"
+													maxPer="${roomDto.max_per}">게스트 삭제</button>
+												</div>
+											</div>
+										</c:forEach>
+									</div>
+									
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>

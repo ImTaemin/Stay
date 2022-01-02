@@ -9,4 +9,38 @@
 	<insert id="insertJoinGuest" parameterType="jgdto">
 		insert into join_guest values (#{no}, #{id})
 	</insert>
+	
+	<resultMap type="stay.data.dto.ResultMapDto" id="resultMap">
+		<collection property="memDto" resultMap="memMap"></collection>
+		<collection property="joinDto" resultMap="joinMap"></collection>
+	</resultMap>
+	
+	<select id="getAllJoinGuest" parameterType="String" resultMap="resultMap">
+		select * from member mem, join_guest jo where jo.no = #{no} and mem.id = jo.id
+	</select>
+	
+	<delete id="deleteJoinGuest" parameterType="HashMap">
+		delete from join_guest where no = #{no} and id = #{id}
+	</delete>
+	
+	<!-- join -->
+	<!-- member -->
+	<resultMap type="stay.data.dto.MemberDto" id="memMap">
+		<id column="id" property="id"/>
+		<id column="pass" property="pass"/>
+		<id column="name" property="name"/>
+		<id column="birth" property="birth"/>
+		<id column="hp" property="hp"/>
+		<id column="addr_load" property="addr_load"/>
+		<id column="addr_detail" property="addr_detail"/>
+		<id column="photo" property="photo"/>
+		<id column="photos" property="photos"/>
+		<id column="likes" property="likes"/>
+		<id column="e_mail" property="e_mail"/>
+	</resultMap>
+	
+	<resultMap type="stay.data.dto.JoinGuestDto" id="joinMap">
+		<id column="no" property="no"/>
+		<id column="id" property="id"/>
+	</resultMap>
 </mapper>

@@ -17,8 +17,8 @@
 	font-size: 2.5em;
 }
 
-.room-detail>.title>a{
-	text-decoration:none;
+.room-detail>.title>a {
+	text-decoration: none;
 	color: #0B57A2;
 	cursor: pointer;
 	font-weight: bold;
@@ -122,7 +122,7 @@
 	width: 44.5%;
 	height: 430px;
 	display: flex;
-	justify-content:space-between;
+	justify-content: space-between;
 	flex-direction: column;
 	border-radius: 7px;
 }
@@ -232,14 +232,66 @@
 	width: 12%;
 }
 
-.guest-btn>.bi {
+.guest-btn .bi {
 	margin-top: 2px;
 	cursor: pointer;
 }
 
-.guest-btn>.bi:hover {
+.guest-btn .bi:hover {
 	color: #0B57A2;
 	font-size: 1.2em;
+}
+
+.modal-body {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+}
+
+.main-guest-wrap {
+	display: flex;
+	align-items: center;
+	width: 98%;
+	margin: 2% 0;
+}
+
+.join-guest-wrap {
+	display: flex;
+	flex-direction: column; align-items : center;
+	width: 98%;
+	align-items: center;
+}
+
+.join-guest-de {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	margin: 2% 0;
+}
+
+.main-guest-img, .join-guest-img {
+	display: flex;
+	width: 15%;
+}
+
+.main-guest-img img, .join-guest-img img {
+	width: 60px;
+	height: 60px;
+	border-radius: 100%;
+}
+
+.main-guest-wrap label, .join-guest-wrap label {
+	font-size: 1.5em;
+	width: 65%;
+}
+
+.main-guest-wrap>.btn, #joinDel {
+	width: 20%;
+}
+
+.swal2-confirm {
+	margin-right: 15px;
 }
 
 .host-wrap {
@@ -282,46 +334,28 @@
 }
 
 .stars label {
-    font-size: 2.0em;
-    margin: 0 3px;
-    color: #ccc;
+	font-size: 2.0em;
+	margin: 0 3px;
+	color: #ccc;
 }
 
-#star-1:hover~.content .stars .star-1,
-#star-1:checked~.content .stars .star-1,
-
-#star-2:hover~.content .stars .star-1,
-#star-2:hover~.content .stars .star-2,
-#star-2:checked~.content .stars .star-1,
-#star-2:checked~.content .stars .star-2,
-
-#star-3:hover~.content .stars .star-1,
-#star-3:hover~.content .stars .star-2,
-#star-3:hover~.content .stars .star-3,
-#star-3:checked~.content .stars .star-1,
-#star-3:checked~.content .stars .star-2,
-#star-3:checked~.content .stars .star-3,
-
-#star-4:hover~.content .stars .star-1,
-#star-4:hover~.content .stars .star-2,
-#star-4:hover~.content .stars .star-3,
-#star-4:hover~.content .stars .star-4,
-#star-4:checked~.content .stars .star-1,
-#star-4:checked~.content .stars .star-2,
-#star-4:checked~.content .stars .star-3,
-#star-4:checked~.content .stars .star-4,
-
-#star-5:hover~.content .stars .star-1,
-#star-5:hover~.content .stars .star-2,
-#star-5:hover~.content .stars .star-3,
-#star-5:hover~.content .stars .star-4,
-#star-5:hover~.content .stars .star-5,
-#star-5:checked~.content .stars .star-1,
-#star-5:checked~.content .stars .star-2,
-#star-5:checked~.content .stars .star-3,
-#star-5:checked~.content .stars .star-4,
-#star-5:checked~.content .stars .star-5 {
-    color: #FFCD28;
+#star-1:hover ~.content .stars .star-1, #star-1:checked ~.content .stars .star-1,
+	#star-2:hover ~.content .stars .star-1, #star-2:hover ~.content .stars .star-2,
+	#star-2:checked ~.content .stars .star-1, #star-2:checked ~.content .stars .star-2,
+	#star-3:hover ~.content .stars .star-1, #star-3:hover ~.content .stars .star-2,
+	#star-3:hover ~.content .stars .star-3, #star-3:checked ~.content .stars .star-1,
+	#star-3:checked ~.content .stars .star-2, #star-3:checked ~.content .stars .star-3,
+	#star-4:hover ~.content .stars .star-1, #star-4:hover ~.content .stars .star-2,
+	#star-4:hover ~.content .stars .star-3, #star-4:hover ~.content .stars .star-4,
+	#star-4:checked ~.content .stars .star-1, #star-4:checked ~.content .stars .star-2,
+	#star-4:checked ~.content .stars .star-3, #star-4:checked ~.content .stars .star-4,
+	#star-5:hover ~.content .stars .star-1, #star-5:hover ~.content .stars .star-2,
+	#star-5:hover ~.content .stars .star-3, #star-5:hover ~.content .stars .star-4,
+	#star-5:hover ~.content .stars .star-5, #star-5:checked ~.content .stars .star-1,
+	#star-5:checked ~.content .stars .star-2, #star-5:checked ~.content .stars .star-3,
+	#star-5:checked ~.content .stars .star-4, #star-5:checked ~.content .stars .star-5
+	{
+	color: #FFCD28;
 }
 
 .numa, .numb {
@@ -333,31 +367,31 @@
 }
 
 .numb::before {
-    content: "0";
+	content: "0";
 }
 
-#star-1:checked~.numb::before {
-    content: "1";
+#star-1:checked ~.numb::before {
+	content: "1";
 }
 
-#star-2:checked~.numb::before {
-    content: "2";
+#star-2:checked ~.numb::before {
+	content: "2";
 }
 
-#star-3:checked~.numb::before {
-    content: "3";
+#star-3:checked ~.numb::before {
+	content: "3";
 }
 
-#star-4:checked~.numb::before {
-    content: "4";
+#star-4:checked ~.numb::before {
+	content: "4";
 }
 
-#star-5:checked~.numb::before {
-    content: "5";
+#star-5:checked ~.numb::before {
+	content: "5";
 }
 
 input[type="radio"] {
-    display: none;
+	display: none;
 }
 
 .rating>.rate-part {
@@ -371,7 +405,7 @@ input[type="radio"] {
 	width: 25%;
 }
 
-.date-part>.date{
+.date-part>.date {
 	align-items: center;
 	font-size: 1.2em;
 	margin-left: 1%;

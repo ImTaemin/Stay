@@ -4,12 +4,13 @@ import lombok.Data;
 
 @Data
 public class ResultMapDto {
-	private RoomDto roomDto;
 	private MemberDto memDto;
-	private WishListDto wishDto;
+	private RoomDto roomDto;
 	private ReservationDto resDto;
 	private CanReservationDto canDto;
+	private JoinGuestDto joinDto;
 	private GuestCommentDto gcoDto;
+	private WishListDto wishDto;
 	private CommentLikeDto likeDto;
 	private AvgTotalDto atDto;
 }

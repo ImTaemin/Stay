@@ -35,8 +35,18 @@ next.addEventListener('click', function() {
 function addGuest(e) {
 	var no = $(e).attr("no");
 	var joinNum = parseInt($(e).attr("joinNum"));
+	var hostId = $(e).attr("hostId");
+	var maxPer = $(e).attr("maxPer");
 
-	Swal.fire({
+	const swalWithBootstrapButtons = Swal.mixin({
+		customClass: {
+			confirmButton: 'btn btn-success',
+			cancelButton: 'btn btn-danger'
+		},
+		buttonsStyling: false
+	})
+
+	swalWithBootstrapButtons.fire({
 		title: '게스트 추가하기',
 		input: 'text',
 		inputAttributes: {
@@ -44,7 +54,8 @@ function addGuest(e) {
 		},
 		showCancelButton: true,
 		cancelButtonText: '취소',
-		confirmButtonText: '아이디 찾기',
+		confirmButtonText: '아이디 추가',
+		inputPlaceholder: '아이디를 입력하세요.',
 		showLoaderOnConfirm: true,
 		preConfirm: (id) => {
 			$.ajax({
@@ -52,36 +63,111 @@ function addGuest(e) {
 				url: "/join/search",
 				data: { "id": id },
 				success: function(data) {
-					if (data == true) {
+					if (id == hostId) {
+						Swal.fire({
+							icon: 'error',
+							title: '추가할 수 없는 아이디 입니다.',
+							text: '호스트 아이디와 동일합니다.'
+						})
+					} else if (id == '') {
+						Swal.fire({
+							icon: 'error',
+							title: '아이디를 입력해주세요.'
+						})
+					} else if (data == false) {
+						Swal.fire({
+							icon: 'error',
+							title: id + '는 없는 아이디 입니다.'
+						})
+					} else if (data == true) {
 						$.ajax({
 							type: "post",
 							url: "/join/insert",
 							data: { "no": no, "id": id },
 							success: function() {
-								Swal.fire({
-									icon: 'success',
-									title: '게스트가 추가되었습니다.'
-								})
 							}
 						});
-						
+
+						const swalWithBootstrapButtons = Swal.mixin({
+							customClass: {
+								confirmButton: 'btn btn-success',
+							},
+							buttonsStyling: false
+						})
+
+						swalWithBootstrapButtons.fire({
+							icon: 'success',
+							title: '게스트가 추가되었습니다.',
+							confirmButtonText: '확인'
+						})
+
 						joinNum += 1;
-						
+
 						$(e).attr("joinNum", joinNum);
 						$("#joinNum").html(joinNum + "명");
-					} else if (id == '') {
-						Swal.fire({
-							icon: 'error',
-							title: '아이디를 입력해주세요.',
-						})
-					} else {
-						Swal.fire({
-							icon: 'error',
-							title: id + '는 없는 아이디 입니다.',
-						})
+
+						if (maxPer == joinNum) {
+							$(e).hide();
+						}
+										
+//						var s = '';
+//						s += '<div class="join-guest-wrap" id="${join.memDto.id}">';
+//						s += '<hr>';
+//						s += '<div class="join-guest-de">';
+//						s += '<div class="join-guest-img">';
+//						s += '<img src="${root}/photo/memberPhoto/${join.memDto.photo}">';
+//						s += '</div>';
+//						s += '<label>${join.memDto.id}</label>';
+//						s += '<button type="button" class="btn btn-danger" onclick="delGuest(this)"';
+//						s += 'resNo="${join.joinDto.no}" guestId="${join.memDto.id}">게스트 삭제</button>';
+//						s += '</div></div>';
+//
+//						$(".join-guest-wrap").append(s);
 					}
 				}
 			});
+		}
+	})
+}
+
+// 공동 게스트 삭제
+function delGuest(e) {
+	var no = $(e).attr("resNo");
+	var id = $(e).attr("guestId");
+	var joinNum = parseInt($(e).attr("joinNum"));
+	var maxPer = $(e).attr("maxPer");
+
+	const swalWithBootstrapButtons = Swal.mixin({
+		customClass: {
+			confirmButton: 'btn btn-success',
+			cancelButton: 'btn btn-danger'
+		},
+		buttonsStyling: false
+	})
+
+	swalWithBootstrapButtons.fire({
+		title: '게스트를 삭제하시겠습니까?',
+		icon: 'warning',
+		cancelButtonText: '취소',
+		showCancelButton: true,
+		showCloseButton: true,
+		confirmButtonText: '삭제',
+	}).then((result) => {
+		if (result.isConfirmed) {
+			$.ajax({
+				type: "post",
+				url: "/join/delete",
+				data: { "no": no, "id": id }
+			});
+			
+			joinNum -= 1;
+
+			$(e).attr("joinNum", joinNum);
+			$("#joinNum").html(joinNum + "명");
+
+			if (maxPer > joinNum) {
+				$("#addGuest").show();
+			}
 		}
 	})
 }

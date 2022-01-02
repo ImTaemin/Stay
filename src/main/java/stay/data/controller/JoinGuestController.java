@@ -41,4 +41,9 @@ public class JoinGuestController {
 		
 		joinService.insertJoinGuest(joinDto);
 	}
+	
+	@PostMapping("/delete")
+	public void joinDelete(@RequestParam String no, @RequestParam String id) {
+		joinService.deleteJoinGuest(no, id);
+	}
 }

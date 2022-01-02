@@ -66,6 +66,9 @@ public class ReservationController {
 	@Autowired
 	CanReservationService canReserService;
 	
+	@Autowired
+	JoinGuestService joinService;
+	
 	@PostMapping("/pay/paymentform")
 	public ModelAndView paymentForm(
 			@RequestParam String roomNo, @RequestParam String startDate, @RequestParam String endDate,
@@ -353,6 +356,10 @@ public class ReservationController {
 			}
 		}
 		
+		// 조인 게스트
+		MemberDto guestDto = memberService.getMember(myid);
+		List<ResultMapDto> joinList = joinService.getAllJoinGuest(reserNo);
+		
 		mview.addObject("reserDto", reserDto);
 		mview.addObject("roomDto", roomDto);
 		mview.addObject("start", start);
@@ -365,6 +372,8 @@ public class ReservationController {
 		mview.addObject("gCommentDto", gCommentDto);
 		mview.addObject("canReserDto", canReserDto);
 		mview.addObject("canCheck", canCheck);
+		mview.addObject("guestDto", guestDto);
+		mview.addObject("joinList", joinList);
 		
 		mview.setViewName("/reservation/reservationDetail");
 		
