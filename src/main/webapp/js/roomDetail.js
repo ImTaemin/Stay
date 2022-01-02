@@ -122,6 +122,7 @@ function coHeartClick(e) {
 	var reserNo = $(e).attr("reserNo");
 	var guestId = $(e).attr("guestId");
 	var myId = $(e).attr("myid");
+	var cnt = parseInt($(e).attr("cnt"));
 	
 	if(myId == "") {
 		Swal.fire({
@@ -139,6 +140,10 @@ function coHeartClick(e) {
 				url: "/like/insert",
 				data: { "reserNo": reserNo, "guestId": guestId }
 			});
+			
+			cnt += 1;
+			
+			$("#" + reserNo).html(cnt);
 		} else {
 			$(e).attr("class", "bi bi-heart co-heart");
 			flag = true;
@@ -148,6 +153,8 @@ function coHeartClick(e) {
 				url: "/like/delete",
 				data: { "reserNo": reserNo, "guestId": guestId }
 			});
+			
+			$("#" + reserNo).html(cnt);
 		}
 	}
 }

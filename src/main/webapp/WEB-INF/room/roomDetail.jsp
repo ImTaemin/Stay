@@ -307,20 +307,20 @@
 											<c:forEach var="like" items="${likeList}">
 												<c:if test="${like.no eq coList.gcoDto.no}">
 													<i reserNo="${coList.gcoDto.no}" guestId="${coList.gcoDto.guest_id}" myId="${myid}"
-													onclick="coHeartClick(this)" class="bi bi-heart-fill co-heart"></i>
+													cnt="${coList.gcoDto.countLike}" onclick="coHeartClick(this)" class="bi bi-heart-fill co-heart"></i>
 													<c:set var="heart_flag" value="true"/>
 												</c:if>
 											</c:forEach>
 											
 											<c:if test="${not heart_flag}">
 												<i reserNo="${coList.gcoDto.no}" guestId="${coList.gcoDto.guest_id}" myId="${myid}"
-												onclick="coHeartClick(this)" class="bi bi-heart co-heart"></i>
+												cnt="${coList.gcoDto.countLike}" onclick="coHeartClick(this)" class="bi bi-heart co-heart"></i>
 											</c:if>
 											
-											<span class="heart-count" id="heartNum">${coList.gcoDto.countLike}</span>
+											<span class="heart-count" id="${coList.gcoDto.no}">${coList.gcoDto.countLike}</span>
 										</div>
 									</div>
-									
+									 
 									<div class="co-content">
 										<span>${coList.gcoDto.content}</span>
 									</div>
