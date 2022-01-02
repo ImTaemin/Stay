@@ -3,6 +3,7 @@ package stay.data.service;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,6 +91,18 @@ public class ChatService {
 		map.put(sender, receiver);
 		
 		emitterChatMap.put(emitter, map);
+	}
+	
+	public List<ChatDto> getInitChattingRooms(String sender){
+		List<ChatDto> dtos = chatMapper.getChattingRooms(sender);
+		for(ChatDto dto : dtos) {
+			historyRoom.add(dto);
+		}
+		return dtos;
+	}
+	
+	public List<ChatDto> getInitChatting(String sender, String receiver) {
+		return chatMapper.chatting(sender, receiver);
 	}
 	
 	public void insertChat(ChatDto dto) {

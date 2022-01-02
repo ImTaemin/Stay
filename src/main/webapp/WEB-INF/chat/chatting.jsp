@@ -63,33 +63,62 @@
 
 	<script type="text/javascript">
 		$(function(){
-			//채팅방 요청
-			var eventSourceRoom = new EventSource("http://localhost:8080/chat/${sessionScope.myid}");
-// 			var eventSourceRoom = new EventSource("http://localhost:8080/chat/stay");
+			$.ajax({
+				dataType: "json",
+				type: "post",
+				data: {"sender":"${sessionScope.myid}"},
+				url: "/chat/recorded",
+				success: function(data){
+					data.forEach(element=>createRooms(element));
+				}
+			});
 			
-			eventSourceRoom.onmessage = (event) => {
+// 			$.ajax({
+// 					dataType: "json",
+// 					type: "post",
+// 					data: {"sender":"${sessionScope.myid}"},
+// 					url: "http://localhost:8080/chat/chatting",
+// 					success: function(data){
+// 						data.forEach(element=>createRooms(element));
+// 					}
+// 				});
+			//채팅방 요청
+			var eventSourceRoom = new EventSource("http://localhost:8080/chat/chatting/${sessionScope.myid}");
+	
+			console.log(eventSourceRoom);
+			eventSourceRoom.onmessage = function(event) {
 				var dataRooms = JSON.parse(event.data);
-
-				createRooms(dataRooms);//dataRooms.msg로 찾을 수 있음
+				
+				createRooms(dataRooms); //dataRooms.msg로 찾을 수 있음
 			};
 			
 			//채팅방 생성
 			function createRooms(rooms){
 				'use strict';
 				var s = `
-				<div class="chat-room" id="` + rooms.receiver + `"receiver="` + rooms.receiver + `">
-					<img src="../../photo/profile.png" class="room-photo">
-					<span>` + rooms.receiver + `</span>
-				</div>
+					<div class="chat-room" id="` + rooms.receiver + `" receiver="` + rooms.receiver + `">
+						<img src="../../photo/profile.png" class="room-photo">
+						<span>` + rooms.receiver + `</span>
+					</div>
 				`
 				$(".chat-list").append(s);
+				$(".chat-list").scrollTop(document.body.scrollHeight);
 			}
 			
 			//채팅방 클릭시 채팅
 			$(document).on("click", ".chat-room", function(){
-				//한번만 클릭할 수 있게
+				'use strict';
+				
+				var profileName = $(this).attr("receiver");
+				
+				//한번만 클릭
 				if($(this).attr("receiver") == $("#profile-name").text()){
 					return;
+				}
+				
+				//원래 채팅방 연결해제
+				if(eventSourceChat != null){
+					eventSourceChat.close();	
 				}
 				
 				if($("#profile-name").text() != ""){
@@ -97,33 +126,35 @@
 					document.getElementById(tmp).style.cursor = "pointer";
 				}
 				
-				var eventSourceChat;
-			
-// 				$(".profile").append($(this).attr("receiver"));
-
 				//채팅방 타이틀
 				$("#profile-img").attr("src","../../photo/profile.png");
-				$("#profile-name").text($(this).attr("receiver"));
+				$("#profile-name").text(profileName);
 				
 				$(this).css("cursor","default");
 				$(".chat-section").html("");
 				
-				if(eventSourceChat != null){eventSourceChat.close();}
+				//원래 채팅내역 가져옴
+				$.ajax({
+					dataType: "json",
+					type: "post",
+					data: {"sender":"${sessionScope.myid}","receiver": profileName},
+					url: "http://localhost:8080/chat/chatting",
+					success: function(data){
+						data.forEach(element=>createChats(element));
+					}
+				});
 				
-				eventSourceChat = new EventSource("http://localhost:8080/chat/${sessionScope.myid}/" + $(this).attr("receiver"));
-				
+				var eventSourceChat = new EventSource("http://localhost:8080/chat/chatting/${sessionScope.myid}/" + profileName);
 				eventSourceChat.onmessage = (event) => {
 					var dataChats = JSON.parse(event.data);
-					console.log(dataChats);
-
 					createChats(dataChats);//dataChats.msg로 찾을 수 있음
 				};
 			});
-			
+
 			//채팅내용 생성
 			function createChats(chats){
 				'use strict';
-				if(chats.sender == "stay" /*`${sessionScope.myid}`*/){
+				if(chats.sender == '${sessionScope.myid}'){
 					//보낸내용
 					var s=`
 						<div class="send-msg-box" >
@@ -133,7 +164,10 @@
 							</div>
 						</div>
 					`;
+					
+					var chatSection = $(".chat-section");
 					$(".chat-section").append(s);
+					$(".chat-section").scrollTop($(".chat-section")[0].scrollHeight);
 				} else {
 					//받은 내용
 					var s=`
@@ -145,6 +179,7 @@
 						</div>
 					`;
 					$(".chat-section").append(s);
+					$(".chat-section").scrollTop($(".chat-section")[0].scrollHeight)
 				}
 			}
 	
@@ -159,21 +194,13 @@
 			
 				//통신이 끝날떄까지 기다려야함
 				/*var response = await */
-				fetch("http://localhost:8080/chat/insert",{
+				fetch("http://localhost:8080/chat/chatting/insert",{
 					method: "post",
 					body: JSON.stringify(chat), //JS->JSON
 					headers: {
 						"Content-Type":"application/json; charset=utf-8",
-						"Connection":"keep-alive",
-						"Cache-Control":"no-cache"
 					}
 				});
-			
-// 				var parseResponse = await response.json();
-			
-// 				chatOutgoingBox.innerHTML = getSendMsgBox(msgInput.value, now);
-	
-// 				chatBox.append(chatOutgoingBox);
 	
 				msgInput.value = "";
 			}
@@ -183,30 +210,18 @@
 			});
 	
 			document.querySelector("#input-msg").addEventListener("keydown", (e) => {
+				if($("#input-msg").text()!="")
+					return;
+				
 				//엔터키
 				if (e.keyCode === 13) {
+					
 					addMessage();
 				}
 			});
 
-// 			function initMyMessage(historyMsg) {
-// 				var chatBox = document.querySelector("#chat-box");
-		
-// 				var chatOutgoingBox = document.createElement("div");
-// 				chatOutgoingBox.className = "send-msg-box";
-// 				chatOutgoingBox.innerHTML = getSendMsgBox(data.msg, data.day);
-		
-// 				chatBox.append(chatOutgoingBox);
-// 			}
 		});
 		
-		window.addEventListener("beforeunload", (event)=>{
-			eventSourceChat.close();
-			eventSourceRoom.close();
-			
-			event.preventDefault();
-			event.returnValue="";
-		});
 	</script>
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
