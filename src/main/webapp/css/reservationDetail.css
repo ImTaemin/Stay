@@ -200,6 +200,11 @@
 	cursor: pointer;
 }
 
+.receipt>.bi:hover {
+	color: #0B57A2;
+	font-size: 1.5em;
+}
+
 .reser>.guest-wrap {
 	display: flex;
 	flex-direction: column;
@@ -217,13 +222,24 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	font-size: 1.2em;
+	font-size: 1.5em;
 }
 
-.guest-wrap>.guest>.bi {
+.guest-btn {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	width: 12%;
+}
+
+.guest-btn>.bi {
 	margin-top: 2px;
-	font-size: 1.2em;
 	cursor: pointer;
+}
+
+.guest-btn>.bi:hover {
+	color: #0B57A2;
+	font-size: 1.2em;
 }
 
 .host-wrap {

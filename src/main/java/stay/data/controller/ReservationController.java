@@ -322,7 +322,7 @@ public class ReservationController {
 		String endDayWeek = getDateDay(endDate);
 		
 		// 공동 게스트 출력
-		int joinGuestNum = joinGuestService.countJoinGuest(roomNo) + 1;
+		int joinGuestNum = joinGuestService.countJoinGuest(reserNo) + 1;
 		
 		// 호스트 정보 가져오기
 		String hostId = reserDto.getHost_id();
@@ -343,6 +343,16 @@ public class ReservationController {
 		// 예약 취소 여부
 		CanReservationDto canReserDto = canReserService.getOneCanReser(reserNo);
 		
+		Boolean canCheck = false;
+		
+		if(canReserDto != null) {
+			String canNo = canReserDto.getNo();
+			
+			if (reserNo.equals(canNo)) {
+				canCheck = true;
+			}
+		}
+		
 		mview.addObject("reserDto", reserDto);
 		mview.addObject("roomDto", roomDto);
 		mview.addObject("start", start);
@@ -354,6 +364,7 @@ public class ReservationController {
 		mview.addObject("preCheck", preCheck);
 		mview.addObject("gCommentDto", gCommentDto);
 		mview.addObject("canReserDto", canReserDto);
+		mview.addObject("canCheck", canCheck);
 		
 		mview.setViewName("/reservation/reservationDetail");
 		

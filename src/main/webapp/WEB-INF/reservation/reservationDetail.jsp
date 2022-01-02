@@ -105,21 +105,22 @@
 					<!-- 공동 게스트 -->
 					<div class="guest-wrap">
 						<div class="guest-title">
-							<label>공동 게스트 (최대 ${roomDto.max_per}명)</label>
+							<label>게스트 (최대 ${roomDto.max_per}명)</label>
 						</div>
 						
 						<hr>
 						
 						<div class="guest">
-							<span>${joinGuestNum}명</span>
+							<span id="joinNum">${joinGuestNum}명</span>
 							
-							<c:if test="${preCheck == false}">
-								<span class="bi bi-plus-circle"></span>
-							</c:if>
-							
-							<c:if test="${preCheck == true}">
+							<div class="guest-btn">
+								<c:if test="${preCheck == false and canCheck == false}">
+									<span class="bi bi-plus-circle" no="${reserDto.no}" joinNum="${joinGuestNum}"
+									onclick="addGuest(this)"></span>
+								</c:if>
+								
 								<span class="bi bi-three-dots"></span>
-							</c:if>
+							</div>
 						</div>
 					</div>
 				</div>

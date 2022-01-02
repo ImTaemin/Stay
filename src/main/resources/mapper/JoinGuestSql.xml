@@ -5,4 +5,8 @@
 	<select id="countJoinGuest" parameterType="String" resultType="int">
 		select count(*) from join_guest where no = #{no}
 	</select>
+	
+	<insert id="insertJoinGuest" parameterType="jgdto">
+		insert into join_guest values (#{no}, #{id})
+	</insert>
 </mapper>
