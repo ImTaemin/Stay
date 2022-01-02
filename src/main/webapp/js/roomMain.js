@@ -44,6 +44,8 @@ $(document).ready(function() {
 var tmp = true;
 
 function heartClick(e) {
+	var check = $(e).attr("class");
+	
 	var roomId = $(e).attr("roomID");
 	var myId = $(e).attr("myid");
 	
@@ -54,13 +56,22 @@ function heartClick(e) {
 			text: '로그인 후 이용가능한 서비스입니다.'
 		});
 	} else {
-		if (tmp) {
+		if (check == "bi bi-heart") {
 			$(e).attr("class", "bi bi-heart-fill");
 			tmp = false;
 
 			$.ajax({
 				type: "post",
 				url: "/wish/insert",
+				data: { "roomId": roomId }
+			});
+		} else if(check == "bi bi-heart-fill") {
+			$(e).attr("class", "bi bi-heart");
+			tmp = true;
+			
+			$.ajax({
+				type: "post",
+				url: "/wish/delete",
 				data: { "roomId": roomId }
 			});
 		} else {

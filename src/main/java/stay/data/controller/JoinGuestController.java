@@ -34,17 +34,11 @@ public class JoinGuestController {
 	}
 	
 	@PostMapping("/insert")
-	@ResponseBody
-	public String joinInsert(
+	public void joinInsert(
 			@ModelAttribute JoinGuestDto joinDto, @RequestParam String no, @RequestParam String id) {
-		MemberDto memDto = memService.getMember(id);
-		String memPhoto = memDto.getPhoto();
-		
 		joinDto.setNo(no);
 		joinDto.setId(id);
 		
 		joinService.insertJoinGuest(joinDto);
-		
-		return memPhoto;
 	}
 }

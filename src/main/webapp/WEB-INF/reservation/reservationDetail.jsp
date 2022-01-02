@@ -114,12 +114,14 @@
 							<span id="joinNum">${joinGuestNum}명</span>
 							
 							<div class="guest-btn">
-								<c:if test="${preCheck == false and canCheck == false}">
-									<span class="bi bi-plus-circle" no="${reserDto.no}" joinNum="${joinGuestNum}"
-									onclick="addGuest(this)"></span>
+								<c:if test="${roomDto.max_per > joinGuestNum}">
+									<c:if test="${preCheck == false and canCheck == false}">
+										<span class="bi bi-plus-circle" no="${reserDto.no}" joinNum="${joinGuestNum}"
+										onclick="addGuest(this)" style="margin-right: 20%"></span>
+									</c:if>
 								</c:if>
-								
-								<span class="bi bi-three-dots"></span>
+							
+								<span class="bi bi-three-dots" onclick="getGuest(this)"></span>
 							</div>
 						</div>
 					</div>
