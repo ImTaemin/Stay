@@ -3,8 +3,12 @@
 
 <mapper namespace="stay.data.mapper.CanReservationMapper">
 	<insert id="insertCanReser" parameterType="crdto">
-		insert into can_reservation values (#{no}, now(), #{refund}, 'ing')
+		insert into can_reservation values (#{no}, now(), #{refund}, 'ing', null)
 	</insert>
+	
+	<update id="updateRefReser" parameterType="crdto">
+		update can_reservation set refund_check = 'end', refund_date = now() where no = #{no}
+	</update>
 	
 	<select id="getOneCanReser" parameterType="String" resultType="crdto">
 		select * from can_reservation where no = #{no}

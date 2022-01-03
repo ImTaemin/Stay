@@ -18,6 +18,10 @@ public class CanReservationService {
 		mapper.insertCanReser(dto);
 	}
 	
+	public void updateRefReser(CanReservationDto dto) {
+		mapper.updateRefReser(dto);
+	}
+	
 	public CanReservationDto getOneCanReser(String no) {
 		return mapper.getOneCanReser(no);
 	}

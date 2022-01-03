@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -43,5 +44,12 @@ public class CanReservationController {
 		crDto.setRefund(price);
 		
 		canReserService.insertCanReser(crDto);
+	}
+	
+	@PostMapping("/refund")
+	public void reserRefund(
+			@ModelAttribute CanReservationDto crDto, @RequestParam String no) {
+		crDto.setNo(no);
+		canReserService.updateRefReser(crDto);
 	}
 }
