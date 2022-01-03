@@ -32,21 +32,6 @@
   </form>
 </div>
 
-	<!-- 결과 모달 -->
-  	  <div class="modal">
-  	    <div id="background_modal" class="background_modal">
-		  <div class="modal_contents">
-		  <div class="close">&times;</div>
-			<h2>
-				<b id="id_user"></b>
-			</h2><br>
-				<h1><b id="id_value"></b></h1>
-			<br>
-			<button type="button" id="pwSearch_btn" class="findPw-btn">비밀번호 찾기</button>
-		  </div>
-	    </div>
-	  </div>
-
 <!-- js -->
 <script src="/js/findForm.js"></script>
 </body>

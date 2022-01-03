@@ -58,7 +58,7 @@ public class GaipController {
 		mapper.insertMember(dto);
 
 		//메인으로
-		return "redirect:/";
+		return "redirect:/member/login";
 	}
 
 	@GetMapping("/updateform")

@@ -3,6 +3,8 @@ package stay.data.mapper;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import stay.data.dto.MemberDto;
@@ -31,8 +33,12 @@ public interface MemberMapper {
 	public void updatelikes(String id);
 	
 	public String findId(String inputName, String inputHp);
-	public void findPw(String e_mail);
+	public void findPw(MemberDto mdto);
 	
 	public void insertSingoMem(ReportMemberDto rmDto);
 	public List<ReportMemberDto> getSingoMem(String black_id);
+	
+	// 비밀번호 변경
+	public int updatePw(MemberDto mdto) throws Exception;
+
 }

@@ -62,7 +62,7 @@
 		select id from member where name=#{inputName} and hp=#{inputHp}
 	</select>
 	
-	<update id="findPw" parameterType="mdto">
+	<update id="updatePw">
 		update member set pass=#{pass} where id=#{id}
 	</update>
 	
@@ -73,4 +73,5 @@
 	<select id="getSingoMem" parameterType="String" resultType="rmdto">
 		select * from report_member where black_id = #{black_id}
 	</select>	
+
 </mapper>

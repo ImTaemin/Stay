@@ -7,14 +7,17 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -129,6 +132,11 @@ public class LoginController {
         	mdto.setPhoto(photo);
         	mdto.setE_mail(e_mail);
         	mapper.insertMember(mdto);
+        } else {
+        	MemberDto mdto=new MemberDto();
+        	mdto.setName(name);
+        	mdto.setPhoto(photo);
+        	mapper.updateMember(mdto);
         }
         
         session.setAttribute("myid", e_mail);
@@ -187,44 +195,17 @@ public class LoginController {
 		return m;
 	}
 	
-	//비밀번호 찾기
-	@GetMapping("findPw")
-	public String findPwForm() throws Exception{
-		
-		return "/member/findPwForm";
-	}
 	
-	//이메일, 아이디 일치 여부 check
-	 @GetMapping("findPwprocess")
-	 public @ResponseBody Map<String, Boolean> findPw(String e_mail, String id){ 
-		 
-		  Map<String,Boolean> json = new HashMap<>();
-	      //boolean pwFindCheck = service.userEmailCheck(userEmail,userName);
-
-	      //System.out.println(pwFindCheck);
-	      //json.put("check", pwFindCheck);
-	      
-	      return json;
+	// 비밀번호 찾기
+	 @RequestMapping(value = "/findPw", method = RequestMethod.GET)
+	 public String findPwGET() throws Exception{
+		 return "/member/findPwForm";
 	 }
-	 
-	
-	
-	
-	/*
-	 * // 비밀번호 찾기
-	 * 
-	 * @RequestMapping(value = "/user/searchPassword", method = RequestMethod.GET)
-	 * 
-	 * @ResponseBody public String passwordSearch(@RequestParam("userId")String
-	 * user_id,
-	 * 
-	 * @RequestParam("userEmail")String user_email, HttpServletRequest request) {
-	 * 
-	 * mailsender.mailSendWithPassword(user_id, user_email, request);
-	 * 
-	 * return "user/userSearchPassword"; }
-	 */
-	
+
+	 @RequestMapping(value = "/findPw", method = RequestMethod.POST)
+	 public void findPwPOST(@ModelAttribute MemberDto mdto) throws Exception{
+	 	service.findPw(mdto);
+	 }
 	
 
 
