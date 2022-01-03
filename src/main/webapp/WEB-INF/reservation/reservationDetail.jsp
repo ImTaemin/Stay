@@ -122,7 +122,7 @@
 									</c:if>
 								</c:if>
 								
-								<div data-toggle="modal" data-target="#guestList">
+								<div onclick="guestInfo(${reserDto.no}, ${joinGuestNum}, ${roomDto.max_per})" data-toggle="modal" data-target="#guestList">
 									<span class="bi bi-three-dots"></span>
 								</div>
 							</div>
@@ -140,7 +140,7 @@
 									<div class="modal-body">
 										<div class="main-guest-wrap">
 											<div class="main-guest-img">
-												<img src="${root}/photo/memberPhoto/${guestDto.photo}">
+												<img id="main-img" src="${root}/photo/memberPhoto/${guestDto.photo}">
 											</div>
 											
 											<label>${guestDto.id}</label>
@@ -148,26 +148,7 @@
 											<button type="button" class="btn btn-default" style="pointer-events: none;">메인 게스트</button>
 										</div>
 										
-										<div class="join-guest-wrap" id="${join.memDto.id}">
-										</div>
-										
-										<c:forEach var="join" items="${joinList}">
-											<div class="join-guest-wrap" id="${join.memDto.id}">
-												<hr>
-												
-												<div class="join-guest-de">
-													<div class="join-guest-img">
-														<img src="${root}/photo/memberPhoto/${join.memDto.photo}">
-													</div>
-													
-													<label>${join.memDto.id}</label>
-												
-													<button type="button" id="joinDel" class="btn btn-danger" onclick="delGuest(this)"
-													resNo="${join.joinDto.no}" guestId="${join.memDto.id}" joinNum="${joinGuestNum}"
-													maxPer="${roomDto.max_per}">게스트 삭제</button>
-												</div>
-											</div>
-										</c:forEach>
+										<div class="join-guest"></div>
 									</div>
 									
 									<div class="modal-footer">

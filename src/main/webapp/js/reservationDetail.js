@@ -87,49 +87,47 @@ function addGuest(e) {
 							title: id + '는 없는 아이디 입니다.'
 						})
 					} else if (data == true) {
-						$.ajax({
-							type: "post",
-							url: "/join/insert",
-							data: { "no": no, "id": id },
-							success: function() {
-							}
-						});
-
-						const swalWithBootstrapButtons = Swal.mixin({
-							customClass: {
-								confirmButton: 'btn btn-success',
-							},
-							buttonsStyling: false
-						})
-
 						swalWithBootstrapButtons.fire({
-							icon: 'success',
-							title: '게스트가 추가되었습니다.',
-							confirmButtonText: '확인'
+							title: id + ' 님을 추가하시겠습니까?',
+							text: "추가할 경우 해당 예약 내역이 공유됩니다.",
+							icon: 'question',
+							showCancelButton: true,
+							confirmButtonText: '추가',
+							cancelButtonText: '취소'
+						}).then((result) => {
+							if (result.isConfirmed) {
+								$.ajax({
+									type: "post",
+									url: "/join/insert",
+									data: { "no": no, "id": id },
+									success: function() {
+									}
+								});
+
+								swalWithBootstrapButtons.fire({
+									icon: 'success',
+									title: '게스트가 추가되었습니다.',
+									confirmButtonText: '확인'
+								})
+
+								joinNum += 1;
+
+								$(e).attr("joinNum", joinNum);
+								$("#joinNum").html(joinNum + "명");
+
+								if (maxPer == joinNum) {
+									$(e).hide();
+								}
+							} else if (
+								result.dismiss === Swal.DismissReason.cancel
+							) {
+								swalWithBootstrapButtons.fire(
+									'취소되었습니다.',
+									'게스트 추가가 취소되었습니다.',
+									'error'
+								)
+							}
 						})
-
-						joinNum += 1;
-
-						$(e).attr("joinNum", joinNum);
-						$("#joinNum").html(joinNum + "명");
-
-						if (maxPer == joinNum) {
-							$(e).hide();
-						}
-										
-//						var s = '';
-//						s += '<div class="join-guest-wrap" id="${join.memDto.id}">';
-//						s += '<hr>';
-//						s += '<div class="join-guest-de">';
-//						s += '<div class="join-guest-img">';
-//						s += '<img src="${root}/photo/memberPhoto/${join.memDto.photo}">';
-//						s += '</div>';
-//						s += '<label>${join.memDto.id}</label>';
-//						s += '<button type="button" class="btn btn-danger" onclick="delGuest(this)"';
-//						s += 'resNo="${join.joinDto.no}" guestId="${join.memDto.id}">게스트 삭제</button>';
-//						s += '</div></div>';
-//
-//						$(".join-guest-wrap").append(s);
 					}
 				}
 			});
@@ -166,7 +164,7 @@ function delGuest(e) {
 				url: "/join/delete",
 				data: { "no": no, "id": id }
 			});
-			
+
 			joinNum -= 1;
 
 			$(e).attr("joinNum", joinNum);
@@ -177,6 +175,38 @@ function delGuest(e) {
 			}
 		}
 	})
+}
+
+// 조인 게스트 출력
+function guestInfo(no, joinGuestNum, maxPer) {
+	$("#main-img").attr("src", $("#img").attr("src"));
+	
+	var s = "";
+
+	$.ajax({
+		type: "post",
+		dataType: "json",
+		data: { "no": no },
+		url: "/join/guestlist",
+		success: function(data) {
+			data.forEach(function(element) {
+				s += '<div class="join-guest-wrap" id="' + element.memDto.id + '">';
+				s += '<hr>';
+				s += '<div class="join-guest-de">';
+				s += '<div class="join-guest-img">';
+				s += '<img id="join-guest" src="../../photo/memberPhoto/' + element.memDto.photo + '">';
+				s += '</div>';
+				s += '<label>' + element.memDto.id + '</label>';
+				s += '<button type="button" id="joinDel" class="btn btn-danger" onclick="delGuest(this)"';
+				s += 'resNo="' + element.joinDto.no + '" guestId="' + element.memDto.id + '" joinNum="' + joinGuestNum + '"';
+				s += 'maxPer="' + maxPer + '">게스트 삭제</button>';
+				s += '</div>';
+				s += '</div>';
+			});
+
+			$(".join-guest").html(s);
+		}
+	});
 }
 
 // 별점 주기
@@ -243,7 +273,7 @@ $(document).ready(function() {
 	result = content.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
 
 	$(".content-input").val(result);
-})
+});
 
 // 예약 취소
 function reserCan(e) {

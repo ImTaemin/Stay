@@ -1,5 +1,7 @@
 package stay.data.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import stay.data.dto.JoinGuestDto;
 import stay.data.dto.MemberDto;
+import stay.data.dto.ResultMapDto;
 import stay.data.service.JoinGuestService;
 import stay.data.service.MemberService;
 
@@ -45,5 +48,11 @@ public class JoinGuestController {
 	@PostMapping("/delete")
 	public void joinDelete(@RequestParam String no, @RequestParam String id) {
 		joinService.deleteJoinGuest(no, id);
+	}
+	
+	@PostMapping("/guestlist")
+	@ResponseBody
+	public List<ResultMapDto> joinGuestList(@RequestParam String no) {
+		return joinService.getAllJoinGuest(no);
 	}
 }

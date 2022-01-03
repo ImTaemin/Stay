@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import stay.data.dto.JoinGuestDto;
 import stay.data.dto.ResultMapDto;
@@ -35,4 +36,5 @@ public class JoinGuestService {
 		
 		mapper.deleteJoinGuest(map);
 	}
+	
 }
