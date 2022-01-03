@@ -19,6 +19,9 @@
 <!-- js -->
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<!-- 달력 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -33,43 +36,6 @@
 		<input type="hidden" name="allPrice" value="${allPrice}">
 		<input type="hidden" name="payMethod">
 		<input type="hidden" name="cardNum">
-		
-		<script type="text/javascript">
-			function formCheck(){
-				var kakao = $("#kakao").attr("check");
-				var card = $("#card").attr("check");
-				
-				if (kakao == "0" && card == "0") {
-					$("#frm").attr("action", "");
-				
-					Swal.fire({
-						icon: 'error',
-						title: '결제 방법을 선택해주세요.'
-					});
-				} else if(kakao == "1" && card == "0"){
-					$.ajax({
-						url:"kakaopay",
-						dataType:"json",
-						data:{"roomNo" : ${dto.roomDto.no}, "allPrice" : ${allPrice}, "startDate" : "${startDate}", "endDate" : "${endDate}" ,  "taxPrice" : ${allPrice * 0.2}},
-						contentType: "application/json; charset=utf-8",
-					}).done(function(resp){
-						if(resp.status === 500){
-							alert("카카오페이결제를 실패하였습니다.")
-						} else{
-							//결제 고유 번호
-							var box = resp.next_redirect_pc_url;
-							// 새창 열기
-							// window.open(box, '_blank', "width=500,height=500");
-							location.href = box;
-						}
-					}).fail(function(error){
-						alert(JSON.stringify(error));
-					});
-				} else {
-					$("#frm").submit();
-				}
-			}
-		</script>
 		
 		<div class="title">
 			<div class="back" onclick="history.back()">
@@ -88,7 +54,7 @@
 					<div class="title">
 						<label>예약 정보</label>
 					</div>
-
+					
 					<div class="day">
 						<!-- 체크인 날짜 -->
 						<div class="check-in">
@@ -97,8 +63,8 @@
 									<label>체크인 날짜</label>
 								</div>
 
-								<div class="update" data-toggle="modal" data-target="#checkInModal">
-									<i class="bi bi-pencil-square"></i>
+								<div class="update">
+									<i class="bi bi-pencil-square" onclick="checkInChange(this)" roomPrice="${dto.roomDto.price}"></i>
 								</div>
 							</div>
 
@@ -118,8 +84,8 @@
 									<label>체크아웃 날짜</label>
 								</div>
 
-								<div class="update" data-toggle="modal" data-target="#checkOutModal">
-									<i class="bi bi-pencil-square"></i>
+								<div class="update">
+									<i class="bi bi-pencil-square" onclick="checkOutChange(this)" roomPrice="${dto.roomDto.price}"></i>
 								</div>
 							</div>
 
@@ -135,50 +101,6 @@
 					
 					<jsp:useBean id="now" class="java.util.Date"/>
 					<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today"/>
-					
-					<!-- 체크인 모달 -->
-					<div id="checkInModal" class="modal">
-						<div class="modal-dialog">
-							<!-- Modal content -->
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal">&times;</button>
-									<h4 class="modal-title">체크인 날짜 변경하기</h4>
-								</div>
-								
-								<div class="modal-body">
-									<input type="date" id="re-check-in" min="${today}">
-									<button type="button" id="bodyBtn" class="btn btn-primary" onclick="changeCheckIn()" data-dismiss="modal">변경</button>
-								</div>
-								
-								<div class="modal-footer">
-									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-								</div>
-							</div>
-						</div>
-					</div>
-					
-					<!-- 체크아웃 모달 -->
-					<div id="checkOutModal" class="modal">
-						<div class="modal-dialog">
-							<!-- Modal content -->
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal">&times;</button>
-									<h4 class="modal-title">체크아웃 날짜 변경하기</h4>
-								</div>
-								
-								<div class="modal-body">
-									<input type="date" id="re-check-out" min="${startDate}">
-									<button type="button" id="bodyBtn" class="btn btn-primary" onclick="changeCheckOut()" data-dismiss="modal">변경</button>
-								</div>
-
-								<div class="modal-footer">
-									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-								</div>
-							</div>
-						</div>
-					</div>
 					
 					<hr style="margin-top: 40px;">
 
@@ -304,6 +226,8 @@
 		</div>
 	</form>
 	
+	<!-- js -->
+	<script src="${root}/js/paymentForm.js"></script>
 	<script type="text/javascript">
 		// 카드 클릭 이벤트
 		function payClick(e) {
@@ -385,94 +309,6 @@
 
 				$('input[name=payMethod]').attr('value', 'card');
 				$('input[name=cardNum]').attr('value', cardNum);
-			}
-		}
-		
-		function changeCheckIn() {
-			var startDate = $('#re-check-in').val();
-
-			var start = startDate.split("-");
-
-			var start_date = new Date(start[0], start[1], start[2]);
-			var end_date = new Date(${end[0]}, ${end[1]}, ${end[2]});
-			
-			var betweenMs = end_date.getTime() - start_date.getTime();
-			var betweenDay = betweenMs / (1000 * 60 * 60 * 24);
-			
-			var calPrice = ${dto.roomDto.price} * betweenDay;
-			var commaCal = Number(calPrice).toLocaleString();
-			
-			var taxPrice = calPrice * 0.2;
-			var commaTax = Number(taxPrice).toLocaleString();
-
-			var allPrice = calPrice + taxPrice;
-			var commaAll = Number(allPrice).toLocaleString();
-			
-			if(betweenDay <= 0) {
-				Swal.fire({
-					icon: 'error',
-					title: '날짜를 다시 선택해주세요.',
-					text: '체크인 날짜를 다시 입력해주세요.'
-				});
-			} else {
-				$('label[id=start1]').html(start[0]);
-				$('label[id=start2]').html(start[1]);
-				$('label[id=start3]').html(start[2]);
-				
-				$('label[id=betweenDay]').html(betweenDay);
-				$('label[id=calPrice]').html("￦" + commaCal);
-				$('label[id=taxPrice]').html("￦" + commaTax);
-				$('label[id=allPrice]').html("￦" + commaAll);
-				
-				$('input[name=startDate]').attr('value', startDate);
-				$('input[name=betweenDay]').attr('value', betweenDay);
-				$('input[name=calPrice]').attr('value', calPrice);
-				$('input[name=taxPrice]').attr('value', taxPrice);
-				$('input[name=allPrice]').attr('value', allPrice);
-			}
-		}
-
-		function changeCheckOut() {
-			var endDate = $('#re-check-out').val();
-
-			var end = endDate.split("-");
-
-			var start_date = new Date(${start[0]}, ${start[1]}, ${start[2]});
-			var end_date = new Date(end[0], end[1], end[2]);
-			
-			var betweenMs = end_date.getTime() - start_date.getTime();
-			var betweenDay = betweenMs / (1000 * 60 * 60 * 24);
-			
-			var calPrice = ${dto.roomDto.price} * betweenDay;
-			var commaCal = Number(calPrice).toLocaleString();
-			
-			var taxPrice = calPrice * 0.2;
-			var commaTax = Number(taxPrice).toLocaleString();
-
-			var allPrice = calPrice + taxPrice;
-			var commaAll = Number(allPrice).toLocaleString();
-			
-			if(betweenDay <= 0) {
-				Swal.fire({
-					icon: 'error',
-					title: '날짜를 다시 선택해주세요.',
-					text: '체크아웃 날짜를 다시 입력해주세요.'
-				});
-			} else {
-				$('label[id=end1]').html(end[0]);
-				$('label[id=end2]').html(end[1]);
-				$('label[id=end3]').html(end[2]);
-				
-				$('label[id=betweenDay]').html(betweenDay);
-				$('label[id=calPrice]').html("￦" + commaCal);
-				$('label[id=taxPrice]').html("￦" + commaTax);
-				$('label[id=allPrice]').html("￦" + commaAll);
-				
-				$('input[name=endDate]').attr('value', endDate);
-				$('input[name=betweenDay]').attr('value', betweenDay);
-				$('input[name=calPrice]').attr('value', calPrice);
-				$('input[name=taxPrice]').attr('value', taxPrice);
-				$('input[name=allPrice]').attr('value', allPrice);
 			}
 		}
 	</script>
