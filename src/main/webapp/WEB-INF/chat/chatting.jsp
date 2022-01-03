@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +11,12 @@
 </head>
 
 <body>
+	<c:if test="${sessionScope.myid ==null}">
+		<script>
+			alert("로그인을 해주세요");
+			location.href="/";
+		</script>
+	</c:if>
 	<div class="chat-container">
 		
 		<!-- 채팅방 목록 -->
