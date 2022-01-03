@@ -47,27 +47,6 @@
 					</div>
 				</div>-->
 
-				<script type="text/javascript">
-				/* $(function(){
-					   loginok="${sessionScope.loginok}";
-					    */
-					$(".openBtn").click(function(){
-						$("#singo-id").val($("#report_id").text());
-					});
-					
-					 $(".singoBtn").click(function(){
-						var black_id = $('#report_id').text();
-						$.ajax({
-							  type:"post",
-							  dataType:"text",
-							  url:"singo",
-							  data:{"black_id":black_id,"reason":reason},
-							  success:function(data) {
-								location.reload();							  
-							  }
-						   });
-					 });
-				</script>
 				
 				<!-- 신고하기 모달 -->
 				<div id="singoModal" class="modal" role="dialog">
@@ -87,8 +66,8 @@
 							</div>
 
 							<div class="modal-footer">
-								<button type="button" id="bodyBtn" class="btn btn-primary"
-									onclick="'singoBtn'" data-dismiss="modal">신고하기</button>
+								<button type="button" id="bodyBtn" class="btn btn-primary" 
+									data-dismiss="modal">신고하기</button>
 								<button type="button" class="btn btn-default"
 									data-dismiss="modal">Close</button>
 							</div>
@@ -143,6 +122,32 @@
 			<h2>숙소 후기</h2>
 		</div>
 	</div>
+	
+	
+	<script type="text/javascript">
+	/* $(function(){
+		   loginok="${sessionScope.loginok}";
+		    */
+		$(".openBtn").click(function(){
+			$("#singo-id").val($("#report_id").text());
+		});
+		
+		 $("#bodyBtn").click(function(){
+			var black_id = $("#report_id").text();
+			var reason = $('#singo-reason').val();
+			console.log(black_id);
+			$.ajax({
+				  type:"post",
+				  dataType:"text",
+				  url:"/profile/singo",
+				  data:{"black_id":black_id,"reason":reason},
+				  success:function(data) {
+					  console.log("성공");
+					  location.reload();							  
+				  }
+			   });
+		 });
+	</script>
 	<script src="/js/profileForm.js"></script>
 </body>
 </html>

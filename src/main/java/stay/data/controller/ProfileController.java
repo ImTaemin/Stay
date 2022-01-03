@@ -37,12 +37,12 @@ public class ProfileController {
 		String myid = (String)session.getAttribute("myid");
 		
 		MemberDto memberDto = memberService.getMember(myid);
-		List<ReportMemberDto> rmList = memberService.getSingoMem(myid);
+		/* List<ReportMemberDto> rmList = memberService.getSingoMem(myid); */
 		
 		memberDto.setId(myid);
 		
 		mview.addObject("memberDto", memberDto);
-		mview.addObject("rmList", rmList);
+		/* mview.addObject("rmList", rmList); */
 		
 		mview.setViewName("/member/profileForm");
 		
@@ -57,8 +57,10 @@ public class ProfileController {
 			HttpSession session) {
 		String myid = (String)session.getAttribute("myid");
 		
-		rmDto.setReport_id(myid);
+		System.out.println(black_id + " " + reason + " " +myid );
+		
 		rmDto.setBlack_id(black_id);
+		rmDto.setReport_id(myid);
 		rmDto.setReason(reason);
 		
 		memberService.insertSingoMem(rmDto);
