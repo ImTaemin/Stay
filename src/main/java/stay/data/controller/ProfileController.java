@@ -20,7 +20,6 @@ import stay.data.dto.GuestCommentDto;
 import stay.data.dto.MemberDto;
 import stay.data.dto.ReportMemberDto;
 import stay.data.dto.ResultMapDto;
-import stay.data.dto.WishListDto;
 import stay.data.mapper.MemberMapper;
 import stay.data.service.CommentLikeService;
 import stay.data.service.GuestCommentService;
@@ -51,54 +50,35 @@ public class ProfileController {
 	CommentLikeService likeService;
 	
 	@GetMapping("/profileform")
-	public ModelAndView profile1(@RequestParam(required = false) String no,
-			@RequestParam(value = "currentPage", defaultValue = "1") int currentPage,
-			HttpSession session) {
+	public ModelAndView profile1(@RequestParam String id, HttpSession session) {
 		ModelAndView mview = new ModelAndView();
 		
-		String myid = (String)session.getAttribute("myid");
-		String loginok = (String)session.getAttribute("loginok");
+		MemberDto memberDto = memberService.getMember(id);
 		
-		MemberDto memberDto = memberService.getMember(myid);
-		
-		memberDto.setId(myid);
-		
+		/*
+		 * // 게스트 댓글 List<ResultMapDto> commentList =
+		 * gcommentService.selectOneGuest(id);
+		 * 
+		 * for (ResultMapDto c : commentList) { // 회원 정보 String guestId =
+		 * c.getGcoDto().getGuest_id();
+		 * 
+		 * MemberDto gMemDto = memberService.getMember(guestId);
+		 * 
+		 * c.setMemDto(gMemDto);
+		 * 
+		 * // 좋아요 개수 String reserNo = c.getGcoDto().getNo();
+		 * 
+		 * int likes = likeService.countLike(reserNo, guestId);
+		 * 
+		 * GuestCommentDto gCoDto = gcommentService.getOneComment(reserNo, guestId);
+		 * 
+		 * gCoDto.setCountLike(likes);
+		 * 
+		 * c.setGcoDto(gCoDto); }
+		 * 
+		 * mview.addObject("commentList", commentList);
+		 */
 		mview.addObject("memberDto", memberDto);
-		
-		ResultMapDto dto = roomService.getOneRoom(no);
-		
- 		// 게스트 댓글
- 		List<ResultMapDto> commentList = gcommentService.getRoomComment(no);
- 		
- 		for(ResultMapDto c : commentList) {
- 			// 회원 정보
- 			String guestId = c.getGcoDto().getGuest_id();
- 			
- 			MemberDto gMemDto = memberService.getMember(guestId);
- 			
- 			c.setMemDto(gMemDto);
- 			
- 			// 좋아요 개수
- 			String reserNo = c.getGcoDto().getNo();
- 			
- 			int likes = likeService.countLike(reserNo, guestId);
- 			
- 			GuestCommentDto gCoDto = gcommentService.getOneComment(reserNo, guestId);
- 			
- 			gCoDto.setCountLike(likes);
- 			
- 			c.setGcoDto(gCoDto);
- 		}
- 		
- 		// 좋아요한 댓글 리스트
- 		List<CommentLikeDto> likeList = likeService.getLike(myid);
- 		
- 		mview.addObject("currentPage", currentPage);
- 		mview.addObject("myid", myid);
- 		mview.addObject("loginok", loginok);
-		mview.addObject("dto", dto);
-		mview.addObject("commentList", commentList);
-		mview.addObject("likeList", likeList);
 		
 		mview.setViewName("/member/profileForm");
 		
