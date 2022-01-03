@@ -123,31 +123,6 @@
 		</div>
 	</div>
 	
-	
-	<script type="text/javascript">
-	/* $(function(){
-		   loginok="${sessionScope.loginok}";
-		    */
-		$(".openBtn").click(function(){
-			$("#singo-id").val($("#report_id").text());
-		});
-		
-		 $("#bodyBtn").click(function(){
-			var black_id = $("#report_id").text();
-			var reason = $('#singo-reason').val();
-			console.log(black_id);
-			$.ajax({
-				  type:"post",
-				  dataType:"text",
-				  url:"/profile/singo",
-				  data:{"black_id":black_id,"reason":reason},
-				  success:function(data) {
-					  console.log("성공");
-					  location.reload();							  
-				  }
-			   });
-		 });
-	</script>
 	<script src="/js/profileForm.js"></script>
 </body>
 </html>
