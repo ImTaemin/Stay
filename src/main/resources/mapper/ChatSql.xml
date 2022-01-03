@@ -6,11 +6,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="stay.data.mapper.ChatMapper">
 
 	<select id="getChattingRooms" parameterType="String" resultType="chatDto">
-		select * from chat where sender=#{sender} group by receiver
+		select c.id id, sender, receiver, c.msg msg, msg_time, photo  from chat c, member m 
+		where c.receiver = m.id 
+		and c.sender=#{sender}
+		or c.receiver=#{sender} group by c.receiver
 	</select>
 
 	<select id="chatting" parameterType="HashMap" resultType="chatDto">
-		select * from chat where sender=#{sender} and receiver=#{receiver} union select * from chat where sender=#{receiver} and receiver=#{sender} order by msg_time;
+		select * from chat where sender=#{sender} and receiver=#{receiver}
+		union
+		select * from chat where sender=#{receiver} and receiver=#{sender} order by msg_time
 	</select>
 	
 	<insert id="insertChat" parameterType="HashMap">

@@ -18,6 +18,7 @@
 }
 
 .chat-room-list .chat-list{
+	min-width: 250px;
 	height: 100%;
 	overflow: scroll;
 	overflow-x: visible;
@@ -45,6 +46,7 @@
 
 .chat-room .room-photo{
 	width: 50px;
+	height: 50px;
 	border-style: none;
 	border-radius: 50%;
 	vertical-align: middle;
@@ -55,13 +57,16 @@
 .chat-container .chatting{
 	width: 70%;
 }
-
 .chatting .profile{
 	border-bottom: 1px solid #716d6d;
 	height: 50px;
 }
 
 .chatting .profile img{
+	width: 40px;
+	height: 40px;
+	margin-right: 10px;
+	border: rgba(0,0,0,0);
 	border-radius: 50%;
 }
 

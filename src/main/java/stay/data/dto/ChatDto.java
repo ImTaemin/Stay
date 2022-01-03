@@ -14,6 +14,7 @@ public class ChatDto {
 	private String msg;
 	private String sender;
 	private String receiver;
+	private String photo;
 	
 	@JsonFormat(pattern = "yy/MM/dd HH:mm")
 	private Timestamp msg_time;

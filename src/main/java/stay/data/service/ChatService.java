@@ -27,6 +27,8 @@ public class ChatService {
 	ArrayList<ChatDto> historyRoom = new ArrayList<ChatDto>();
 	ArrayList<ChatDto> historyChat = new ArrayList<ChatDto>();
 
+	ResponseBodyEmitter emitterRoom, emitterChat;
+	
 	//room폴링
 	@Scheduled(fixedRate = 1000L)
 	public void emitRoom() {
@@ -34,7 +36,7 @@ public class ChatService {
 		for(Map.Entry<ResponseBodyEmitter, String> entry : emitterRoomMap.entrySet()) {
 //			ChatDto dto = new RestTemplate().getForObject("http://localhost:8080/chat/{sender}", ChatDto.class, sender);
 
-			ResponseBodyEmitter emitter = entry.getKey(); // emmiter|sender
+			emitterRoom = entry.getKey(); // emmiter|sender
 			
 			try {
 				for(ChatDto chatDto : chatMapper.getChattingRooms(entry.getValue())) {
@@ -43,7 +45,7 @@ public class ChatService {
 					}else {
 //						채팅방이 없으면 채팅방 전송O 
 						historyRoom.add(chatDto);
-						emitter.send(chatDto);
+						emitterRoom.send(chatDto);
 					}
 				}
 			} catch (IOException e) {
@@ -58,7 +60,7 @@ public class ChatService {
 		for(Map.Entry<ResponseBodyEmitter, HashMap<String, String>> entry : emitterChatMap.entrySet()) { //Map<emitter, HashMap<String,String>>
 //			ChatDto dto = new RestTemplate().getForObject("http://localhost:8080/chat/{sender}", ChatDto.class, sender);
 			
-			ResponseBodyEmitter emitter = entry.getKey(); // emmiter,HashMap(sender,receiver);
+			emitterChat = entry.getKey(); // emmiter,HashMap(sender,receiver);
 			
 			try {
 				for(Map.Entry<String, String> chatMap : entry.getValue().entrySet()) { // HashMap<String,String>
@@ -69,7 +71,7 @@ public class ChatService {
 						}else {
 //							채팅이 없으면 채팅내역 전송O 
 							historyChat.add(chatDto);
-							emitter.send(chatDto);
+							emitterChat.send(chatDto);
 						}
 					}
 
@@ -93,16 +95,24 @@ public class ChatService {
 		emitterChatMap.put(emitter, map);
 	}
 	
-	public List<ChatDto> getInitChattingRooms(String sender){
+	public synchronized List<ChatDto> getInitChattingRooms(String sender){
 		List<ChatDto> dtos = chatMapper.getChattingRooms(sender);
 		for(ChatDto dto : dtos) {
-			historyRoom.add(dto);
+			if(!historyRoom.contains(dto)) {
+				historyRoom.add(dto);
+			}
 		}
 		return dtos;
 	}
 	
-	public List<ChatDto> getInitChatting(String sender, String receiver) {
-		return chatMapper.chatting(sender, receiver);
+	public synchronized List<ChatDto> getInitChatting(String sender, String receiver) {
+		List<ChatDto> dtos = chatMapper.chatting(sender, receiver);
+		for(ChatDto dto : dtos) {
+			if(!historyChat.contains(dto)) {
+				historyChat.add(dto);
+			}
+		}
+		return dtos;
 	}
 	
 	public void insertChat(ChatDto dto) {

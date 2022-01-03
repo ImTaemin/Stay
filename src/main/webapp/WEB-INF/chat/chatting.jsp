@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +11,12 @@
 </head>
 
 <body>
+	<c:if test="${sessionScope.myid ==null}">
+		<script>
+			alert("로그인을 해주세요");
+			location.href="/";
+		</script>
+	</c:if>
 	<div class="chat-container">
 		
 		<!-- 채팅방 목록 -->
@@ -17,12 +24,8 @@
 			<div class="chat-title">
 				<span>채팅방 목록</span>
 			</div>
-			<div class="chat-list">
-<!-- 				<div class="chat-room"> -->
-<!-- 					<img src="../../photo/profile.png" class="room-photo"> -->
-<!-- 					유저 아이디 -->
-<!-- 				</div> -->
-			</div>
+			<!-- 채팅방들 -->
+			<div class="chat-list"></div>
 		</div>
 		
 		<!-- 채팅화면 -->
@@ -32,23 +35,8 @@
 				<span id="profile-name"></span>
 			</div>
 
-			<div class="chat-section">
-				<!-- 받은메시지 -->
-				<!-- <div class="receive-msg-box">
-					<div class="receive-msg">
-						<p>수현짱</p>
-						<span class="time_date"> 11:18 | Today</span>
-					</div>
-				</div> -->
-
-				<!-- 보낸메시지 -->
-				<!-- <div class="send-msg-box" >
-					<div class="send_msg">
-						<p>태민짱</p>
-						<span class="time_date" > 11:18 | Today</span>
-					</div>
-				</div> -->
-			</div>
+			<!-- 메세지들 -->
+			<div class="chat-section"></div>
 
 			<!-- 메시지 입력 -->
 			<div class="input-msg-box">
@@ -73,19 +61,9 @@
 				}
 			});
 			
-// 			$.ajax({
-// 					dataType: "json",
-// 					type: "post",
-// 					data: {"sender":"${sessionScope.myid}"},
-// 					url: "http://localhost:8080/chat/chatting",
-// 					success: function(data){
-// 						data.forEach(element=>createRooms(element));
-// 					}
-// 				});
 			//채팅방 요청
 			var eventSourceRoom = new EventSource("http://localhost:8080/chat/chatting/${sessionScope.myid}");
 	
-			console.log(eventSourceRoom);
 			eventSourceRoom.onmessage = function(event) {
 				var dataRooms = JSON.parse(event.data);
 				
@@ -95,12 +73,29 @@
 			//채팅방 생성
 			function createRooms(rooms){
 				'use strict';
-				var s = `
-					<div class="chat-room" id="` + rooms.receiver + `" receiver="` + rooms.receiver + `">
-						<img src="../../photo/profile.png" class="room-photo">
-						<span>` + rooms.receiver + `</span>
-					</div>
-				`
+				
+				var s="";
+				
+				if(rooms.receiver == "${sessionScope.myid}"){
+					return;
+				}
+				
+				if(rooms.receiver.indexOf("@") != -1){
+					
+					s = `
+						<div class="chat-room" id="` + rooms.receiver + `" receiver="` + rooms.receiver + `">
+							<img src="` + rooms.photo + `" class="room-photo">
+							<span>` + rooms.receiver + `</span>
+						</div>
+					`;
+				} else if(rooms.receiver.indexOf("@") == -1){
+					s = `
+						<div class="chat-room" id="` + rooms.receiver + `" receiver="` + rooms.receiver + `">
+							<img src="../photo/memberPhoto/`+ rooms.photo+`" class="room-photo">
+							<span>` + rooms.receiver + `</span>
+						</div>
+					`;
+				}
 				$(".chat-list").append(s);
 				$(".chat-list").scrollTop(document.body.scrollHeight);
 			}
@@ -125,9 +120,9 @@
 					var tmp = $("#profile-name").text();
 					document.getElementById(tmp).style.cursor = "pointer";
 				}
-				
+
 				//채팅방 타이틀
-				$("#profile-img").attr("src","../../photo/profile.png");
+				$("#profile-img").attr("src",$(this).children().attr("src"));
 				$("#profile-name").text(profileName);
 				
 				$(this).css("cursor","default");
