@@ -27,13 +27,19 @@ public class JoinGuestController {
 	
 	@PostMapping("/search")
 	@ResponseBody
-	public Boolean searchMem(@RequestParam String id) {
+	public String searchMem(@RequestParam String no, @RequestParam String id) {
 		MemberDto memDto = memService.getMember(id);
 		
 		if(memDto == null)
-			return false;
+			return "empty";
 		
-		return true;
+		int sameCheck = joinService.sameIdinJoin(no, id);
+		
+		if(sameCheck == 1) {
+			return "same";
+		}
+		
+		return "true";
 	}
 	
 	@PostMapping("/insert")

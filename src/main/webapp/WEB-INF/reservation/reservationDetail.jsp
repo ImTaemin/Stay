@@ -113,16 +113,19 @@
 						<div class="guest">
 							<span id="joinNum">${joinGuestNum}명</span>
 							
+							<!-- hidden -->
+							<input type="hidden" name="joinNum" value="${joinGuestNum}">
+							
 							<div class="guest-btn">
 								<c:if test="${roomDto.max_per > joinGuestNum}">
 									<c:if test="${preCheck == false and canCheck == false}">
 										<span class="bi bi-plus-circle" onclick="addGuest(this)" style="margin-right: 20%"
-										no="${reserDto.no}" joinNum="${joinGuestNum}" hostId="${hostDto.id}"
-										maxPer="${roomDto.max_per}" myid="${sessionScope.myid}" id="addGuest"></span>
+										no="${reserDto.no}" hostId="${hostDto.id}" myid="${sessionScope.myid}"
+										maxPer="${roomDto.max_per}" id="addGuest"></span>
 									</c:if>
 								</c:if>
 								
-								<div onclick="guestInfo(${reserDto.no}, ${joinGuestNum}, ${roomDto.max_per})" data-toggle="modal" data-target="#guestList">
+								<div onclick="guestInfo(${reserDto.no}, ${roomDto.max_per})" data-toggle="modal" data-target="#guestList">
 									<span class="bi bi-three-dots"></span>
 								</div>
 							</div>
@@ -130,11 +133,11 @@
 						
 						<!-- 게스트리스트 모달 -->
 						<div id="guestList" class="modal">
-							<div class="modal-dialog modal-dialog-centered">
+							<div class="modal-dialog">
 								<div class="modal-content">
 									<div class="modal-header">
 										<button type="button" class="close" data-dismiss="modal">&times;</button>
-										<h4 class="modal-title">게스트 상세 목록</h4>
+										<h2 class="modal-title"><b>게스트 상세 목록</b></h2>
 									</div>
 									
 									<div class="modal-body">

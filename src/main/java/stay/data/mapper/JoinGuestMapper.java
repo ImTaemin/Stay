@@ -11,6 +11,7 @@ import stay.data.dto.ResultMapDto;
 @Mapper
 public interface JoinGuestMapper {
 	public int countJoinGuest(String no);
+	public int sameIdinJoin(HashMap<String, String> map);
 	public void insertJoinGuest(JoinGuestDto dto);
 	public List<ResultMapDto> getAllJoinGuest(String no);
 	public void deleteJoinGuest(HashMap<String, String> map);

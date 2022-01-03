@@ -297,6 +297,11 @@
 	width: 20%;
 }
 
+.swal2-show {
+	width: 400px;
+	padding: 2% 0;
+}
+
 .swal2-cancel {
 	margin-left: 15px;
 }
