@@ -10,10 +10,10 @@
   document.querySelector(".openBtn").addEventListener("click", open);
   document.querySelector(".closeBtn").addEventListener("click", close);
   document.querySelector(".bg").addEventListener("click", close);
-*/
+
 
 //수정 다이얼로그 띄우기
-/*
+
    $(document).on("click","span.amod",function(){
 	  
 	   id=$(this).attr("id");
@@ -31,8 +31,8 @@
 	   $("#myModal").modal();
 	   
    });
-*/
-/*
+
+
 $(function(){
 
 //댓글수정
@@ -56,7 +56,7 @@ $(function(){
 		});
 		$("#myModal").modal();  //모달 띄우기
 		
-		/* $(".modbtn").click(function(){
+		$(".modbtn").click(function(){
 			
 			var content = $("#modcontent").val();
 			$.ajax({
@@ -76,9 +76,9 @@ $(function(){
 				
 			});
 			
-		}); */
+		});
 		
-		/*
+		
 	});
 	
 	$(document).on("click",".modbtn",function(){
@@ -102,9 +102,9 @@ $(function(){
 	});
 	
 	
-}); */
+});
 
-/*
+
 function likeClick(e){
 	var id = $(e).attr("user_id");
 	//alert(id);
@@ -164,7 +164,7 @@ $(function(){
 		 });
 	
 });
-*/
+
 
 function likeClick(e){
 	var id = $(e).attr("user_id");
@@ -222,3 +222,4 @@ $(function(){
 		 });
 	
 });
+*/
