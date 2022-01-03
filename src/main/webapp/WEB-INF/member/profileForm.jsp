@@ -115,6 +115,10 @@
 					<span class="glyphicon glyphicon-envelope message" style="width: 30px; cursor: pointer;"></span>
 					<span>MESSAGE &nbsp;${message}</span>
 				</div>
+				
+				
+		<!--  -->
+	</a>
 			</div>
 		</div>
 		

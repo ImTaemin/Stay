@@ -51,18 +51,54 @@ public class ProfileController {
 	CommentLikeService likeService;
 	
 	@GetMapping("/profileform")
-	public ModelAndView profile1(HttpSession session) {
+	public ModelAndView profile1(@RequestParam(required = false) String no,
+			@RequestParam(value = "currentPage", defaultValue = "1") int currentPage,
+			HttpSession session) {
 		ModelAndView mview = new ModelAndView();
 		
 		String myid = (String)session.getAttribute("myid");
+		String loginok = (String)session.getAttribute("loginok");
 		
 		MemberDto memberDto = memberService.getMember(myid);
-		/* List<ReportMemberDto> rmList = memberService.getSingoMem(myid); */
 		
 		memberDto.setId(myid);
 		
 		mview.addObject("memberDto", memberDto);
-		/* mview.addObject("rmList", rmList); */
+		
+		ResultMapDto dto = roomService.getOneRoom(no);
+		
+ 		// 게스트 댓글
+ 		List<ResultMapDto> commentList = gcommentService.getRoomComment(no);
+ 		
+ 		for(ResultMapDto c : commentList) {
+ 			// 회원 정보
+ 			String guestId = c.getGcoDto().getGuest_id();
+ 			
+ 			MemberDto gMemDto = memberService.getMember(guestId);
+ 			
+ 			c.setMemDto(gMemDto);
+ 			
+ 			// 좋아요 개수
+ 			String reserNo = c.getGcoDto().getNo();
+ 			
+ 			int likes = likeService.countLike(reserNo, guestId);
+ 			
+ 			GuestCommentDto gCoDto = gcommentService.getOneComment(reserNo, guestId);
+ 			
+ 			gCoDto.setCountLike(likes);
+ 			
+ 			c.setGcoDto(gCoDto);
+ 		}
+ 		
+ 		// 좋아요한 댓글 리스트
+ 		List<CommentLikeDto> likeList = likeService.getLike(myid);
+ 		
+ 		mview.addObject("currentPage", currentPage);
+ 		mview.addObject("myid", myid);
+ 		mview.addObject("loginok", loginok);
+		mview.addObject("dto", dto);
+		mview.addObject("commentList", commentList);
+		mview.addObject("likeList", likeList);
 		
 		mview.setViewName("/member/profileForm");
 		
@@ -101,70 +137,6 @@ public class ProfileController {
 		
 	}
 	
-	@GetMapping("/content")
-	public ModelAndView content(
-			@RequestParam String no,
-			@RequestParam(value = "currentPage", defaultValue = "1") int currentPage,
-			HttpSession session) {
-		String myid = (String)session.getAttribute("myid");
-		String loginok = (String)session.getAttribute("loginok");
-		
-		ModelAndView mview = new ModelAndView();
-		
-		ResultMapDto dto = roomService.getOneRoom(no);
-		
-		String photoList[] = dto.getRoomDto().getPhotos().split(",");
-		
-		// 호스트 정보
-		String hostId = dto.getRoomDto().getHost_id();
-		
-		MemberDto memDto = memberService.getMember(hostId);
-		
-		// 위시리스트
- 		if(loginok != null) {
- 			List<WishListDto> wishList = wishService.getWishList(myid);
- 			
- 			mview.addObject("wishList", wishList);
- 		}
-		
- 		// 게스트 댓글
- 		List<ResultMapDto> commentList = gcommentService.getRoomComment(no);
- 		
- 		for(ResultMapDto c : commentList) {
- 			// 회원 정보
- 			String guestId = c.getGcoDto().getGuest_id();
- 			
- 			MemberDto gMemDto = memberService.getMember(guestId);
- 			
- 			c.setMemDto(gMemDto);
- 			
- 			// 좋아요 개수
- 			String reserNo = c.getGcoDto().getNo();
- 			
- 			int likes = likeService.countLike(reserNo, guestId);
- 			
- 			GuestCommentDto gCoDto = gcommentService.getOneComment(reserNo, guestId);
- 			
- 			gCoDto.setCountLike(likes);
- 			
- 			c.setGcoDto(gCoDto);
- 		}
- 		
- 		// 좋아요한 댓글 리스트
- 		List<CommentLikeDto> likeList = likeService.getLike(myid);
- 		
- 		mview.addObject("currentPage", currentPage);
- 		mview.addObject("myid", myid);
- 		mview.addObject("loginok", loginok);
-		mview.addObject("dto", dto);
-		mview.addObject("photoList", photoList);
-		mview.addObject("memDto", memDto);
-		mview.addObject("commentList", commentList);
-		mview.addObject("likeList", likeList);
-		
-		mview.setViewName("/room/roomDetail");
-		
-		return mview;
-	}
+	
 	
 }
