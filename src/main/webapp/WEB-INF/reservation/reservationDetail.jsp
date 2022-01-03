@@ -118,7 +118,7 @@
 									<c:if test="${preCheck == false and canCheck == false}">
 										<span class="bi bi-plus-circle" onclick="addGuest(this)" style="margin-right: 20%"
 										no="${reserDto.no}" joinNum="${joinGuestNum}" hostId="${hostDto.id}"
-										maxPer="${roomDto.max_per}" id="addGuest"></span>
+										maxPer="${roomDto.max_per}" myid="${sessionScope.myid}" id="addGuest"></span>
 									</c:if>
 								</c:if>
 								

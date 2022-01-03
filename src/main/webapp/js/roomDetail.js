@@ -7,7 +7,7 @@ slideCount = slideImg.length;
 prev = document.querySelector(".prev");
 next = document.querySelector(".next");
 
-slideWidth = 800;
+slideWidth = 750;
 slideMargin = 100;
 slides.style.width = (slideWidth + slideMargin) * slideCount + "px";
 

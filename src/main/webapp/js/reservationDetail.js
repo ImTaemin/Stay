@@ -37,6 +37,7 @@ function addGuest(e) {
 	var joinNum = parseInt($(e).attr("joinNum"));
 	var hostId = $(e).attr("hostId");
 	var maxPer = $(e).attr("maxPer");
+	var myid = $(e).attr("myid");
 
 	const swalWithBootstrapButtons = Swal.mixin({
 		customClass: {
@@ -68,6 +69,12 @@ function addGuest(e) {
 							icon: 'error',
 							title: '추가할 수 없는 아이디 입니다.',
 							text: '호스트 아이디와 동일합니다.'
+						})
+					} else if (id == myid) {
+						Swal.fire({
+							icon: 'error',
+							title: '추가할 수 없는 아이디 입니다.',
+							text: '메인 게스트와 동일한 아이디입니다.'
 						})
 					} else if (id == '') {
 						Swal.fire({
