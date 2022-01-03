@@ -12,7 +12,9 @@ import stay.data.dto.ResultMapDto;
 public interface ReservationMapper {
 	public void insertReservation(ReservationDto reDto);
 	public List<ResultMapDto> selectNowGuestReservation(String guestId);
+	public List<ResultMapDto> selectNowHostReservation(String hostId);
 	public List<ResultMapDto> selectPreGuestReservation(String guestId);
+	public List<ResultMapDto> selectPreHostReservation(String hostId);
 	public List<ReservationDto> selectHostThreeReservation(String hostId);
 	public List<ReservationDto> selectHostReservation(String hostId);
 	public ReservationDto selectGuestOneReservation(HashMap<String, String> map);

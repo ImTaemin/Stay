@@ -23,8 +23,16 @@ public class ReservationService {
 		return mapper.selectNowGuestReservation(guestId);
 	}
 	
+	public List<ResultMapDto> selectNowHostReservation(String hostId) {
+		return mapper.selectNowHostReservation(hostId);
+	}
+	
 	public List<ResultMapDto> selectPreGuestReservation(String guestId) {
 		return mapper.selectPreGuestReservation(guestId);
+	}
+	
+	public List<ResultMapDto> selectPreHostReservation(String hostId) {
+		return mapper.selectPreHostReservation(hostId);
 	}
 	
 	public List<ReservationDto> selectHostReservation(String hostId) {

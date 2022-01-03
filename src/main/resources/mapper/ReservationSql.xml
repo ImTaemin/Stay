@@ -33,6 +33,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by res.start_date
 	</select>
 	
+	<select id="selectNowHostReservation" parameterType="String" resultMap="resultMap">
+		select * from reservation res, room r 
+		where res.host_id = #{host_id} and res.room_no = r.no 
+		and res.start_date >= date_format(now(), "%y-%m-%d") 
+		and res.no not in (
+			select res.no from can_reservation can, reservation res
+			where can.no = res.no and res.host_id = #{host_id}
+		)
+		order by res.start_date
+	</select>
+	
 	<select id="selectPreGuestReservation" parameterType="String" resultMap="resultMap">
 		select * from reservation res, room r 
 		where res.guest_id = #{guest_id} and res.room_no = r.no 
@@ -40,6 +51,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		and res.no not in (
 			select res.no from can_reservation can, reservation res
 			where can.no = res.no and res.guest_id = #{guest_id}
+		)
+		order by res.start_date
+	</select>
+	
+	<select id="selectPreHostReservation" parameterType="String" resultMap="resultMap">
+		select * from reservation res, room r 
+		where res.host_id = #{host_id} and res.room_no = r.no 
+		and date_format(now(), "%y-%m-%d") > res.start_date 
+		and res.no not in (
+			select res.no from can_reservation can, reservation res
+			where can.no = res.no and res.host_id = #{host_id}
 		)
 		order by res.start_date
 	</select>
