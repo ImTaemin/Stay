@@ -67,21 +67,20 @@
 				<!-- 탭 목록 -->
 				<ul class="nav nav-tabs" id="myTab" role="tablist">
 				
-					<!-- 현재호스팅 -->
+					<!-- 예정 -->
 					<li class="nav-item" role="presentation">
-						<button class="nav-link" id="hos-tab" data-bs-toggle="tab" data-bs-target="#hos" type="button" role="tab" aria-controls="hos" aria-selected="false">현재호스팅</button>
+						<button class="nav-link active" id="now-tab" data-bs-toggle="tab" data-bs-target="#now" type="button" role="tab" aria-controls="now" aria-selected="true">예정된 예약</button>
 					</li>
 					
-					<!-- 체크인예정 -->
+					<!-- 이전 -->
 					<li class="nav-item" role="presentation">
-						<button class="nav-link active" id="in-tab" data-bs-toggle="tab" data-bs-target="#in" type="button" role="tab" aria-controls="in" aria-selected="true">체크인예정</button>
+						<button class="nav-link" id="pre-tab" data-bs-toggle="tab" data-bs-target="#pre" type="button" role="tab" aria-controls="pre" aria-selected="false">이전 예약</button>
 					</li>
 					
-					<!-- 체크아웃 -->
+					<!-- 취소 -->
 					<li class="nav-item" role="presentation">
-						<button class="nav-link" id="out-tab" data-bs-toggle="tab" data-bs-target="#out" type="button" role="tab" aria-controls="out" aria-selected="false">체크아웃</button>
+						<button class="nav-link" id="can-tab" data-bs-toggle="tab" data-bs-target="#can" type="button" role="tab" aria-controls="can" aria-selected="false">취소된 예약</button>
 					</li>
-					
 					
 				</ul>
 			</div>
@@ -90,97 +89,85 @@
 		<div class="hostMain-bottom">
 			<div class="tab-content">
 				
-				<div class="tab-pane" id="hos" role="tabpanel" aria-labelledby="hos-tab">
-					<c:forEach var="list" items="${hosList}">
-						<c:forEach var="room" items="${hosRoom}">
-							<c:if test="${list.room_no == room.no}">
-								<div class="hostMain-reservation" list-no="${list.no}" onclick="btnClick(this)">
-									<div class="hostMain-number">예약번호 : ${list.no}</div>
+				<div class="tab-pane" id="now" role="tabpanel" aria-labelledby="now-tab">
+					<c:forEach var="list" items="${nowList}">
+								<div class="hostMain-reservation" list-no="${list.resDto.no}" onclick="btnClick(this)">
+									<div class="hostMain-number">예약번호 : ${list.resDto.no}</div>
 									<div class="hostMain-content">
-										<div class="content-name">${room.name}
-											<div class="content-site">${room.addr_load}</div>
+										<div class="content-name">${list.roomDto.name}
+											<div class="content-site">${list.roomDto.addr_load}</div>
 										</div>
 										<div class="content-checkIn">체크인
-											<div class="content-inDate">${list.start_date}</div>
+											<div class="content-inDate">${list.resDto.start_date}</div>
 										</div>
 										<div class="content-checkOut">체크아웃
-											<div class="content-outDate">${list.end_date}</div>
+											<div class="content-outDate">${list.resDto.end_date}</div>
 										</div>
 										<div class="content-guest">게스트
-											<div class="content-number">1명</div>
+											<div class="content-number">${joinGuestNum}명</div>
 										</div>
 										<div class="content-payment">결제세부정보
 											<div class="content-cost">
-												<fmt:formatNumber value="${list.price}" type="currency" currencySymbol="￦"/>
+												<fmt:formatNumber value="${list.resDto.price}" type="currency" currencySymbol="￦"/>
 											</div>
 										</div>
 									</div>
 								</div>
-							</c:if>
-						</c:forEach>
 					</c:forEach>
 				</div>
 				
 				
-				<div class="tab-pane active" id="in" role="tabpanel" aria-labelledby="in-tab">
-					<c:forEach var="list" items="${inList}">
-						<c:forEach var="room" items="${inRoom}">
-							<c:if test="${list.room_no == room.no}">
-								<div class="hostMain-reservation" list-no="${list.no}" onclick="btnClick(this)">
-									<div class="hostMain-number">예약번호 : ${list.no}</div>
+				<div class="tab-pane active" id="pre" role="tabpanel" aria-labelledby="pre-tab">
+					<c:forEach var="list" items="${preList}">
+								<div class="hostMain-reservation" list-no="${list.resDto.no}" onclick="btnClick(this)">
+									<div class="hostMain-number">예약번호 : ${list.resDto.no}</div>
 									<div class="hostMain-content">
-										<div class="content-name">${room.name}
-											<div class="content-site">${room.addr_load}</div>
+										<div class="content-name">${list.roomDto.name}
+											<div class="content-site">${list.roomDto.addr_load}</div>
 										</div>
 										<div class="content-checkIn">체크인
-											<div class="content-inDate">${list.start_date}</div>
+											<div class="content-inDate">${list.resDto.start_date}</div>
 										</div>
 										<div class="content-checkOut">체크아웃
-											<div class="content-outDate">${list.end_date}</div>
+											<div class="content-outDate">${list.resDto.end_date}</div>
 										</div>
 										<div class="content-guest">게스트
-											<div class="content-number">1명</div>
+											<div class="content-number">${joinGuestNum}명</div>
 										</div>
 										<div class="content-payment">결제세부정보
 											<div class="content-cost">
-												<fmt:formatNumber value="${list.price}" type="currency" currencySymbol="￦"/>
+												<fmt:formatNumber value="${list.resDto.price}" type="currency" currencySymbol="￦"/>
 											</div>
 										</div>
 									</div>
 								</div>
-							</c:if>
-						</c:forEach>
 					</c:forEach>
 				</div>
 			
-				<div class="tab-pane" id="out" role="tabpanel" aria-labelledby="out-tab">
-					<c:forEach var="list" items="${outList}">
-						<c:forEach var="room" items="${outRoom}">
-							<c:if test="${list.room_no == room.no}">
-								<div class="hostMain-reservation" list-no="${list.no}" onclick="btnClick(this)">
-									<div class="hostMain-number">예약번호 : ${list.no}</div>
+				<div class="tab-pane" id="can" role="tabpanel" aria-labelledby="can-tab">
+					<c:forEach var="list" items="${canList}">
+								<div class="hostMain-reservation" list-no="${list.resDto.no}" onclick="btnClick(this)">
+									<div class="hostMain-number">예약번호 : ${list.resDto.no}</div>
 									<div class="hostMain-content">
-										<div class="content-name">${room.name}
-											<div class="content-site">${room.addr_load}</div>
+										<div class="content-name">${list.roomDto.name}
+											<div class="content-site">${list.roomDto.addr_load}</div>
 										</div>
 										<div class="content-checkIn">체크인
-											<div class="content-inDate">${list.start_date}</div>
+											<div class="content-inDate">${list.resDto.start_date}</div>
 										</div>
 										<div class="content-checkOut">체크아웃
-											<div class="content-outDate">${list.end_date}</div>
+											<div class="content-outDate">${list.resDto.end_date}</div>
 										</div>
 										<div class="content-guest">게스트
-											<div class="content-number">1명</div>
+											<div class="content-number">${joinGuestNum}명</div>
 										</div>
 										<div class="content-payment">결제세부정보
 											<div class="content-cost">
-												<fmt:formatNumber value="${list.price}" type="currency" currencySymbol="￦"/>
+												<fmt:formatNumber value="${list.resDto.price}" type="currency" currencySymbol="￦"/>
 											</div>
 										</div>
 									</div>
 								</div>
-							</c:if>
-						</c:forEach>
 					</c:forEach>
 				</div>
 				

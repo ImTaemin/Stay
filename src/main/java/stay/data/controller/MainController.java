@@ -20,8 +20,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import stay.data.dto.MemberDto;
 import stay.data.dto.ReservationDto;
+import stay.data.dto.ResultMapDto;
 import stay.data.dto.RoomDto;
+import stay.data.service.CanReservationService;
 import stay.data.service.GuestCommentService;
+import stay.data.service.JoinGuestService;
 import stay.data.service.MemberService;
 import stay.data.service.ReservationService;
 import stay.data.service.RoomService;
@@ -40,6 +43,15 @@ public class MainController {
 	
 	@Autowired
 	ReservationService reservationService;
+
+	@Autowired
+	CanReservationService canReserService;
+	
+	@Autowired
+	JoinGuestService joinGuestService;
+	
+	@Autowired
+	JoinGuestService joinService;
 	
 	//첫메인_게스트모드가 기본이므로 게스트메인
    @GetMapping("/")
@@ -76,105 +88,90 @@ public class MainController {
    //호스트메인_호스트전환 클릭할 경우
    @GetMapping("/host/main")
 	public ModelAndView reservationList(HttpSession session) {
-	   
-		ModelAndView mview = new ModelAndView();
+	   ModelAndView mview = new ModelAndView();
 		
 		String myid = (String)session.getAttribute("myid");
 		
-		//호스트모드 예약상태별 예약 목록
-		List<ReservationDto> reserList = reservationService.selectHostReservation(myid);
+		// 조인 게스트
+		//List<ResultMapDto> joinList = joinService.getAllJoinGuest(reserNo);
 		
-		List<ReservationDto> inList = new ArrayList<ReservationDto>();
-		List<ReservationDto> outList = new ArrayList<ReservationDto>();
-		List<ReservationDto> hosList = new ArrayList<ReservationDto>(); 
-		
-		List<RoomDto> inRoom = new ArrayList<RoomDto>();
-		List<RoomDto> outRoom = new ArrayList<RoomDto>();
-		List<RoomDto> hosRoom = new ArrayList<RoomDto>();
+		List<ResultMapDto> nowList = reservationService.selectNowHostReservation(myid);
+		List<ResultMapDto> preList = reservationService.selectPreHostReservation(myid);
+		List<ResultMapDto> canList = canReserService.getAllHostCanReser(myid);
 		
 		//호스트모드 체크인예정 목록중 최근 3개
 		List<ReservationDto> reserThreeList = reservationService.selectHostThreeReservation(myid);
-		
+				
 		List<ReservationDto> inThreeList = new ArrayList<ReservationDto>();
 		List<RoomDto> inThreeRoom = new ArrayList<RoomDto>();
 		
-		LocalDate today = LocalDate.now();
 		
-		//호스트모드 예약상태별 예약 목록
-		for(ReservationDto reser : reserList) {
-			
-			String startDate = reser.getStart_date();
-			String endDate = reser.getEnd_date();
-			
-			LocalDate start = LocalDate.parse(startDate, DateTimeFormatter.ISO_DATE);
-			LocalDate end = LocalDate.parse(endDate, DateTimeFormatter.ISO_DATE);
-			
-			if(start.isAfter(today)) {
-				RoomDto roomDto = roomService.getRoom(reser.getRoom_no());
+		// 예정된 예약
+				for(ResultMapDto dto : nowList) {
+					String photos = dto.getRoomDto().getPhotos();
+					String photo[] = photos.split(",");
+					
+					String roomNo = dto.getResDto().getRoom_no();
+					RoomDto rdto = roomService.getRoom(roomNo);
+					rdto.setPhotos(photo[0]);
+					
+					dto.setRoomDto(rdto);
+				}
 				
-				String photos = roomDto.getPhotos();
-				String photo[] = photos.split(",");
+				// 이전 예약
+				for(ResultMapDto dto : preList) {
+					String photos = dto.getRoomDto().getPhotos();
+					String photo[] = photos.split(",");
+					
+					String roomNo = dto.getResDto().getRoom_no();
+					RoomDto rdto = roomService.getRoom(roomNo);
+					rdto.setPhotos(photo[0]);
+					
+					dto.setRoomDto(rdto);
+				}
 				
-				roomDto.setPhotos(photo[0]);
+				// 취소된 예약
+				for(ResultMapDto dto : canList) {
+					String roomNo = dto.getResDto().getRoom_no();
+					RoomDto rdto = roomService.getRoom(roomNo);
+					
+					String photos = rdto.getPhotos();
+					String photo[] = photos.split(",");
+					
+					rdto.setPhotos(photo[0]);
+					
+					dto.setRoomDto(rdto);
+				}
 				
-				inList.add(reser);
-				inRoom.add(roomDto);
-			} else if (end.isBefore(today)) {
-				RoomDto roomDto = roomService.getRoom(reser.getRoom_no());
+				//호스트모드 예약상태별 예약 목록중 최근 3개
+				for(ReservationDto reser : reserThreeList) {
+
+						RoomDto roomDto = roomService.getRoom(reser.getRoom_no());
+						
+						String photos = roomDto.getPhotos();
+						String photo[] = photos.split(",");
+						
+						roomDto.setPhotos(photo[0]);
+						
+						inThreeList.add(reser);
+						inThreeRoom.add(roomDto);
+				}
 				
-				String photos = roomDto.getPhotos();
-				String photo[] = photos.split(",");
+				mview.addObject("nowList", nowList);
+				mview.addObject("preList", preList);
+				mview.addObject("canList", canList);
 				
-				roomDto.setPhotos(photo[0]);
+				//mview.addObject("joinList", joinList);
+
+				//호스트모드 예약상태별 예약 목록중 최근 3개
+				mview.addObject("inThreeList", inThreeList);
+				mview.addObject("inThreeRoom", inThreeRoom);
+		
 				
-				outList.add(reser);
-				outRoom.add(roomDto);
-			} else if ((start.isBefore(today) || start.equals(today)) && (end.isAfter(today) || end.equals(today))) {
-				RoomDto roomDto = roomService.getRoom(reser.getRoom_no());
+				mview.setViewName("/layout/hostMain");
 				
-				String photos = roomDto.getPhotos();
-				String photo[] = photos.split(",");
-				
-				roomDto.setPhotos(photo[0]);
-				
-				hosList.add(reser);
-				hosRoom.add(roomDto);
+				return mview;
 			}
-		}
-		
-		//호스트모드 예약상태별 예약 목록중 최근 3개
-		for(ReservationDto reser : reserThreeList) {
-			
-
-				RoomDto roomDto = roomService.getRoom(reser.getRoom_no());
-				
-				String photos = roomDto.getPhotos();
-				String photo[] = photos.split(",");
-				
-				roomDto.setPhotos(photo[0]);
-				
-				inThreeList.add(reser);
-				inThreeRoom.add(roomDto);
-			
-		}
-		
-		//호스트모드 예약상태별 예약 목록
-		mview.addObject("inList", inList);
-		mview.addObject("outList", outList);
-		mview.addObject("hosList", hosList);
-		mview.addObject("inRoom", inRoom);
-		mview.addObject("outRoom", outRoom);
-		mview.addObject("hosRoom", hosRoom);
-		
-		//호스트모드 예약상태별 예약 목록중 최근 3개
-		mview.addObject("inThreeList", inThreeList);
-		mview.addObject("inThreeRoom", inThreeRoom);
-
-		
-		mview.setViewName("/layout/hostMain");
-		
-		return mview;
-	}
    
    //header의 메뉴 아이콘_게스트모드 전환, 호스트모드 전환
    @GetMapping("/changeMode")
