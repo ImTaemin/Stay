@@ -216,8 +216,6 @@ public class RoomController {
  		List<CommentLikeDto> likeList = likeService.getLike(myid);
  		
  		mview.addObject("currentPage", currentPage);
- 		mview.addObject("myid", myid);
- 		mview.addObject("loginok", loginok);
 		mview.addObject("dto", dto);
 		mview.addObject("photoList", photoList);
 		mview.addObject("memDto", memDto);

@@ -266,7 +266,8 @@ $("#insert-btn").click(function() {
 	content = content.replace(/(?:\r\n|\r|\n)/g, '<br/>');
 	$(".content-input").val(content);
 
-	document.commentInsert.submit();
+
+	//document.commentInsert.submit();
 });
 
 $("#update-btn").click(function() {
@@ -320,7 +321,7 @@ function reserCan(e) {
 			$(e).html("예약 취소가 진행 중입니다.");
 
 			$.ajax({
-				type: "post",
+				type: "get",
 				url: "/reser/delete",
 				data: { "no": no, "price": price }
 			});
