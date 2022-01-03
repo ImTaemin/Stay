@@ -1,40 +1,105 @@
-function likeClick(e){
+function likeClick(e) {
 	var id = $(e).attr("user_id");
 	//alert(id);
 	var tag = $(e);
-	
+
 	console.log(id);
-	
+
 	$.ajax({
-		
+
 		type: "get",
 		dataType: "json",
 		url: "updatelikes",
-		data: {"id":id},
-		success: function(data){
+		data: { "id": id },
+		success: function(data) {
 			//alert(data.chu);
 			tag.next().text(data.likes);
 		}
-		
+
 	});
 }
 
-$(".openBtn").click(function(){
-			$("#singo-id").val($("#report_id").text());
+$(".openBtn").click(function() {
+	$("#singo-id").val($("#report_id").text());
+});
+
+$("#bodyBtn").click(function() {
+	var black_id = $("#report_id").text();
+	var reason = $('#singo-reason').val();
+	console.log(black_id);
+	$.ajax({
+		type: "post",
+		dataType: "text",
+		url: "/profile/singo",
+		data: { "black_id": black_id, "reason": reason },
+		success: function(data) {
+			console.log("성공");
+			location.reload();
+		}
+	});
+});
+
+
+// 후기 좋아요 클릭 이벤트
+var flag = true;
+
+function coHeartClick(e1) {
+	var check = $(e1).attr("class");
+	
+	var reserNo = $(e1).attr("reserNo");
+	var guestId = $(e1).attr("guestId");
+	var myId = $(e1).attr("myid");
+	var cnt = parseInt($(e1).attr("cnt"));
+	
+	if(myId == "") {
+		Swal.fire({
+			icon: 'error',
+			title: '로그인이 필요합니다.',
+			text: '로그인 후 이용가능한 서비스입니다.'
 		});
-		
-		 $("#bodyBtn").click(function(){
-			var black_id = $("#report_id").text();
-			var reason = $('#singo-reason').val();
-			console.log(black_id);
+	} else {
+		if (check == "bi bi-heart co-heart") {
+			$(e1).attr("class", "bi bi-heart-fill co-heart");
+			flag = false;
+
 			$.ajax({
-				  type:"post",
-				  dataType:"text",
-				  url:"/profile/singo",
-				  data:{"black_id":black_id,"reason":reason},
-				  success:function(data) {
-					  console.log("성공");
-					  location.reload();							  
-				  }
-			   });
-		 });
+				type: "post",
+				url: "/like/insert",
+				data: { "reserNo": reserNo, "guestId": guestId }
+			});
+			
+			cnt += 1;
+			
+			$(e1).attr("cnt", cnt);
+			$("#" + reserNo).html(cnt);
+		} else if (check == "bi bi-heart-fill co-heart") {
+			$(e1).attr("class", "bi bi-heart co-heart");
+			flag = true;
+
+			$.ajax({
+				type: "post",
+				url: "/like/delete",
+				data: { "reserNo": reserNo, "guestId": guestId }
+			});
+			
+			cnt -= 1;
+			
+			$(e1).attr("cnt", cnt);
+			$("#" + reserNo).html(cnt);
+		} else {
+			$(e1).attr("class", "bi bi-heart co-heart");
+			flag = true;
+
+			$.ajax({
+				type: "post",
+				url: "/like/delete",
+				data: { "reserNo": reserNo, "guestId": guestId }
+			});
+			
+			cnt -= 1;
+			
+			$(e1).attr("cnt", cnt);
+			$("#" + reserNo).html(cnt);
+		}
+	}
+}

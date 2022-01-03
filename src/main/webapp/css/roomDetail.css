@@ -286,12 +286,6 @@
 	margin-bottom: 10px;
 }
 
-.comment-wrap>.comment-title>i {
-	color: #FFCD28;
-	margin-left: 3px;
-	margin-right: 5px;
-}
-
 .comment-wrap>.comment>.empty {
 	border: 2px solid #0B57A2;
 	border-radius: 7px;
