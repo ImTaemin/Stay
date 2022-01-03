@@ -19,6 +19,10 @@
 		select * from can_reservation can, reservation res where can.no = res.no and res.guest_id = #{guest_id};
 	</select>
 	
+	<select id="getAllHostCanReser" parameterType="String" resultMap="resultMap">
+		select * from can_reservation can, reservation res where can.no = res.no and res.host_id = #{host_id};
+	</select>
+	
 	<!-- join -->
 	<!-- reservation -->
 	<resultMap type="stay.data.dto.ReservationDto" id="resMap">

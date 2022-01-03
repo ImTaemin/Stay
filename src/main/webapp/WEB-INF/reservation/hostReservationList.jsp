@@ -38,72 +38,85 @@
 			<button class="nav-link" id="can-tab" data-bs-toggle="tab" data-bs-target="#can" type="button" role="tab" aria-controls="can" aria-selected="false">취소된 예약</button>
 		</li>
 	</ul>
-		
+	
 	<!-- 목록 출력 -->
 	<div class="tab-content">
 		<!-- 예정 -->
 		<div class="tab-pane active" id="now" role="tabpanel" aria-labelledby="now-tab">
-			<c:forEach var="list" items="${hostNowList}">
-				<c:forEach var="room" items="${hostNowRoom}">
-					<c:if test="${list.room_no == room.no}">
-						<div class="card">
-							<img class="card-img-top" src="../../photo/roomPhoto/${room.photos}">
-							
-							<div class="card-body top">
-								<h5 class="card-title">${list.start_date} ~ ${list.end_date}</h5>
-								<b class="card-text" id="roomTitle" onclick="location.href='/room/content?no=${room.no}'">
-									${room.name}
-								</b>
-								<p class="card-text">
-									${room.addr_load}
-								</p>
-							</div>
-							
-							<div class="card-body bottom" list-no="${list.no}" onclick="btnClick(this)">
-								<label class="card-link">예약 정보 더보기</label>
-								<i class="bi bi-chevron-right"></i>
-							</div>
-							
-							<!-- form -->
-						</div>
-					</c:if>
-				</c:forEach>
+			<c:forEach var="list" items="${nowList}">
+				<div class="card">
+					<img class="card-img-top" src="../../photo/roomPhoto/${list.roomDto.photos}">
+					
+					<div class="card-body top">
+						<h5 class="card-title">${list.resDto.start_date} ~ ${list.resDto.end_date}</h5>
+						<b class="card-text" id="roomTitle" onclick="location.href='/room/content?no=${list.roomDto.no}'">
+							${list.roomDto.name}
+						</b>
+						<p class="card-text">
+							${list.roomDto.addr_load}
+						</p>
+					</div>
+					
+					<div class="card-body bottom" list-no="${list.resDto.no}" onclick="btnClick(this)">
+						<label class="card-link">예약 정보 더보기</label>
+						<i class="bi bi-chevron-right"></i>
+					</div>
+					
+					<!-- form -->
+				</div>
 			</c:forEach>
 		</div>
 							
 		<!-- 이전 -->
 		<div class="tab-pane" id="pre" role="tabpanel" aria-labelledby="pre-tab">
-			<c:forEach var="list" items="${hostPreList}">
-				<c:forEach var="room" items="${hostPreRoom}">
-					<c:if test="${list.room_no == room.no}">
-						<div class="card">
-							<img class="card-img-top" src="../../photo/roomPhoto/${room.photos}">
-							
-							<div class="card-body top">
-								<h5 class="card-title">${list.start_date} ~ ${list.end_date}</h5>
-								<b class="card-text">
-									${room.name}
-								</b>
-								<p class="card-text">
-									${room.addr_load}
-								</p>
-							</div>
-							
-							<div class="card-body bottom" list-no="${list.no}" onclick="btnClick(this)">
-								<label class="card-link">예약 정보 더보기</label>
-								<i class="bi bi-chevron-right"></i>
-							</div>
-							
-							<!-- form -->
-						</div>
-					</c:if>
-				</c:forEach>
+			<c:forEach var="list" items="${preList}">
+				<div class="card">
+					<img class="card-img-top" src="../../photo/roomPhoto/${list.roomDto.photos}">
+					
+					<div class="card-body top">
+						<h5 class="card-title">${list.resDto.start_date} ~ ${list.resDto.end_date}</h5>
+						<b class="card-text" id="roomTitle" onclick="location.href='/room/content?no=${list.roomDto.no}'">
+							${list.roomDto.name}
+						</b>
+						<p class="card-text">
+							${list.roomDto.addr_load}
+						</p>
+					</div>
+					
+					<div class="card-body bottom" list-no="${list.resDto.no}" onclick="btnClick(this)">
+						<label class="card-link">예약 정보 더보기</label>
+						<i class="bi bi-chevron-right"></i>
+					</div>
+					
+					<!-- form -->
+				</div>
 			</c:forEach>
 		</div>
 		
 		<!-- 취소 -->
 		<div class="tab-pane" id="can" role="tabpanel" aria-labelledby="can-tab">
-			취소
+			<c:forEach var="list" items="${canList}">
+				<div class="card">
+					<img class="card-img-top" src="../../photo/roomPhoto/${list.roomDto.photos}">
+					
+					<div class="card-body top">
+						<h5 class="card-title">${list.resDto.start_date} ~ ${list.resDto.end_date}</h5>
+						<b class="card-text" id="roomTitle" onclick="location.href='/room/content?no=${list.roomDto.no}'">
+							${list.roomDto.name}
+						</b>
+						<p class="card-text">
+							${list.roomDto.addr_load}
+						</p>
+					</div>
+					
+					<div class="card-body bottom" list-no="${list.resDto.no}" onclick="btnClick(this)">
+						<label class="card-link">예약 취소 정보 더보기</label>
+						<i class="bi bi-chevron-right"></i>
+					</div>
+					
+					<!-- form -->
+				</div>
+			</c:forEach>
 		</div>
 	</div>
 </body>

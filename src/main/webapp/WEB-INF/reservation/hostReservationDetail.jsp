@@ -14,6 +14,8 @@
 <!-- css -->
 <link rel="stylesheet" href="${root}/css/hostReservationDetail.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+<!-- js -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -103,21 +105,64 @@
 					<!-- 공동 게스트 -->
 					<div class="guest-wrap">
 						<div class="guest-title">
-							<label>공동 게스트</label>
+							<label>게스트 (최대 ${roomDto.max_per}명)</label>
 						</div>
 						
 						<hr>
 						
 						<div class="guest">
-							<span>${joinGuestNum}명</span>
+							<span id="joinNum">${joinGuestNum}명</span>
 							
-							<c:if test="${preCheck == false}">
-								<span class="bi bi-plus-circle"></span>
-							</c:if>
-							
-							<c:if test="${preCheck == true}">
-								<span class="bi bi-three-dots"></span>
-							</c:if>
+							<div class="guest-btn">	
+								<div data-toggle="modal" data-target="#guestList">
+									<span class="bi bi-three-dots"></span>
+								</div>
+							</div>
+						</div>
+						
+						<!-- 게스트리스트 모달 -->
+						<div id="guestList" class="modal">
+							<div class="modal-dialog modal-dialog-centered">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+										<h4 class="modal-title">게스트 상세 목록</h4>
+									</div>
+									
+									<div class="modal-body">
+										<div class="main-guest-wrap">
+											<div class="main-guest-img">
+												<img src="${root}/photo/memberPhoto/${guestDto.photo}">
+											</div>
+											
+											<label>${guestDto.id}</label>
+											
+											<button type="button" class="btn btn-default"	>메인 게스트</button>
+										</div>
+										
+										<div class="join-guest-wrap" id="${join.memDto.id}">
+										</div>
+										
+										<c:forEach var="join" items="${joinList}">
+											<div class="join-guest-wrap" id="${join.memDto.id}">
+												<hr>
+												
+												<div class="join-guest-de">
+													<div class="join-guest-img">
+														<img src="${root}/photo/memberPhoto/${join.memDto.photo}">
+													</div>
+													
+													<label>${join.memDto.id}</label>
+												</div>
+											</div>
+										</c:forEach>
+									</div>
+									
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -125,73 +170,31 @@
 			
 			<hr>
 			
-			<!-- 호스트 정보 -->
-			<div class="host-wrap">
-				<div class="photo">
-					<img alt="" src="../photo/memberPhoto/${guestDto.photo}">
-				</div>
-				
-				<div class="content">
-					<label class="name">게스트 : ${guestDto.id} 님</label>
-					<br>
-					<label class="email">${guestDto.e_mail}</label>
-				</div>
-				
-				<div class="message">
-					<button type="button" class="btn btn-default" id="message-btn">게스트에게 연락하기</button>
-				</div>
-			</div>
-			
-			<hr>
-			
-			<c:if test="${preCheck == true}">
-				<!-- 후기 작성 -->
-				<form action="/comment/insert" method="post" class="comment-wrap">
-					<c:if test="${gCommentDto != null}">
-						
-					</c:if>
-					
-					<c:if test="${gCommentDto == null}">
-						<div class="rating">
-						    <input type="radio" name="rate" id="star-1" onclick="getStarNum(this)">
-						    <input type="radio" name="rate" id="star-2" onclick="getStarNum(this)">
-						    <input type="radio" name="rate" id="star-3" onclick="getStarNum(this)">
-						    <input type="radio" name="rate" id="star-4" onclick="getStarNum(this)">
-						    <input type="radio" name="rate" id="star-5" onclick="getStarNum(this)">
-						    
-						    <div class="content">
-						        <div class="stars">
-						            <label for="star-1" class="star-1 fas fa-star"></label>
-						            <label for="star-2" class="star-2 fas fa-star"></label>
-						            <label for="star-3" class="star-3 fas fa-star"></label>
-						            <label for="star-4" class="star-4 fas fa-star"></label>
-						            <label for="star-5" class="star-5 fas fa-star"></label>
-						        </div>
-						    </div>
-						    
-						    <!-- hidden -->
-						    <input type="hidden" name="reserNo" value="${reserDto.no}">
-						    
-						    <span class="numb">점</span>
-						</div>
-						
-						<div class="comment">
-							<textarea class="content-input" name="content"></textarea>
-							<button id="btn-comment" class="btn btn-primary">후기 저장</button>
-						</div>
-					</c:if>
-				</form>
-			</c:if>
-			
 			<c:if test="${preCheck == false}">
 				<!-- 취소 버튼 -->
-				<div class="btn-wrap">
-					<button class="btn btn-danger" id="can-reser">예약 취소</button>
+				<div class="can-wrap">
+					<c:if test="${canReserDto == null}">
+						<button class="btn btn-danger" id="can-reser" no="${reserDto.no}" price="${reserDto.price}"
+						onclick="reserCan(this)">예약 취소</button>
+					</c:if>
+					
+					<c:if test="${canReserDto.refund_check == 'ing'}">
+						<button class="btn btn-secondary can-btn" id="can-reser" onclick="reserRef(this)">예약 취소가 진행 중입니다.</button>
+					</c:if>
+					
+					<c:if test="${canReserDto.refund_check == 'end'}">
+						<button class="btn btn-secondary can-btn" id="can-reser">결제 환불이 진행 중입니다.</button>
+					</c:if>
+					
+					<c:if test="${canReserDto.refund_check == 'can'}">
+						<button class="btn btn-warning can-btn" id="can-reser">예약 취소가 완료되었습니다.</button>
+					</c:if>
 				</div>
 			</c:if>
 		</div>
 	</div>
 	
-
+	<!-- js -->
+	<script src="${root}/js/HostReservationDetail.js"></script>
 </body>
 </html>

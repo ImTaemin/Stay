@@ -32,19 +32,43 @@
 				<div class="guestMain-siteBtn"><button type="button" class="guestMain-site">위치 검색</button></div>
 				<div class="bar">|</div>
 				<div class="site-search">
-					<input class="search" onchange="함수이름()" type="text" placeholder="위치를 검색하세요.">
+					<input id="search-addr" onchange="search(this)" type="text" placeholder="위치를 검색하세요.">
 					<hr>
-					<!-- 
-						function 함수이름(){
+					<script type="text/javascript">
+						/* function search(){
 							success:function(data){
-								.forEach(item, ){
+								.forEach(item, index, array){
 									s="";
 									
 								}
 								$("#search-result").html(s);
 							}
+						} */
+						
+						function search(){
+							var search = $("#search-addr").val();
+							
+							$.ajax({
+								url:"searchRoomSite",
+								type:"get",
+								data: {"search": search},
+								success:function(data){
+									var s="";
+									$.each(data, function(i, item){
+										s+="<b>"+item.addr_load+"</b>";
+									});
+									$('#search-result').html(s);
+									alert("완료!");
+								},
+								error : function() {
+									alert("error");
+								}
+							});
 						}
-					 -->
+						
+						
+						
+					</script>
 					<div id="search-result"></div>
 				</div>
 			</div>

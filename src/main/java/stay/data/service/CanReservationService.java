@@ -25,4 +25,8 @@ public class CanReservationService {
 	public List<ResultMapDto> getAllCanReser(String guest_id) {
 		return mapper.getAllCanReser(guest_id);
 	}
+	
+	public List<ResultMapDto> getAllHostCanReser(String host_id) {
+		return mapper.getAllHostCanReser(host_id);
+	}
 }
