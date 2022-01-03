@@ -120,8 +120,91 @@
 		
 		<div class="profile-review">
 			<h2>숙소 후기</h2>
+			<br>
+			
+			<!-- 후기 -->
+			<div class="comment-wrap">
+				<div class="comment-title">
+					<label class="title">후기  ${dto.atDto.total} 개</label>
+				</div>
+				
+				<div class="comment">
+					<c:if test="${dto.atDto.total == 0}">
+						<div class="empty">등록된 후기가 없습니다.</div>
+					</c:if>
+					
+					<c:if test="${dto.atDto.total > 0}">
+						<div class="co-wrap">
+							<c:forEach var="coList" items="${commentList}">
+								<div class="co-detail">
+									<div class="mem-detail">
+										<div class="mem-img">
+											<img src="${root}/photo/memberPhoto/${coList.memDto.photo}"
+											onclick="location.href='/profile/profileform'">
+										</div>
+										
+										<div class="mem-content">
+											<fmt:formatDate var="wirteDay" value="${coList.gcoDto.write_day}" pattern="yyyy년 MM월 dd일"/>
+											<span class="mem-id" onclick="location.href='/profile/profileform'">${coList.memDto.id}</span>
+											<span class="write-day">${wirteDay}</span>
+										</div>
+										
+										<c:set var="heart_flag" value="false"/>
+										<div class="co-heart-wrap">
+											<c:forEach var="like" items="${likeList}">
+												<c:if test="${like.no eq coList.gcoDto.no}">
+													<i reserNo="${coList.gcoDto.no}" guestId="${coList.gcoDto.guest_id}" myId="${myid}"
+													cnt="${coList.gcoDto.countLike}" onclick="coHeartClick(this)" class="bi bi-heart-fill co-heart"></i>
+													<c:set var="heart_flag" value="true"/>
+												</c:if>
+											</c:forEach>
+											
+											<c:if test="${not heart_flag}">
+												<i reserNo="${coList.gcoDto.no}" guestId="${coList.gcoDto.guest_id}" myId="${myid}"
+												cnt="${coList.gcoDto.countLike}" onclick="coHeartClick(this)" class="bi bi-heart co-heart"></i>
+											</c:if>
+											
+											<span class="heart-count" id="${coList.gcoDto.no}">${coList.gcoDto.countLike}</span>
+										</div>
+									</div>
+									 
+									<div class="co-content">
+										<span>${coList.gcoDto.content}</span>
+									</div>
+								</div>
+							</c:forEach>
+						</div>
+					</c:if>
+				</div>
+			</div>
+			
 			<br><br>
-			<button type="button" class="review-many">후기 더 보기</button>
+			
+			<div class="hugi" data-toggle="modal" data-target="#hugiModal">
+					<button class="review-many">후기 더 보기</button>
+				</div>
+				
+				<!-- 후기 더 보기 모달 -->
+				<div id="hugiModal" class="modal" role="dialog">
+					<div class="modal-dialog modal-dialog-centered">
+						<!-- Modal content -->
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">후기</h4>
+							</div>
+
+							<div class="modal-body">
+								
+							</div>
+
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">Close</button>
+							</div>
+						</div>
+					</div>
+				</div>
 		</div>
 	</div>
 	
