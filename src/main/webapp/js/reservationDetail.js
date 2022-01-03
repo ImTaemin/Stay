@@ -169,7 +169,7 @@ function delGuest(e) {
 				url: "/join/delete",
 				data: { "no": no, "id": id }
 			});
-			
+
 			joinNum -= 1;
 
 			$("#joinNum").html(joinNum + "명");
@@ -327,3 +327,10 @@ function reserCan(e) {
 		}
 	})
 }
+
+// 모달 창 닫을 때 이벤트 (body 화면 줄어듦)
+$(document).ready(function() {
+	$('#guestList').on('hidden.bs.modal', function() {
+		document.body.style.padding = "0";
+    });
+});
