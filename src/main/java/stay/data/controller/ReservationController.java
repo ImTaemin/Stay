@@ -32,6 +32,7 @@ import stay.data.dto.CanReservationDto;
 import stay.data.dto.GuestCommentDto;
 import stay.data.dto.MemberDto;
 import stay.data.dto.PayCardDto;
+import stay.data.dto.ReceiptDto;
 import stay.data.dto.ReservationDto;
 import stay.data.dto.ResultMapDto;
 import stay.data.dto.RoomDto;
@@ -40,6 +41,7 @@ import stay.data.service.CostService;
 import stay.data.service.GuestCommentService;
 import stay.data.service.JoinGuestService;
 import stay.data.service.MemberService;
+import stay.data.service.ReceiptService;
 import stay.data.service.ReservationService;
 import stay.data.service.RoomService;
 
@@ -68,6 +70,9 @@ public class ReservationController {
 	
 	@Autowired
 	JoinGuestService joinService;
+	
+	@Autowired
+	ReceiptService receiptService;
 	
 	@PostMapping("/pay/paymentform")
 	public ModelAndView paymentForm(
@@ -145,7 +150,7 @@ public class ReservationController {
 
 	@PostMapping("/pay/insert")
 	public ModelAndView payInsert(
-			@ModelAttribute ReservationDto reserDto, @RequestParam String roomNo,
+			@ModelAttribute ReservationDto reserDto, @ModelAttribute ReceiptDto receiptDto, @RequestParam String roomNo,
 			@RequestParam String startDate, @RequestParam String endDate, @RequestParam String betweenDay,
 			@RequestParam String calPrice, @RequestParam String taxPrice, @RequestParam String allPrice,
 			@RequestParam String payMethod, @RequestParam String cardNum, HttpSession session) {
@@ -153,6 +158,7 @@ public class ReservationController {
 		
 		String myid = (String)session.getAttribute("myid");
 		
+		// 예약 추가
 		RoomDto roomDto = roomService.getRoom(roomNo);
 		
 		reserDto.setHost_id(roomDto.getHost_id());
@@ -169,6 +175,12 @@ public class ReservationController {
 		
 		reservationService.insertReservation(reserDto);
 		
+		// 영수증 추가
+		String reserNo = reservationService.getReserMaxNo();
+		receiptDto.setNo(reserNo);
+		
+		receiptService.receInsert(receiptDto);
+		
 		mview.setViewName("redirect:/room/main");
 		
 		return mview;
@@ -176,7 +188,8 @@ public class ReservationController {
 	
 	@GetMapping("/pay/kakaopay")
 	public @ResponseBody String kakaoPay(
-			@ModelAttribute ReservationDto reserDto, @RequestParam Map<String, Object> param, HttpSession session) {
+			@ModelAttribute ReservationDto reserDto, @ModelAttribute ReceiptDto receiptDto,
+			@RequestParam Map<String, Object> param, HttpSession session) {
 		String myid = (String)session.getAttribute("myid");
 		
 		String roomNo = (String)param.get("roomNo");
@@ -211,7 +224,7 @@ public class ReservationController {
 								+ "&total_amount=" + allPrice // 총 금액
 								+ "&vat_amount=" + taxPrice // 부가세
 								+ "&tax_free_amount=0" // 상품 비과세 금액
-								+ "&approval_url=http://localhost:8080/" // 결제 성공 시
+								+ "&approval_url=http://localhost:8080/reser/reservationlist" // 결제 성공 시
 								+ "&fail_url=http://localhost:8080/" // 결제 실패 시
 								+ "&cancel_url=http://localhost:8080/"; // 결제 취소 시
 			
@@ -230,6 +243,12 @@ public class ReservationController {
 			} else {
 				receive = connection.getErrorStream(); 
 			}
+
+			// 영수증 추가
+			String reserNo = reservationService.getReserMaxNo();
+			receiptDto.setNo(reserNo);
+			
+			receiptService.receInsert(receiptDto);
 			
 			// 읽는 부분
 			InputStreamReader read = new InputStreamReader(receive); // 받은걸 읽는다.

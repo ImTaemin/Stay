@@ -179,15 +179,15 @@
 					</c:if>
 					
 					<c:if test="${canReserDto.refund_check == 'ing'}">
-						<button class="btn btn-secondary can-btn" id="can-reser" onclick="reserRef(this)">예약 취소가 진행 중입니다.</button>
+						<button class="btn btn-secondary can-btn" id="can-reser" no="${reserDto.no}" onclick="reserRef(this)">예약 취소가 진행 중입니다.</button>
 					</c:if>
 					
 					<c:if test="${canReserDto.refund_check == 'end'}">
-						<button class="btn btn-secondary can-btn" id="can-reser">결제 환불이 진행 중입니다.</button>
+						<button class="btn btn-secondary can-btn" id="can-reser" style="pointer-events: none;">결제 환불이 진행 중입니다.</button>
 					</c:if>
 					
 					<c:if test="${canReserDto.refund_check == 'can'}">
-						<button class="btn btn-warning can-btn" id="can-reser">예약 취소가 완료되었습니다.</button>
+						<button class="btn btn-warning can-btn" id="can-reser" style="pointer-events: none;">예약 취소가 완료되었습니다.</button>
 					</c:if>
 				</div>
 			</c:if>

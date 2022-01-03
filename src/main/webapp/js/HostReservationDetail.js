@@ -66,7 +66,7 @@ function reserCan(e) {
 			$(e).html("예약 취소가 진행 중입니다.");
 
 			$.ajax({
-				type: "post",
+				type: "get",
 				url: "/reser/delete",
 				data: { "no": no, "price": price }
 			});
@@ -77,7 +77,6 @@ function reserCan(e) {
 // 환불 진행
 function reserRef(e) {
 	var no = $(e).attr("no");
-	var price = $(e).attr("price");
 
 	const swalWithBootstrapButtons = Swal.mixin({
 		customClass: {
@@ -88,30 +87,28 @@ function reserRef(e) {
 	})
 
 	swalWithBootstrapButtons.fire({
-		title: '예약을 취소하시겠습니까?',
-		text: "취소 후 숙소 재예약이 어려울 수 있습니다.",
+		title: '환불을 진행하시겠습니까?',
 		icon: 'warning',
 		cancelButtonText: '취소',
 		showCancelButton: true,
 		showCloseButton: true,
-		confirmButtonText: '예약 취소',
+		confirmButtonText: '환불',
 	}).then((result) => {
 		if (result.isConfirmed) {
 			swalWithBootstrapButtons.fire(
-				'예약이 취소되었습니다.',
+				'환불이 진행중입니다.',
 				'환불 규정에 맞춰 환불이 진행될 예정입니다.',
 				'success'
 			)
-
 			$(e).attr("class", "btn btn-secondary");
 			$(e).attr("onclick", "");
 			$(e).attr("style", "pointer-events: none;");
-			$(e).html("예약 취소가 진행 중입니다.");
+			$(e).html("결제 환불이 진행 중입니다.");
 
 			$.ajax({
 				type: "post",
-				url: "/reser/delete",
-				data: { "no": no, "price": price }
+				url: "/reser/refund",
+				data: { "no": no }
 			});
 		}
 	})

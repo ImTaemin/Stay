@@ -11,6 +11,7 @@ import stay.data.dto.ResultMapDto;
 @Mapper
 public interface ReservationMapper {
 	public void insertReservation(ReservationDto reDto);
+	public String getReserMaxNo();
 	public List<ResultMapDto> selectNowGuestReservation(String guestId);
 	public List<ResultMapDto> selectNowHostReservation(String hostId);
 	public List<ResultMapDto> selectPreGuestReservation(String guestId);

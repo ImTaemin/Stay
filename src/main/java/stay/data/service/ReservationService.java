@@ -19,6 +19,10 @@ public class ReservationService {
 		mapper.insertReservation(reDto);
 	}
 	
+	public String getReserMaxNo() {
+		return mapper.getReserMaxNo();
+	}
+	
 	public List<ResultMapDto> selectNowGuestReservation(String guestId) {
 		return mapper.selectNowGuestReservation(guestId);
 	}
