@@ -25,6 +25,8 @@ public class ChatController {
 	@Autowired
 	ChatService chatService;
 	
+	SseEmitter emitterRoom, emitterChat;
+	
 	@GetMapping("")
 	public String chat() {
 		return "/chat/chatting";
@@ -33,19 +35,23 @@ public class ChatController {
 	//채팅방 목록
 	@GetMapping(path="/chatting/{sender}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
 	public @ResponseBody ResponseBodyEmitter getChattingRooms(@PathVariable String sender){
-		SseEmitter emitter = new SseEmitter();
-		chatService.roomAdd(emitter, sender);
+		if(emitterRoom == null) {
+			emitterRoom = new SseEmitter();
+		}
+		chatService.roomAdd(emitterRoom, sender);
 		
-		return emitter;
+		return emitterRoom;
 	}
 	
 	//채팅방별 채팅
 	@GetMapping(path="/chatting/{sender}/{receiver}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
 	public @ResponseBody ResponseBodyEmitter chatting(@PathVariable("sender") String sender, @PathVariable("receiver") String receiver) {
-		SseEmitter emitter = new SseEmitter();
-		chatService.chatAdd(emitter, sender, receiver);
+		if(emitterChat == null) {
+			emitterChat = new SseEmitter();
+		}
+		chatService.chatAdd(emitterChat, sender, receiver);
 		
-		return emitter;
+		return emitterChat;
 	}
 
 	//채팅방 내역
