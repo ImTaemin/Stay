@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+.receipt-wrap {
+	padding: 0 5%;
+}
+
+.receipt-title {
+	display: flex;
+	align-items: center;
+	width: 100%;
+}
+
+.receipt-title>label {
+	width: 40%;
+	font-size: 2.3em;
+	color: #0B57A2;
+}
+
+.receipt-title>img {
+	width: 8%;
+}
