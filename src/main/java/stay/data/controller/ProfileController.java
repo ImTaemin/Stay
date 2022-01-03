@@ -1,6 +1,7 @@
 package stay.data.controller;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,10 +15,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import stay.data.dto.CommentLikeDto;
+import stay.data.dto.GuestCommentDto;
 import stay.data.dto.MemberDto;
 import stay.data.dto.ReportMemberDto;
+import stay.data.dto.ResultMapDto;
+import stay.data.dto.WishListDto;
 import stay.data.mapper.MemberMapper;
+import stay.data.service.CommentLikeService;
+import stay.data.service.GuestCommentService;
 import stay.data.service.MemberService;
+import stay.data.service.RoomService;
+import stay.data.service.WishListService;
 
 @Controller
 @RequestMapping("/profile")
@@ -28,6 +37,18 @@ public class ProfileController {
 	
 	@Autowired
 	MemberService memberService;
+	
+	@Autowired
+	RoomService roomService;
+	
+	@Autowired
+	GuestCommentService gcommentService;
+	
+	@Autowired
+	WishListService wishService;
+	
+	@Autowired
+	CommentLikeService likeService;
 	
 	@GetMapping("/profileform")
 	public ModelAndView profile1(HttpSession session) {
@@ -78,6 +99,72 @@ public class ProfileController {
 		
 		return map;
 		
+	}
+	
+	@GetMapping("/content")
+	public ModelAndView content(
+			@RequestParam String no,
+			@RequestParam(value = "currentPage", defaultValue = "1") int currentPage,
+			HttpSession session) {
+		String myid = (String)session.getAttribute("myid");
+		String loginok = (String)session.getAttribute("loginok");
+		
+		ModelAndView mview = new ModelAndView();
+		
+		ResultMapDto dto = roomService.getOneRoom(no);
+		
+		String photoList[] = dto.getRoomDto().getPhotos().split(",");
+		
+		// 호스트 정보
+		String hostId = dto.getRoomDto().getHost_id();
+		
+		MemberDto memDto = memberService.getMember(hostId);
+		
+		// 위시리스트
+ 		if(loginok != null) {
+ 			List<WishListDto> wishList = wishService.getWishList(myid);
+ 			
+ 			mview.addObject("wishList", wishList);
+ 		}
+		
+ 		// 게스트 댓글
+ 		List<ResultMapDto> commentList = gcommentService.getRoomComment(no);
+ 		
+ 		for(ResultMapDto c : commentList) {
+ 			// 회원 정보
+ 			String guestId = c.getGcoDto().getGuest_id();
+ 			
+ 			MemberDto gMemDto = memberService.getMember(guestId);
+ 			
+ 			c.setMemDto(gMemDto);
+ 			
+ 			// 좋아요 개수
+ 			String reserNo = c.getGcoDto().getNo();
+ 			
+ 			int likes = likeService.countLike(reserNo, guestId);
+ 			
+ 			GuestCommentDto gCoDto = gcommentService.getOneComment(reserNo, guestId);
+ 			
+ 			gCoDto.setCountLike(likes);
+ 			
+ 			c.setGcoDto(gCoDto);
+ 		}
+ 		
+ 		// 좋아요한 댓글 리스트
+ 		List<CommentLikeDto> likeList = likeService.getLike(myid);
+ 		
+ 		mview.addObject("currentPage", currentPage);
+ 		mview.addObject("myid", myid);
+ 		mview.addObject("loginok", loginok);
+		mview.addObject("dto", dto);
+		mview.addObject("photoList", photoList);
+		mview.addObject("memDto", memDto);
+		mview.addObject("commentList", commentList);
+		mview.addObject("likeList", likeList);
+		
+		mview.setViewName("/room/roomDetail");
+		
+		return mview;
 	}
 	
 }

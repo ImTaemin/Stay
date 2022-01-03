@@ -120,6 +120,8 @@
 		
 		<div class="profile-review">
 			<h2>숙소 후기</h2>
+			<br><br>
+			<button type="button" class="review-many">후기 더 보기</button>
 		</div>
 	</div>
 	
