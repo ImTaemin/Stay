@@ -137,8 +137,8 @@
 					<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today"/>
 					
 					<!-- 체크인 모달 -->
-					<div id="checkInModal" class="modal" role="dialog">
-						<div class="modal-dialog modal-dialog-centered">
+					<div id="checkInModal" class="modal">
+						<div class="modal-dialog">
 							<!-- Modal content -->
 							<div class="modal-content">
 								<div class="modal-header">
@@ -159,8 +159,8 @@
 					</div>
 					
 					<!-- 체크아웃 모달 -->
-					<div id="checkOutModal" class="modal" role="dialog">
-						<div class="modal-dialog modal-dialog-centered">
+					<div id="checkOutModal" class="modal">
+						<div class="modal-dialog">
 							<!-- Modal content -->
 							<div class="modal-content">
 								<div class="modal-header">

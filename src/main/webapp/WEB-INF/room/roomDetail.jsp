@@ -293,12 +293,13 @@
 								<div class="co-detail">
 									<div class="mem-detail">
 										<div class="mem-img">
-											<img src="${root}/photo/memberPhoto/${coList.memDto.photo}">
+											<img src="${root}/photo/memberPhoto/${coList.memDto.photo}"
+											onclick="location.href='/profile/profileform'">
 										</div>
 										
 										<div class="mem-content">
 											<fmt:formatDate var="wirteDay" value="${coList.gcoDto.write_day}" pattern="yyyy년 MM월 dd일"/>
-											<span class="mem-id">${coList.memDto.id}</span>
+											<span class="mem-id" onclick="location.href='/profile/profileform'">${coList.memDto.id}</span>
 											<span class="write-day">${wirteDay}</span>
 										</div>
 										
@@ -335,18 +336,24 @@
 			
 			<!-- 호스트 정보 -->
 			<div class="host-wrap">
-				<div class="photo">
-					<img alt="" src="../photo/memberPhoto/${memDto.photo}">
+				<div class="host-title">
+					호스트 상세 정보
 				</div>
 				
-				<div class="content">
-					<label class="name">호스트 : ${memDto.id} 님</label>
-					<br>
-					<label class="email">${memDto.e_mail}</label>
-				</div>
-				
-				<div class="message">
-					<button type="button" class="btn btn-default" id="message-btn">호스트에게 연락하기</button>
+				<div class="host-main">
+					<div class="photo">
+						<img alt="" src="../photo/memberPhoto/${memDto.photo}" onclick="location.href='/profile/profileform'">
+					</div>
+					
+					<div class="content">
+						<label class="name" onclick="location.href='/profile/profileform'">${memDto.id}</label>
+						<br>
+						<label class="email">${memDto.e_mail}</label>
+					</div>
+					
+					<div class="message">
+						<button type="button" class="btn btn-default" id="message-btn">호스트에게 연락하기</button>
+					</div>
 				</div>
 			</div>
 			

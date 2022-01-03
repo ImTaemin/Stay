@@ -327,6 +327,7 @@
 	display: flex;
 	justify-content: center;
 	width: 15%;
+	cursor: pointer;
 }
 
 .mem-img>img {
@@ -345,6 +346,11 @@
 .mem-content>.mem-id {
 	font-size: 1.5em;
 	font-weight: bold;
+	cursor: pointer;
+}
+
+.mem-content>.mem-id:hover {
+	color: #0B57A2;
 }
 
 .mem-detail>.co-heart-wrap {
@@ -372,27 +378,57 @@
 .host-wrap {
 	margin-bottom: 20px;
 	display: flex;
-	align-items: center;
+	flex-direction: column;
 }
 
-.host-wrap>.photo>img {
+.host-wrap>.host-title {
+	font-size: 1.5em;
+	font-weight: bold;
+	margin-bottom: 20px;
+	padding-left: 1%;
+}
+
+.host-wrap>.host-main {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	padding: 0 1%;
+}
+
+.host-main>.photo {
+	display: flex;
+	justify-content: center;
+	width: 7%;
+}
+
+.host-main>.photo>img {
 	width: 80px;
 	height: 80px;
 	border-radius: 100%;
+	cursor: pointer;
 }
 
-.host-wrap>.content {
+.host-main>.content {
 	margin-left: 20px;
 	width: 74%;
 }
 
-.host-wrap>.content>.name {
+.host-main>.content>.name {
 	font-size: 1.5em;
 	color: #0B57A2;
+	cursor: pointer;
+}
+
+.host-main>.content>.name:hover {
+	color: black;
+}
+
+.host-main>.message {
+	width: 19%;
 }
 
 #message-btn {
-	width: 140%;
+	width: 100%;
 	height: 40px;
 }
 
