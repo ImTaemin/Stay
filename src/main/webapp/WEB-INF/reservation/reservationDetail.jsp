@@ -184,18 +184,24 @@
 			
 			<!-- 호스트 정보 -->
 			<div class="host-wrap">
-				<div class="photo">
-					<img alt="" src="../photo/memberPhoto/${hostDto.photo}">
+				<div class="host-title">
+					호스트 상세 정보
 				</div>
 				
-				<div class="content">
-					<label class="name">호스트 : ${hostDto.id} 님</label>
-					<br>
-					<label class="email">${hostDto.e_mail}</label>
-				</div>
-				
-				<div class="message">
-					<button type="button" class="btn btn-default" id="message-btn">호스트에게 연락하기</button>
+				<div class="host-main">
+					<div class="photo">
+						<img alt="" src="../photo/memberPhoto/${hostDto.photo}" onclick="location.href='/profile/profileform'">
+					</div>
+					
+					<div class="content">
+						<label class="name" onclick="location.href='/profile/profileform'">${hostDto.id}</label>
+						<br>
+						<label class="email">${hostDto.e_mail}</label>
+					</div>
+					
+					<div class="message">
+						<button type="button" class="btn btn-default" id="message-btn">호스트에게 연락하기</button>
+					</div>
 				</div>
 			</div>
 			
