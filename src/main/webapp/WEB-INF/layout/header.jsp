@@ -58,7 +58,7 @@
 	        </ul>
 	        <ul>
 	          <li>
-	            <a href="${root}/profile/profileform?id=${sessionScope.myid }">프로필</a>
+	            <a href="${root}/profile/profileform?id=${sessionScope.myid}">프로필</a>
 	          </li>
 	          <li>
 	            <a href="${root}/mypage/mypageform">마이페이지</a>

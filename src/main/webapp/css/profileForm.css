@@ -23,7 +23,7 @@
 	margin-left: 20px;
 }
 
-.warn-btn {
+/* .warn-btn {
 	display: inline;
 	width: 100px;
 	height: 40px;
@@ -33,7 +33,7 @@
 	color: #fff;
 	box-shadow: 2px;
 	margin-top: 15px;
-}
+} */
 
 .profile-main>.profile-top>.profile-second {
 	display: flex;
@@ -83,6 +83,7 @@
 
 .profile-main>.profile-top>.profile-first>.update>.openBtn {
 	background-color: #F9B514;
+	/* background-color:#EB0000; */
 	padding: 5px 10px;
 	border-radius: 4px;
 	cursor: pointer;
@@ -150,6 +151,8 @@
 	width: 25%;
 	height: 35px;
 }
+
+
 
 .profile-main>.profile-review>.hugi>.review-many {
 	display: inline;

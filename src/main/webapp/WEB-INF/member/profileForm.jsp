@@ -66,7 +66,7 @@
 							</div>
 
 							<div class="modal-footer">
-								<button type="button" id="bodyBtn" class="btn btn-primary" 
+								<button type="button" id="bodyBtn" class="btn btn-danger" 
 									data-dismiss="modal">신고하기</button>
 								<button type="button" class="btn btn-default"
 									data-dismiss="modal">Close</button>
@@ -101,10 +101,10 @@
 						style="width: 30px; cursor: pointer; color: red" user_id="${memberDto.id}"></span>
 					<span>LIKE &nbsp;${memberDto.likes}</span>
 				</div>
-				<div class="profile-message">
+				<%-- <div class="profile-message">
 					<span class="glyphicon glyphicon-envelope message" style="width: 30px; cursor: pointer;"></span>
 					<span>MESSAGE &nbsp;${message}</span>
-				</div>
+				</div> --%>
 			</div>
 		</div>
 		<br><br>
