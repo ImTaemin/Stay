@@ -400,6 +400,25 @@
 	color: #FFCD28;
 }
 
+#star-1-u:hover ~.content .stars .star-1, #star-1-u:checked ~.content .stars .star-1,
+	#star-2-u:hover ~.content .stars .star-1, #star-2-u:hover ~.content .stars .star-2,
+	#star-2-u:checked ~.content .stars .star-1, #star-2-u:checked ~.content .stars .star-2,
+	#star-3-u:hover ~.content .stars .star-1, #star-3-u:hover ~.content .stars .star-2,
+	#star-3-u:hover ~.content .stars .star-3, #star-3-u:checked ~.content .stars .star-1,
+	#star-3-u:checked ~.content .stars .star-2, #star-3-u:checked ~.content .stars .star-3,
+	#star-4-u:hover ~.content .stars .star-1, #star-4-u:hover ~.content .stars .star-2,
+	#star-4-u:hover ~.content .stars .star-3, #star-4-u:hover ~.content .stars .star-4,
+	#star-4-u:checked ~.content .stars .star-1, #star-4-u:checked ~.content .stars .star-2,
+	#star-4-u:checked ~.content .stars .star-3, #star-4-u:checked ~.content .stars .star-4,
+	#star-5-u:hover ~.content .stars .star-1, #star-5-u:hover ~.content .stars .star-2,
+	#star-5-u:hover ~.content .stars .star-3, #star-5-u:hover ~.content .stars .star-4,
+	#star-5-u:hover ~.content .stars .star-5, #star-5-u:checked ~.content .stars .star-1,
+	#star-5-u:checked ~.content .stars .star-2, #star-5-u:checked ~.content .stars .star-3,
+	#star-5-u:checked ~.content .stars .star-4, #star-5-u:checked ~.content .stars .star-5
+	{
+	color: #FFCD28;
+}
+
 .numa, .numb {
 	display: flex;
 	align-items: center;
@@ -461,8 +480,7 @@ input[type="radio"] {
 	justify-content: space-between;
 }
 
-.content-input {
-	display: block;
+.content-input, .content-update {
 	width: 85%;
 	height: 150px;
 	padding: 12px;

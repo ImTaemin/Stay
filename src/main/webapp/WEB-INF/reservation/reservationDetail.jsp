@@ -19,6 +19,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<c:set var="commentNo" value="${gCommentDto.no }"></c:set>
 	<div class="reser-detail-wrap">
 		<div class="room-detail">
 			<!-- 숙소 이름 -->
@@ -193,14 +194,14 @@
 			
 			<c:if test="${preCheck == true}">
 				<!-- 후기 작성 -->
-				<form action="/comment/insert" method="post" name="commentInsert" class="comment-wrap">
-					<c:if test="${gCommentDto.no == null}">
+				<div id="insertContainer">
+					<form action="/comment/insert" method="post" name="commentInsert" class="comment-wrap">
 						<div class="rating">
-						    <input type="radio" name="rate" id="star-1" onclick="getStarNum(this)">
-						    <input type="radio" name="rate" id="star-2" onclick="getStarNum(this)">
-						    <input type="radio" name="rate" id="star-3" onclick="getStarNum(this)">
-						    <input type="radio" name="rate" id="star-4" onclick="getStarNum(this)">
-						    <input type="radio" name="rate" id="star-5" onclick="getStarNum(this)">
+						    <input type="radio" name="rate" id="star-1" onclick="getStarNum(this)" value="0.0">
+						    <input type="radio" name="rate" id="star-2" onclick="getStarNum(this)" value="0.0">
+						    <input type="radio" name="rate" id="star-3" onclick="getStarNum(this)" value="0.0">
+						    <input type="radio" name="rate" id="star-4" onclick="getStarNum(this)" value="0.0">
+						    <input type="radio" name="rate" id="star-5" onclick="getStarNum(this)" value="0.0">
 						    
 						    <div class="content">
 						        <div class="stars">
@@ -213,7 +214,7 @@
 						    </div>
 						    
 						    <!-- hidden -->
-						    <input type="hidden" name="reserNo" value="${reserDto.no}">
+						    <input type="hidden" name="reserNo" id="reserNo" value="${reserDto.no}">
 						    
 						    <span class="numb">점</span>
 						</div>
@@ -222,37 +223,36 @@
 							<textarea class="content-input" name="content"></textarea>
 							<button type="button" id="insert-btn" class="btn btn-primary">후기 저장</button>
 						</div>
-					</c:if>
-				</form>
+					</form>
+				</div>
 				
-				<!-- 후기 수정 -->
-				<form action="/comment/update" method="post" name="commentUpdate" class="comment-wrap">
-					<c:if test="${gCommentDto != null}">
+				<!-- 후기 수정 및 삭제 -->
+				<div id="updateDeleteContainer">
+					<form action="/comment/update" method="post" name="commentUpdate" class="comment-wrap">
 						<div class="rating">
 							<div class="rate-part">
-								<input type="radio" name="rate" id="star-1" value="${gCommentDto.rating}"
-								 ${gCommentDto.rating == '1.0' ? 'checked="checked"' : ''} onclick="changeStarNum(this)">
-							    <input type="radio" name="rate" id="star-2" value="${gCommentDto.rating}"
-							     ${gCommentDto.rating == '2.0' ? 'checked="checked"' : ''} onclick="changeStarNum(this)">
-							    <input type="radio" name="rate" id="star-3" value="${gCommentDto.rating}"
-							     ${gCommentDto.rating == '3.0' ? 'checked="checked"' : ''} onclick="changeStarNum(this)">
-							    <input type="radio" name="rate" id="star-4" value="${gCommentDto.rating}"
-							     ${gCommentDto.rating == '4.0' ? 'checked="checked"' : ''} onclick="changeStarNum(this)">
-							    <input type="radio" name="rate" id="star-5" value="${gCommentDto.rating}"
-							     ${gCommentDto.rating == '5.0' ? 'checked="checked"' : ''} onclick="changeStarNum(this)">
+								<input type="radio" name="rate-u" id="star-1-u" value="${gCommentDto.rating}"
+								 ${gCommentDto.rating == '1.0' ? 'checked="checked"' : ''} onclick="changeStarNumUpdate(this)">
+							    <input type="radio" name="rate-u" id="star-2-u" value="${gCommentDto.rating}"
+							     ${gCommentDto.rating == '2.0' ? 'checked="checked"' : ''} onclick="changeStarNumUpdate(this)">
+							    <input type="radio" name="rate-u" id="star-3-u" value="${gCommentDto.rating}"
+							     ${gCommentDto.rating == '3.0' ? 'checked="checked"' : ''} onclick="changeStarNumUpdate(this)">
+							    <input type="radio" name="rate-u" id="star-4-u" value="${gCommentDto.rating}"
+							     ${gCommentDto.rating == '4.0' ? 'checked="checked"' : ''} onclick="changeStarNumUpdate(this)">
+							    <input type="radio" name="rate-u" id="star-5-u" value="${gCommentDto.rating}"
+							     ${gCommentDto.rating == '5.0' ? 'checked="checked"' : ''} onclick="changeStarNumUpdate(this)">
 							    
 							    <div class="content">
 							        <div class="stars">
-							            <label for="star-1" class="star-1 fas fa-star"></label>
-							            <label for="star-2" class="star-2 fas fa-star"></label>
-							            <label for="star-3" class="star-3 fas fa-star"></label>
-							            <label for="star-4" class="star-4 fas fa-star"></label>
-							            <label for="star-5" class="star-5 fas fa-star"></label>
+							            <label for="star-1-u" class="star-1 fas fa-star"></label>
+							            <label for="star-2-u" class="star-2 fas fa-star"></label>
+							            <label for="star-3-u" class="star-3 fas fa-star"></label>
+							            <label for="star-4-u" class="star-4 fas fa-star"></label>
+							            <label for="star-5-u" class="star-5 fas fa-star"></label>
 							        </div>
 							    </div>
-							    
 							    <!-- hidden -->
-						    	<input type="hidden" name="reserNo" value="${reserDto.no}">
+						    	<input type="hidden" name="reserNo" id="reserNo" value="${reserDto.no}">
 						    	
 							    <fmt:parseNumber var="star" value="${gCommentDto.rating}" integerOnly="true" />
 							    
@@ -267,16 +267,29 @@
 						</div>
 						
 						<div class="comment">
-							<textarea class="content-input" name="content">${gCommentDto.content}</textarea>
+							<textarea class="content-update" name="content">${gCommentDto.content}</textarea>
 							
 							<div class="btn-wrap">
 								<button type="button" id="update-btn" class="btn btn-primary">후기 수정</button>
-								<button type="button" id="delete-btn" class="btn btn-danger"
-								onclick="location.href='/comment/delete?no=${reserDto.no}'">후기 삭제</button>
+								<button type="button" id="delete-btn" class="btn btn-danger">후기 삭제</button>
 							</div>
 						</div>
-					</c:if>
-				</form>
+					</form>
+				</div>
+			</c:if>
+			
+			<c:if test="${commentNo == null}">
+				<script type="text/javascript">
+					$("#insertContainer").show();
+					$("#updateDeleteContainer").hide();
+				</script>
+			</c:if>
+			
+			<c:if test="${commentNo != null}">
+				<script type="text/javascript">
+					$("#updateDeleteContainer").show();
+					$("#insertContainer").hide();
+				</script>
 			</c:if>
 			
 			<c:if test="${preCheck == false}">
