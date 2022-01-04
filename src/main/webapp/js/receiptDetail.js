@@ -21,3 +21,22 @@ $(document).ready(function() {
 	$("span[id=taxPrice]").html("￦" + taxPrice.toLocaleString());
 	$("span[id=allPrice]").html("￦" + allPrice.toLocaleString());
 });
+
+// 이미지 다운로드
+function PrintDiv(div){
+	var reserNo = $("input[name=reserNo]").attr("value");
+	
+	div = div[0]
+	html2canvas(div).then(function(canvas){
+		var myImage = canvas.toDataURL();
+		downloadURI(myImage, reserNo + ".png")
+	});
+}
+
+function downloadURI(uri, name){
+	var link = document.createElement("a")
+	link.download = name;
+	link.href = uri;
+	document.body.appendChild(link);
+	link.click();
+}

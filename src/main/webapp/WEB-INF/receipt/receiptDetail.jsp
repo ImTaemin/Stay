@@ -16,15 +16,21 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 <!-- js -->
 <script src="${root}/js/receiptDetail.js" charset="utf-8"></script>
+<script src="/js/html2canvas.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
 	<!-- hidden -->
+	<input type="hidden" name="reserNo" value="${receiptDto.resDto.no}">
 	<input type="hidden" name="startDate" value="${receiptDto.resDto.start_date}">
 	<input type="hidden" name="endDate" value="${receiptDto.resDto.end_date}">
 	<input type="hidden" name="roomPrice" value="${receiptDto.roomDto.price}">
-
-	<div class="receipt-wrap">
+	
+	<div class="save-btn">
+		<a class="btn btn-success" href='javascript:void(0);' onclick="PrintDiv($('#save-img'));">영수증 이미지로 저장</a>
+	</div>
+	
+	<div class="receipt-wrap" id="save-img">
 		<div class="receipt-title">
 			<div class="title-content">
 				<label id="receipt-title">쉼, 영수증</label>
