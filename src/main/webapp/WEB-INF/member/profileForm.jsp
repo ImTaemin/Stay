@@ -47,18 +47,18 @@
 			<div class="profile-third">
 				<c:set var="heart_flag" value="false"/>
 				<div class="profile-like">
-					<c:if test="${like.no eq coList.gcoDto.no}">
-						<i onclick="heartClick(this)" id="${memberDto.id}" cnt="${memberDto.likes}"
-						class="bi bi-heart-fill co-heart"></i>
-						<c:set var="heart_flag" value="true"/>
-					</c:if>
+<%-- 					<c:if test="${like.no eq coList.gcoDto.no}"> --%>
+<%-- 						<i onclick="heartClick(this)" id="${memberDto.id}" cnt="${memberDto.likes}" --%>
+<!-- 						class="bi bi-heart-fill co-heart"></i> -->
+<%-- 						<c:set var="heart_flag" value="true"/> --%>
+<%-- 					</c:if> --%>
 					
-					<c:if test="${not heart_flag}">
-						<i onclick="heartClick(this)" id="${memberDto.id}" cnt="${memberDto.likes}"
-						class="bi bi-heart co-heart"></i>
-					</c:if>
+<%-- 					<c:if test="${not heart_flag}"> --%>
+<%-- 						<i onclick="heartClick(this)" id="${memberDto.id}" cnt="${memberDto.likes}" --%>
+<!-- 						class="bi bi-heart co-heart"></i> -->
+<%-- 					</c:if> --%>
 					
-					<span class="heart-count" id="heartCount">${memberDto.likes}</span>
+<%-- 					<span class="heart-count" id="heartCount">${memberDto.likes}</span> --%>
 				</div>
 				
 				<div class="update" data-toggle="modal" data-target="#singoModal">

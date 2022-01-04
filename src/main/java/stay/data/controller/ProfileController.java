@@ -119,6 +119,6 @@ public class ProfileController {
 	
 	@GetMapping("/deletelikes")
 	public @ResponseBody void deleteLikes(@RequestParam String id) {
-		
+		memberService.deletelikes(id);
 	}
 }

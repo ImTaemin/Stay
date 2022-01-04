@@ -1,29 +1,10 @@
-//function likeClick(e) {
-//	var id = $(e).attr("user_id");
-//	//alert(id);
-//	var tag = $(e);
-//
-//	console.log(id);
-//
-//	$.ajax({
-//
-//		type: "get",
-//		dataType: "json",
-//		url: "updatelikes",
-//		data: { "id": id },
-//		success: function(data) {
-//			//alert(data.chu);
-//			tag.next().text(data.likes);
-//		}
-//
-//	});
-//}
-
 // 멤버 좋아요 클릭
 var flag = true;
 
 function heartClick(e) {
-	var id = $(e).attr("user_id");
+	var check = $(e).attr("class");
+	
+	var id = $(e).attr("id");
 	var cnt = parseInt($(e).attr("cnt"));
 
 	if (check == "bi bi-heart co-heart") {
@@ -32,42 +13,42 @@ function heartClick(e) {
 
 		$.ajax({
 			type: "get",
-			url: "/updatelikes",
+			url: "/profile/updatelikes",
 			data: { "id": id }
 		});
 
 		cnt += 1;
 
 		$(e).attr("cnt", cnt);
-		$("#" + reserNo).html(cnt);
+		$("#" + heartCount).html(cnt);
 	} else if (check == "bi bi-heart-fill co-heart") {
 		$(e).attr("class", "bi bi-heart co-heart");
 		flag = true;
 
 		$.ajax({
-			type: "post",
-			url: "/like/delete",
-			data: { "reserNo": reserNo, "guestId": guestId }
-		});
-
-		cnt -= 1;
-
-		$(e).attr("cnt", cnt);
-		$("#" + reserNo).html(cnt);
-	} else {
-		$(e).attr("class", "bi bi-heart co-heart");
-		flag = true;
-
-		$.ajax({
 			type: "get",
-			url: "/updatelikes",
+			url: "/profile/deletelikes",
 			data: { "id": id }
 		});
 
 		cnt -= 1;
 
 		$(e).attr("cnt", cnt);
-		$("#" + reserNo).html(cnt);
+		$("#" + heartCount).html(cnt);
+	} else {
+		$(e).attr("class", "bi bi-heart co-heart");
+		flag = true;
+
+		$.ajax({
+			type: "get",
+			url: "/profile/deletelikes",
+			data: { "id": id }
+		});
+
+		cnt -= 1;
+
+		$(e).attr("cnt", cnt);
+		$("#" + heartCount).html(cnt);
 	}
 }
 

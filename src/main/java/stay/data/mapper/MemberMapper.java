@@ -29,8 +29,6 @@ public interface MemberMapper {
 	public void updateImg(MemberDto dto);
 	
 	public MemberDto getData(String id);
-	public void updatelikes(String id);
-	public void deletelikes(String id);
 	
 	public String findId(String inputName, String inputHp);
 	
