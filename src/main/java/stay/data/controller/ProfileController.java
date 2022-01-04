@@ -105,20 +105,20 @@ public class ProfileController {
 
 		memberService.insertSingoMem(rmDto);
 	}
-
-	@GetMapping("/updatelikes")
-	@ResponseBody
-	public HashMap<String, Integer> updatelikes(@RequestParam String id) {
-		HashMap<String, Integer> map = new HashMap<String, Integer>();
-		mapper.updatelikes(id);
-		int likes = mapper.getMember(id).getLikes();
-		map.put("likes", likes);
-
-		return map;
-	}
-	
-	@GetMapping("/deletelikes")
-	public @ResponseBody void deleteLikes(@RequestParam String id) {
-		memberService.deletelikes(id);
-	}
-}
+//
+//	@GetMapping("/updatelikes")
+//	@ResponseBody
+//	public HashMap<String, Integer> updatelikes(@RequestParam String id) {
+//		HashMap<String, Integer> map = new HashMap<String, Integer>();
+//		mapper.updatelikes(id);
+//		int likes = mapper.getMember(id).getLikes();
+//		map.put("likes", likes);
+//
+//		return map;
+//	}
+//	
+//	@GetMapping("/deletelikes")
+//	public @ResponseBody void deleteLikes(@RequestParam String id) {
+//		memberService.deletelikes(id);
+//	}
+//}
