@@ -107,13 +107,14 @@
 				</div>
 			</div>
 		</div>
-		
+		<br><br>
+		<hr style="border: 1px solid #eee; height: 0px !important; display: block !important; width: 100% !important;;"/>
 		<div class="profile-review">
-			<br>
+			
 			<!-- 후기 -->
 			<div class="comment-wrap">
 				<div class="comment-title">
-					<label class="title">숙소 후기</label>
+					<label class="title">숙소 후기  ${commentNum}  개</label>
 				</div>
 			
 				<div class="comment">
