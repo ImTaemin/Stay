@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="stay.data.mapper.RoomMapper">
 	<select id="getRoomCount" resultType="int">
-		select count(*) from room
+		select count(*) from room where hosting = true
 	</select>
 	
 	<select id="getRoomMaxNo" resultType="int">
@@ -29,7 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    			select round(avg(g.rating), 1) a, count(g.rating) t, r.no
 			from room r, reservation res, guest_comment g
 			where r.no = res.room_no and res.no = g.no group by r.no
-		) b on a.no = b.no limit #{start}, #{perPage}
+		) b on a.no = b.no where a.hosting = true limit #{start}, #{perPage}
 	</select>
 	
 	<select id="getRoom" parameterType="String" resultType="rdto">
