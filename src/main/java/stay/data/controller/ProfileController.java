@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import stay.data.dto.CommentLikeDto;
 import stay.data.dto.GuestCommentDto;
 import stay.data.dto.MemberDto;
 import stay.data.dto.ReportMemberDto;
@@ -51,6 +52,7 @@ public class ProfileController {
 	@GetMapping("/profileform")
 	public ModelAndView profile1(@RequestParam String id, HttpSession session) {
 		ModelAndView mview = new ModelAndView();
+		String myid = (String)session.getAttribute("myid");
 		
 		// 회원 정보
 		MemberDto memberDto = memberService.getMember(id);
@@ -78,8 +80,12 @@ public class ProfileController {
 		// 후기 개수
 		int commentNum = gcommentService.countGuestComment(id);
 		
+		// 좋아요한 댓글 리스트
+		List<CommentLikeDto> likeList = likeService.getLike(myid);
+
 		mview.addObject("commentList", commentList);
 		mview.addObject("commentNum", commentNum);
+		mview.addObject("likeList", likeList);
 		
 		mview.setViewName("/member/profileForm");
 		
