@@ -64,7 +64,6 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	margin-left: -560px;
 	margin-top: 25px;
 	align-items: center;
 }
@@ -169,7 +168,27 @@
 	width: 100%;
 }
 
-.comment-wrap>.comment>.empty {
+/* .profile-review>.hugi-title {
+	margin-bottom: 10px;
+}
+
+.profile-review>.hugi-title>.title-r {
+	font-weight: bold;
+	font-size: 1.5em;
+	margin-bottom: 10px;
+} */
+
+.comment-wrap>.comment-title {
+	margin-bottom: 10px;
+}
+
+.comment-wrap>.comment-title>.title {
+	font-weight: bold;
+	font-size: 2.0em;
+	margin-bottom: 10px;
+}
+
+.comment>.empty {
 	border: 2px solid #0B57A2;
 	border-radius: 7px;
 	padding: 10px 0;
@@ -235,6 +254,31 @@
 	justify-content: space-evenly;
 	align-items: center;
 	width: 15%;
+}
+
+.bi-heart {
+	font-size: 3.5em;
+	display: flex;
+	justify-content: center;
+	padding-top: 0.4%;
+	margin-right: 1%;
+	cursor: pointer;
+}
+
+.bi-heart:hover {
+	font-size: 3.5em;
+	color: #EB0000;
+	cursor: pointer;
+}
+
+.bi-heart-fill {
+	font-size: 3.5em;
+	display: flex;
+	justify-content: center;
+	padding-top: 0.4%;
+	margin-right: 1%;
+	color: #EB0000;
+	cursor: pointer;
 }
 
 .co-heart-wrap>.co-heart {

@@ -109,16 +109,19 @@
 		</div>
 		
 		<div class="profile-review">
-			<h2>숙소 후기</h2>
 			<br>
 			<!-- 후기 -->
 			<div class="comment-wrap">
+				<div class="comment-title">
+					<label class="title">숙소 후기</label>
+				</div>
+			
 				<div class="comment">
-					<c:if test="${commentList == null}">
+					<c:if test="${commentNum == 0}">
 						<div class="empty">등록된 후기가 없습니다.</div>
 					</c:if>
 					
-					<c:if test="${commentList != null}">
+					<c:if test="${commentNum != 0}">
 						<div class="co-wrap">
 							<c:forEach var="coList" items="${commentList}">
 								<div class="co-detail">
