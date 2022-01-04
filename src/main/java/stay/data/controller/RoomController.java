@@ -228,10 +228,10 @@ public class RoomController {
 	}
 	
 	@GetMapping("/updateform")
-	public ModelAndView roomUpdateForm(String no) {
+	public ModelAndView roomUpdateForm(@RequestParam String no) {
 		ModelAndView mview = new ModelAndView();
 		
-		RoomDto roomDto = roomService.getRoom("7");
+		RoomDto roomDto = roomService.getRoom(no);
 		
 		mview.addObject("roomDto", roomDto);
 		

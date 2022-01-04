@@ -1,0 +1,68 @@
+@charset "UTF-8";
+
+.roomPlus{
+	margin-bottom: 30px;
+	font-size: 2.5em;
+	font-weight: bold;	
+}
+
+.roomPlus > span{
+	margin-left: 1%;
+	cursor: pointer;
+}
+
+.roomList{
+	border: 2px solid #0B57A2;
+	margin-bottom: 20px;
+	border-radius: 10px;
+	padding:  2%; 
+	display: flex;
+	align-items: center;
+	width: 100%;
+	height: 150px;
+}
+
+.room-name{
+	width: 35%;
+	font-size: 18pt;
+	font-weight: bold;
+}
+
+.room-addr{
+	width: 40%;
+	font-size: 16pt;
+	font-weight: bold;
+}
+
+.room-type{
+	font-size: 14pt;
+	font-weight: normal;
+}
+
+.room-maxPer{
+	width: 10%;
+	font-size: 16pt;
+	font-weight: bold;
+}
+
+.room-maxPerData{
+	font-size: 14pt;
+	font-weight: normal;
+}
+
+.room-price{
+	width: 10%;
+	font-size: 16pt;
+	font-weight: bold;
+}
+
+.room-priceData{
+	font-size: 14pt;
+	font-weight: normal;
+}
+
+.update{
+	width: 5%;
+	font-size: 2em;
+	cursor: pointer;
+}
