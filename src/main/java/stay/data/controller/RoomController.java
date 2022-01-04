@@ -285,4 +285,19 @@ public class RoomController {
 		
 		return "redirect:main";
 	}
+	
+	@GetMapping("/list")
+	public ModelAndView hostRoomList(HttpSession session){
+		ModelAndView mview = new ModelAndView();
+		
+		String myid = (String)session.getAttribute("myid");
+		
+		List <RoomDto> roomList = roomService.getRoomList(myid);
+		
+		mview.addObject("roomList", roomList);
+		
+		mview.setViewName("/room/hostRoomList");
+		
+		return mview;
+	}
 }

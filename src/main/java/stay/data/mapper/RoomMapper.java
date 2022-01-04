@@ -19,4 +19,5 @@ public interface RoomMapper {
 	public void updateRoom(RoomDto roomDto);
 	public List<RoomDto> getBestRoom();
 	public List<RoomDto> getRoomSite(String search);
+	public List<RoomDto> getRoomList(String hostId);
 }

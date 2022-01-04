@@ -34,7 +34,7 @@
 			      	<a href="${root}/room/main">숙소</a>
 			      </c:if>
 			      <c:if test="${sessionScope.mode=='host'}">
-				     <a href="#">숙소</a>
+				     <a href="${root}/room/list">숙소</a>
 			      </c:if>
 	          </li>
 	        </ul>

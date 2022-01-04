@@ -62,6 +62,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from room where addr_load like concat(#{search},"%")
 	</select>
 	
+	<select id="getRoomList" resultType="rdto" parameterType="String">
+		select * from room where host_id = #{host_id}
+	</select>
+	
 	<!-- join -->
 	<!-- room -->
 	<resultMap type="stay.data.dto.RoomDto" id="roomMap">
