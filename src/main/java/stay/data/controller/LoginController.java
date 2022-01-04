@@ -174,13 +174,13 @@ public class LoginController {
 	}
 	
 	//아이디 찾기
-	@GetMapping("findId")
+	@GetMapping("/findId")
 	public String findIdForm() throws Exception{
 		
 		return "/member/findIdForm";
 	}
 	
-	@PostMapping("findIdprocess")
+	@PostMapping("/findIdprocess")
 	public @ResponseBody HashMap findId(@RequestParam(value="name", required=false) String inputName, @RequestParam(value="hp", required=false) String inputHp){
 		String result = service.findId(inputName, inputHp);
 		
@@ -197,12 +197,27 @@ public class LoginController {
 		 return "/member/findPwForm";
 	 }
 
+//	 @PostMapping("/findPw")
+//	 @ResponseBody
+//	 public MemberDto findPwPOST(@ModelAttribute MemberDto mdto) throws Exception{
+//	 	return service.checkIdEmail(mdto);
+//	 }
 	 @PostMapping("/findPw")
-	 public void findPwPOST(String id, String e_mail, HttpServletResponse response) throws Exception{
-	 	service.findPw(id, e_mail, response);
+	 @ResponseBody
+	 public String findPwPOST(@ModelAttribute MemberDto mdto) throws Exception{
+		 MemberDto dto = service.checkIdEmail(mdto);
+		 
+		 if(dto == null) {
+			 return "일치하는 회원정보가 없습니다.";
+		 } else {
+			 return "임시 비밀번호를 메일로 발송했습니다.";
+		 }
+	 	
 	 }
+	 
+		/*
+		 * @PostMapping("/updatePw") public void updatePw(String id, String e_mail)
+		 * throws Exception{ service.updatePw(id, e_mail); }
+		 */
 	
-
-
-
 }

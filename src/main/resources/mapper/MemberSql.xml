@@ -63,7 +63,7 @@
 	</select>
 	
 	<update id="updatePw" parameterType="String">
-		update member set pass=#{pass} where id=#{id}
+		update member set pass=#{pass} where id=#{id} 
 	</update>
 	
 	<insert id="insertSingoMem" parameterType="rmdto">
@@ -74,7 +74,7 @@
 		select * from report_member where black_id = #{black_id}
 	</select>	
 	
-	<select id="findPw" parameterType="String" resultType="int">
-		select count(id) from member where id=#{id} and e_mail=#{e_mail}
+	<select id="checkIdEmail" parameterType="HashMap" resultType="mdto">
+		select * from member where id=#{id} and e_mail=#{e_mail}
 	</select>
 </mapper>

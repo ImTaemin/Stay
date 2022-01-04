@@ -32,7 +32,7 @@ $(document).on('click','#searchBtn',function(inputName, inputHp){
 			console.log(data);
 			var findId=data.id;
 			if(findId == null){
-				$('#id_user').text();	
+				$('#id_user').text("");	
 				$('#id_value').html("일치하는 회원정보가<br> 없습니다");
 			} else {
 				$('#id_user').text("회원님의 아이디는");
@@ -48,9 +48,10 @@ $(document).on('click','#searchBtn2',function(){
 	$.ajax({
 		url : "/member/findPw",
 		type : "POST",
+		dataType: "text",//반환받는 데이터타입
 		data : {
-			id : $("#id").val(),
-			e_mail : $("#e_mail").val()
+			"id" : $("#id").val(),
+			"e_mail" : $("#e_mail").val()
 		},
 		success : function(result) {
 			alert(result);
