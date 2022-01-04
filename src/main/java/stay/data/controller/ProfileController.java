@@ -121,4 +121,4 @@ public class ProfileController {
 //	public @ResponseBody void deleteLikes(@RequestParam String id) {
 //		memberService.deletelikes(id);
 //	}
-//}
+}
