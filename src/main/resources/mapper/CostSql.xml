@@ -4,6 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="stay.data.mapper.CostMapper">
+	<!-- 카드 -->
 	<insert id="insertCard" parameterType="pcdto">
 		insert into pay_card values (#{num}, #{id}, #{name}, #{end_date}, #{cvc}, #{pass})
 	</insert>
@@ -12,6 +13,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from pay_card where id = #{id}
 	</select>
 	
+	<select id="getCardName" parameterType="String" resultType="String">
+		select name from pay_card where num = #{num}
+	</select>
+	
+	<!-- 계좌 -->
 	<insert id="insertAccount" parameterType="radto">
 		insert into receive_account values (#{account}, #{id}, #{bank})
 	</insert>

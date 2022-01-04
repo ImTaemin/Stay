@@ -12,6 +12,7 @@ public interface CostMapper {
 	// card
 	public void insertCard(PayCardDto cardDto);
 	public List<PayCardDto> getAllCard(String id);
+	public String getCardName(String num);
 	
 	// account
 	public void insertAccount(ReceiveAccountDto receiveAccountDto);

@@ -23,6 +23,10 @@ public class CostService {
 		return mapper.getAllCard(id);
 	}
 	
+	public String getCardName(String num) {
+		return mapper.getCardName(num);
+	}
+	
 	// 계좌
 	public void insertAccount(ReceiveAccountDto receiveAccountDto) {
 		mapper.insertAccount(receiveAccountDto);

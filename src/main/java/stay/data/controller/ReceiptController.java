@@ -6,12 +6,13 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import stay.data.dto.ResultMapDto;
-import stay.data.dto.RoomDto;
 import stay.data.service.CanReceiptService;
+import stay.data.service.CostService;
 import stay.data.service.JoinGuestService;
 import stay.data.service.ReceiptService;
 import stay.data.service.RoomService;
@@ -29,23 +30,19 @@ public class ReceiptController {
 	
 	@Autowired
 	CanReceiptService canreceiptService;
+	
+	@Autowired
+	CostService costService;
 
-	@GetMapping("/receipt/detail")
-	public ModelAndView receiptDetail() throws Exception {
+	@PostMapping("/receipt/detail")
+	public ModelAndView receiptDetail(@RequestParam String reserNo) throws Exception {
 		ModelAndView mview = new ModelAndView();
 		
-		String no = "21122900010";
-
-		ResultMapDto receiptDto = receiptService.getDetailReceipt(no);
+		ResultMapDto receiptDto = receiptService.getDetailReceipt(reserNo);
 		
-		// 이미지 분리
-		RoomDto roomDto = roomService.getRoom(receiptDto.getResDto().getRoom_no());
+		// 예약 번호
+		receiptDto.getResDto().setNo(reserNo);
 		
-		String photos[] = roomDto.getPhotos().split(",");
-		roomDto.setPhotos(photos[0]);
-		
-		receiptDto.setRoomDto(roomDto);
-
 		// 날짜 split
 		String startDate = receiptDto.getResDto().getStart_date();
 		String start[] = startDate.split("-");
@@ -61,7 +58,16 @@ public class ReceiptController {
 		int joinNum = joinService.countJoinGuest(receiptDto.getResDto().getNo()) + 1;
 		
 		// 취소 예약 확인
-		int canCheck = canreceiptService.selectCancleCheck(no);
+		int canCheck = canreceiptService.selectCancleCheck(reserNo);
+		
+		// 카드 이름
+		if(receiptDto.getResDto().getPay_method().equals("card")) {
+			String cardName = costService.getCardName(receiptDto.getResDto().getCard_num());
+			
+			mview.addObject("cardName", cardName);
+			
+			System.out.println(cardName);
+		}
 		
 		mview.addObject("receiptDto", receiptDto);
 		mview.addObject("start", start);

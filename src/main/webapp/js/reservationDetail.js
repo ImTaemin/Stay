@@ -291,27 +291,27 @@ $("#insert-btn").click(function() {
 
 	//rate하나만 선택해도 star1에는 값 정해짐 (초기값 0.0)
 	$.ajax({
-		data: {"reserNo": $("#reserNo").val(), "content": content, "rate": $("#star-1").val() },
+		data: { "reserNo": $("#reserNo").val(), "content": content, "rate": $("#star-1").val() },
 		type: "post",
 		dataType: "json",
 		url: "/comment/insert",
-		success: function(data){
+		success: function(data) {
 			$("#updateDeleteContainer").show();
 			$("#insertContainer").hide();
 
-			var s=`
-		    	<span class="date">작성일 | ` + data.write_day.substr(0,4) + "년 " + data.write_day.substr(5,2) + "월 " + (Number(data.write_day.substr(8,2))+1) + "일 " + `</span>
+			var s = `
+		    	<span class="date">작성일 | ` + data.write_day.substr(0, 4) + "년 " + data.write_day.substr(5, 2) + "월 " + (Number(data.write_day.substr(8, 2)) + 1) + "일 " + `</span>
 			`;
-			
+
 			$(".date-part").html(s);
-			
-			$("#starNum").text($("#star-1").val().substr(0,1));
-			$("input[name=rate-u]").val(data.rating+".0");
-			$("#star-" + data.rating + "-u").attr("checked","checked");
-			
+
+			$("#starNum").text($("#star-1").val().substr(0, 1));
+			$("input[name=rate-u]").val(data.rating + ".0");
+			$("#star-" + data.rating + "-u").attr("checked", "checked");
+
 			//input-container 초기화
-			$("input[name=rate]").attr("value","0.0");
-			$("input[name=rate]").attr("checked","false");
+			$("input[name=rate]").attr("value", "0.0");
+			$("input[name=rate]").attr("checked", "false");
 			$(".content-input").val("");
 			$(".content-update").val(data.content);
 		}
@@ -342,18 +342,18 @@ $("#update-btn").click(function() {
 		confirmButtonText: '수정',
 	}).then((result) => {
 		$.ajax({
-			data: {"reserNo": $("#reserNo").val(), "content": content, "rate": $("#star-1-u").val() },
+			data: { "reserNo": $("#reserNo").val(), "content": content, "rate": $("#star-1-u").val() },
 			type: "post",
 			dataType: "json",
 			url: "/comment/update",
-			success: function(data){
+			success: function(data) {
 				$("#content-update").val(data.content);
 				$("#insertContainer").hide();
 				$("#updateDeleteContainer").show();
 			},
-			error: function(){
+			error: function() {
 				$("#insertContainer").hide();
-				$("#updateDeleteContainer").show();		
+				$("#updateDeleteContainer").show();
 			}
 		});
 	});
@@ -383,26 +383,26 @@ $("#delete-btn").click(function() {
 		$.ajax({
 			type: "post",
 			url: "/comment/delete",
-			data: {"no": $("#reserNo").val()},
-			success: function(){
-				$("input:[name=rate]").attr("value","0.0");
+			data: { "no": $("#reserNo").val() },
+			success: function() {
+				$("input:[name=rate]").attr("value", "0.0");
 				$("input[name=rate]").removeAttr("checked");
-				$("input[name=rate-u]").attr("value","0.0");
+				$("input[name=rate-u]").attr("value", "0.0");
 				$("input[name=rate-u]").removeAttr("checked");
-				$(".numb::before").css("content","0");
-				$(".numa::before").css("content","0");
+				$(".numb::before").css("content", "0");
+				$(".numa::before").css("content", "0");
 				$(".content-input").val("");
 				$(".content-update").val("");
 				$("#updateDeleteContainer").hide();
 				$("#insertContainer").show();
 			},
-			error: function(){
-				$("input[name=rate]").attr("value","0.0");
+			error: function() {
+				$("input[name=rate]").attr("value", "0.0");
 				$("input[name=rate]").removeAttr("checked");
-				$("input[name=rate-u]").attr("value","0.0");
+				$("input[name=rate-u]").attr("value", "0.0");
 				$("input[name=rate-u]").removeAttr("checked");
-				$(".numb::before").css("content","0");
-				$(".numa::before").css("content","0");
+				$(".numb::before").css("content", "0");
+				$(".numa::before").css("content", "0");
 				$(".content-input").val("");
 				$(".content-update").val("");
 				$("#updateDeleteContainer").hide();
@@ -467,5 +467,17 @@ function reserCan(e) {
 $(document).ready(function() {
 	$('#guestList').on('hidden.bs.modal', function() {
 		document.body.style.padding = "0";
-    });
+	});
 });
+
+// 영수증 출력
+function postPopUp() {
+	frm = document.getElementById("receiptPop");
+
+	window.open('', 'popup', 'width=1100, height=650, top=50, left=120');
+
+	frm.action = "/receipt/detail";
+	frm.target = "popup";
+	frm.method = "post";
+	frm.submit();
+}

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="${root}/css/receiptDetail.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 <!-- js -->
-<script src="${root}/js/receiptDetail.js"></script>
+<script src="${root}/js/receiptDetail.js" charset="utf-8"></script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -26,10 +26,10 @@
 
 	<div class="receipt-wrap">
 		<div class="receipt-title">
-			<label>쉼, 영수증</label>
-			
-			<div class="receipt-id">
-				<label>영수증 No | ${receiptDto.recDto.id}</label>
+			<div class="title-content">
+				<label id="receipt-title">쉼, 영수증</label>
+				
+				<label id="receipt-id">영수증 No | ${receiptDto.recDto.id}</label>
 			</div>
 			
 			<img src="${root}/photo/logo_sm.png">
@@ -62,12 +62,10 @@
 					 ~ ${end[0]}년 ${end[1]}월 ${end[2]}일 (${endDayWeek})</span>
 				</div>
 				
+				<span class="reser-no">예약 번호 | ${receiptDto.resDto.no}</span>
+				
 				<div class="guest-wrap">
 					<span>게스트 | ${receiptDto.resDto.guest_id} ( 총 ${joinNum}명 )</span>
-				</div>
-				
-				<div class="photo-wrap">
-					<img id="roomPhoto" src="${root}/photo/roomPhoto/${receiptDto.roomDto.photos}">
 				</div>
 				
 				<hr>
@@ -106,12 +104,48 @@
 					</div>
 					
 					<hr>
+					
+					<div class="all-wrap">
+						<span>총 합계</span>
+						
+						<span id="allPrice"></span>
+					</div>
 				</div>
 				
 				<div class="payment-wrap">
 					<label class="title">결제</label>
 					
 					<hr>
+					
+					<div class="card-warp">
+						<div class="pay-method">
+							<span class="pay-title">결제 방식</span>
+							
+							<c:if test="${receiptDto.resDto.pay_method == 'card'}">
+								<span><b>${receiptDto.resDto.pay_method}</b></span>
+							</c:if>
+							
+							<c:if test="${receiptDto.resDto.pay_method == 'kakao'}">
+								<img id="kakao" src="${root}/photo/카카오페이.png">
+							</c:if>
+						</div>
+						
+						<c:if test="${receiptDto.resDto.pay_method == 'card'}">
+							<div class="card-num">
+								<span>${cardName}</span>
+							
+								<span>${receiptDto.resDto.card_num}</span>
+							</div>
+						</c:if>
+					</div>
+					
+					<hr>
+					
+					<div class="all-wrap">
+						<span>총 합계</span>
+						
+						<span id="allPrice"></span>
+					</div>
 				</div>
 			</div>
 		</div>
