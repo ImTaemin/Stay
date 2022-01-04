@@ -29,6 +29,7 @@ public interface MemberMapper {
 	public void updateImg(MemberDto dto);
 	
 	public MemberDto getData(String id);
+	public void updatelikes(String id);
 	
 	public String findId(String inputName, String inputHp);
 	
@@ -40,7 +41,7 @@ public interface MemberMapper {
 	public MemberDto checkIdEmail(String id, String e_mail);
 	
 	// 비밀번호 변경
-	public void updatePw(String id, String pw) throws Exception; 
+	public void updatePw(String id, String pass) throws Exception; 
 	
 	//이메일발송
   	public void sendEmail(MemberDto mdto) throws Exception;

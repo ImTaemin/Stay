@@ -95,13 +95,15 @@ public class MemberService {
                 }
             }
             
-            String pw = temp.toString();
+            String pass = temp.toString();
             //mdto.setPass(pw);
-            System.out.println(pw);
+            System.out.println(pass);
+            
+            mdto.setPass(pass);
             
             //비밀번호 변경
             //mapper.updatePw(mdto.getId(), pw);
-            mapper.updatePw(mdto.getId(), pw);
+            mapper.updatePw(mdto.getId(), mdto.getPass());
             
             //비밀번호 변경 메일 발송
             sendEmail(mdto);
@@ -111,56 +113,9 @@ public class MemberService {
 		return dto;
 	}
 	
-//	//비밀번호찾기
-//    public void findPw(MemberDto mdto) throws Exception {
-//    	
-//    	// 가입된 아이디가 없으면
-//    	if(mapper.checkIdEmail(mdto.getId(),mdto.getE_mail())==null) {
-//    		
-//
-//    	} else {
-//    		//인증 번호 생성기
-//            StringBuffer temp =new StringBuffer();
-//            Random rnd = new Random();
-//            for(int i=0;i<10;i++)
-//            {
-//                int rIndex = rnd.nextInt(4);
-//                switch (rIndex) {
-//                case 0:
-//                    // a-z
-//                    temp.append((char) ((int) (rnd.nextInt(26)) + 97));
-//                    break;
-//                case 1:
-//                    // A-Z
-//                    temp.append((char) ((int) (rnd.nextInt(26)) + 65));
-//                    break;
-//                case 2:
-//                    // 0-9
-//                    temp.append((rnd.nextInt(10)));
-//                    break;
-//                case 3:
-//                	//!,@,#,$,%
-//                	char[] sc={'!','@','#','$','%'};
-//                	Random rd=new Random();
-//                	int s=rd.nextInt(4);
-//                	temp.append(sc[s]);
-//                	break;
-//                }
-//            }
-//            
-//            String pw = temp.toString();
-//            //mdto.setPass(pw);
-//            //System.out.println(pw);
-//            // 비밀번호 변경
-//            //mapper.updatePw(mdto.getId(), pw);
-//            // 비밀번호 변경 메일 발송
-//            //sendEmail(mdto);
-//       }
-//  }
-	
-	//비밀번호 변경
-	public void updatePw(String id, String pw) throws Exception{
-		mapper.updatePw(id, pw);
+	//임시비밀번호로 변경 DB업데이트
+	public void updatePw(String id, String pass) throws Exception{
+		mapper.updatePw(id, pass);
 	}
 	
 	//메일 발송
@@ -179,10 +134,17 @@ public class MemberService {
 		String msg = "";
 		
 		subject = "쉼, 임시 비밀번호 입니다.";
-		msg += "<div align='center' style='border:1px solid black; font-family:WandocleanseaR'>";
-		msg += "<h3 style='color: blue;'>";
+		msg += "<style>@charset \"UTF-8\";\r\n"
+				+ "@font-face {\r\n"
+				+ "    font-family: 'WandocleanseaR';\r\n"
+				+ "    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/WandocleanseaR.woff') format('woff');\r\n"
+				+ "    font-weight: normal;\r\n"
+				+ "    font-style: normal;\r\n"
+				+ "}</style>";
+		msg += "<div align='center' style='border:1px solid black; font-family: WandocleanseaR;'>";
+		msg += "<h3 style='color: blue; font-family: WandocleanseaR;'>";
 		msg += mdto.getId() + "님의 임시 비밀번호 입니다. 비밀번호를 변경하여 사용하세요.</h3>";
-		msg += "<p>임시 비밀번호 : ";
+		msg += "<p style='font-family: WandocleanseaR;'>임시 비밀번호 : ";
 		msg += mdto.getPass() + "</p></div>";
 		
 		// 받는 사람 E-Mail 주소
