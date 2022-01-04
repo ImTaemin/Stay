@@ -29,6 +29,11 @@
 		<div class="dropdown-menu"> 
 		<c:if test="${sessionScope.loginok!=null }">
 	        <ul>
+	         <li>
+	        	<c:if test="${sessionScope.myid=='admin'}">
+				  <a href="${root}/report">신고관리</a>
+			    </c:if>
+	          </li>
 	          <li>
 		          <c:if test="${sessionScope.mode=='guest'}">
 			      	<a href="${root}/room/main">숙소</a>
