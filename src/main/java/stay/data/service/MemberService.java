@@ -169,6 +169,8 @@ public class MemberService {
 		}
 	}
 	
-	
+	public List<ReportMemberDto> getReport(){
+		return mapper.getReport();
+	}
 
 }

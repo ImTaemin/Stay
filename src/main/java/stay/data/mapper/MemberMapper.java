@@ -49,5 +49,5 @@ public interface MemberMapper {
   	//비밀번호찾기
   	public void findPw(MemberDto mdto) throws Exception;
 	
-
+  	public List<ReportMemberDto> getReport();
 }

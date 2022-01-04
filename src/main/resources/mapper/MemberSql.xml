@@ -63,7 +63,7 @@
 	</update>
 	
 	<insert id="insertSingoMem" parameterType="rmdto">
-		insert into report_member values (null, #{black_id}, #{report_id}, #{reason})
+		insert into report_member values (null, #{black_id}, #{report_id}, #{reason}, now(), null)
 	</insert>
 	
 	<select id="getSingoMem" parameterType="String" resultType="rmdto">
@@ -72,5 +72,9 @@
 	
 	<select id="checkIdEmail" parameterType="HashMap" resultType="mdto">
 		select * from member where id=#{id} and e_mail=#{e_mail}
+	</select>
+	
+	<select id="getReport" resultType="rmdto">
+		select * from report_member
 	</select>
 </mapper>
