@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+	<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,12 +22,13 @@
 				<div class="photo">
 					<%-- <img alt="" src="${root}/photo/memberPhoto/${memberDto.photo}"> --%>
 				  <!-- 일반 로그인 -->
-				  <c:if test="${sessionScope.kakaologin==null }">
+				
+				  <c:if test="${not fn:contains(memberDto.id, '@')}">
 					<img alt="" src="${root}/photo/memberPhoto/${memberDto.photo}">
 				  </c:if>
 				  <!-- 카카오 로그인 -->
-				  <c:if test="${sessionScope.kakaologin!=null }">
-					<img src="${sessionScope.profile}">
+				  <c:if test="${fn:contains(memberDto.id, '@')}">
+					<img src="${memberDto.photo}">
 				  </c:if>
 				</div>
 				

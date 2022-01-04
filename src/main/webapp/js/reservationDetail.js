@@ -474,7 +474,7 @@ $(document).ready(function() {
 function postPopUp() {
 	frm = document.getElementById("receiptPop");
 
-	window.open('', 'popup', 'width=1100, height=650, top=50, left=120');
+	window.open('', 'popup', 'width=1100, height=700, top=30, left=120');
 
 	frm.action = "/receipt/detail";
 	frm.target = "popup";
