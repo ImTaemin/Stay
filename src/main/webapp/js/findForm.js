@@ -44,18 +44,16 @@ $(document).on('click','#searchBtn',function(inputName, inputHp){
  
  
 //*****비밀번호 찾기*****
-$(function(){
-		$("#searchBtn2").click(function(){
-			$.ajax({
-				url : "/member/findPw",
-				type : "POST",
-				data : {
-					id : $("#id").val(),
-					e_mail : $("#e_mail").val()
-				},
-				success : function(result) {
-					alert(result);
-				},
-			})
-		});
+$(document).on('click','#searchBtn2',function(){
+	$.ajax({
+		url : "/member/findPw",
+		type : "POST",
+		data : {
+			id : $("#id").val(),
+			e_mail : $("#e_mail").val()
+		},
+		success : function(result) {
+			alert(result);
+		},
 	});
+});

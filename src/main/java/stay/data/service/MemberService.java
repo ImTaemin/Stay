@@ -3,6 +3,7 @@ package stay.data.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,12 +50,6 @@ public class MemberService {
 		return mapper.findId(inputName, inputHp);
 	}
 	
-	//비밀번호 찾기
-	public void findPw(MemberDto mdto) throws Exception{
-		
-		mapper.findPw(mdto);
-	}
-	
 	public void insertSingoMem(ReportMemberDto rmDto) {
 		mapper.insertSingoMem(rmDto);
 	}
@@ -62,10 +57,17 @@ public class MemberService {
 	public List<ReportMemberDto> getSingoMem(String black_id) {
 		return mapper.getSingoMem(black_id);
 	}
+
+	//비밀번호 찾기
+	public int findPw(String id, String e_mail, HttpServletResponse response) throws Exception{
+		
+		return mapper.findPw(id, e_mail, response);
+	}
 	
 	// 비밀번호 변경
-	public int updatePw(MemberDto mdto) throws Exception{
-		return mapper.updatePw(mdto);
+	public void updatePw(String id) throws Exception{
+		mapper.updatePw(id);
 	}
+	
 
 }
