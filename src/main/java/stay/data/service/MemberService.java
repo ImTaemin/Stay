@@ -141,10 +141,10 @@ public class MemberService {
 				+ "    font-weight: normal;\r\n"
 				+ "    font-style: normal;\r\n"
 				+ "}</style>";
-		msg += "<div align='center' style='border:1px solid black; font-family: WandocleanseaR;'>";
-		msg += "<h3 style='color: blue; font-family: WandocleanseaR;'>";
+		msg += "<div align='center' style='border:1px solid black; font-family: 'WandocleanseaR';'>";
+		msg += "<h3 style='color: blue; font-family: 'WandocleanseaR';'>";
 		msg += mdto.getId() + "님의 임시 비밀번호 입니다. 비밀번호를 변경하여 사용하세요.</h3>";
-		msg += "<p style='font-family: WandocleanseaR;'>임시 비밀번호 : ";
+		msg += "<p style='font-family: 'WandocleanseaR';'>임시 비밀번호 : ";
 		msg += mdto.getPass() + "</p></div>";
 		
 		// 받는 사람 E-Mail 주소
