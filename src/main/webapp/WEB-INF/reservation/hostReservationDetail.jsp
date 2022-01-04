@@ -137,7 +137,7 @@
 											
 											<label>${guestDto.id}</label>
 											
-											<button type="button" class="btn btn-default"	>메인 게스트</button>
+											<button type="button" class="btn btn-default" onclick="location.href='../chat'">메인 게스트</button>
 										</div>
 										
 										<div class="join-guest-wrap" id="${join.memDto.id}">
