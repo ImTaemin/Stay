@@ -237,9 +237,10 @@ function getStarNum(e) {
 	}
 
 	$('input[name=rate]').attr('value', rating);
+	$('span[id=starNum]').html(rating);
 }
 
-// 별점 수정
+// 별점 입력
 function changeStarNum(e) {
 	var clickId = $(e).attr("id");
 	var rating = "0";
@@ -256,26 +257,159 @@ function changeStarNum(e) {
 		rating = "5";
 	}
 
-	$('input[name=rate]').attr('value', rating);
+	$('input[name=rate-u]').attr('value', rating);
 	$('span[id=starNum]').html(rating);
 }
 
-// 엔터값 변경
+// 업데이트 별점 수정
+function changeStarNumUpdate(e) {
+	var clickId = $(e).attr("id");
+	var rating = "0";
+
+	if (clickId == "star-1-u") {
+		rating = "1";
+	} else if (clickId == "star-2-u") {
+		rating = "2";
+	} else if (clickId == "star-3-u") {
+		rating = "3";
+	} else if (clickId == "star-4-u") {
+		rating = "4";
+	} else if (clickId == "star-5-u") {
+		rating = "5";
+	}
+
+	$('input[name=rate-u]').attr('value', rating);
+	$('span[id=starNum]').html(rating);
+}
+
+
+// 후기 입력
 $("#insert-btn").click(function() {
 	var content = $('.content-input').val();
 	content = content.replace(/(?:\r\n|\r|\n)/g, '<br/>');
 	$(".content-input").val(content);
 
+	//rate하나만 선택해도 star1에는 값 정해짐 (초기값 0.0)
+	$.ajax({
+		data: {"reserNo": $("#reserNo").val(), "content": content, "rate": $("#star-1").val() },
+		type: "post",
+		dataType: "json",
+		url: "/comment/insert",
+		success: function(data){
+			$("#updateDeleteContainer").show();
+			$("#insertContainer").hide();
 
+			var s=`
+		    	<span class="date">작성일 | ` + data.write_day.substr(0,4) + "년 " + data.write_day.substr(5,2) + "월 " + (Number(data.write_day.substr(8,2))+1) + "일 " + `</span>
+			`;
+			
+			$(".date-part").html(s);
+			
+			$("#starNum").text($("#star-1").val().substr(0,1));
+			$("input[name=rate-u]").val(data.rating+".0");
+			$("#star-" + data.rating + "-u").attr("checked","checked");
+			
+			//input-container 초기화
+			$("input[name=rate]").attr("value","0.0");
+			$("input[name=rate]").attr("checked","false");
+			$(".content-input").val("");
+			$(".content-update").val(data.content);
+		}
+	});
 	//document.commentInsert.submit();
 });
 
+//후기 수정
 $("#update-btn").click(function() {
-	var content = $('.content-input').val();
+	var content = $('.content-update').val();
 	content = content.replace(/(?:\r\n|\r|\n)/g, '<br/>');
 	$(".content-input").val(content);
 
-	document.commentUpdate.submit();
+	const swalWithBootstrapButtons = Swal.mixin({
+		customClass: {
+			confirmButton: 'btn btn-success',
+			cancelButton: 'btn btn-danger'
+		},
+		buttonsStyling: false
+	})
+
+	swalWithBootstrapButtons.fire({
+		title: '댓글을 수정하시겠습니까?',
+		icon: 'warning',
+		cancelButtonText: '취소',
+		showCancelButton: true,
+		showCloseButton: true,
+		confirmButtonText: '수정',
+	}).then((result) => {
+		$.ajax({
+			data: {"reserNo": $("#reserNo").val(), "content": content, "rate": $("#star-1-u").val() },
+			type: "post",
+			dataType: "json",
+			url: "/comment/update",
+			success: function(data){
+				$("#content-update").val(data.content);
+				$("#insertContainer").hide();
+				$("#updateDeleteContainer").show();
+			},
+			error: function(){
+				$("#insertContainer").hide();
+				$("#updateDeleteContainer").show();		
+			}
+		});
+	});
+	//document.commentUpdate.submit();
+});
+
+//후기 삭제
+$("#delete-btn").click(function() {
+
+	const swalWithBootstrapButtons = Swal.mixin({
+		customClass: {
+			confirmButton: 'btn btn-success',
+			cancelButton: 'btn btn-danger'
+		},
+		buttonsStyling: false
+	});
+
+	swalWithBootstrapButtons.fire({
+		title: '후기를 삭제하시겠습니까?',
+		icon: 'warning',
+		cancelButtonText: '취소',
+		showCancelButton: true,
+		showCloseButton: true,
+		confirmButtonText: '삭제',
+	}).then((result) => {
+
+		$.ajax({
+			type: "post",
+			url: "/comment/delete",
+			data: {"no": $("#reserNo").val()},
+			success: function(){
+				$("input:[name=rate]").attr("value","0.0");
+				$("input[name=rate]").removeAttr("checked");
+				$("input[name=rate-u]").attr("value","0.0");
+				$("input[name=rate-u]").removeAttr("checked");
+				$(".numb::before").css("content","0");
+				$(".numa::before").css("content","0");
+				$(".content-input").val("");
+				$(".content-update").val("");
+				$("#updateDeleteContainer").hide();
+				$("#insertContainer").show();
+			},
+			error: function(){
+				$("input[name=rate]").attr("value","0.0");
+				$("input[name=rate]").removeAttr("checked");
+				$("input[name=rate-u]").attr("value","0.0");
+				$("input[name=rate-u]").removeAttr("checked");
+				$(".numb::before").css("content","0");
+				$(".numa::before").css("content","0");
+				$(".content-input").val("");
+				$(".content-update").val("");
+				$("#updateDeleteContainer").hide();
+				$("#insertContainer").show();
+			}
+		});
+	});
 });
 
 //엔터값 출력
@@ -321,7 +455,7 @@ function reserCan(e) {
 			$(e).html("예약 취소가 진행 중입니다.");
 
 			$.ajax({
-				type: "get",
+				type: "post",
 				url: "/reser/delete",
 				data: { "no": no, "price": price }
 			});

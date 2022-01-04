@@ -58,7 +58,6 @@
 										s+="<b>"+item.addr_load+"</b>";
 									});
 									$('#search-result').html(s);
-									alert("완료!");
 								},
 								error : function() {
 									alert("error");

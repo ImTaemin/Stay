@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="stay.data.mapper.MemberMapper">
-<insert id="insertMember" parameterType="mdto">
+	<insert id="insertMember" parameterType="mdto">
 		insert into member (id,pass,name,birth,hp,addr_load,addr_detail,photo,likes,e_mail) values(#{id},#{pass},#{name},#{birth},#{hp},#{addr_load},#{addr_detail},#{photo},#{likes},#{e_mail})
 	</insert>
 	
@@ -62,7 +62,7 @@
 		select id from member where name=#{inputName} and hp=#{inputHp}
 	</select>
 	
-	<update id="updatePw">
+	<update id="updatePw" parameterType="String">
 		update member set pass=#{pass} where id=#{id}
 	</update>
 	
@@ -73,5 +73,8 @@
 	<select id="getSingoMem" parameterType="String" resultType="rmdto">
 		select * from report_member where black_id = #{black_id}
 	</select>	
-
+	
+	<select id="findPw" parameterType="String" resultType="int">
+		select count(id) from member where id=#{id} and e_mail=#{e_mail}
+	</select>
 </mapper>

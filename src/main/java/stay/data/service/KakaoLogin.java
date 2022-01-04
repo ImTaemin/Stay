@@ -109,8 +109,7 @@ public class KakaoLogin {
     		}
     		//System.out.println("response body : " + result);
     		
-    		
-    		
+
     		JsonParser parser = new JsonParser();
     		JsonElement element = parser.parse(result);
     		
