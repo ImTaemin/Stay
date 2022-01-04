@@ -104,7 +104,7 @@
 											<div class="content-outDate">${list.resDto.end_date}</div>
 										</div>
 										<div class="content-guest">게스트
-											<div class="content-number">${joinGuestNum}명</div>
+											<div class="content-number">${list.joinDto.count}명</div>
 										</div>
 										<div class="content-payment">결제세부정보
 											<div class="content-cost">
@@ -132,7 +132,7 @@
 											<div class="content-outDate">${list.resDto.end_date}</div>
 										</div>
 										<div class="content-guest">게스트
-											<div class="content-number">${joinGuestNum}명</div>
+<%-- 											<div class="content-number">${joinGuestNum}명</div> --%>
 										</div>
 										<div class="content-payment">결제세부정보
 											<div class="content-cost">
@@ -159,7 +159,7 @@
 											<div class="content-outDate">${list.resDto.end_date}</div>
 										</div>
 										<div class="content-guest">게스트
-											<div class="content-number">${joinGuestNum}명</div>
+<%-- 											<div class="content-number">${joinGuestNum}명</div> --%>
 										</div>
 										<div class="content-payment">결제세부정보
 											<div class="content-cost">

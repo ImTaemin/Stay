@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import stay.data.dto.JoinGuestDto;
 import stay.data.dto.MemberDto;
 import stay.data.dto.ReservationDto;
 import stay.data.dto.ResultMapDto;
@@ -46,9 +47,6 @@ public class MainController {
 
 	@Autowired
 	CanReservationService canReserService;
-	
-	@Autowired
-	JoinGuestService joinGuestService;
 	
 	@Autowired
 	JoinGuestService joinService;
@@ -87,13 +85,10 @@ public class MainController {
    
    //호스트메인_호스트전환 클릭할 경우
    @GetMapping("/host/main")
-	public ModelAndView reservationList(HttpSession session) {
+	public ModelAndView reservationList(HttpSession session){
 	   ModelAndView mview = new ModelAndView();
 		
 		String myid = (String)session.getAttribute("myid");
-		
-		// 조인 게스트
-		//List<ResultMapDto> joinList = joinService.getAllJoinGuest(reserNo);
 		
 		List<ResultMapDto> nowList = reservationService.selectNowHostReservation(myid);
 		List<ResultMapDto> preList = reservationService.selectPreHostReservation(myid);
@@ -116,6 +111,16 @@ public class MainController {
 					rdto.setPhotos(photo[0]);
 					
 					dto.setRoomDto(rdto);
+					
+					// 조인 게스트
+					String reserNo = dto.getResDto().getNo();
+					
+					JoinGuestDto joinDto = joinService.selectOneJoin(reserNo);
+					int joinNum = joinService.countJoinGuest(reserNo) + 1;
+					
+					joinDto.setCount(joinNum);
+					
+					dto.setJoinDto(joinDto);
 				}
 				
 				// 이전 예약
@@ -161,8 +166,6 @@ public class MainController {
 				mview.addObject("preList", preList);
 				mview.addObject("canList", canList);
 				
-				//mview.addObject("joinList", joinList);
-
 				//호스트모드 예약상태별 예약 목록중 최근 3개
 				mview.addObject("inThreeList", inThreeList);
 				mview.addObject("inThreeRoom", inThreeRoom);

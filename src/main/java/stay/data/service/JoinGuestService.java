@@ -45,4 +45,7 @@ public class JoinGuestService {
 		mapper.deleteJoinGuest(map);
 	}
 	
+	public JoinGuestDto selectOneJoin(String no) {
+		return mapper.selectOneJoin(no);
+	}
 }

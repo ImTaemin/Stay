@@ -9,4 +9,6 @@ import lombok.Data;
 public class JoinGuestDto {
 	private String no;
 	private String id;
+	
+	private int count;
 }

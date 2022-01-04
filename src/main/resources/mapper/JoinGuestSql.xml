@@ -3,7 +3,7 @@
 
 <mapper namespace="stay.data.mapper.JoinGuestMapper">
 	<select id="countJoinGuest" parameterType="String" resultType="int">
-		select count(*) from join_guest where no = #{no}
+		select ifnull(count(*), 0) from join_guest where no = #{no}
 	</select>
 	
 	<select id="sameIdinJoin" parameterType="HashMap" resultType="int">
@@ -26,6 +26,10 @@
 	<delete id="deleteJoinGuest" parameterType="HashMap">
 		delete from join_guest where no = #{no} and id = #{id}
 	</delete>
+	
+	<select id="selectOneJoin" parameterType="String" resultType="jgdto">
+		select * from join_guest where no = #{no}
+	</select>
 	
 	<!-- join -->
 	<!-- member -->
