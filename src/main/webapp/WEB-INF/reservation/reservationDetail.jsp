@@ -98,7 +98,11 @@
 							
 							<div class="receipt">
 								<span>영수증 보기</span>
-								<span class="bi bi-receipt-cutoff"></span>
+								<span class="bi bi-receipt-cutoff" onclick="postPopUp()"></span>
+								<!-- from -->
+								<form action='/receipt/detail' method='post' id="receiptPop">
+									<input type="hidden" name="reserNo" value="${reserDto.no}">
+								</form>
 							</div>
 						</div>
 					</div>
@@ -175,11 +179,11 @@
 				
 				<div class="host-main">
 					<div class="photo">
-						<img alt="" src="../photo/memberPhoto/${hostDto.photo}" onclick="location.href='/profile/profileform'">
+						<img alt="" src="../photo/memberPhoto/${hostDto.photo}" onclick="location.href='/profile/profileform?id=${hostDto.id}'">
 					</div>
 					
 					<div class="content">
-						<label class="name" onclick="location.href='/profile/profileform'">${hostDto.id}</label>
+						<label class="name" onclick="location.href='/profile/profileform?id=${hostDto.id}'">${hostDto.id}</label>
 						<br>
 						<label class="email">${hostDto.e_mail}</label>
 					</div>

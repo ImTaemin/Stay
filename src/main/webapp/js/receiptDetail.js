@@ -15,7 +15,9 @@ $(document).ready(function() {
 	var roomPrice = $("input[name=roomPrice]").attr("value");
 	var calPrice = roomPrice * betweenDay;
 	var taxPrice = calPrice * 0.2;
+	var allPrice = parseInt(calPrice) + parseInt(taxPrice);
 	
 	$("span[id=calPrice]").html("￦" + calPrice.toLocaleString());
 	$("span[id=taxPrice]").html("￦" + taxPrice.toLocaleString());
+	$("span[id=allPrice]").html("￦" + allPrice.toLocaleString());
 });

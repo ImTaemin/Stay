@@ -50,7 +50,7 @@ public class ProfileController {
 	CommentLikeService likeService;
 	
 	@GetMapping("/profileform")
-	public ModelAndView profile1(@RequestParam String id, HttpSession session) {
+	public ModelAndView profile1(@RequestParam(required=false) String id, HttpSession session) {
 		ModelAndView mview = new ModelAndView();
 		String myid = (String)session.getAttribute("myid");
 		

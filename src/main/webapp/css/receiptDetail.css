@@ -1,7 +1,9 @@
 @charset "UTF-8";
+@import url('font.css');
 
 .receipt-wrap {
-	padding: 0 5%;
+	padding: 3% 5%;
+	font-family: 'WandocleanseaR';
 }
 
 .receipt-wrap hr {
@@ -14,14 +16,17 @@
 	width: 100%;
 }
 
-.receipt-title>label {
-	width: 13%;
-	font-size: 2.3em;
-	color: #0B57A2;
+.title-content {
+	width: 92%;
 }
 
-.receipt-title>.receipt-id {
-	width: 79%;
+.title-content>#receipt-title {
+	font-size: 2.3em;
+	color: #0B57A2;
+	margin-right: 1%;
+}
+
+.title-content>#receipt-id {
 	margin-top: 1%;
 	font-size: 1.2em;
 }
@@ -77,23 +82,15 @@
 	margin-bottom: 2%;
 }
 
+.room-detail>.reser-no {
+	font-size: 1.2em;
+	margin-bottom: 12%;
+}
+
 .room-detail>.guest-wrap {
 	display: flex;
 	font-size: 1.2em;
-	margin-bottom: 3%;
-}
-
-.room-detail>.photo-wrap {
-	display: flex;
-	justify-content: center;
-	width: 100%;
-	margin-bottom: 2%;
-}
-
-.photo-wrap>#roomPhoto {
-	width: 100%;
-	height: 450px;
-	border-radius: 7px;
+	margin-bottom: 1%;
 }
 
 .room-detail>.host-wrap {
@@ -137,6 +134,13 @@
 	font-weight: bold;
 }
 
+.all-wrap {
+	display: flex;
+	justify-content: space-between;
+	font-size: 1.5em;
+	font-weight: bold;
+}
+
 .payment-wrap {
 	display: flex;
 	flex-direction: column;
@@ -144,4 +148,28 @@
 	border: 2px solid #0B57A2;
 	border-radius: 7px;
 	padding: 4% 4%;
+}
+
+.card-warp {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.card-warp>.pay-method {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	font-size: 1.2em;
+}
+
+#kakao{
+	width: 15%;
+}
+
+.card-num {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	margin-top: 1%;
 }

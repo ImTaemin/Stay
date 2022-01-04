@@ -4,13 +4,22 @@
 "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
+	<!-- 영수증 -->
+	<definition name="receiptTiles" template="/WEB-INF/layout/receiptTiles.jsp">
+        <put-attribute name="receipt" value="/WEB-INF/receipt/receiptDetail.jsp"/>  
+    </definition>
+    
+    <definition name="/receipt/*" extends="receiptTiles">
+         <put-attribute name="receipt" value="/WEB-INF/receipt/{1}.jsp"/>
+    </definition>
+
+	<!-- defined -->
 	<definition name="layoutsTiles" template="/WEB-INF/layout/layoutsTiles.jsp">
 		<put-attribute name="header" value="/WEB-INF/layout/header.jsp"/>
 		<put-attribute name="main" value="/WEB-INF/layout/guestMain.jsp"/>
 		<put-attribute name="footer" value="/WEB-INF/layout/footer.jsp"/>
 	</definition>
 	
-	<!-- wildcard -->
 	<definition name="/*/*" extends="layoutsTiles">
 		<put-attribute name="main" value="/WEB-INF/{1}/{2}.jsp"/>
 	</definition>
