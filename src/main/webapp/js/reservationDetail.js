@@ -204,7 +204,11 @@ function guestInfo(no, maxPer) {
 				s += '<hr>';
 				s += '<div class="join-guest-de">';
 				s += '<div class="join-guest-img">';
-				s += '<img id="join-guest" src="../../photo/memberPhoto/' + element.memDto.photo + '">';
+				if (element.memDto.photo.indexOf("@") != -1) {
+					s += '<img id="join-guest" src="../../photo/memberPhoto/' + element.memDto.photo + '">';
+				} else {
+					s += '<img id="join-guest" src="' + element.memDto.photo + '">';
+				}
 				s += '</div>';
 				s += '<label>' + element.memDto.id + '</label>';
 				s += '<button type="button" id="joinDel" class="btn btn-danger" onclick="delGuest(this)"';
