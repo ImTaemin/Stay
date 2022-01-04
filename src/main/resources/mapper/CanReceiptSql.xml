@@ -5,4 +5,8 @@
 	<insert id="canRecInsert" parameterType="canredto">
 		insert into can_receipt values (#{id}, #{no})
 	</insert>
+	
+	<select id="selectCancleCheck" parameterType="String" resultType="int">
+		select count(*) from receipt r, can_receipt c where r.id = c.id and c.no = #{no}
+	</select>
 </mapper>

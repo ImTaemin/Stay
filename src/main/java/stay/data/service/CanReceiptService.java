@@ -14,4 +14,8 @@ public class CanReceiptService {
 	public void canRecInsert(CanReceiptDto dto) {
 		mapper.canRecInsert(dto);
 	}
+	
+	public int selectCancleCheck(String no) {
+		return mapper.selectCancleCheck(no);
+	}
 }

@@ -7,4 +7,5 @@ import stay.data.dto.CanReceiptDto;
 @Mapper
 public interface CanReceiptMapper {
 	public void canRecInsert(CanReceiptDto dto);
+	public int selectCancleCheck(String no);
 }
