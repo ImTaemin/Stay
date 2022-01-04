@@ -39,6 +39,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from guest_comment where guest_id = #{guest_id}
 	</select>
 	
+	<select id="countGuestComment" parameterType="String" resultType="int">
+		select count(*) from guest_comment where guest_id = #{guest_id}
+	</select>
+	
 	<!-- join -->
 	<!-- room -->
 	<resultMap type="stay.data.dto.RoomDto" id="roomMap">

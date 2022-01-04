@@ -44,6 +44,10 @@ public class GuestCommentService {
 		return mapper.selectOneGuest(id);
 	}
 	
+	public int countGuestComment(String id) {
+		return mapper.countGuestComment(id);
+	}
+	
 	public void updateLikes(String no, String guest_id) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		

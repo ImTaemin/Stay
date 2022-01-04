@@ -15,12 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import stay.data.dto.CommentLikeDto;
 import stay.data.dto.GuestCommentDto;
 import stay.data.dto.MemberDto;
 import stay.data.dto.ReportMemberDto;
 import stay.data.dto.ResultMapDto;
-import stay.data.dto.WishListDto;
 import stay.data.mapper.MemberMapper;
 import stay.data.service.CommentLikeService;
 import stay.data.service.GuestCommentService;
@@ -77,7 +75,11 @@ public class ProfileController {
 			c.setGcoDto(gcoDto);
 		}
 		
+		// 후기 개수
+		int commentNum = gcommentService.countGuestComment(id);
+		
 		mview.addObject("commentList", commentList);
+		mview.addObject("commentNum", commentNum);
 		
 		mview.setViewName("/member/profileForm");
 		
