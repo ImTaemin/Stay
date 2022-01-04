@@ -111,20 +111,14 @@
 		<div class="profile-review">
 			<h2>숙소 후기</h2>
 			<br>
-			
 			<!-- 후기 -->
 			<div class="comment-wrap">
-				<div class="comment-title">
-					<i class="bi bi-star-fill" style="font-size: 2.0rem;"></i>
-					<label class="title">${dto.atDto.avg} 점  |  후기  ${dto.atDto.total} 개</label>
-				</div>
-				
 				<div class="comment">
-					<c:if test="${dto.atDto.total == 0}">
+					<c:if test="${commentList == null}">
 						<div class="empty">등록된 후기가 없습니다.</div>
 					</c:if>
 					
-					<c:if test="${dto.atDto.total > 0}">
+					<c:if test="${commentList != null}">
 						<div class="co-wrap">
 							<c:forEach var="coList" items="${commentList}">
 								<div class="co-detail">

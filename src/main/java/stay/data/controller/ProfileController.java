@@ -20,6 +20,7 @@ import stay.data.dto.GuestCommentDto;
 import stay.data.dto.MemberDto;
 import stay.data.dto.ReportMemberDto;
 import stay.data.dto.ResultMapDto;
+import stay.data.dto.WishListDto;
 import stay.data.mapper.MemberMapper;
 import stay.data.service.CommentLikeService;
 import stay.data.service.GuestCommentService;
@@ -53,32 +54,30 @@ public class ProfileController {
 	public ModelAndView profile1(@RequestParam String id, HttpSession session) {
 		ModelAndView mview = new ModelAndView();
 		
+		// 회원 정보
 		MemberDto memberDto = memberService.getMember(id);
-		
-		/*
-		 * // 게스트 댓글 List<ResultMapDto> commentList =
-		 * gcommentService.selectOneGuest(id);
-		 * 
-		 * for (ResultMapDto c : commentList) { // 회원 정보 String guestId =
-		 * c.getGcoDto().getGuest_id();
-		 * 
-		 * MemberDto gMemDto = memberService.getMember(guestId);
-		 * 
-		 * c.setMemDto(gMemDto);
-		 * 
-		 * // 좋아요 개수 String reserNo = c.getGcoDto().getNo();
-		 * 
-		 * int likes = likeService.countLike(reserNo, guestId);
-		 * 
-		 * GuestCommentDto gCoDto = gcommentService.getOneComment(reserNo, guestId);
-		 * 
-		 * gCoDto.setCountLike(likes);
-		 * 
-		 * c.setGcoDto(gCoDto); }
-		 * 
-		 * mview.addObject("commentList", commentList);
-		 */
+
 		mview.addObject("memberDto", memberDto);
+		
+		// 후기 정보
+		List<ResultMapDto> commentList = gcommentService.selectOneGuest(id);
+		
+		for(ResultMapDto c : commentList) {
+			// 회원 정보
+			c.setMemDto(memberDto);
+			
+			// 좋아요 개수
+			String reserNo = c.getGcoDto().getNo();
+			
+			int likes = likeService.countLike(reserNo, id);
+			
+			GuestCommentDto gcoDto = gcommentService.getOneComment(reserNo, id);
+			gcoDto.setCountLike(likes);
+			
+			c.setGcoDto(gcoDto);
+		}
+		
+		mview.addObject("commentList", commentList);
 		
 		mview.setViewName("/member/profileForm");
 		

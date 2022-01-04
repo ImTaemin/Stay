@@ -164,24 +164,9 @@
 	box-shadow: 2px;
 }
 
+/* 후기 */
 .comment-wrap {
 	width: 100%;
-}
-
-.comment-wrap>.comment-title {
-	margin-bottom: 10px;
-}
-
-.comment-wrap>.comment-title>.title {
-	font-weight: bold;
-	font-size: 1.5em;
-	margin-bottom: 10px;
-}
-
-.comment-wrap>.comment-title>i {
-	color: #FFCD28;
-	margin-left: 3px;
-	margin-right: 5px;
 }
 
 .comment-wrap>.comment>.empty {
