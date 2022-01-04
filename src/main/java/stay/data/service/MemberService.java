@@ -40,6 +40,10 @@ public class MemberService {
 		mapper.updateImg(memberDto);
 	}
 	
+	public void deletelikes(String id) {
+		mapper.deletelikes(id);
+	}
+	
 	//아이디 찾기
 	public String findId(String inputName, String inputHp) {
 		

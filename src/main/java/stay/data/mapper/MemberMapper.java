@@ -30,6 +30,7 @@ public interface MemberMapper {
 	
 	public MemberDto getData(String id);
 	public void updatelikes(String id);
+	public void deletelikes(String id);
 	
 	public String findId(String inputName, String inputHp);
 	

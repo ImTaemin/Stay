@@ -35,9 +35,6 @@ public class GuestCommentController {
 		
 		double rating = Double.parseDouble(rate);
 		
-//		// 숙소 번호 구하기
-//		String roomNo = reservationService.getRoomNo(reserNo);
-		
 		GuestCommentDto gCommentDto = new GuestCommentDto();
 		gCommentDto.setNo(reserNo);
 		gCommentDto.setGuest_id(myid);

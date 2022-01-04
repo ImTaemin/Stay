@@ -1,24 +1,77 @@
-function likeClick(e) {
+//function likeClick(e) {
+//	var id = $(e).attr("user_id");
+//	//alert(id);
+//	var tag = $(e);
+//
+//	console.log(id);
+//
+//	$.ajax({
+//
+//		type: "get",
+//		dataType: "json",
+//		url: "updatelikes",
+//		data: { "id": id },
+//		success: function(data) {
+//			//alert(data.chu);
+//			tag.next().text(data.likes);
+//		}
+//
+//	});
+//}
+
+// 멤버 좋아요 클릭
+var flag = true;
+
+function heartClick(e) {
 	var id = $(e).attr("user_id");
-	//alert(id);
-	var tag = $(e);
+	var cnt = parseInt($(e).attr("cnt"));
 
-	console.log(id);
+	if (check == "bi bi-heart co-heart") {
+		$(e).attr("class", "bi bi-heart-fill co-heart");
+		flag = false;
 
-	$.ajax({
+		$.ajax({
+			type: "get",
+			url: "/updatelikes",
+			data: { "id": id }
+		});
 
-		type: "get",
-		dataType: "json",
-		url: "updatelikes",
-		data: { "id": id },
-		success: function(data) {
-			//alert(data.chu);
-			tag.next().text(data.likes);
-		}
+		cnt += 1;
 
-	});
+		$(e).attr("cnt", cnt);
+		$("#" + reserNo).html(cnt);
+	} else if (check == "bi bi-heart-fill co-heart") {
+		$(e).attr("class", "bi bi-heart co-heart");
+		flag = true;
+
+		$.ajax({
+			type: "post",
+			url: "/like/delete",
+			data: { "reserNo": reserNo, "guestId": guestId }
+		});
+
+		cnt -= 1;
+
+		$(e).attr("cnt", cnt);
+		$("#" + reserNo).html(cnt);
+	} else {
+		$(e).attr("class", "bi bi-heart co-heart");
+		flag = true;
+
+		$.ajax({
+			type: "get",
+			url: "/updatelikes",
+			data: { "id": id }
+		});
+
+		cnt -= 1;
+
+		$(e).attr("cnt", cnt);
+		$("#" + reserNo).html(cnt);
+	}
 }
 
+// 신고 모달
 $(".openBtn").click(function() {
 	$("#singo-id").val($("#report_id").text());
 });
@@ -33,25 +86,23 @@ $("#bodyBtn").click(function() {
 		url: "/profile/singo",
 		data: { "black_id": black_id, "reason": reason },
 		success: function(data) {
-			console.log("성공");
 			location.reload();
 		}
 	});
 });
-
 
 // 후기 좋아요 클릭 이벤트
 var flag = true;
 
 function coHeartClick(e1) {
 	var check = $(e1).attr("class");
-	
+
 	var reserNo = $(e1).attr("reserNo");
 	var guestId = $(e1).attr("guestId");
 	var myId = $(e1).attr("myid");
 	var cnt = parseInt($(e1).attr("cnt"));
-	
-	if(myId == "") {
+
+	if (myId == "") {
 		Swal.fire({
 			icon: 'error',
 			title: '로그인이 필요합니다.',
@@ -67,9 +118,9 @@ function coHeartClick(e1) {
 				url: "/like/insert",
 				data: { "reserNo": reserNo, "guestId": guestId }
 			});
-			
+
 			cnt += 1;
-			
+
 			$(e1).attr("cnt", cnt);
 			$("#" + reserNo).html(cnt);
 		} else if (check == "bi bi-heart-fill co-heart") {
@@ -81,9 +132,9 @@ function coHeartClick(e1) {
 				url: "/like/delete",
 				data: { "reserNo": reserNo, "guestId": guestId }
 			});
-			
+
 			cnt -= 1;
-			
+
 			$(e1).attr("cnt", cnt);
 			$("#" + reserNo).html(cnt);
 		} else {
@@ -95,9 +146,9 @@ function coHeartClick(e1) {
 				url: "/like/delete",
 				data: { "reserNo": reserNo, "guestId": guestId }
 			});
-			
+
 			cnt -= 1;
-			
+
 			$(e1).attr("cnt", cnt);
 			$("#" + reserNo).html(cnt);
 		}

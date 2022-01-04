@@ -58,6 +58,10 @@
 		update member set likes=likes+1 where id=#{id}
 	</update>
 	
+	<update id="deletelikes" parameterType="String">
+		update member set likes=likes-1 where id=#{id}
+	</update>
+	
 	<select id="findId" parameterType="String" resultType="String">
 		select id from member where name=#{inputName} and hp=#{inputHp}
 	</select>
