@@ -36,6 +36,7 @@
 	justify-content: space-evenly;
 	align-items: center;
 	margin-left: 15%;
+	margin-top: 1.5%;
 }
 
 .profile-main>.profile-top>.profile-third>.profile-like {
@@ -111,6 +112,17 @@
 	outline: none;
 	box-shadow: none;
 	border-color: #0B57A2;
+}
+
+#singo-id:focus, #singo-id:hover, #singo-id:active {
+	display: block;
+	width: 70%;
+	height: 35px;
+	padding: 0 12px;
+	border-radius: 7px;
+	font-size: 16px;
+	border: 2px solid #d3dce6;
+	transition: border-color 200ms ease-in-out;
 }
 
 .modal-footer>#bodyBtn {

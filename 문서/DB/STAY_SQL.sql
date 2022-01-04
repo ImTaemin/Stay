@@ -18,6 +18,8 @@ create table report_member(
 	black_id varchar(20),
 	report_id varchar(20),
 	reason varchar(500) not null,
+	report_date date not null,
+	approve_date date,
 	foreign key (black_id) references member(id) on update cascade on delete set null,
 	foreign key (report_id) references member(id) on update cascade on delete cascade
 );
@@ -109,15 +111,17 @@ create table can_reservation(
 	can_date date not null,
 	refund int not null,
 	refund_check varchar(20) default "ing",
+	refund_date date,
 	foreign key (no) references reservation(no)
 );
 
 #예약취소영수증
 create table can_receipt(
-	id int auto_increment not null,
+	id int not null,
 	no varchar(20) not null,
 	primary key (id, no),
-	foreign key (no) references can_reservation(no)
+	foreign key (id) references receipt(id),
+	foreign key (no) references receipt(no)
 );
 
 #공동게스트
@@ -163,12 +167,13 @@ create table wishlist(
 	foreign key (guest_id) references member(id)
 );
 
-#채팅
-create table chat(
-	id varchar(255) primary key,
-	msg varchar(5000),
-	sender varchar(50),
-	receiver varchar(50)
+#멤버 좋아요
+create table member_like(
+	guest_id varchar(20) not null,
+	id varchar(20) not null,
+	primary key (guest_id, id),
+	foreign key (guest_id) references member(id) on delete cascade on update cascade,
+	foreign key (id) references member(id) on delete cascade on update cascade
 );
 
 #게스트 댓글 좋아요
@@ -177,7 +182,22 @@ create table comment_like(
 	guest_id varchar(20) not null,
 	id varchar(20) not null,
 	primary key (no, guest_id, id),
-	foreign key (no) references reservation(no),
-	foreign key (guest_id) references reservation(guest_id),
+	foreign key (no) references guest_comment(no) on delete cascade,
+	foreign key (guest_id) references guest_comment(guest_id) on delete cascade,
 	foreign key (id) references member(id)
 );
+
+#채팅
+create table chat(
+	id varchar(255) primary key,
+	sender varchar(50),
+	receiver varchar(50),
+	msg varchar(5000),
+	msg_time timestamp
+);
+
+# 2일 후 환불 스케줄러
+CREATE EVENT after_2day_refund
+    ON SCHEDULE EVERY 1 DAY
+    DO 
+   update can_reservation set refund_check = "can" where refund_check="end" and refund_date = DATE_FORMAT((SELECT DATE_SUB(NOW(), INTERVAL 2 DAY)),"%y-%m-%d");

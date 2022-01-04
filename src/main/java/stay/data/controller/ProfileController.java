@@ -1,6 +1,5 @@
 package stay.data.controller;
 
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -12,17 +11,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import stay.data.dto.CommentLikeDto;
 import stay.data.dto.GuestCommentDto;
 import stay.data.dto.MemberDto;
+import stay.data.dto.MemberLikeDto;
 import stay.data.dto.ReportMemberDto;
 import stay.data.dto.ResultMapDto;
 import stay.data.mapper.MemberMapper;
 import stay.data.service.CommentLikeService;
 import stay.data.service.GuestCommentService;
+import stay.data.service.MemberLikeService;
 import stay.data.service.MemberService;
 import stay.data.service.RoomService;
 import stay.data.service.WishListService;
@@ -48,12 +48,16 @@ public class ProfileController {
 
 	@Autowired
 	CommentLikeService likeService;
+	
+	@Autowired
+	MemberLikeService memLikeService;
 
 	@GetMapping("/profileform")
 	public ModelAndView profile1(@RequestParam(required = false) String id, HttpSession session) {
 		ModelAndView mview = new ModelAndView();
-		String myid = (String) session.getAttribute("myid");
-
+		
+		String myid = (String)session.getAttribute("myid");
+		
 		// 회원 정보
 		MemberDto memberDto = memberService.getMember(id);
 
@@ -81,11 +85,17 @@ public class ProfileController {
 		int commentNum = gcommentService.countGuestComment(id);
 
 		// 좋아요한 댓글 리스트
-		List<CommentLikeDto> likeList = likeService.getLike(myid);
+		List<CommentLikeDto> likeList = likeService.getLike(id);
+		
+		// 멤버 좋아요
+		int likeFlag = memLikeService.getSameLike(id, myid);
+		int memberLikeNum = memLikeService.getGuestLikeNum(id);
 
 		mview.addObject("commentList", commentList);
 		mview.addObject("commentNum", commentNum);
 		mview.addObject("likeList", likeList);
+		mview.addObject("likeFlag", likeFlag);
+		mview.addObject("memberLikeNum", memberLikeNum);
 
 		mview.setViewName("/member/profileForm");
 
@@ -105,20 +115,22 @@ public class ProfileController {
 
 		memberService.insertSingoMem(rmDto);
 	}
-//
-//	@GetMapping("/updatelikes")
-//	@ResponseBody
-//	public HashMap<String, Integer> updatelikes(@RequestParam String id) {
-//		HashMap<String, Integer> map = new HashMap<String, Integer>();
-//		mapper.updatelikes(id);
-//		int likes = mapper.getMember(id).getLikes();
-//		map.put("likes", likes);
-//
-//		return map;
-//	}
-//	
-//	@GetMapping("/deletelikes")
-//	public @ResponseBody void deleteLikes(@RequestParam String id) {
-//		memberService.deletelikes(id);
-//	}
+	
+	@PostMapping("/insertlike")
+	public void likeInsert(
+			@ModelAttribute MemberLikeDto memLikeDto, @RequestParam String guestId, HttpSession session) {
+		String myid = (String)session.getAttribute("myid");
+		
+		memLikeDto.setGuest_id(guestId);
+		memLikeDto.setId(myid);
+		
+		memLikeService.insertLike(memLikeDto);
+	}
+	
+	@PostMapping("/deletelike")
+	public void deleteLike(@RequestParam String guestId, HttpSession session) {
+		String myid = (String)session.getAttribute("myid");
+		
+		memLikeService.deleteLike(guestId, myid);
+	}
 }

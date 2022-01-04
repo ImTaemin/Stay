@@ -47,18 +47,18 @@
 			<div class="profile-third">
 				<c:set var="heart_flag" value="false"/>
 				<div class="profile-like">
-<%-- 					<c:if test="${like.no eq coList.gcoDto.no}"> --%>
-<%-- 						<i onclick="heartClick(this)" id="${memberDto.id}" cnt="${memberDto.likes}" --%>
-<!-- 						class="bi bi-heart-fill co-heart"></i> -->
-<%-- 						<c:set var="heart_flag" value="true"/> --%>
-<%-- 					</c:if> --%>
+					<c:if test="${likeFlag == 1}">
+						<i onclick="heartClick(this)" guestId="${memberDto.id}" cnt="${memberLikeNum}"
+						class="bi bi-heart-fill co-heart"></i>
+						<c:set var="heart_flag" value="true"/>
+					</c:if>
 					
-<%-- 					<c:if test="${not heart_flag}"> --%>
-<%-- 						<i onclick="heartClick(this)" id="${memberDto.id}" cnt="${memberDto.likes}" --%>
-<!-- 						class="bi bi-heart co-heart"></i> -->
-<%-- 					</c:if> --%>
+					<c:if test="${not heart_flag}">
+						<i onclick="heartClick(this)" guestId="${memberDto.id}" cnt="${memberLikeNum}"
+						class="bi bi-heart co-heart"></i>
+					</c:if>
 					
-<%-- 					<span class="heart-count" id="heartCount">${memberDto.likes}</span> --%>
+					<span class="heart-count" id="heartCount">${memberLikeNum}</span>
 				</div>
 				
 				<div class="update" data-toggle="modal" data-target="#singoModal">
@@ -77,14 +77,15 @@
 
 							<div class="modal-body">
 								<label for="id-singo">신고 할 아이디&nbsp;</label>
-								<input type="text" id="singo-id" required="required" value="${sessionScope.id}"><br>
+								<input type="text" id="singo-id" required="required" value="${sessionScope.id}"
+								readonly="readonly"><br>
 								
 								<label for="reason-singo">신고사유</label>
-								<input type="text" id="singo-reason" required="required">
+								<input type="text" id="singo-reason" required>
 							</div>
 
 							<div class="modal-footer">
-								<button type="submit" id="bodyBtn" class="btn btn-danger" data-dismiss="modal">신고하기</button>
+								<button type="button" id="bodyBtn" class="btn btn-danger" data-dismiss="modal">신고하기</button>
 								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 							</div>
 						</div>

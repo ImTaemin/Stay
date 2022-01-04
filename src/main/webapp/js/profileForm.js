@@ -3,8 +3,8 @@ var flag = true;
 
 function heartClick(e) {
 	var check = $(e).attr("class");
-	
-	var id = $(e).attr("id");
+
+	var guestId = $(e).attr("guestId");
 	var cnt = parseInt($(e).attr("cnt"));
 
 	if (check == "bi bi-heart co-heart") {
@@ -12,43 +12,43 @@ function heartClick(e) {
 		flag = false;
 
 		$.ajax({
-			type: "get",
-			url: "/profile/updatelikes",
-			data: { "id": id }
+			type: "post",
+			url: "/profile/insertlike",
+			data: { "guestId": guestId }
 		});
 
 		cnt += 1;
 
 		$(e).attr("cnt", cnt);
-		$("#" + heartCount).html(cnt);
+		$("#heartCount").html(cnt);
 	} else if (check == "bi bi-heart-fill co-heart") {
 		$(e).attr("class", "bi bi-heart co-heart");
 		flag = true;
 
 		$.ajax({
-			type: "get",
-			url: "/profile/deletelikes",
-			data: { "id": id }
+			type: "post",
+			url: "/profile/deletelike",
+			data: { "guestId": guestId }
 		});
 
 		cnt -= 1;
 
 		$(e).attr("cnt", cnt);
-		$("#" + heartCount).html(cnt);
+		$("#heartCount").html(cnt);
 	} else {
 		$(e).attr("class", "bi bi-heart co-heart");
 		flag = true;
 
 		$.ajax({
-			type: "get",
-			url: "/profile/deletelikes",
-			data: { "id": id }
+			type: "post",
+			url: "/profile/deletelike",
+			data: { "guestId": guestId }
 		});
 
 		cnt -= 1;
 
 		$(e).attr("cnt", cnt);
-		$("#" + heartCount).html(cnt);
+		$("#heartCount").html(cnt);
 	}
 }
 
@@ -135,3 +135,10 @@ function coHeartClick(e1) {
 		}
 	}
 }
+
+// 모달 창 닫을 때 이벤트 (body 화면 줄어듦)
+$(document).ready(function() {
+	$('#singoModal').on('hidden.bs.modal', function() {
+		document.body.style.padding = "0";
+	});
+});
