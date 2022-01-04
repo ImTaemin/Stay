@@ -19,7 +19,7 @@
 <div class="find-form">
  <h1>비밀번호 찾기</h1>
  
-  <form action="findIdprocess" method="post">
+  <form>
   	<label for="id">아이디</label>
     <input type="text" id="id" name="id" placeholder="아이디를 입력하세요" required="required" autofocus="autofocus"><br>
   	<label for="e_mail">이메일</label>

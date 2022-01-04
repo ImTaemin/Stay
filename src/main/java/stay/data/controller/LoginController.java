@@ -132,12 +132,7 @@ public class LoginController {
         	mdto.setPhoto(photo);
         	mdto.setE_mail(e_mail);
         	mapper.insertMember(mdto);
-        } else {
-        	MemberDto mdto=new MemberDto();
-        	mdto.setName(name);
-        	mdto.setPhoto(photo);
-        	mapper.updateMember(mdto);
-        }
+        } 
         
         session.setAttribute("myid", e_mail);
         session.setAttribute("kakaoName", name);
@@ -197,14 +192,14 @@ public class LoginController {
 	
 	
 	// 비밀번호 찾기
-	 @RequestMapping(value = "/findPw", method = RequestMethod.GET)
+	 @GetMapping("/findPw")
 	 public String findPwGET() throws Exception{
 		 return "/member/findPwForm";
 	 }
 
-	 @RequestMapping(value = "/findPw", method = RequestMethod.POST)
-	 public void findPwPOST(@ModelAttribute MemberDto mdto) throws Exception{
-	 	service.findPw(mdto);
+	 @PostMapping("/findPw")
+	 public void findPwPOST(String id, String e_mail, HttpServletResponse response) throws Exception{
+	 	service.findPw(id, e_mail, response);
 	 }
 	
 
