@@ -40,6 +40,10 @@ public class GuestCommentService {
 		mapper.deleteGuestComment(no);
 	}
 	
+	public List<ResultMapDto> selectOneGuest(String id) {
+		return mapper.selectOneGuest(id);
+	}
+	
 	public void updateLikes(String no, String guest_id) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		

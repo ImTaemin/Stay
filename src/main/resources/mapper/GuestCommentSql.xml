@@ -35,6 +35,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from guest_comment where no = #{no}
 	</delete>
 	
+	<select id="selectOneGuest" parameterType="String" resultMap="resultMap">
+		select * from guest_comment where guest_id = #{guest_id}
+	</select>
+	
 	<!-- join -->
 	<!-- room -->
 	<resultMap type="stay.data.dto.RoomDto" id="roomMap">

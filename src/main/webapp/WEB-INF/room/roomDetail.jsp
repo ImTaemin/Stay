@@ -294,12 +294,12 @@
 									<div class="mem-detail">
 										<div class="mem-img">
 											<img src="${root}/photo/memberPhoto/${coList.memDto.photo}"
-											onclick="location.href='/profile/profileform'">
+											onclick="location.href='/profile/profileform?id=${coList.memDto.id}'">
 										</div>
 										
 										<div class="mem-content">
 											<fmt:formatDate var="wirteDay" value="${coList.gcoDto.write_day}" pattern="yyyy년 MM월 dd일"/>
-											<span class="mem-id" onclick="location.href='/profile/profileform'">${coList.memDto.id}</span>
+											<span class="mem-id" onclick="location.href='/profile/profileform?id=${coList.memDto.id}'">${coList.memDto.id}</span>
 											<span class="write-day">${wirteDay}</span>
 										</div>
 										
@@ -342,11 +342,11 @@
 				
 				<div class="host-main">
 					<div class="photo">
-						<img alt="" src="../photo/memberPhoto/${memDto.photo}" onclick="location.href='/profile/profileform'">
+						<img alt="" src="../photo/memberPhoto/${memDto.photo}" onclick="location.href='/profile/profileform?id=${memDto.id}'">
 					</div>
 					
 					<div class="content">
-						<label class="name" onclick="location.href='/profile/profileform'">${memDto.id}</label>
+						<label class="name" onclick="location.href='/profile/profileform?id=${memDto.id}'">${memDto.id}</label>
 						<br>
 						<label class="email">${memDto.e_mail}</label>
 					</div>

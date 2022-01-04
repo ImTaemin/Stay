@@ -60,7 +60,7 @@
 
 							<div class="modal-body">
 								<label for="id-singo">신고 할 아이디&nbsp;</label>
-								<input type="text" id="singo-id" required="required" value="${sessionScope.myid }"><br>
+								<input type="text" id="singo-id" required="required" value="${sessionScope.id }"><br>
 								<label for="reason-singo">신고사유</label>
 								<input type="text" id="singo-reason" required="required">
 							</div>
@@ -84,22 +84,12 @@
 						</b>
 					</h2> --%>
 					
-					<c:if test="${sessionScope.kakaologin == null }">
-						<h2>
-							<b id="report_id">${sessionScope.myid }</b>
-							<b> 님의<br>
-								<br>프로필입니다.😊
-							</b>
-						</h2>
-					</c:if>
-					<c:if test="${sessionScope.kakaologin!=null }">
-						<h2>
-							<b id="report_id">${sessionScope.kakaoName }</b>
-							<b> 님의<br>
-								<br>프로필입니다.😊
-							</b>
-						</h2>
-					</c:if>
+					<h2>
+						<b id="report_id">${memberDto.id }</b>
+						<b> 님의<br>
+							<br>프로필입니다.😊
+						</b>
+					</h2>
 				</c:if>
 			</div>
 			
@@ -121,31 +111,26 @@
 		<div class="profile-review">
 			<h2>숙소 후기</h2>
 			<br>
-			
 			<!-- 후기 -->
 			<div class="comment-wrap">
-				<div class="comment-title">
-					<label class="title">후기  ${dto.atDto.total} 개</label>
-				</div>
-				
 				<div class="comment">
-					<c:if test="${dto.atDto.total == 0}">
+					<c:if test="${commentList == null}">
 						<div class="empty">등록된 후기가 없습니다.</div>
 					</c:if>
 					
-					<c:if test="${dto.atDto.total > 0}">
+					<c:if test="${commentList != null}">
 						<div class="co-wrap">
 							<c:forEach var="coList" items="${commentList}">
 								<div class="co-detail">
 									<div class="mem-detail">
 										<div class="mem-img">
 											<img src="${root}/photo/memberPhoto/${coList.memDto.photo}"
-											onclick="location.href='/profile/profileform'">
+											onclick="location.href='/profile/profileform?id=${coList.memDto.id}'">
 										</div>
 										
 										<div class="mem-content">
 											<fmt:formatDate var="wirteDay" value="${coList.gcoDto.write_day}" pattern="yyyy년 MM월 dd일"/>
-											<span class="mem-id" onclick="location.href='/profile/profileform'">${coList.memDto.id}</span>
+											<span class="mem-id" onclick="location.href='/profile/profileform?id=${coList.memDto.id}'">${coList.memDto.id}</span>
 											<span class="write-day">${wirteDay}</span>
 										</div>
 										
@@ -180,14 +165,14 @@
 			
 			<br><br>
 			
-			<div class="hugi" data-toggle="modal" data-target="#hugiModal">
+			<!-- <div class="hugi" data-toggle="modal" data-target="#hugiModal">
 					<button class="review-many">후기 더 보기</button>
 				</div>
 				
-				<!-- 후기 더 보기 모달 -->
+				후기 더 보기 모달
 				<div id="hugiModal" class="modal" role="dialog">
 					<div class="modal-dialog modal-dialog-centered">
-						<!-- Modal content -->
+						Modal content
 						<div class="modal-content">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -204,7 +189,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 		</div>
 	</div>
 	
