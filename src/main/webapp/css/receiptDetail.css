@@ -103,7 +103,6 @@
 .pay-detail {
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
 	width: 42%;
 }
 
@@ -114,7 +113,7 @@
 	border: 2px solid #0B57A2;
 	border-radius: 7px;
 	padding: 4% 4%;
-	height: 49%;
+	margin-bottom: 2%;
 }
 
 .price-wrap>.cal-wrap {
@@ -145,5 +144,4 @@
 	border: 2px solid #0B57A2;
 	border-radius: 7px;
 	padding: 4% 4%;
-	height: 49%;
 }

@@ -88,7 +88,6 @@
 		
 		<div class="hostMain-bottom">
 			<div class="tab-content">
-				
 				<div class="tab-pane" id="now" role="tabpanel" aria-labelledby="now-tab">
 					<c:forEach var="list" items="${nowList}">
 								<div class="hostMain-reservation" list-no="${list.resDto.no}" onclick="btnClick(this)">
@@ -132,7 +131,7 @@
 											<div class="content-outDate">${list.resDto.end_date}</div>
 										</div>
 										<div class="content-guest">게스트
-<%-- 											<div class="content-number">${joinGuestNum}명</div> --%>
+											<div class="content-number">${list.joinDto.count}명</div>
 										</div>
 										<div class="content-payment">결제세부정보
 											<div class="content-cost">
@@ -159,7 +158,7 @@
 											<div class="content-outDate">${list.resDto.end_date}</div>
 										</div>
 										<div class="content-guest">게스트
-<%-- 											<div class="content-number">${joinGuestNum}명</div> --%>
+											<div class="content-number">${list.joinDto.count}명</div>
 										</div>
 										<div class="content-payment">결제세부정보
 											<div class="content-cost">
