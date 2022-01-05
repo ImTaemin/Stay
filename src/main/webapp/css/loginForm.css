@@ -21,10 +21,10 @@ h1 {
 }
 
 div .idsave {
-	width: 300px;
+	width: 82%;
 	height: 20px;
 	display: flex;
-	justify-content: center;
+	justify-content: flex-end;
 	font-size: 12pt;
 	margin-top: 20px;
     margin-bottom: 12px;

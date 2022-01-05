@@ -116,7 +116,7 @@ public class ProfileController {
 		if(checkSingo == 1) {
 			return false;
 		} else {
-//			memberService.insertSingoMem(rmDto);
+			memberService.insertSingoMem(rmDto);
 			
 			return true;
 		}
