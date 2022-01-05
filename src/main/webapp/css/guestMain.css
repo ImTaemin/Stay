@@ -190,16 +190,17 @@
 /* 	display: none; */
 	visibility:hidden;
 	position: absolute;
-	height: 100px;
     top: 65%;
+    max-height: 100px;
     z-index: 15;
-    width: 200px;
     border-radius: 4px;
     background-color: #fff;
     box-shadow: 0 1px 15px rgba(27, 31, 35, 0.15);
     transition: transform 200ms ease-in;
     padding: 1%;
     text-align: center;	
+    overflow: auto;
+    overflow-x: visible;
 }
   
   guestMain-site:focus,

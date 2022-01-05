@@ -32,21 +32,16 @@
 				<div class="guestMain-siteBtn"><button type="button" class="guestMain-site">위치 검색</button></div>
 				<div class="bar">|</div>
 				<div class="site-search">
-					<input id="search-addr" onchange="search(this)" type="text" placeholder="위치를 검색하세요.">
+					<input id="search-addr" onkeyup="search(this)" type="text" placeholder="위치를 검색하세요.">
 					<hr>
 					<script type="text/javascript">
-						/* function search(){
-							success:function(data){
-								.forEach(item, index, array){
-									s="";
-									
-								}
-								$("#search-result").html(s);
-							}
-						} */
-						
 						function search(){
 							var search = $("#search-addr").val();
+							
+							if(search==""){
+								$('#search-result').html("");
+								return;
+							}
 							
 							$.ajax({
 								url:"searchRoomSite",
@@ -55,12 +50,10 @@
 								success:function(data){
 									var s="";
 									$.each(data, function(i, item){
-										s+="<b>"+item.addr_load+"</b>";
+										var load = item.addr_load.split(" ");
+										s+="<h6>"+ (load[0] + " " + load[1]) +"</h6>";
 									});
 									$('#search-result').html(s);
-								},
-								error : function() {
-									alert("error");
 								}
 							});
 						}
