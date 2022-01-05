@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import stay.data.dto.MemberDto;
 import stay.data.mapper.MemberMapper;
@@ -157,7 +158,6 @@ public class LoginController {
 	// 아이디 찾기
 	@GetMapping("/findId")
 	public String findIdForm() throws Exception {
-
 		return "/member/findIdForm";
 	}
 
@@ -174,8 +174,14 @@ public class LoginController {
 
 	// 비밀번호 찾기
 	@GetMapping("/findPw")
-	public String findPwGET() throws Exception {
-		return "/member/findPwForm";
+	public ModelAndView findPwGET(@RequestParam(required =  false) String userId) throws Exception {
+		ModelAndView mview = new ModelAndView();
+		
+		mview.addObject("userId", userId);
+		
+		mview.setViewName("/member/findPwForm");
+		
+		return mview;
 	}
 
 	@PostMapping("/findPw")

@@ -23,7 +23,15 @@
 
 		<form>
 			<label for="id">아이디</label>
-			<input type="text" id="id" name="id" placeholder="아이디를 입력하세요" value="" required="required" autofocus="autofocus">
+			
+			<c:if test="${userId == null}">
+				<input type="text" id="id" name="id" placeholder="아이디를 입력하세요" value="" required="required" autofocus="autofocus">
+			</c:if>
+			
+			<c:if test="${userId != null}">
+				<input type="text" id="id" name="id" placeholder="아이디를 입력하세요" value="${userId}"
+				required="required" autofocus="autofocus">
+			</c:if>
 			
 			<br>
 			
