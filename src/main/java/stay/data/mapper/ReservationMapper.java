@@ -16,7 +16,7 @@ public interface ReservationMapper {
 	public List<ResultMapDto> selectNowHostReservation(String hostId);
 	public List<ResultMapDto> selectPreGuestReservation(String guestId);
 	public List<ResultMapDto> selectPreHostReservation(String hostId);
-	public List<ReservationDto> selectHostThreeReservation(String hostId);
+	public List<ResultMapDto> selectHostThreeReservation(String hostId);
 	public List<ReservationDto> selectHostReservation(String hostId);
 	public ReservationDto selectGuestOneReservation(HashMap<String, String> map);
 	public ReservationDto selectHostOneReservation(HashMap<String, String> map);

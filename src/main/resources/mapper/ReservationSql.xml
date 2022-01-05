@@ -74,7 +74,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from reservation where host_id = #{host_id}
 	</select>
 	
-	<select id="selectHostThreeReservation" parameterType="String" resultType="redto">
+	<select id="selectHostThreeReservation" parameterType="String" resultMap="resultMap">
 		select * from reservation res, room r 
 		where res.host_id = #{host_id} and res.room_no = r.no 
 		and res.start_date >= date_format(now(), "%y-%m-%d") 

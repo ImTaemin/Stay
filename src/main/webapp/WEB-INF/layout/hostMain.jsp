@@ -24,31 +24,26 @@
 <body>
 	<div class="hostMain">
 		<div class="hostMain-top">
-		
 			<!-- 선택된 상태의 숙소 카드 -->
-			<c:forEach var="list" items="${inThreeList}">
-				<c:forEach var="room" items="${inThreeRoom}">
-					<c:if test="${list.room_no == room.no}">
-						<div class="card">
-							<img class="card-img-top" src="../../photo/roomPhoto/${room.photos}">
-							
-							<div class="card-body top">
-								<h5 class="card-title">${list.start_date} ~ ${list.end_date}</h5>
-								<b class="card-text">
-									${room.name}
-								</b>
-								<p class="card-text">
-									${room.addr_load}
-								</p>
-							</div>
-							
-							<div class="card-body bottom" list-no="${list.no}" onclick="btnClick(this)">
-								<label class="card-link">예약 정보 더보기</label>
-								<i class="bi bi-chevron-right"></i>
-							</div>
-						</div>
-					</c:if>
-				</c:forEach>
+			<c:forEach var="list" items="${reserThreeList}">
+				<div class="card">
+					<img class="card-img-top" src="../../photo/roomPhoto/${list.roomDto.photos}">
+					
+					<div class="card-body top">
+						<h5 class="card-title">${list.resDto.start_date} ~ ${list.resDto.end_date}</h5>
+						<b class="card-text">
+							${list.roomDto.name}
+						</b>
+						<p class="card-text">
+							${list.roomDto.addr_load}
+						</p>
+					</div>
+					
+					<div class="card-body bottom" list-no="${list.resDto.no}" onclick="btnClick(this)">
+						<label class="card-link">예약 정보 더보기</label>
+						<i class="bi bi-chevron-right"></i>
+					</div>
+				</div>
 			</c:forEach>
 			 
 		</div>

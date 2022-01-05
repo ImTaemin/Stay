@@ -1,6 +1,5 @@
 package stay.data.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -14,7 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import stay.data.dto.JoinGuestDto;
 import stay.data.dto.MemberDto;
-import stay.data.dto.ReservationDto;
 import stay.data.dto.ResultMapDto;
 import stay.data.dto.RoomDto;
 import stay.data.service.CanReservationService;
@@ -88,10 +86,7 @@ public class MainController {
 		List<ResultMapDto> canList = canReserService.getAllHostCanReser(myid);
 
 		// 호스트모드 체크인예정 목록중 최근 3개
-		List<ReservationDto> reserThreeList = reservationService.selectHostThreeReservation(myid);
-
-		List<ReservationDto> inThreeList = new ArrayList<ReservationDto>();
-		List<RoomDto> inThreeRoom = new ArrayList<RoomDto>();
+		List<ResultMapDto> reserThreeList = reservationService.selectHostThreeReservation(myid);
 
 		// 예정된 예약
 		for (ResultMapDto dto : nowList) {
@@ -176,17 +171,17 @@ public class MainController {
 		}
 
 		// 호스트모드 예약상태별 예약 목록중 최근 3개
-		for (ReservationDto reser : reserThreeList) {
-
-			RoomDto roomDto = roomService.getRoom(reser.getRoom_no());
-
+		for (ResultMapDto reser : reserThreeList) {
+			String roomNo = reser.getResDto().getRoom_no();
+			
+			RoomDto roomDto = roomService.getRoom(roomNo);
+			
 			String photos = roomDto.getPhotos();
 			String photo[] = photos.split(",");
 
 			roomDto.setPhotos(photo[0]);
 
-			inThreeList.add(reser);
-			inThreeRoom.add(roomDto);
+			reser.setRoomDto(roomDto);
 		}
 
 		mview.addObject("nowList", nowList);
@@ -194,8 +189,7 @@ public class MainController {
 		mview.addObject("canList", canList);
 
 		// 호스트모드 예약상태별 예약 목록중 최근 3개
-		mview.addObject("inThreeList", inThreeList);
-		mview.addObject("inThreeRoom", inThreeRoom);
+		mview.addObject("reserThreeList", reserThreeList);
 
 		mview.setViewName("/layout/hostMain");
 
