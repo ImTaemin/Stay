@@ -1,0 +1,18 @@
+@charset "UTF-8";
+@import url('font.css');
+
+.cal-container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.cal-container .cal-wrap{
+    width: 70%;
+    height: 100%;
+}
+
+.cal-container .cal-info{
+    width: 30%;
+    height: 100%;
+}

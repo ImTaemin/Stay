@@ -140,6 +140,12 @@
 				<button type="button" class="btn btn-default"  id="signupbtn" onclick="location.href='${root}/member/gaip'">Sign Up</button>
 			</c:if>
 			<c:if test="${sessionScope.loginok!=null }">
+			  <c:if test="${sessionScope.mode=='guest'}">
+			    <i class="bi bi-person-fill"></i>
+			  </c:if>
+			  <c:if test="${sessionScope.mode=='host'}">
+			    <i class="bi bi-house-fill"></i>
+			  </c:if>
 				<c:if test="${sessionScope.kakaologin == null }">
 					<b>${sessionScope.myid } 님</b>
 				</c:if>
