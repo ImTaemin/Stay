@@ -82,6 +82,12 @@ public class LoginController {
 
 		int check = mapper.login(map);
 
+	      if(check == 1 && id.equals("admin")) {
+	    	 session.setAttribute("loginok", "yes");
+	    	 session.setAttribute("myid", id);
+	         return "redirect:/report";
+	      }
+		
 		if (check == 1) {
 			session.setAttribute("myid", id);
 			session.setAttribute("loginok", "yes");
