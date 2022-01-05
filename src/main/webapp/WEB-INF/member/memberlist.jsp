@@ -36,8 +36,9 @@
 						<td>${list.report_id}</td>
 						<td>${list.reason}</td>
 						<td>
-							<button type="button" class="btn btn-danger btn-xs">승인</button>
+							<button type="button" class="btn btn-danger btn-xs">접수</button>
 							<button type="button" class="btn btn-warning btn-xs del">보류</button>
+							<button type="button" class="btn btn-success btn-xs">승인</button>
 						</td>
 					</tr>
 				</c:forEach>
