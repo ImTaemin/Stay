@@ -132,3 +132,42 @@ function postPopUp() {
 	frm.method = "post";
 	frm.submit();
 }
+
+// 조인 게스트 출력
+function guestInfo(no, maxPer) {
+	// 메인 게스트 이미지 설정 (kakao)
+	$("#main-img").attr("src", $("#img").attr("src"));
+
+	var joinNum = parseInt($('input[name=joinNum]').attr('value'));
+
+	var s = "";
+
+	$.ajax({
+		type: "post",
+		dataType: "json",
+		data: { "no": no },
+		url: "/join/guestlist",
+		success: function(data) {
+			data.forEach(function(element) {
+				s += '<div class="join-guest-wrap" id="' + element.memDto.id + '">';
+				s += '<hr>';
+				s += '<div class="join-guest-de">';
+				s += '<div class="join-guest-img">';
+				if (element.memDto.photo.indexOf("@") != -1) {
+					s += '<img id="join-guest" src="../../photo/memberPhoto/' + element.memDto.photo + '">';
+				} else {
+					s += '<img id="join-guest" src="' + element.memDto.photo + '">';
+				}
+				s += '</div>';
+				s += '<label>' + element.memDto.id + '</label>';
+				s += '<button type="button" id="joinDel" class="btn btn-danger" onclick="delGuest(this)"';
+				s += 'resNo="' + element.joinDto.no + '" guestId="' + element.memDto.id + '" joinNum="' + joinNum + '"';
+				s += 'maxPer="' + maxPer + '">게스트 삭제</button>';
+				s += '</div>';
+				s += '</div>';
+			});
+
+			$(".join-guest").html(s);
+		}
+	});
+}

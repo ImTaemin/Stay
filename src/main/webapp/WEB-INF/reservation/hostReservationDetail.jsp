@@ -117,8 +117,19 @@
 						<div class="guest">
 							<span id="joinNum">${joinGuestNum}명</span>
 							
-							<div class="guest-btn">	
-								<div data-toggle="modal" data-target="#guestList">
+							<!-- hidden -->
+							<input type="hidden" name="joinNum" value="${joinGuestNum}">
+							
+							<div class="guest-btn">
+								<c:if test="${roomDto.max_per > joinGuestNum}">
+									<c:if test="${preCheck == false and canCheck == false}">
+										<span class="bi bi-plus-circle" onclick="addGuest(this)" style="margin-right: 20%"
+										no="${reserDto.no}" hostId="${hostDto.id}" myid="${sessionScope.myid}"
+										maxPer="${roomDto.max_per}" id="addGuest"></span>
+									</c:if>
+								</c:if>
+								
+								<div onclick="guestInfo(${reserDto.no}, ${roomDto.max_per})" data-toggle="modal" data-target="#guestList">
 									<span class="bi bi-three-dots"></span>
 								</div>
 							</div>
@@ -136,7 +147,7 @@
 									<div class="modal-body">
 										<div class="main-guest-wrap">
 											<div class="main-guest-img">
-												<img src="${root}/photo/memberPhoto/${guestDto.photo}">
+												<img id="main-img" src="${root}/photo/memberPhoto/${guestDto.photo}">
 											</div>
 											
 											<label>${guestDto.id}</label>
