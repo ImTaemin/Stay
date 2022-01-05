@@ -120,3 +120,15 @@ $(document).ready(function() {
 		document.body.style.padding = "0";
     });
 });
+
+// 영수증 출력
+function postPopUp() {
+	frm = document.getElementById("receiptPop");
+
+	window.open('', 'popup', 'width=1100, height=700, top=30, left=120');
+
+	frm.action = "/receipt/detail";
+	frm.target = "popup";
+	frm.method = "post";
+	frm.submit();
+}

@@ -97,7 +97,11 @@
 							
 							<div class="receipt">
 								<span>영수증 보기</span>
-								<span class="bi bi-receipt-cutoff"></span>
+								<span class="bi bi-receipt-cutoff" onclick="postPopUp()"></span>
+								<!-- from -->
+								<form action='/receipt/detail' method='post' id="receiptPop">
+									<input type="hidden" name="reserNo" value="${reserDto.no}">
+								</form>
 							</div>
 						</div>
 					</div>
@@ -173,10 +177,10 @@
 			<c:if test="${preCheck == false}">
 				<!-- 취소 버튼 -->
 				<div class="can-wrap">
-					<c:if test="${canReserDto == null}">
+					<%-- <c:if test="${canReserDto == null}">
 						<button class="btn btn-danger" id="can-reser" no="${reserDto.no}" price="${reserDto.price}"
 						onclick="reserCan(this)">예약 취소</button>
-					</c:if>
+					</c:if> --%>
 					
 					<c:if test="${canReserDto.refund_check == 'ing'}">
 						<button class="btn btn-secondary can-btn" id="can-reser" no="${reserDto.no}" onclick="reserRef(this)">예약 취소가 진행 중입니다.</button>
