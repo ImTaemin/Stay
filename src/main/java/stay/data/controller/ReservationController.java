@@ -181,7 +181,7 @@ public class ReservationController {
 		
 		receiptService.receInsert(receiptDto);
 		
-		mview.setViewName("redirect:/room/main");
+		mview.setViewName("redirect:/reser/reservationlist");
 		
 		return mview;
 	}
