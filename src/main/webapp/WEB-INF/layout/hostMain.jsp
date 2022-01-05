@@ -138,6 +138,11 @@
 												<fmt:formatNumber value="${list.resDto.price}" type="currency" currencySymbol="￦"/>
 											</div>
 										</div>
+										<div class="content-review-check">
+											<c:if test="${gcdto.getNo()!=null}">
+												리뷰<i class="bi bi-chat-square-dots"></i>
+											</c:if>
+										</div>
 									</div>
 								</div>
 					</c:forEach>
