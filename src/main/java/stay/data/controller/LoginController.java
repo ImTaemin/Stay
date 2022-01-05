@@ -137,13 +137,13 @@ public class LoginController {
 	@RequestMapping("/kakaologout")
 	public String kakaologout(HttpSession session) {
 		if (session.getAttribute("kakaologin") == null) {
-			session.removeAttribute("myid");
 			session.removeAttribute("loginok");
 			session.removeAttribute("mode");
 			return "/member/loginForm";
 		}
 
 		kakao.kakaoLogout((String) session.getAttribute("access_Token"));
+		session.removeAttribute("myid");
 		session.removeAttribute("access_Token");
 		session.removeAttribute("userId");
 		session.removeAttribute("kakaologin");
