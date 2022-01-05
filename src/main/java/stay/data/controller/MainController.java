@@ -1,5 +1,6 @@
 package stay.data.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import stay.data.dto.GuestCommentDto;
 import stay.data.dto.JoinGuestDto;
 import stay.data.dto.MemberDto;
 import stay.data.dto.ResultMapDto;
@@ -84,6 +86,8 @@ public class MainController {
 		List<ResultMapDto> nowList = reservationService.selectNowHostReservation(myid);
 		List<ResultMapDto> preList = reservationService.selectPreHostReservation(myid);
 		List<ResultMapDto> canList = canReserService.getAllHostCanReser(myid);
+		// 게스트 댓글
+		List<ResultMapDto> guestList = new ArrayList<ResultMapDto>();
 
 		// 호스트모드 체크인예정 목록중 최근 3개
 		List<ResultMapDto> reserThreeList = reservationService.selectHostThreeReservation(myid);
@@ -140,6 +144,10 @@ public class MainController {
 			joinDto.setCount(joinNum);
 
 			dto.setJoinDto(joinDto);
+			
+			ResultMapDto countDto = gcommentService.checkComment(reserNo, myid);
+			
+			guestList.add(countDto);
 		}
 
 		// 취소된 예약
@@ -183,10 +191,11 @@ public class MainController {
 
 			reser.setRoomDto(roomDto);
 		}
-
+		
 		mview.addObject("nowList", nowList);
 		mview.addObject("preList", preList);
 		mview.addObject("canList", canList);
+		mview.addObject("guestList", guestList);
 
 		// 호스트모드 예약상태별 예약 목록중 최근 3개
 		mview.addObject("reserThreeList", reserThreeList);
