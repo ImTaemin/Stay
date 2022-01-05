@@ -92,7 +92,7 @@ public class LoginController {
 		String access_Token = kakao.getAccessToken(code);
 
 		HashMap<String, Object> userInfo = kakao.getUserInfo(access_Token);
-		System.out.println("login Controller : " + userInfo);
+		//System.out.println("login Controller : " + userInfo);
 
 		String name = (String) userInfo.get("nickname");
 		String birthday = (String) userInfo.get("birthday");

@@ -146,7 +146,7 @@ public class KakaoLogin {
             conn.setRequestProperty("Authorization", "Bearer " + access_Token);
             
             int responseCode = conn.getResponseCode();
-            System.out.println("responseCode : " + responseCode);
+            //System.out.println("responseCode : " + responseCode);
             
             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             
@@ -156,7 +156,7 @@ public class KakaoLogin {
             while ((line = br.readLine()) != null) {
                 result += line;
             }
-            System.out.println(result);
+            //System.out.println(result);
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
