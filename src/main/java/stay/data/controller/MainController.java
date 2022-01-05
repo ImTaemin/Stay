@@ -1,6 +1,5 @@
 package stay.data.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -142,6 +141,19 @@ public class MainController {
 			joinDto.setCount(joinNum);
 
 			dto.setJoinDto(joinDto);
+			
+			// 후기 여부
+			GuestCommentDto gcommentDto = gcommentService.getOneComment(reserNo, dto.getResDto().getGuest_id());
+			int countComment = gcommentService.checkComment(reserNo, myid);
+			
+			if(gcommentDto == null) {
+				countComment = 0;
+				gcommentDto = new GuestCommentDto();
+			}
+			
+			gcommentDto.setCountLike(countComment);
+			
+			dto.setGcoDto(gcommentDto);
 		}
 
 		// 취소된 예약

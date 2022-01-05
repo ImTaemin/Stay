@@ -1,9 +1,10 @@
 @charset "UTF-8";
 
-.hostMain-top{
+.hostMain-top {
 	display: flex;
 	justify-content: space-around;
-} 
+}
+
 .hostMain .card {
 	border-radius: 7px !important;
 	width: 30%;
@@ -61,30 +62,31 @@
 	border-top-right-radius: 10px !important;
 }
 
-.hostMain .hostMain-detail{
+.hostMain .hostMain-detail {
 	text-align: center;
 	padding: 6% 1%;
 	align-items: center;
 }
 
-.hostMain .hostMain-name{
+.hostMain .hostMain-name {
 	font-size: 15pt;
 	font-weight: bolder;
 }
 
 /* hostMain-middle : 오늘날짜, 상태 탭목록*/
-.hostMain .hostMain-middle{
+.hostMain .hostMain-middle {
 	display: flex;
 	justify-content: space-between;
 	margin-top: 3%;
 }
 
-.hostMain .hostMain-date{
+.hostMain .hostMain-date {
 	font-size: 16pt;
-	font-weight: bolder;	
-} 
+	font-weight: bolder;
+}
 
-.hostMain .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+.hostMain .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active
+	{
 	width: 100%;
 	font-size: 1.2em;
 	color: white !important;
@@ -98,7 +100,7 @@
 }
 
 .hostMain .nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
-	background-color: rgb(174, 217, 218, 0.3);	
+	background-color: rgb(174, 217, 218, 0.3);
 }
 
 /* hostMain-bottom : 선택된 상태의 숙소 블록 */
@@ -112,59 +114,120 @@
 	border-radius: 10px !important;
 	width: 100%;
 	margin-top: 3%;
-	padding:  2%; 
+	padding: 2%;
 	cursor: pointer;
+	display: flex;
 }
 
-.hostMain .hostMain-number{
+.hostMain-number {
 	text-align: right;
 	font-weight: bolder;
-	font-size: 13pt;
+	font-size: 1.2em;
 }
 
-.hostMain .hostMain-content{
+.hostMain-content {
 	margin-top: 1%;
 	display: flex;
 	font-weight: bolder;
 	font-size: 12pt;
 	width: 100%;
+	justify-content: space-between;
 }
 
-.hostMain .content-bar{
+.hostMain .content-bar {
 	border: 1px solid gray;
 	width: 1px;
 	height: 45px;
 }
 
-.content-name{
-	width: 30%;
-}
-.content-checkIn, .content-checkOut{
-	width: 20%;
-}
-.content-guest{
-	width: 15%;
+.content-name {
+	width: 40%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 
-.content-payment{
-	width: 15%;
+.hostMain-content-wrap {
+	width: 60%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
-.hostMain .content-name{
+
+.content-checkIn, .content-checkOut {
+	width: 20%;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.content-guest {
+	width: 20%;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.content-payment {
+	width: 20%;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.content-review {
+	width: 15%;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	font-size: 2em;
+}
+
+.content-review>.bi-chat {
+	color: #ccc;
+}
+
+.content-review>.bi-chat-dots {
+	color: #0275d8;
+}
+
+.content-review>.bi-chat-dots-fill {
+	color: #5cb85c;
+}
+
+.hostMain .content-name {
 	font-size: 16pt;
 	font-weight: bolder;
+	display: flex;
+	justify-content: space-around;
+	flex-direction: column;
 }
 
-.hostMain .content-site{
+.content-name span {
+	font-size: 1.2em;
+}
+
+.hostMain .content-site {
 	font-size: 11pt;
 	font-weight: normal;
 	margin-top: 1%;
 }
 
-.hostMain .content-inDate, .content-outDate, .content-number, .content-cost{
+.hostMain .content-inDate, .content-outDate, .content-number,
+	.content-cost {
 	font-weight: normal;
 	margin-top: 1%;
 }
 
+.nav-tabs {
+	border-bottom: 0px !important;
+}
 
+.nav-tabs .nav-link {
+	border-radius: 3px !important;
+}
 
-
+.hostMain .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+	color: white !important;
+}

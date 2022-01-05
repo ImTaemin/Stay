@@ -105,10 +105,9 @@ public class ProfileController {
 		// 신고 여부
 		int checkSingo = memberService.checkSingo(blackId, myid);
 		
-		System.out.println(checkSingo);
-		
 		// 신고 insert
 		ReportMemberDto rmDto = new ReportMemberDto();
+		
 		rmDto.setBlack_id(blackId);
 		rmDto.setReport_id(myid);
 		rmDto.setReason(reason);

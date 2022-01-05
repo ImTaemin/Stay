@@ -1,3 +1,18 @@
+// calender
+document.addEventListener('DOMContentLoaded', function() {
+	var calendarEl = document.getElementById('calendar');
+	var calendar = new FullCalendar.Calendar(calendarEl, {
+		initialView: 'dayGridMonth',
+		headerToolbar: {
+			left: '',
+			center: 'title',
+			right : ''
+		},
+	});
+	
+	calendar.render();
+});
+
 // 오늘, 년, 월, 일, 1일, 말일
 $(document).ready(function() {
 	var now = new Date();
@@ -5,25 +20,25 @@ $(document).ready(function() {
 
 	var getDate = CF_toStringByFormatting(now.setMonth(now.getMonth())).split("-");
 	var nowDate = getDate[0] + "년 " + getDate[1] + "월";
-	
+
 	var node = document.createElement("option");
 	node.setAttribute("value", nowDate);
-	
+
 	var text = document.createTextNode(nowDate);
 	node.appendChild(text);
-	
+
 	document.getElementById("date").appendChild(node);
-	
+
 	for (var i = 0; i < 11; i++) {
 		var getDate = CF_toStringByFormatting(now.setMonth(now.getMonth() + 1)).split("-");
 		day[i] = getDate[0] + "년 " + getDate[1] + "월";
-		
+
 		var node = document.createElement("option");
 		node.setAttribute("value", day[i]);
-		
+
 		var text = document.createTextNode(day[i]);
 		node.appendChild(text);
-		
+
 		document.getElementById("date").appendChild(node);
 	}
 });

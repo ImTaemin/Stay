@@ -97,8 +97,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select room_no from reservation where no = #{no}
 	</select>
 	
-	<select id="checkComment" parameterType=""></select>
-	
 	<!-- join -->
 	<!-- room -->
 	<resultMap type="stay.data.dto.RoomDto" id="roomMap">

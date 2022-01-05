@@ -15,20 +15,6 @@
 <!-- js -->
 <script src='../../js/calendar.js'></script>
 <script src='../../js/roomCalendar.js'></script>
-<script>
-	document.addEventListener('DOMContentLoaded', function() {
-		var calendarEl = document.getElementById('calendar');
-		var calendar = new FullCalendar.Calendar(calendarEl, {
-			initialView : 'dayGridMonth',
-			headerToolbar : {
-				left : '',
-				center : 'title',
-				right : ''
-			},
-		});
-		calendar.render();
-	});
-</script>
 </head>
 <body>
 <div class="cal-container">
