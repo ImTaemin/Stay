@@ -1,18 +1,111 @@
 @charset "UTF-8";
+
 @import url('font.css');
 
-.cal-container{
-    width: 100%;
-    height: 100%;
-    display: flex;
+.cal-container {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: space-between;
 }
 
-.cal-container .cal-wrap{
-    width: 70%;
-    height: 100%;
+.cal-container>.cal-wrap {
+	width: 74%;
+	height: 100%;
 }
 
-.cal-container .cal-info{
-    width: 30%;
-    height: 100%;
+.cal-wrap>.cal-rooms {
+	display: flex;
+	margin-bottom: 1%;
+	justify-content: space-between;
+}
+
+.rooms-list>.form-select {
+	width: 350px;
+	height: 35px;
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+.rooms-date>.form-select {
+	width: 150px;
+	height: 35px;
+	font-size: 1.2em;
+}
+
+.cal-container>.cal-info {
+	width: 24%;
+	padding-top: 2%;
+	display: flex;
+	flex-direction: column;
+}
+
+.cal-info>.info-date {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+}
+
+.cal-info hr {
+	width: 100%;
+}
+
+.info-date>h1 {
+	font-weight: bold;
+}
+
+.cal-info>.info-hosting {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.info-hosting>span {
+	font-size: 1.5em;
+	width: 50%;
+}
+
+.info-hosting>.hosting-btn-wrap {
+	width: 50%;
+	display: flex;
+	justify-content: space-around;
+	font-size: 1.8em;
+}
+
+.hosting-btn-wrap .bi {
+	cursor: pointer;
+}
+
+.bi-check-circle:hover, .bi-check-circle-fill {
+	color: #5cb85c;
+}
+
+.bi-x-circle:hover, .bi-x-circle-fill {
+	color: #d9534f;
+}
+
+.cal-info>.info-price {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.info-price>.price-title {
+	display: flex;
+	width: 100%;
+	align-items: flex-end;
+	margin-bottom: 7%;
+}
+
+.price-title>.tag {
+	font-size: 1.5em;
+}
+
+.price-title>.day {
+	font-size: 1.2em;
+}
+
+.info-btn {
+	display: flex;
+	justify-content: center;
 }
