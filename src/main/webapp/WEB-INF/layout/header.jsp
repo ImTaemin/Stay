@@ -57,7 +57,7 @@
 			      	 	<a href="${root }/wish/list">위시리스트</a>
 			      </c:if>
 		          <c:if test="${sessionScope.mode=='host'}">
-			      	 	<a href="#">달력</a>
+						<a href="${root }/calendar">달력</a>
 			      </c:if>
 	          </li>
 	        </ul>
