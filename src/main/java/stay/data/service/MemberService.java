@@ -1,6 +1,7 @@
 package stay.data.service;
 
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -172,5 +173,13 @@ public class MemberService {
 	public List<ReportMemberDto> getReport(){
 		return mapper.getReport();
 	}
-
+	
+	public int checkSingo(String blackId, String reportId) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		
+		map.put("black_id", blackId);
+		map.put("report_id", reportId);
+		
+		return mapper.checkSingo(map);
+	}
 }

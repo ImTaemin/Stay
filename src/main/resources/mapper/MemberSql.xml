@@ -63,7 +63,7 @@
 	</update>
 	
 	<insert id="insertSingoMem" parameterType="rmdto">
-		insert into report_member values (null, #{black_id}, #{report_id}, #{reason}, now(), null)
+		insert into report_member values (null, #{black_id}, #{report_id}, #{reason}, now(), null, 'ing')
 	</insert>
 	
 	<select id="getSingoMem" parameterType="String" resultType="rmdto">
@@ -76,5 +76,9 @@
 	
 	<select id="getReport" resultType="rmdto">
 		select * from report_member
+	</select>
+	
+	<select id="checkSingo" parameterType="HashMap" resultType="int">
+		select count(*) from report_member where black_id = #{black_id} and report_id = #{report_id}
 	</select>
 </mapper>

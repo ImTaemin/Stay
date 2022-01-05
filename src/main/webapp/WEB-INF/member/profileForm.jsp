@@ -16,6 +16,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <c:set var="root" value="${pageContext.request.contextPath}" />
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <title>프로필 화면</title>
 </head>
 <body>
@@ -61,8 +62,12 @@
 					<span class="heart-count" id="heartCount">${memberLikeNum}</span>
 				</div>
 				
+				<!-- hidden -->
+				<input type="hidden" name="myid" value="${sessionScope.myid}">
+				<input type="hidden" name="guestId" value="${memberDto.id}">
+				
 				<div class="update" data-toggle="modal" data-target="#singoModal">
-					<button class="openBtn btn btn-warning">신고하기</button>
+					<button id="openBtn" class="openBtn btn btn-warning" style="">신고하기</button>
 				</div>
 
 				<!-- 신고하기 모달 -->
@@ -77,7 +82,7 @@
 
 							<div class="modal-body">
 								<label for="id-singo">신고 할 아이디&nbsp;</label>
-								<input type="text" id="singo-id" required="required" value="${sessionScope.id}"
+								<input type="text" id="singo-id" required="required" value="${memberDto.id}"
 								readonly="readonly"><br>
 								
 								<label for="reason-singo">신고사유</label>
@@ -94,7 +99,7 @@
 			</div>
 		</div>
 		
-		<hr style="border: 1px solid #eee; height: 0px !important; display: block !important; width: 100% !important;" />
+		<hr width="100%">
 		
 		<div class="profile-review">
 			<!-- 후기 -->

@@ -345,28 +345,28 @@ $("#update-btn").click(function() {
 		showCloseButton: true,
 		confirmButtonText: '수정',
 	}).then((result) => {
-		$.ajax({
-			data: { "reserNo": $("#reserNo").val(), "content": content, "rate": $("#star-1-u").val() },
-			type: "post",
-			dataType: "json",
-			url: "/comment/update",
-			success: function(data) {
-				$("#content-update").val(data.content);
-				$("#insertContainer").hide();
-				$("#updateDeleteContainer").show();
-			},
-			error: function() {
-				$("#insertContainer").hide();
-				$("#updateDeleteContainer").show();
-			}
-		});
+		if (result.isConfirmed) {
+			$.ajax({
+				data: { "reserNo": $("#reserNo").val(), "content": content, "rate": $("#star-1-u").val() },
+				type: "post",
+				dataType: "json",
+				url: "/comment/update",
+				success: function(data) {
+					$("#content-update").val(data.content);
+					$("#insertContainer").hide();
+					$("#updateDeleteContainer").show();
+				},
+				error: function() {
+					$("#insertContainer").hide();
+					$("#updateDeleteContainer").show();
+				}
+			});
+		}
 	});
-	//document.commentUpdate.submit();
 });
 
 //후기 삭제
 $("#delete-btn").click(function() {
-
 	const swalWithBootstrapButtons = Swal.mixin({
 		customClass: {
 			confirmButton: 'btn btn-success',
@@ -383,36 +383,37 @@ $("#delete-btn").click(function() {
 		showCloseButton: true,
 		confirmButtonText: '삭제',
 	}).then((result) => {
-
-		$.ajax({
-			type: "post",
-			url: "/comment/delete",
-			data: { "no": $("#reserNo").val() },
-			success: function() {
-				$("input:[name=rate]").attr("value", "0.0");
-				$("input[name=rate]").removeAttr("checked");
-				$("input[name=rate-u]").attr("value", "0.0");
-				$("input[name=rate-u]").removeAttr("checked");
-				$(".numb::before").css("content", "0");
-				$(".numa::before").css("content", "0");
-				$(".content-input").val("");
-				$(".content-update").val("");
-				$("#updateDeleteContainer").hide();
-				$("#insertContainer").show();
-			},
-			error: function() {
-				$("input[name=rate]").attr("value", "0.0");
-				$("input[name=rate]").removeAttr("checked");
-				$("input[name=rate-u]").attr("value", "0.0");
-				$("input[name=rate-u]").removeAttr("checked");
-				$(".numb::before").css("content", "0");
-				$(".numa::before").css("content", "0");
-				$(".content-input").val("");
-				$(".content-update").val("");
-				$("#updateDeleteContainer").hide();
-				$("#insertContainer").show();
-			}
-		});
+		if (result.isConfirmed) {
+			$.ajax({
+				type: "post",
+				url: "/comment/delete",
+				data: { "no": $("#reserNo").val() },
+				success: function() {
+					$("input:[name=rate]").attr("value", "0.0");
+					$("input[name=rate]").removeAttr("checked");
+					$("input[name=rate-u]").attr("value", "0.0");
+					$("input[name=rate-u]").removeAttr("checked");
+					$(".numb::before").css("content", "0");
+					$(".numa::before").css("content", "0");
+					$(".content-input").val("");
+					$(".content-update").val("");
+					$("#updateDeleteContainer").hide();
+					$("#insertContainer").show();
+				},
+				error: function() {
+					$("input[name=rate]").attr("value", "0.0");
+					$("input[name=rate]").removeAttr("checked");
+					$("input[name=rate-u]").attr("value", "0.0");
+					$("input[name=rate-u]").removeAttr("checked");
+					$(".numb::before").css("content", "0");
+					$(".numa::before").css("content", "0");
+					$(".content-input").val("");
+					$(".content-update").val("");
+					$("#updateDeleteContainer").hide();
+					$("#insertContainer").show();
+				}
+			});
+		}
 	});
 });
 

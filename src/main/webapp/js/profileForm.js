@@ -60,16 +60,57 @@ $(".openBtn").click(function() {
 $("#bodyBtn").click(function() {
 	var black_id = $("#report_id").text();
 	var reason = $('#singo-reason').val();
-	console.log(black_id);
-	$.ajax({
-		type: "post",
-		dataType: "text",
-		url: "/profile/singo",
-		data: { "black_id": black_id, "reason": reason },
-		success: function(data) {
-			location.reload();
-		}
-	});
+
+	const swalWithBootstrapButtons = Swal.mixin({
+		customClass: {
+			confirmButton: 'btn btn-success',
+			cancelButton: 'btn btn-danger'
+		},
+		buttonsStyling: false
+	})
+
+	if (reason == "" || reason == null) {
+		swalWithBootstrapButtons.fire(
+			'신고사유를 작성해주세요.',
+			'신고사유 작성은 필수 작성요소입니다.',
+			'error'
+		)
+	} else {
+		swalWithBootstrapButtons.fire({
+			title: '신고하시겠습니까?',
+			text: "신고할 경우 취소는 불가능합니다.",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonText: '승인',
+			cancelButtonText: '취소'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				$.ajax({
+					type: "post",
+					url: "/profile/report",
+					dataType: "json",
+					data: { "blackId": black_id, "reason": reason},
+					success: function(data) {
+						if (data == false) {
+							swalWithBootstrapButtons.fire(
+								'이미 신고한 아이디입니다.',
+								'아이디당 신고는 한 번만 가능합니다.',
+								'error'
+							)
+						} else if (data == true) {
+							swalWithBootstrapButtons.fire(
+								'신고되었습니다.',
+								'관리자가 신고를 승인한 경우 블랙회원 처리됩니다.',
+								'success'
+							)
+						}
+					}
+				});
+				
+				$("#singo-reason").val('');
+			}
+		})
+	}
 });
 
 // 후기 좋아요 클릭 이벤트
@@ -141,4 +182,13 @@ $(document).ready(function() {
 	$('#singoModal').on('hidden.bs.modal', function() {
 		document.body.style.padding = "0";
 	});
+
+	var myid = $("input[name=myid]").attr("value");
+	var guestId = $("input[name=guestId]").attr("value");
+
+	if (myid == guestId) {
+		$("#openBtn").attr("style", "pointer-events: none;");
+		$("#openBtn").attr("class", "btn btn-secoundry");
+		$(".update").attr("data-target", "");
+	}
 });

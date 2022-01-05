@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import stay.data.dto.CommentLikeDto;
@@ -19,7 +20,6 @@ import stay.data.dto.MemberDto;
 import stay.data.dto.MemberLikeDto;
 import stay.data.dto.ReportMemberDto;
 import stay.data.dto.ResultMapDto;
-import stay.data.mapper.MemberMapper;
 import stay.data.service.CommentLikeService;
 import stay.data.service.GuestCommentService;
 import stay.data.service.MemberLikeService;
@@ -30,10 +30,6 @@ import stay.data.service.WishListService;
 @Controller
 @RequestMapping("/profile")
 public class ProfileController {
-
-	@Autowired
-	MemberMapper mapper;
-
 	@Autowired
 	MemberService memberService;
 
@@ -101,19 +97,29 @@ public class ProfileController {
 
 		return mview;
 	}
-
-	@PostMapping("/singo")
-	public void singoInsert(@ModelAttribute ReportMemberDto rmDto, @RequestParam String black_id,
-			@RequestParam String reason, HttpSession session) {
-		String myid = (String) session.getAttribute("myid");
-
-		System.out.println(black_id + " " + reason + " " + myid);
-
-		rmDto.setBlack_id(black_id);
+	
+	@PostMapping("/report")
+	public @ResponseBody boolean insertReport(@RequestParam String blackId, @RequestParam String reason, HttpSession session) {
+		String myid = (String)session.getAttribute("myid");
+		
+		// 신고 여부
+		int checkSingo = memberService.checkSingo(blackId, myid);
+		
+		System.out.println(checkSingo);
+		
+		// 신고 insert
+		ReportMemberDto rmDto = new ReportMemberDto();
+		rmDto.setBlack_id(blackId);
 		rmDto.setReport_id(myid);
 		rmDto.setReason(reason);
-
-		memberService.insertSingoMem(rmDto);
+		
+		if(checkSingo == 1) {
+			return false;
+		} else {
+//			memberService.insertSingoMem(rmDto);
+			
+			return true;
+		}
 	}
 	
 	@PostMapping("/insertlike")

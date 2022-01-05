@@ -50,4 +50,6 @@ public interface MemberMapper {
   	public void findPw(MemberDto mdto) throws Exception;
 	
   	public List<ReportMemberDto> getReport();
+  	
+  	public int checkSingo(HashMap<String, String> map);
 }

@@ -20,6 +20,7 @@ create table report_member(
 	reason varchar(500) not null,
 	report_date date not null,
 	approve_date date,
+	approve_check varchar(20) default 'ing' not null,
 	foreign key (black_id) references member(id) on update cascade on delete set null,
 	foreign key (report_id) references member(id) on update cascade on delete cascade
 );
