@@ -48,15 +48,6 @@ public class GuestCommentService {
 		return mapper.countGuestComment(id);
 	}
 	
-	public ResultMapDto checkComment(String no, String host_id) {
-		HashMap<String, String> map = new HashMap<String, String>();
-		
-		map.put("no", no);
-		map.put("host_id", host_id);
-		
-		return mapper.checkComment(map);
-	}
-	
 	public void updateLikes(String no, String guest_id) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		
