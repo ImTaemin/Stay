@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import stay.data.dto.CanReservationDto;
+import stay.data.dto.GuestCommentDto;
 import stay.data.dto.MemberDto;
 import stay.data.dto.ReservationDto;
 import stay.data.dto.ResultMapDto;
@@ -31,7 +32,6 @@ import stay.data.service.RoomService;
 
 @Controller
 public class HostReservationController {
-
 	@Autowired
 	CostService costService;
 
@@ -55,6 +55,9 @@ public class HostReservationController {
 
 	@Autowired
 	JoinGuestService joinService;
+	
+	@Autowired
+	GuestCommentService guestCommentService;
 
 	@GetMapping("/reser/hostreservationlist")
 	public ModelAndView HostReservationList(HttpSession session) {
@@ -88,6 +91,21 @@ public class HostReservationController {
 			rdto.setPhotos(photo[0]);
 
 			dto.setRoomDto(rdto);
+
+			// 후기 여부
+			String reserNo = dto.getResDto().getNo();
+			
+			GuestCommentDto gcommentDto = guestCommentService.getOneComment(reserNo, dto.getResDto().getGuest_id());
+			int countComment = guestCommentService.checkComment(reserNo, myid);
+
+			if (gcommentDto == null) {
+				countComment = 0;
+				gcommentDto = new GuestCommentDto();
+			}
+
+			gcommentDto.setCountLike(countComment);
+
+			dto.setGcoDto(gcommentDto);
 		}
 
 		// 취소된 예약

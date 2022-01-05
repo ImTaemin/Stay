@@ -24,6 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<resultMap type="stay.data.dto.ResultMapDto" id="resultMap">
 		<collection property="roomDto" resultMap="roomMap"></collection>
 		<collection property="resDto" resultMap="resMap"></collection>
+		<collection property="resNoDto" resultMap="resNoMap"></collection>
 	</resultMap>
 	
 	<select id="selectNowGuestReservation" parameterType="String" resultMap="resultMap">
@@ -84,6 +85,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 		order by res.start_date limit 3
 	</select>
+		
+	<select id="selectCheckInHostReservation" parameterType="String" resultMap="resultMap">
+		select * from reservation res, room r 
+		where res.host_id = #{host_id} and res.room_no = r.no 
+		and date_format((select current_date + interval 7 day), "%y-%m-%d") > res.start_date
+		and start_date > date_format((select current_date + interval 1 day), "%y-%m-%d")  
+		and res.no not in (
+			select res.no from can_reservation can, reservation res
+			where can.no = res.no and res.host_id = #{host_id}
+		)
+		order by res.start_date
+	</select>
+	
+	<select id="selectCheckOutHostReservation" parameterType="String" resultMap="resultMap">
+		select * from reservation res, room r 
+		where res.host_id = #{host_id} and res.room_no = r.no 
+		and date_format((select current_date + interval 7 day), "%y-%m-%d") > res.end_date
+		and end_date > date_format((select current_date + interval 1 day), "%y-%m-%d")  
+		and res.no not in (
+			select res.no from can_reservation can, reservation res
+			where can.no = res.no and res.host_id = #{host_id}
+		)
+		order by res.start_date
+	</select>
+	
+	<select id="selectHostingHostReservation" parameterType="String" resultMap="resultMap">
+		select *, b.no reser_no from room a right join (
+			select * from reservation res
+			where res.start_date = date_format((select current_date + interval 1 day), "%y-%m-%d")
+			or res.end_date = date_format((select current_date + interval 1 day), "%y-%m-%d")
+			and res.host_id = #{host_id} and res.no not in (
+				select res.no from can_reservation can, reservation res
+				where can.no = res.no and res.host_id = #{host_id}
+			)
+		) b on a.no = b.room_no
+	</select>
 	
 	<select id="selectGuestOneReservation" parameterType="HashMap" resultType="redto">
 		select * from reservation where no = #{no} and guest_id = #{guestId}
@@ -126,5 +163,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<id column="account_num" property="account_num"/>
 		<id column="pay_date" property="pay_date"/>
 		<id column="room_no" property="room_no"/>
+	</resultMap>
+	
+	<!-- reservation no -->
+	<resultMap type="stay.data.dto.ReservationNoDto" id="resNoMap">
+		<id column="reser_no" property="reser_no"/>
 	</resultMap>
 </mapper>

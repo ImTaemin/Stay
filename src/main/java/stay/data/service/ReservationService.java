@@ -47,6 +47,18 @@ public class ReservationService {
 		return mapper.selectHostThreeReservation(hostId);
 	}
 	
+	public List<ResultMapDto> selectCheckInHostReservation(String hostId) {
+		return mapper.selectCheckInHostReservation(hostId);
+	}
+	
+	public List<ResultMapDto> selectCheckOutHostReservation(String hostId) {
+		return mapper.selectCheckOutHostReservation(hostId);
+	}
+	
+	public List<ResultMapDto> selectHostingHostReservation(String hostId) {
+		return mapper.selectHostingHostReservation(hostId);
+	}
+	
 	public ReservationDto selectGuestOneReservation(String no, String guestId) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		

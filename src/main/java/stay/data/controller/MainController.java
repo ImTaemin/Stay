@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import stay.data.dto.GuestCommentDto;
 import stay.data.dto.JoinGuestDto;
 import stay.data.dto.MemberDto;
 import stay.data.dto.ResultMapDto;
@@ -82,15 +81,15 @@ public class MainController {
 
 		String myid = (String) session.getAttribute("myid");
 
-		List<ResultMapDto> nowList = reservationService.selectNowHostReservation(myid);
-		List<ResultMapDto> preList = reservationService.selectPreHostReservation(myid);
-		List<ResultMapDto> canList = canReserService.getAllHostCanReser(myid);
+		List<ResultMapDto> checkInList = reservationService.selectCheckInHostReservation(myid);
+		List<ResultMapDto> checkOutList = reservationService.selectCheckOutHostReservation(myid);
+		List<ResultMapDto> hostingList = reservationService.selectHostingHostReservation(myid);
 
 		// 호스트모드 체크인예정 목록중 최근 3개
 		List<ResultMapDto> reserThreeList = reservationService.selectHostThreeReservation(myid);
 
-		// 예정된 예약
-		for (ResultMapDto dto : nowList) {
+		// 체크인 예정
+		for (ResultMapDto dto : checkInList) {
 			String photos = dto.getRoomDto().getPhotos();
 			String photo[] = photos.split(",");
 
@@ -116,8 +115,8 @@ public class MainController {
 			dto.setJoinDto(joinDto);
 		}
 
-		// 이전 예약
-		for (ResultMapDto dto : preList) {
+		// 체크아웃 예정
+		for (ResultMapDto dto : checkOutList) {
 			String photos = dto.getRoomDto().getPhotos();
 			String photo[] = photos.split(",");
 
@@ -141,35 +140,21 @@ public class MainController {
 			joinDto.setCount(joinNum);
 
 			dto.setJoinDto(joinDto);
-			
-			// 후기 여부
-			GuestCommentDto gcommentDto = gcommentService.getOneComment(reserNo, dto.getResDto().getGuest_id());
-			int countComment = gcommentService.checkComment(reserNo, myid);
-			
-			if(gcommentDto == null) {
-				countComment = 0;
-				gcommentDto = new GuestCommentDto();
-			}
-			
-			gcommentDto.setCountLike(countComment);
-			
-			dto.setGcoDto(gcommentDto);
 		}
 
-		// 취소된 예약
-		for (ResultMapDto dto : canList) {
-			String roomNo = dto.getResDto().getRoom_no();
-			RoomDto rdto = roomService.getRoom(roomNo);
-
-			String photos = rdto.getPhotos();
+		// 호스팅 중
+		for (ResultMapDto dto : hostingList) {
+			String photos = dto.getRoomDto().getPhotos();
 			String photo[] = photos.split(",");
 
+			String roomNo = dto.getResDto().getRoom_no();
+			RoomDto rdto = roomService.getRoom(roomNo);
 			rdto.setPhotos(photo[0]);
 
 			dto.setRoomDto(rdto);
 
 			// 조인 게스트
-			String reserNo = dto.getResDto().getNo();
+			String reserNo = dto.getResNoDto().getReser_no();
 
 			JoinGuestDto joinDto = joinService.selectOneJoin(reserNo);
 			int joinNum = joinService.countJoinGuest(reserNo) + 1;
@@ -187,9 +172,9 @@ public class MainController {
 		// 호스트모드 예약상태별 예약 목록중 최근 3개
 		for (ResultMapDto reser : reserThreeList) {
 			String roomNo = reser.getResDto().getRoom_no();
-			
+
 			RoomDto roomDto = roomService.getRoom(roomNo);
-			
+
 			String photos = roomDto.getPhotos();
 			String photo[] = photos.split(",");
 
@@ -197,10 +182,10 @@ public class MainController {
 
 			reser.setRoomDto(roomDto);
 		}
-		
-		mview.addObject("nowList", nowList);
-		mview.addObject("preList", preList);
-		mview.addObject("canList", canList);
+
+		mview.addObject("checkInList", checkInList);
+		mview.addObject("checkOutList", checkOutList);
+		mview.addObject("hostingList", hostingList);
 
 		// 호스트모드 예약상태별 예약 목록중 최근 3개
 		mview.addObject("reserThreeList", reserThreeList);
@@ -215,13 +200,9 @@ public class MainController {
 	public String modeChange(HttpSession session) {
 		if (((String) session.getAttribute("mode")).equals("guest")) {
 			session.setAttribute("mode", "host");
-//		   session.removeAttribute("mode");
-//		   session.setAttribute("mode", "host");
 			return "redirect:/host/main";
 		} else {
 			session.setAttribute("mode", "guest");
-//		   session.removeAttribute("mode");
-//		   session.setAttribute("mode", "host");
 			return "redirect:/";
 		}
 
@@ -229,7 +210,6 @@ public class MainController {
 
 	@GetMapping("/searchRoomSite")
 	public @ResponseBody List<RoomDto> searchRoomSite(@RequestParam(value = "search") String search) {
-
 		List<RoomDto> rdtoList = roomService.getRoomSite(search);
 
 		return rdtoList;

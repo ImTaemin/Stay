@@ -19,7 +19,7 @@
 }
 
 .nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
-	background-color: rgb(174, 217, 218, 0.3);	
+	background-color: rgb(174, 217, 218, 0.3);
 }
 
 .tab-content>.active {
@@ -48,7 +48,7 @@
 	height: 250px;
 }
 
-.card-body>.card-title {
+.card-title {
 	margin-bottom: 20px;
 }
 
@@ -80,10 +80,38 @@
 	color: white;
 }
 
-.card>.top>b {
+.card>.top>b, .content-main>b {
 	font-size: 1.5em;
 }
 
-.card>.top>p {
+.card>.top>p, .content-main>p {
 	margin-top: 10px;
+}
+
+.card-pre {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.content-review {
+	width: 100%;
+	padding: 0 2%;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.content-review>.bi-chat {
+	color: #ccc;
+	font-size: 2em;
+}
+
+.content-review>.bi-chat-dots {
+	color: #0275d8;
+	font-size: 2em;
+}
+
+.content-review>.bi-chat-dots-fill {
+	color: #5cb85c;
+	font-size: 2em;
 }

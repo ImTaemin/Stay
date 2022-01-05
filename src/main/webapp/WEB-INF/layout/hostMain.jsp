@@ -61,38 +61,36 @@
 			<div class="hostMain-option">
 				<!-- 탭 목록 -->
 				<ul class="nav nav-tabs" id="myTab" role="tablist">
-				
-					<!-- 예정 -->
+					<!-- 호스팅 중 -->
 					<li class="nav-item" role="presentation">
-						<button class="nav-link active" id="now-tab" data-bs-toggle="tab" data-bs-target="#now" type="button" role="tab" aria-controls="now" aria-selected="true">예정된 예약</button>
+						<button class="nav-link active" id="hosting-tab" data-bs-toggle="tab" data-bs-target="#hosting" type="button" role="tab" aria-controls="hosting" aria-selected="true">현재 호스팅</button>
 					</li>
 					
-					<!-- 이전 -->
+					<!-- 체크인 예정 -->
 					<li class="nav-item" role="presentation">
-						<button class="nav-link" id="pre-tab" data-bs-toggle="tab" data-bs-target="#pre" type="button" role="tab" aria-controls="pre" aria-selected="false">이전 예약</button>
+						<button class="nav-link" id="checkin-tab" data-bs-toggle="tab" data-bs-target="#checkin" type="button" role="tab" aria-controls="checkin" aria-selected="false">체크인 예정</button>
 					</li>
 					
-					<!-- 취소 -->
+					<!-- 체크아웃 예정 -->
 					<li class="nav-item" role="presentation">
-						<button class="nav-link" id="can-tab" data-bs-toggle="tab" data-bs-target="#can" type="button" role="tab" aria-controls="can" aria-selected="false">취소된 예약</button>
+						<button class="nav-link" id="checkout-tab" data-bs-toggle="tab" data-bs-target="#checkout" type="button" role="tab" aria-controls="checkout" aria-selected="false">체크아웃 예정</button>
 					</li>
-					
 				</ul>
 			</div>
 		</div>
 		
 		<div class="hostMain-bottom">
 			<div class="tab-content">
-				<div class="tab-pane" id="now" role="tabpanel" aria-labelledby="now-tab">
-					<c:forEach var="list" items="${nowList}">
-						<div class="hostMain-reservation" list-no="${list.resDto.no}" onclick="btnClick(this)">
+				<div class="tab-pane active" id="hosting" role="tabpanel" aria-labelledby="hosting-tab">
+					<c:forEach var="list" items="${hostingList}">
+						<div class="hostMain-reservation" list-no="${list.resNoDto.reser_no}" onclick="btnClick(this)">
 							<div class="content-name">
 								<span>${list.roomDto.name}</span>
 								<div class="content-site">${list.roomDto.addr_load}</div>
 							</div>
 							
 							<div class="hostMain-content-wrap">
-								<div class="hostMain-number">예약번호 : ${list.resDto.no}</div>
+								<div class="hostMain-number">예약번호 : ${list.resNoDto.reser_no}</div>
 							
 								<div class="hostMain-content">
 									<div class="content-checkIn">체크인
@@ -115,9 +113,8 @@
 					</c:forEach>
 				</div>
 				
-				
-				<div class="tab-pane active" id="pre" role="tabpanel" aria-labelledby="pre-tab">
-					<c:forEach var="list" items="${preList}">
+				<div class="tab-pane" id="checkin" role="tabpanel" aria-labelledby="checkin-tab">
+					<c:forEach var="list" items="${checkInList}">
 						<div class="hostMain-reservation" list-no="${list.resDto.no}" onclick="btnClick(this)">
 							<div class="content-name">
 								<span>${list.roomDto.name}</span>
@@ -141,18 +138,6 @@
 										<div class="content-cost">
 											<fmt:formatNumber value="${list.resDto.price}" type="currency" currencySymbol="￦"/>
 										</div>
-									</div>
-									<div class="content-review">
-										<c:if test="${list.gcoDto.countLike == 0}"> 
-											<i class="bi bi-chat"></i>
-										</c:if>
-										
-										<c:if test="${list.gcoDto.countLike == 1}"> 
-											<i class="bi bi-chat-dots"></i>
-										</c:if>
-										
-										<!-- 호스트가 댓글 단 경우 체크 -->
-<!-- 										<i class="bi bi-chat-dots-fill"></i> -->
 									</div>
 								</div>
 							</div>
@@ -160,8 +145,8 @@
 					</c:forEach>
 				</div>
 			
-				<div class="tab-pane" id="can" role="tabpanel" aria-labelledby="can-tab">
-					<c:forEach var="list" items="${canList}">
+				<div class="tab-pane" id="checkout" role="tabpanel" aria-labelledby="checkout-tab">
+					<c:forEach var="list" items="${checkOutList}">
 						<div class="hostMain-reservation" list-no="${list.resDto.no}" onclick="btnClick(this)">
 							<div class="content-name">
 								<span>${list.roomDto.name}</span>

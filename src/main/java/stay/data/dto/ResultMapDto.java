@@ -15,4 +15,5 @@ public class ResultMapDto {
 	private WishListDto wishDto;
 	private CommentLikeDto likeDto;
 	private AvgTotalDto atDto;
+	private ReservationNoDto resNoDto;
 }

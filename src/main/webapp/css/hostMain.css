@@ -155,45 +155,24 @@
 }
 
 .content-checkIn, .content-checkOut {
-	width: 20%;
+	width: 25%;
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
 }
 
 .content-guest {
-	width: 20%;
+	width: 25%;
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
 }
 
 .content-payment {
-	width: 20%;
+	width: 25%;
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
-}
-
-.content-review {
-	width: 15%;
-	display: flex;
-	justify-content: center;
-	flex-direction: column;
-	align-items: center;
-	font-size: 2em;
-}
-
-.content-review>.bi-chat {
-	color: #ccc;
-}
-
-.content-review>.bi-chat-dots {
-	color: #0275d8;
-}
-
-.content-review>.bi-chat-dots-fill {
-	color: #5cb85c;
 }
 
 .hostMain .content-name {
