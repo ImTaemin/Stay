@@ -16,4 +16,5 @@ public class ResultMapDto {
 	private CommentLikeDto likeDto;
 	private AvgTotalDto atDto;
 	private ReservationNoDto resNoDto;
+	private ReportMemberDto rmDto;
 }

@@ -82,4 +82,8 @@
 	<select id="checkSingo" parameterType="HashMap" resultType="int">
 		select count(*) from report_member where black_id = #{black_id} and report_id = #{report_id}
 	</select>
+	
+	<update id="updateRepMem" parameterType="rmdto">
+		update report_member set approve_check = 'end', approve_date = now() where no = #{no}
+	</update>
 </mapper>

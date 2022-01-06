@@ -52,4 +52,7 @@ public interface MemberMapper {
   	public List<ReportMemberDto> getReport();
   	
   	public int checkSingo(HashMap<String, String> map);
+  	
+  	//신고관리
+  	public void updateRepMem(ReportMemberDto rmDto);
 }
