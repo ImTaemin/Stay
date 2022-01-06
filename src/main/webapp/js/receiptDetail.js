@@ -17,9 +17,9 @@ $(document).ready(function() {
 	var taxPrice = calPrice * 0.2;
 	var allPrice = parseInt(calPrice) + parseInt(taxPrice);
 	
-	$("span[id=calPrice]").html("￦" + calPrice.toLocaleString());
-	$("span[id=taxPrice]").html("￦" + taxPrice.toLocaleString());
-	$("span[id=allPrice]").html("￦" + allPrice.toLocaleString());
+	$("span[id=calPrice]").html("￦ " + calPrice.toLocaleString());
+	$("span[id=taxPrice]").html("￦ " + taxPrice.toLocaleString());
+	$("span[id=allPrice]").html("￦ " + allPrice.toLocaleString());
 });
 
 // 이미지 다운로드

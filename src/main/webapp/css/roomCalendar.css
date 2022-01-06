@@ -19,7 +19,6 @@
 	display: flex;
 	margin-bottom: 10px;
 	justify-content: space-between;
-	z-index: 10;
 }
 
 .rooms-list>.form-select {
@@ -27,17 +26,51 @@
 	height: 35px;
 	font-size: 1.2em;
 	font-weight: bold;
+	cursor: pointer;
+	z-index: 10;
 }
 
 .rooms-date>.form-select {
 	width: 150px;
 	height: 35px;
 	font-size: 1.2em;
+	cursor: pointer;
+	z-index: 10;
 }
 
 .cal-wrap>.cal-content {
-	z-index: 2;
 	margin-top: -50px;
+}
+
+.fc-day-past {
+	cursor : no-drop !important;
+	background: #F5F5F5;
+}
+
+.fc-day-today, .fc-day-future {
+	cursor: pointer !important;
+}
+
+.fc-day-today .cal-price, .fc-day-future .cal-price {
+	font-size: 18px;
+	font-weight: bold;
+	display: flex;
+	justify-content: flex-end;
+	padding: 0 8px;
+}
+
+.fc-day-other .cal-price {
+	color: #ccc;
+}
+
+.fc-scrollgrid-sync-inner {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.fc-toolbar-ltr {
+	z-index: -1 !important;
 }
 
 .cal-container>.cal-info {
@@ -109,6 +142,30 @@
 
 .price-title>.day {
 	font-size: 1.2em;
+}
+
+.price-box {
+	display: flex;
+	justify-content: center;
+}
+
+.price-box>#roomPirce {
+	display: block;
+	width: 100%;
+	height: 44px;
+	padding: 0 12px;
+	border-radius: 7px;
+	font-size: 16px;
+	border: 2px solid #d3dce6;
+	transition: border-color 200ms ease-in-out;
+	font-size: 1.5em;
+}
+
+.price-box>#roomPirce:focus, #roomPirce:hover, #roomPirce:active {
+	width: 100%;
+	outline: none;
+	box-shadow: none;
+	border-color: #0B57A2;
 }
 
 .info-btn {

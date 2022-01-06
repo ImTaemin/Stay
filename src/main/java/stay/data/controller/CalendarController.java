@@ -7,7 +7,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import stay.data.dto.RoomDto;
@@ -38,5 +41,10 @@ public class CalendarController {
 		mview.setViewName("/room/roomCalendar");
 		
 		return mview;
+	}
+	
+	@PostMapping("/searchroom")
+	public @ResponseBody RoomDto searchRoom(@RequestParam String roomNo) {
+		return roomService.getRoom(roomNo);
 	}
 }

@@ -23,9 +23,9 @@
 		<!-- 숙소 리스트, 날짜 수정 -->
 		<div class="cal-rooms">
 			<div class="rooms-list">
-				<select id="rooms" class="form-select">
+				<select id="rooms" class="form-select" onchange="selectRoom()">
 					<c:forEach var="list" items="${roomList}">
-						<option value="${list.name}">${list.name}</option>
+						<option value="${list.no}">${list.name}</option>
 					</c:forEach>
 				</select>
 			</div>
@@ -46,7 +46,9 @@
 	<div class="cal-info">
 		<!-- 여기서 동적생성 -->
 		<div class="info-date">
-			<h1>2022-01-04</h1>
+			<c:set var="now" value="<%=new java.util.Date()%>" /> 
+			<fmt:formatDate value="${now}" pattern="yyyy년 MM월 dd일" var="today" />
+			<h1 id="select-day">${today}</h1>
 		</div>
 		
 		<hr>
@@ -56,14 +58,10 @@
 			
 			<div class="hosting-btn-wrap">
 				<!-- 체크버튼 -->
-				<i class="bi bi-check-circle" onclick="clickCheck(this)"></i>
-				<!-- 체크버튼 클릭 -->
-<!-- 				<i class="bi bi-check-circle-fill"></i> -->
+				<i id="hosting-true" class="bi bi-check-circle" check="0" onclick="clickCheck(this)"></i>
 				
 				<!-- x버튼 -->
-				<i class="bi bi-x-circle" onclick="clickCan(this)"></i>
-				<!-- x버튼 클릭 -->
-<!-- 				<i class="bi bi-x-circle-fill"></i> -->
+				<i id="hosting-false" class="bi bi-x-circle" check="0" onclick="clickCheck(this)"></i>
 			</div>
 		</div>
 			
@@ -77,7 +75,7 @@
 			</div>
 			
 			<div class="price-box">
-				&#8361;<span>123</span>
+				<input id="roomPirce" numberOnlyMinComma="true" koreanCurrency="true"></input>
 			</div>
 		</div>
 		
