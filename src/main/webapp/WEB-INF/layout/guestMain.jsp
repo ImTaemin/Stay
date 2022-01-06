@@ -106,11 +106,11 @@
 		<!-- 인기숙소 -->
 		<div class="guestMain-toproom">
 				<div class="heart">
-					<i class="bi bi-heart-fill"></i>
+					<i class="bi bi-house-fill"></i>
 				</div>
 				<div class="title">인기 숙소</div>
 				<div class="heart">
-					<i class="bi bi-heart-fill"></i>
+					<i class="bi bi-house-fill"></i>
 				</div>
 		</div>
 		

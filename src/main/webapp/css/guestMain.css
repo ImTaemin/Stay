@@ -117,8 +117,13 @@
 	min-width: 10%;
 }
 
+.guestMain-toproom .title{
+	padding-left: 1%;
+	padding-right: 1%;
+}
+
 .guestMain-toproom i {
-	color: red;
+	color: skyblue;
 }
 
 .guestMain-toproom .heart {
