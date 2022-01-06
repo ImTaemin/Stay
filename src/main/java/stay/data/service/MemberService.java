@@ -186,4 +186,8 @@ public class MemberService {
 	public void updateRepMem(ReportMemberDto rmDto) {
 		mapper.updateRepMem(rmDto);
 	}
+	
+	public void updateRepCan(ReportMemberDto rmDto) {
+		mapper.updateRepCan(rmDto);
+	}
 }
