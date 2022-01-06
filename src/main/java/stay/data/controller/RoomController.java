@@ -50,14 +50,25 @@ public class RoomController {
 	@GetMapping("/main")
 	public ModelAndView roomMain(
 			@RequestParam(value = "currentPage", defaultValue = "1") int currentPage,
+			@RequestParam(required = false) String addr_load,
+			@RequestParam(required = false)  String from,
+			@RequestParam(required = false)  String to,
 			HttpSession session) {
 		ModelAndView mview = new ModelAndView();
 		
 		String myid = (String)session.getAttribute("myid");
 		String loginok = (String)session.getAttribute("loginok");
 		
-		// 총 숙소 개수
-		int totalCount = roomService.getRoomCount();
+		int totalCount = 0;
+		if(addr_load != null) {
+			// 검색한 숙소 개수
+			totalCount = roomService.getRoomSearchCount(addr_load, from, to);
+			System.out.println(totalCount);
+		} else {
+			// 총 숙소 개수
+			totalCount = roomService.getRoomCount();
+			System.out.println(totalCount);
+		}
 		
 		// 총 페이지 수
 		int totalPage;
@@ -86,10 +97,19 @@ public class RoomController {
 
 		// 각 페이지에서 불러올 시작 번호
 		start = (currentPage - 1) * perPage;
+		
+		List<ResultMapDto> roomList = new ArrayList<ResultMapDto>();
+		
+		if(addr_load != null) {
+			// 검색한 페이지에서 필요한 방 가져오기
+			roomList = roomService.getSearchPageRoom(start, perPage, addr_load, from, to);
+			System.out.println(roomList.size());
+		} else {
+			// 각 페이지에서 필요한 게시글 가져오기
+			roomList = roomService.getPageRoom(start, perPage);
+			System.out.println(roomList.size());
+		}
 
-		// 각 페이지에서 필요한 게시글 가져오기
-		List<ResultMapDto> roomList = roomService.getPageRoom(start, perPage);
- 		
  		for(ResultMapDto dto : roomList) {
  			// 이미지 분리
  			String photos[] = dto.getRoomDto().getPhotos().split(",");

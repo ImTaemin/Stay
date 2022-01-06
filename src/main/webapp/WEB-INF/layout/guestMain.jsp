@@ -24,62 +24,64 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="guestMain-top">
-		<!-- 검색핉터창 -->
-	  
-		<div class="guestMain-filter">
-			<div class="guestMain-map">
-				<div class="guestMain-siteBtn"><button type="button" class="guestMain-site">위치 검색</button></div>
-				<div class="bar">|</div>
-				<div class="site-search">
-					<input id="search-addr" onkeyup="search(this)" type="text" placeholder="위치를 검색하세요.">
-					<hr>
-					<script type="text/javascript">
-						function search(){
-							var search = $("#search-addr").val();
-							
-							if(search==""){
-								$('#search-result').html("");
-								return;
+	<form action="/room/main">
+		<div class="guestMain-top">
+			<!-- 검색핉터창 -->
+			<div class="guestMain-filter">
+				<div class="guestMain-map">
+					<div class="guestMain-siteBtn"><button type="button" class="guestMain-site">위치 검색</button></div>
+					<div class="bar">|</div>
+					<div class="site-search">
+						<input id="search-addr" onkeyup="search(this)" type="text" placeholder="위치를 검색하세요.">
+						<hr>
+						<script type="text/javascript">
+							function search(){
+								var search = $("#search-addr").val();
+								
+								if(search==""){
+									$('#search-result').html("");
+									return;
+								}
+								
+								$.ajax({
+									url:"searchRoomSite",
+									type:"get",
+									data: {"search": search},
+									async: false,
+									success:function(data){
+										var s="";
+										$.each(data, function(i, item){
+											s += "<input type='radio' name='addr_load' id='addr"+ i +"' value='"+item.addr_load +"'>";
+											s += "<label class='search-label' for='addr"+ i +"'>"+ item.addr_load +"</label><br>";
+										});
+										$('#search-result').html(s);
+									}
+								});
 							}
 							
-							$.ajax({
-								url:"searchRoomSite",
-								type:"get",
-								data: {"search": search},
-								success:function(data){
-									var s="";
-									$.each(data, function(i, item){
-										var load = item.addr_load.split(" ");
-										s+="<h6>"+ (load[0] + " " + load[1]) +"</h6>";
-									});
-									$('#search-result').html(s);
-								}
-							});
-						}
-						
-						
-						
-					</script>
-					<div id="search-result"></div>
+							
+							
+						</script>
+						<div id="search-result"></div>
+					</div>
+				</div>
+				<div class="guestMain-start">  
+									<jsp:useBean id="now" class="java.util.Date"/>
+									<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today"/>
+									<label for="now">체크인</label>
+									<input type="date" name="from" id="check-in" min="${today}">  |  
+				</div>
+				<div class="guestMain-end">
+									<label for="now">체크아웃</label>
+									<input type="date" name="to" id="check-out" min="${today}">
 				</div>
 			</div>
-			<div class="guestMain-start">  
-								<jsp:useBean id="now" class="java.util.Date"/>
-								<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today"/>
-								<label for="now">체크인</label>
-								<input type="date" id="check-in" min="${today}">  |  
+			<div class="guestMain-search">
+				<button type="submit" class="glyphicon glyphicon-search"></button>
 			</div>
-			<div class="guestMain-end">
-								<label for="now">체크아웃</label>
-								<input type="date" id="check-out" min="${today}">
-			</div>
+		 
 		</div>
-		<div class="guestMain-search">
-			<button type="button" class="glyphicon glyphicon-search"></button>
-		</div>
-	 
-	</div>
+	</form>
 	
 	<div class="guestMain-bottom">
 		<!-- 인기숙소 -->

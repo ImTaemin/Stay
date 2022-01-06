@@ -246,12 +246,16 @@
 	transform: translateX(10px);
 }
 
+.search_result:hover {
+	cursor: pointer;
+	background-color: #ddd;
+}
 
-  
+input[type="radio"] {
+	display: none;
+}
 
-  
-
-  
-
-
-  
+input[type="radio"]:hover + .search-label,
+input[type="radio"]:checked + .search-label{
+	background-color: #ddd;
+}

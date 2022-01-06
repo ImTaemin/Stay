@@ -18,6 +18,14 @@ public class RoomService {
 	public int getRoomCount() {
 		return mapper.getRoomCount();
 	}
+
+	public int getRoomSearchCount(String addr_load, String from, String to) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("addr_load", addr_load);
+		map.put("from", from);
+		map.put("to", to);
+		return mapper.getRoomSearchCount(map);
+	}
 	
 	public int getRoomMaxNo() {
 		return mapper.getRoomMaxNo();
@@ -25,6 +33,17 @@ public class RoomService {
 	
 	public void insertRoom(RoomDto roomDto) {
 		mapper.insertRoom(roomDto);
+	}
+	
+	public List<ResultMapDto> getSearchPageRoom(int start, int perPage, String addr_load, String from, String to){
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("perPage", perPage);
+		map.put("addr_load", addr_load);
+		map.put("from", from);
+		map.put("to", to);
+		
+		return mapper.getSearchPageRoom(map);
 	}
 	
 	public List<ResultMapDto> getPageRoom(int start, int perPage) {
