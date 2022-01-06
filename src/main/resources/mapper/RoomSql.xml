@@ -25,6 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					)
 				) b on a.no = b.room_no
 				where a.addr_load like concat(#{addr_load},"%")
+				group by a.no
 		) result_t left join guest_comment g
 		on result_t.res_no = g.no
 	</select>
@@ -62,6 +63,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					)
 				) b on a.no = b.room_no
 				where a.addr_load like concat(#{addr_load},"%")
+				group by a.no
 		) result_t left join guest_comment g
 		on result_t.res_no = g.no
 		group by result_t.no 

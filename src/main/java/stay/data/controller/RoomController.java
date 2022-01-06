@@ -60,9 +60,11 @@ public class RoomController {
 		String loginok = (String)session.getAttribute("loginok");
 		
 		int totalCount = 0;
-		if(addr_load != "" || addr_load != null) {
+		if(addr_load != "") {
 			// 검색한 숙소 개수
 			totalCount = roomService.getRoomSearchCount(addr_load, from, to);
+			
+			System.out.println(totalCount);
 		} else {
 			// 총 숙소 개수
 			totalCount = roomService.getRoomCount();
@@ -98,10 +100,10 @@ public class RoomController {
 		
 		List<ResultMapDto> roomList = new ArrayList<ResultMapDto>();
 		
-		if(addr_load != "" || addr_load != null) {
+		if(addr_load != "") {
 			// 검색한 페이지에서 필요한 방 가져오기
 			roomList = roomService.getSearchPageRoom(start, perPage, addr_load, from, to);
-			mview.setViewName("/room/roomMain?addr_load="+addr_load+"&from="+from+"&to="+to);
+			mview.setViewName("/room/roomMain");
 		} else {
 			// 각 페이지에서 필요한 게시글 가져오기
 			roomList = roomService.getPageRoom(start, perPage);
