@@ -36,22 +36,6 @@ function reserRef(e) {
 				url: "/report/oksingo",
 				data: {"no": no}
 			});
-		} else if (result.isCanceled) {
-			swalWithBootstrapButtons.fire(
-				'신고 승인이 거절됩니다.',
-				'ok'
-			)
-
-			$(e).attr("class", "btn btn-danger");
-			$(e).attr("onclick", "");
-			$(e).attr("style", "pointer-events: none;");
-			$(e).html("승인 거절");
-
-			$.ajax({
-				type: "post",
-				url: "/report/oksingo",
-				data: {"no": no}
-			});
 		}
 	})
 }
