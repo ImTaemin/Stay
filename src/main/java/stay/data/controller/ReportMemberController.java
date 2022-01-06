@@ -7,6 +7,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import stay.data.dto.ReportMemberDto;
@@ -16,6 +19,9 @@ import stay.data.service.MemberService;
 public class ReportMemberController {
 	@Autowired
 	MemberService memberService;
+	
+	@Autowired
+	
 
 	@GetMapping("/report")
 	public ModelAndView report(HttpSession session) {
@@ -29,4 +35,12 @@ public class ReportMemberController {
 
 		return mview;
 	}
+	
+	@PostMapping("/report/oksingo")
+	public void reportSingo(
+			@ModelAttribute ReportMemberDto rmDto, @RequestParam int no) {
+		rmDto.setNo(no);
+		memberService.updateRepMem(rmDto);
+	}
+	
 }

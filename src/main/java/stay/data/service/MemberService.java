@@ -182,4 +182,8 @@ public class MemberService {
 		
 		return mapper.checkSingo(map);
 	}
+	
+	public void updateRepMem(ReportMemberDto rmDto) {
+		mapper.updateRepMem(rmDto);
+	}
 }

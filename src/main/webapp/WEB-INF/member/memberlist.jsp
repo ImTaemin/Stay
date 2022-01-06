@@ -36,9 +36,26 @@
 						<td>${list.report_id}</td>
 						<td>${list.reason}</td>
 						<td>
-							<button type="button" class="btn btn-danger btn-xs">접수</button>
+							<!-- <button type="button" class="btn btn-danger btn-xs">접수</button>
 							<button type="button" class="btn btn-warning btn-xs del">보류</button>
-							<button type="button" class="btn btn-success btn-xs">승인</button>
+							<button type="button" class="btn btn-success btn-xs">승인</button> -->
+
+							<c:if test="${preCheck == false}">
+								<!-- 상태 버튼 -->
+								<div class="can-wrap">
+									<c:if test="${reMemDto.approve_check == 'ing'}">
+										<button class="btn btn-info" id="can-reser" no="${reMemDto.no}"
+											onclick="reserCan(this)">승인대기</button>
+									</c:if>
+
+									<c:if test="${reMemDto.approve_check == 'end'}">
+										<button class="btn btn-secondary can-btn" id="can-reser"
+											style="pointer-events: none;">승인완료</button>
+									</c:if>
+
+								</div>
+							</c:if>
+
 						</td>
 					</tr>
 				</c:forEach>
@@ -80,5 +97,8 @@
 			</c:if> --%>
 		</div>
 	</div>
+	
+	<!-- js -->
+	<script src="${root}/js/memberlist.js"></script>
 </body>
 </html>
