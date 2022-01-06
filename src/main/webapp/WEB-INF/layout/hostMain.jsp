@@ -100,7 +100,13 @@
 										<div class="content-outDate">${list.resDto.end_date}</div>
 									</div>
 									<div class="content-guest">게스트
-										<div class="content-number">${list.joinDto.count}명</div>
+										<c:if test="${list.joinDto.count == null}">
+											<div class="content-number">1명</div>
+										</c:if>
+										
+										<c:if test="${list.joinDto.count != null}">
+											<div class="content-number">${list.joinDto.count}명</div>
+										</c:if>
 									</div>
 									<div class="content-payment">결제 금액
 										<div class="content-cost">
@@ -132,7 +138,13 @@
 										<div class="content-outDate">${list.resDto.end_date}</div>
 									</div>
 									<div class="content-guest">게스트
-										<div class="content-number">${list.joinDto.count}명</div>
+										<c:if test="${list.joinDto.count == null}">
+											<div class="content-number">1명</div>
+										</c:if>
+										
+										<c:if test="${list.joinDto.count != null}">
+											<div class="content-number">${list.joinDto.count}명</div>
+										</c:if>
 									</div>
 									<div class="content-payment">결제 금액
 										<div class="content-cost">
@@ -164,7 +176,13 @@
 										<div class="content-outDate">${list.resDto.end_date}</div>
 									</div>
 									<div class="content-guest">게스트
-										<div class="content-number">${list.joinDto.count}명</div>
+										<c:if test="${list.joinDto.count == null}">
+											<div class="content-number">1명</div>
+										</c:if>
+										
+										<c:if test="${list.joinDto.count != null}">
+											<div class="content-number">${list.joinDto.count}명</div>
+										</c:if>
 									</div>
 									<div class="content-payment">결제 금액
 										<div class="content-cost">

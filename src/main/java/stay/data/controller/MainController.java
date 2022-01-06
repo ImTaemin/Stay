@@ -101,18 +101,15 @@ public class MainController {
 
 			// 조인 게스트
 			String reserNo = dto.getResDto().getNo();
+			List<JoinGuestDto> joinDtoList = joinService.selectListJoin(reserNo);
 
-			JoinGuestDto joinDto = joinService.selectOneJoin(reserNo);
 			int joinNum = joinService.countJoinGuest(reserNo) + 1;
 
-			if (joinDto == null) {
-				joinNum = 1;
-				joinDto = new JoinGuestDto();
+			for (JoinGuestDto joinDto : joinDtoList) {
+				joinDto.setCount(joinNum);
+
+				dto.setJoinDto(joinDto);
 			}
-
-			joinDto.setCount(joinNum);
-
-			dto.setJoinDto(joinDto);
 		}
 
 		// 체크아웃 예정
@@ -128,18 +125,15 @@ public class MainController {
 
 			// 조인 게스트
 			String reserNo = dto.getResDto().getNo();
+			List<JoinGuestDto> joinDtoList = joinService.selectListJoin(reserNo);
 
-			JoinGuestDto joinDto = joinService.selectOneJoin(reserNo);
 			int joinNum = joinService.countJoinGuest(reserNo) + 1;
 
-			if (joinDto == null) {
-				joinNum = 1;
-				joinDto = new JoinGuestDto();
+			for (JoinGuestDto joinDto : joinDtoList) {
+				joinDto.setCount(joinNum);
+
+				dto.setJoinDto(joinDto);
 			}
-
-			joinDto.setCount(joinNum);
-
-			dto.setJoinDto(joinDto);
 		}
 
 		// 호스팅 중
@@ -155,18 +149,15 @@ public class MainController {
 
 			// 조인 게스트
 			String reserNo = dto.getResNoDto().getReser_no();
+			List<JoinGuestDto> joinDtoList = joinService.selectListJoin(reserNo);
 
-			JoinGuestDto joinDto = joinService.selectOneJoin(reserNo);
 			int joinNum = joinService.countJoinGuest(reserNo) + 1;
 
-			if (joinDto == null) {
-				joinNum = 1;
-				joinDto = new JoinGuestDto();
+			for (JoinGuestDto joinDto : joinDtoList) {
+				joinDto.setCount(joinNum);
+
+				dto.setJoinDto(joinDto);
 			}
-
-			joinDto.setCount(joinNum);
-
-			dto.setJoinDto(joinDto);
 		}
 
 		// 호스트모드 예약상태별 예약 목록중 최근 3개

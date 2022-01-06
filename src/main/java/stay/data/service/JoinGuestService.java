@@ -48,4 +48,8 @@ public class JoinGuestService {
 	public JoinGuestDto selectOneJoin(String no) {
 		return mapper.selectOneJoin(no);
 	}
+
+	public List<JoinGuestDto> selectListJoin(String no) {
+		return mapper.selectListJoin(no);
+	}
 }

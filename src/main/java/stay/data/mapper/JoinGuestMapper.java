@@ -16,4 +16,5 @@ public interface JoinGuestMapper {
 	public List<ResultMapDto> getAllJoinGuest(String no);
 	public void deleteJoinGuest(HashMap<String, String> map);
 	public JoinGuestDto selectOneJoin(String no);
+	public List<JoinGuestDto> selectListJoin(String no);
 }

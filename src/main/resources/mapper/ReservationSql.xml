@@ -112,14 +112,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="selectHostingHostReservation" parameterType="String" resultMap="resultMap">
 		select *, b.no reser_no from room a right join (
-			select * from reservation res
-			where res.start_date = date_format((select current_date + interval 1 day), "%y-%m-%d")
-			or res.end_date = date_format((select current_date + interval 1 day), "%y-%m-%d")
-			and res.host_id = #{host_id} and res.no not in (
+			select *, res.host_id h from reservation res
+			where res.start_date = date_format(now(), "%y-%m-%d")
+			or res.end_date = date_format(now(), "%y-%m-%d") and res.no not in (
 				select res.no from can_reservation can, reservation res
 				where can.no = res.no and res.host_id = #{host_id}
 			)
-		) b on a.no = b.room_no
+		) b on a.no = b.room_no where b.h = #{host_id}
 	</select>
 	
 	<select id="selectGuestOneReservation" parameterType="HashMap" resultType="redto">

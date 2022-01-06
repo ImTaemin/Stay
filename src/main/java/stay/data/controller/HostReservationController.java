@@ -137,9 +137,10 @@ public class HostReservationController {
 		String myid = (String) session.getAttribute("myid");
 
 		ReservationDto reserDto = reservationService.selectHostOneReservation(reserNo, myid);
-
+		
 		// 숙소 정보 가져오기
 		String roomNo = reserDto.getRoom_no();
+		
 		RoomDto roomDto = roomService.getRoom(roomNo);
 
 		// 날짜 split

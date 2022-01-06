@@ -69,6 +69,9 @@ public class ReservationService {
 	}
 	
 	public ReservationDto selectHostOneReservation(String no, String hostId) {
+		
+		System.out.println(no +" " + hostId);
+		
 		HashMap<String, String> map = new HashMap<String, String>();
 		
 		map.put("no", no);

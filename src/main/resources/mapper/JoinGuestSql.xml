@@ -30,6 +30,10 @@
 	<select id="selectOneJoin" parameterType="String" resultType="jgdto">
 		select * from join_guest where no = #{no}
 	</select>
+
+	<select id="selectListJoin" parameterType="String" resultType="jgdto">
+		select * from join_guest where no = #{no}
+	</select>
 	
 	<!-- join -->
 	<!-- member -->
