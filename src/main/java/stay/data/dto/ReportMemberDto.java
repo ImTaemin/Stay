@@ -10,7 +10,7 @@ import lombok.Data;
 @Alias("rmdto")
 public class ReportMemberDto {
 
-	private int no;
+	private String no;
 	private String black_id;
 	private String report_id;
 	private String reason;

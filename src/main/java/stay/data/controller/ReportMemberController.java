@@ -36,7 +36,7 @@ public class ReportMemberController {
 	
 	@PostMapping("/report/oksingo")
 	public void reportSingo(
-			@ModelAttribute ReportMemberDto rmDto, @RequestParam int no) {
+			@ModelAttribute ReportMemberDto rmDto, @RequestParam String no) {
 		rmDto.setNo(no);
 		memberService.updateRepMem(rmDto);
 	}

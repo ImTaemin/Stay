@@ -23,7 +23,7 @@ function reserRef(e) {
 			swalWithBootstrapButtons.fire(
 				'신고가 승인 되었습니다.',
 				'본사 규정에 맞춰 신고 절차에 따라 진행될 예정입니다.',
-				'ok'
+				'success'
 			)
 
 			$(e).attr("class", "btn btn-success");

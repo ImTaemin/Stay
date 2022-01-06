@@ -84,6 +84,6 @@
 	</insert>
 	
 	<update id="updateRepMem" parameterType="rmdto">
-		update report_member set approve_check = 'ok', approve_date = now() where no = #{no}
+		update report_member set approve_date = now(), approve_check = 'ok' where no = #{no}
 	</update>
 </mapper>
