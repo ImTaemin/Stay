@@ -21,13 +21,6 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </head>
 <body>
-	${totalCount}
-	${roomList}
-	${totalPage}
-	${startPage}
-	${endPage}
-	${currentPage}
-	${wishList}
 	<div class="room-main-wrap">
 		<!-- 숙소 상세 목록 -->
 		<div class="list">

@@ -50,6 +50,9 @@
 									async: false,
 									success:function(data){
 										var s="";
+										s += "<input type='radio' name='addr_load' id='addr-1' value='" + data[0].addr_load.split(" ")[0] +"'>";
+										s += "<label class='search-label' for='addr-1'>"+ data[0].addr_load.split(" ")[0] +"</label><br>";
+										
 										$.each(data, function(i, item){
 											s += "<input type='radio' name='addr_load' id='addr"+ i +"' value='"+item.addr_load +"'>";
 											s += "<label class='search-label' for='addr"+ i +"'>"+ item.addr_load +"</label><br>";
