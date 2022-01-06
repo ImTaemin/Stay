@@ -1,4 +1,4 @@
-// 예약 취소
+// 신고 승인
 function reserRef(e) {
 	var no = $(e).attr("no");
 
@@ -36,6 +36,23 @@ function reserRef(e) {
 				url: "/report/oksingo",
 				data: {"no": no}
 			});
+		} else {
+			swalWithBootstrapButtons.fire(
+				'신고가 거절 되었습니다.',
+				'본사 규정에 맞춰 신고 절차에 따라 진행될 예정입니다.',
+				'error'
+			)
+
+			$(e).attr("class", "btn btn-danger");
+			$(e).attr("onclick", "");
+			$(e).attr("style", "pointer-events: none;");
+			$(e).html("승인 거절");
+
+			$.ajax({
+				type: "post",
+				url: "/report/cansingo",
+				data: {"no": no}
+			});
 		}
-	})
+	});
 }

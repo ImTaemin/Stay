@@ -16,6 +16,11 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <title>관리자 페이지 - 회원목록</title>
+<style>
+	td,th {
+		vertical-align: middle !important;
+	}
+</style>
 </head>
 <body>
 	<div class="report-main-wrap">
@@ -33,7 +38,7 @@
 
 				<c:forEach var="list" items="${reportList}" varStatus="i">
 					<tr>
-						<td align="center">${i.count}</td>
+						<td align="center" >${i.count}</td>
 						<td align="center">${list.black_id}</td>
 						<td align="center">${list.report_id}</td>
 						<td>${list.reason}</td>
