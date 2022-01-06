@@ -41,4 +41,11 @@ public class ReportMemberController {
 		memberService.updateRepMem(rmDto);
 	}
 	
+	@PostMapping("/report/cansingo")
+	public void reportCancel(
+			@ModelAttribute ReportMemberDto rmDto, @RequestParam String no) {
+		rmDto.setNo(no);
+		memberService.updateRepCan(rmDto);
+	}
+	
 }

@@ -41,7 +41,7 @@
 								<!-- 상태 버튼 -->
 								<div class="can-wrap">
 									<c:if test="${list.approve_check == 'ing'}">
-										<button class="btn btn-secondary can-btn" id="can-reser" no="${rmDto.no}"
+										<button class="btn btn-secondary can-btn" id="can-reser" no="${list.no}"
 											onclick="reserRef(this)">승인 대기</button>
 									</c:if>
 

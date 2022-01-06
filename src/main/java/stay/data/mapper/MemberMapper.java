@@ -55,4 +55,5 @@ public interface MemberMapper {
   	
   	//신고관리
   	public void updateRepMem(ReportMemberDto rmDto);
+  	public void updateRepCan(ReportMemberDto rmDto);
 }
