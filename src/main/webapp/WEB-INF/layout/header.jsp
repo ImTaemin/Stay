@@ -24,55 +24,76 @@
 <c:set var="root" value="<%=request.getContextPath()%>"></c:set>
 <body>
 	<div class="main-title">
+
 		<!-- 드롭다운메뉴 -->
 		<div class="dropdown">
 			<button type="button" aria-label="Open user menu"
 				class="dropdown-button">
 				<div class="glyphicon glyphicon-align-justify" id="main-menu"></div>
 			</button>
+			<c:if test="${sessionScope.mode!='admin'}">
 			<div class="dropdown-menu">
 				<c:if test="${sessionScope.loginok!=null }">
 					<ul>
-						<li><c:if test="${sessionScope.mode=='guest'}">
+						<li>
+						    <c:if test="${sessionScope.mode=='guest'}">
 								<a href="${root}/room/main">숙소</a>
-							</c:if> <c:if test="${sessionScope.mode=='host'}">
+							</c:if> 
+							<c:if test="${sessionScope.mode=='host'}">
 								<a href="${root}/room/list">숙소</a>
-							</c:if></li>
-					</ul>
-					<ul>
-						<li><c:if test="${sessionScope.mode=='guest'}">
-								<a href="${root}/reser/reservationlist">예약정보</a>
-							</c:if> <c:if test="${sessionScope.mode=='host'}">
-								<a href="${root}/reser/hostreservationlist">예약정보</a>
-							</c:if></li>
-						<li><c:if test="${sessionScope.mode=='guest'}">
-								<a href="${root }/wish/list">위시리스트</a>
-							</c:if> <c:if test="${sessionScope.mode=='host'}">
-								<a href="${root }/calendar">달력</a>
-							</c:if></li>
-					</ul>
-					<ul>
-						<li><a
-							href="${root}/profile/profileform?id=${sessionScope.myid}">프로필</a>
+							</c:if>
 						</li>
-						<li><a href="${root}/mypage/mypageform">마이페이지</a></li>
-						<li><c:if test="${sessionScope.mode=='guest'}">
-								<a href="/card/insertform">결제카드 추가</a>
-							</c:if> <c:if test="${sessionScope.mode=='host'}">
-								<a href="/account/insertform">수금 계좌번호 등록</a>
-							</c:if></li>
 					</ul>
 					<ul>
-						<li><c:if test="${sessionScope.mode=='guest'}">
+						<li>
+							 <c:if test="${sessionScope.mode=='host'}">
+								<a href="${root}/reser/hostreservationlist">예약정보</a>
+							</c:if>
+							<c:if test="${sessionScope.mode=='guest'}">
+								<a href="${root}/reser/reservationlist">예약정보</a>
+							</c:if>
+						</li>
+						<li>
+							<c:if test="${sessionScope.mode=='guest'}">
+								<a href="${root }/wish/list">위시리스트</a>
+							</c:if> 
+							<c:if test="${sessionScope.mode=='host'}">
+								<a href="${root }/calendar">달력</a>
+							</c:if>
+						</li>
+					</ul>
+					<ul>
+						<li>
+							<a href="${root}/profile/profileform?id=${sessionScope.myid}">프로필</a>
+						</li>
+						<li>
+							<a href="${root}/mypage/mypageform">마이페이지</a>
+						</li>
+						<li>
+							<c:if test="${sessionScope.mode=='guest'}">
+								<a href="/card/insertform">결제카드 추가</a>
+							</c:if> 
+							<c:if test="${sessionScope.mode=='host'}">
+								<a href="/account/insertform">수금 계좌번호 등록</a>
+							</c:if>
+						</li>
+					</ul>
+					<ul>
+						<li>
+							<c:if test="${sessionScope.mode=='guest'}">
 								<a href="/changeMode">호스트로 전환</a>
-							</c:if> <c:if test="${sessionScope.mode=='host'}">
+							</c:if> 
+							<c:if test="${sessionScope.mode=='host'}">
 								<a href="/changeMode">게스트로 전환</a>
-							</c:if></li>
+							</c:if>
+						</li>
 					</ul>
 				</c:if>
 				<c:if test="${sessionScope.loginok==null }">
 					<ul>
 						<li><a href="${root}/room/main">숙소</a></li>
+					</ul>
+					<ul>
 						<li><a href="${root }/member/login">예약정보</a></li>
 						<li><a href="${root }/member/login">위시리스트</a></li>
 					</ul>
@@ -85,7 +106,9 @@
 					</ul>
 				</c:if>
 			</div>
+			</c:if>
 		</div>
+		
 		<!-- 로고_클릭시 메인페이지로 이동 -->
 		<div class="main-logo">
 			<c:if test="${sessionScope.loginok==null }">
@@ -102,6 +125,10 @@
 					<a href="${root }/host/main"> <img alt=""
 						src="../photo/logo_sm.png">
 					</a>
+				</c:if>
+				
+				<c:if test="${sessionScope.mode=='admin'}">
+					<img alt="" src="../photo/logo_sm.png">
 				</c:if>
 			</c:if>
 		</div>
