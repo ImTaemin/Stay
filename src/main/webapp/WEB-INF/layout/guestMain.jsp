@@ -29,13 +29,14 @@
 			<!-- 검색핉터창 -->
 			<div class="guestMain-filter">
 				<div class="guestMain-map">
-					<div class="guestMain-siteBtn"><button type="button" class="guestMain-site">위치 검색</button></div>
+					<div class="guestMain-siteBtn"><button type="button" class="guestMain-site" id="guestMain-site">위치 검색</button></div>
 					<div class="bar">|</div>
 					<div class="site-search">
 						<input id="search-addr" onkeyup="search(this)" type="text" placeholder="위치를 검색하세요.">
 						<hr>
 						<script type="text/javascript">
 							function search(){
+								
 								var search = $("#search-addr").val();
 								
 								if(search==""){
@@ -61,28 +62,43 @@
 									}
 								});
 							}
+							function searchSite(e) {
+								var searchSite = $(':radio[name="addr_load"]:checked').val();
+
+								$("button[id=guestMain-site]").html(searchSite);
+							} 
 							
+							function checkIn(e) {
+								var startDate = $('#check-in').val();
+
+								$("label[id=checkIn]").html(startDate);
+							} 
 							
+							function checkOut(e) {
+								var endDate = $('#check-out').val();
+
+								$("label[id=checkOut]").html(endDate);
+							}
+				
 							
 						</script>
-						<div id="search-result"></div>
+						<div id="search-result" onchange="searchSite(this)"></div>
 					</div>
 				</div>
 				<div class="guestMain-start">  
 									<jsp:useBean id="now" class="java.util.Date"/>
 									<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today"/>
-									<label for="now">체크인</label>
-									<input type="date" name="from" id="check-in" min="${today}">  |  
+									<label id="checkIn" for="now">체크인</label> 
+									<input type="date" name="from" id="check-in" min="${today}"  oninput="checkIn(this)">  |  
 				</div>
 				<div class="guestMain-end">
-									<label for="now">체크아웃</label>
-									<input type="date" name="to" id="check-out" min="${today}">
+									<label id="checkOut"  for="now">체크아웃</label>
+									<input type="date" name="to" id="check-out" min="${today}"   oninput="checkOut(this)">
 				</div>
 			</div>
 			<div class="guestMain-search">
-				<button type="submit" class="glyphicon glyphicon-search"></button>
+				<button type="submit" class="glyphicon glyphicon-search" id="search-icon"></button>
 			</div>
-		 
 		</div>
 	</form>
 	
