@@ -381,3 +381,87 @@
 	font-size: 1.5em;
 	font-weight: bold;
 }
+
+.comment-wrap {
+	width: 100%;
+}
+
+.comment-wrap>.comment-title {
+	margin-bottom: 10px;
+}
+
+.comment-wrap>.comment-title>.title {
+	font-weight: bold;
+	font-size: 1.5em;
+	margin-bottom: 10px;
+}
+
+i.bi.bi-star-fill {
+	color: #FFCD28;
+	margin-left: 3px;
+	margin-right: 5px;
+}
+
+.comment-wrap>.comment>.empty {
+	padding: 10px 0;
+	font-size: 1.1em;
+	padding-left: 10px;
+	color: gray;
+	font-weight: bold;
+}
+
+.co-wrap {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.co-wrap>.co-detail {
+	display: flex;
+	flex-direction: column;
+	width: 49%;
+	margin-bottom: 1.5%;
+	padding: 1%;
+}
+
+.co-detail>.mem-detail {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+
+.mem-detail>.mem-img {
+	display: flex;
+	justify-content: center;
+	width: 15%;
+	cursor: pointer;
+}
+
+.mem-img>img {
+	border-radius: 100%;
+	width: 80px;
+	height: 80px;
+}
+
+.mem-detail>.mem-content {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	width: 68%;
+}
+
+.mem-content>.mem-id {
+	font-size: 1.5em;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.mem-content>.mem-id:hover {
+	color: #0B57A2;
+}
+
+.co-detail>.co-content {
+	margin-top: 3.5%;
+	padding: 0 5%;
+}
