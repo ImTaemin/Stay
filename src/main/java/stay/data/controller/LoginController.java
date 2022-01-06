@@ -71,6 +71,7 @@ public class LoginController {
 		if (check == 1 && id.equals("admin")) {
 			session.setAttribute("loginok", "yes");
 			session.setAttribute("myid", id);
+			session.setAttribute("mode", "admin");
 			return "redirect:/report";
 		}
 
