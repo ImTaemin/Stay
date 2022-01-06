@@ -20,8 +20,6 @@ public class ReportMemberController {
 	@Autowired
 	MemberService memberService;
 	
-	@Autowired
-	
 
 	@GetMapping("/report")
 	public ModelAndView report(HttpSession session) {

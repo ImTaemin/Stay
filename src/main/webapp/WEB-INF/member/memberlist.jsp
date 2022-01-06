@@ -12,6 +12,8 @@
 <!-- css -->
 <link rel="stylesheet" href="${root}/css/memberlist.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+<!-- js -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <title>관리자 페이지 - 회원목록</title>
 </head>
@@ -21,41 +23,38 @@
 		<div class="report-list">
 			<table class="table table-bordered" style="width: 100%;">
 				<caption><b>신고 관리 목록</b></caption>
-				<tr bgcolor="#eee">
-					<th width="50">No</th>
-					<th width="70">Black_Id</th>
-					<th width="70">Report_Id</th>
-					<th width="150">Reason</th>
-					<th width="130">Admission</th>
+				<tr bgcolor="#eee" style="text-align: center;">
+					<th style="text-align: center;" width="30">No</th>
+					<th style="text-align: center;" width="70">Black_Id</th>
+					<th style="text-align: center;" width="70">Report_Id</th>
+					<th style="text-align: center;" width="350">Reason</th>
+					<th style="text-align: center;" width="70">Admission</th>
 				</tr>
 
 				<c:forEach var="list" items="${reportList}" varStatus="i">
 					<tr>
 						<td align="center">${i.count}</td>
-						<td>${list.black_id}</td>
-						<td>${list.report_id}</td>
+						<td align="center">${list.black_id}</td>
+						<td align="center">${list.report_id}</td>
 						<td>${list.reason}</td>
 						<td>
-							<!-- <button type="button" class="btn btn-danger btn-xs">접수</button>
-							<button type="button" class="btn btn-warning btn-xs del">보류</button>
-							<button type="button" class="btn btn-success btn-xs">승인</button> -->
-
-							<c:if test="${preCheck == false}">
 								<!-- 상태 버튼 -->
 								<div class="can-wrap">
-									<c:if test="${reMemDto.approve_check == 'ing'}">
-										<button class="btn btn-info" id="can-reser" no="${reMemDto.no}"
-											onclick="reserCan(this)">승인대기</button>
+									<c:if test="${list.approve_check == 'ing'}">
+										<button class="btn btn-secondary can-btn" id="can-reser" no="${rmDto.no}"
+											onclick="reserRef(this)">승인 대기</button>
 									</c:if>
 
-									<c:if test="${reMemDto.approve_check == 'end'}">
-										<button class="btn btn-secondary can-btn" id="can-reser"
-											style="pointer-events: none;">승인완료</button>
+									<c:if test="${list.approve_check == 'ok'}">
+										<button class="btn btn-success can-btn" id="can-reser"
+											style="pointer-events: none;">승인 완료</button>
 									</c:if>
-
+									
+									<c:if test="${list.approve_check == 'can'}">
+										<button class="btn btn-danger can-btn" id="can-reser"
+											style="pointer-events: none;">승인 거절</button>
+									</c:if>
 								</div>
-							</c:if>
-
 						</td>
 					</tr>
 				</c:forEach>
