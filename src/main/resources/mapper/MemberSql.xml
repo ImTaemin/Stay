@@ -63,10 +63,6 @@
 		update member set pass=#{pass} where id=#{id} 
 	</update>
 	
-	<insert id="insertSingoMem" parameterType="rmdto">
-		insert into report_member values (null, #{black_id}, #{report_id}, #{reason}, now(), null, 'ing')
-	</insert>
-	
 	<select id="getSingoMem" parameterType="String" resultType="rmdto">
 		select * from report_member where black_id = #{black_id}
 	</select>	
@@ -83,7 +79,11 @@
 		select count(*) from report_member where black_id = #{black_id} and report_id = #{report_id}
 	</select>
 	
+	<insert id="insertSingoMem" parameterType="rmdto">
+		insert into report_member values (null, #{black_id}, #{report_id}, #{reason}, now(), null, 'ing')
+	</insert>
+	
 	<update id="updateRepMem" parameterType="rmdto">
-		update report_member set approve_check = 'end', approve_date = now() where no = #{no}
+		update report_member set approve_date = now(), approve_check = 'ok' where no = #{no}
 	</update>
 </mapper>
