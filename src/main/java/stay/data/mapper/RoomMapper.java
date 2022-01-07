@@ -22,4 +22,5 @@ public interface RoomMapper {
 	public List<RoomDto> getBestRoom();
 	public List<RoomDto> getRoomSite(String search);
 	public List<RoomDto> getRoomList(String hostId);
+	public boolean getRoomHosting(String no);
 }

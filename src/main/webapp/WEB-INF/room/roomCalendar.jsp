@@ -14,6 +14,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <!-- js -->
 <script src='../../js/calendar.js'></script>
+<script src='../../js/calendarKorea.js'></script>
 <script src='../../js/roomCalendar.js'></script>
 </head>
 <body>
@@ -58,10 +59,10 @@
 			
 			<div class="hosting-btn-wrap">
 				<!-- 체크버튼 -->
-				<i id="hosting-true" class="bi bi-check-circle" check="0" onclick="clickCheck(this)"></i>
+				<i id="hosting-true" class="bi bi-check-circle" onclick="clickCheck(this)"></i>
 				
 				<!-- x버튼 -->
-				<i id="hosting-false" class="bi bi-x-circle" check="0" onclick="clickCheck(this)"></i>
+				<i id="hosting-false" class="bi bi-x-circle" onclick="clickCheck(this)"></i>
 			</div>
 		</div>
 			
@@ -82,7 +83,7 @@
 		<hr>
 		
 		<div class="info-btn">
-			<button class="btn btn-primary">확인</button>
+			<button class="btn btn-primary" onclick="checkChange()">확인</button>
 		</div>
 	</div>
 </div>

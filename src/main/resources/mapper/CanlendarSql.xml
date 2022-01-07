@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="stay.data.mapper.CalendarMapper">
+	<!-- hosting -->
+	<insert id="insertHosting" parameterType="rhdto">
+		insert into room_hosting values (#{no}, #{change_date}, #{hosting})
+	</insert>
+	
+	<delete id="deleteHosting" parameterType="HashMap">
+		delete from room_hosting where no = #{no} and change_date = #{change_date}
+	</delete>
+	
+	<!-- price -->
+	<insert id="insertPrice" parameterType="rpdto">
+		insert into room_price values (#{no}, #{change_date}, #{price})
+	</insert>
+	
+	<delete id="deletePrice" parameterType="HashMap">
+		delete from room_price where no = #{no} and change_date = #{change_date}
+	</delete>
+</mapper>

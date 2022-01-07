@@ -74,7 +74,12 @@ public class RoomService {
 	public List<RoomDto> getRoomSite(String search){
 		return mapper.getRoomSite(search);
 	}
+	
 	public List<RoomDto> getRoomList(String hostId){
 		return mapper.getRoomList(hostId);
+	}
+	
+	public boolean getRoomHosting(String no) {
+		return mapper.getRoomHosting(no);
 	}
 }

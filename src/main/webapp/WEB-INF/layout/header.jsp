@@ -122,8 +122,7 @@
 				</c:if>
 
 				<c:if test="${sessionScope.mode=='host'}">
-					<a href="${root }/host/main"> <img alt=""
-						src="../photo/logo_sm.png">
+					<a href="${root }/host/main"> <img alt="" src="../photo/logo_sm.png">
 					</a>
 				</c:if>
 				

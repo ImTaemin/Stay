@@ -112,6 +112,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from room where host_id = #{host_id}
 	</select>
 	
+	<select id="getRoomHosting" parameterType="String" resultType="boolean">
+		select hosting from room where no = #{no}
+	</select>
+	
 	<!-- join -->
 	<!-- room -->
 	<resultMap type="stay.data.dto.RoomDto" id="roomMap">
