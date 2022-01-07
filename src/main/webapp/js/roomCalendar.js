@@ -87,8 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					var clickDate = click.split("-");
 
 					$("#select-day").html(clickDate[0] + "년 " + clickDate[1] + "월 " + clickDate[2] + "일");
-
-					$('td[data-date=' + click + ']').css('background-color', '#F0F8FF');
+					$('#roomPirce').attr('value',roomPcie);
 
 					// 호스팅 여부 출력
 					if (data.hosting == true) {
@@ -106,6 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					var clickDate = click.split("-");
 
 					$("#select-day").html(clickDate[0] + "년 " + clickDate[1] + "월 " + clickDate[2] + "일");
+					$("input[id=roomPirce]").attr("value", "￦ " + roomPrice.toLocaleString());
 
 					// 호스팅 여부 출력
 					if (data.hosting == true) {
@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				}
 			});
 
-			// 미래 날짜 클릭 이벤트
+			// 미래 날짜 클릭 이벤트 (월 변경 시)
 			$('.fc-day-future').click(function() {
 				var clickDate = $(this).attr('data-date').split("-");
 
@@ -238,6 +238,20 @@ function checkChange() {
 					url: "/calendar/updatehosting",
 					data: { "roomNo": roomNo, "chageDate": splitDate, "hosting": hostingCheck }
 				});
+
+				// 가격 변경 여부
+				var chagePrice = $('#roomPirce').val().replace('￦ ', '').replace(',', '');
+
+				if (roomPirce != chagePrice) {
+					$('td[data-date=' + splitDate + '] span').html($('#roomPirce').val());
+
+					$.ajax({
+						type: "post",
+						dataType: "json",
+						url: "/calendar/updateprice",
+						data: { "roomNo": roomNo, "chageDate": splitDate, "roomPrice": chagePrice }
+					});
+				}
 			} else if ($('#hosting-false').attr("class") == "bi bi-x-circle-fill") {
 				hostingCheck = false;
 
@@ -250,20 +264,6 @@ function checkChange() {
 					url: "/calendar/updatehosting",
 					data: { "roomNo": roomNo, "chageDate": splitDate, "hosting": hostingCheck }
 				});
-			}
-
-			// 가격 변경 여부
-			var chagePrice = $('#roomPirce').val().replace('￦ ', '').replace(',', '');
-
-			if (roomPirce != chagePrice) {
-				$('td[data-date=' + splitDate + '] span').html( $('#roomPirce').val());
-				
-//				$.ajax({
-//					type: "post",
-//					dataType: "json",
-//					url: "/calendar/updateprice",
-//					data: { "roomNo": roomNo, "chageDate": splitDate, "roomPrice": chagePrice }
-//				});
 			}
 		}
 	});

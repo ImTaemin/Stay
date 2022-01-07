@@ -27,7 +27,16 @@ public class CalendarService {
 
 		mapper.deleteHosting(map);
 	}
+	
+	public RoomHostingDto getDateRoomHosting(String no, String change_date) {
+		HashMap<String, String> map = new HashMap<String, String>();
 
+		map.put("no", no);
+		map.put("change_date", change_date);
+
+		return mapper.getDateRoomHosting(map);
+	}
+	
 	// price
 	public void insertPrice(RoomPirceDto dto) {
 		mapper.insertPrice(dto);
@@ -40,5 +49,18 @@ public class CalendarService {
 		map.put("change_date", change_date);
 
 		mapper.deletePrice(map);
+	}
+	
+	public RoomPirceDto getDateRoomPrice(String no, String change_date) {
+		HashMap<String, String> map = new HashMap<String, String>();
+
+		map.put("no", no);
+		map.put("change_date", change_date);
+
+		return mapper.getDateRoomPrice(map);
+	}
+	
+	public void updatePrice(RoomPirceDto dto) {
+		mapper.updatePrice(dto);
 	}
 }

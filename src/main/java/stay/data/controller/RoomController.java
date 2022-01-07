@@ -59,14 +59,12 @@ public class RoomController {
 
 		int totalCount = 0;
 
-		if (addr_load != "") {
-			// 검색한 숙소 개수
-			totalCount = roomService.getRoomSearchCount(addr_load, from, to);
-
-			System.out.println(totalCount);
-		} else {
+		if (addr_load.isEmpty()) {
 			// 총 숙소 개수
 			totalCount = roomService.getRoomCount();
+		} else {
+			// 검색한 숙소 개수
+			totalCount = roomService.getRoomSearchCount(addr_load, from, to);
 		}
 
 		// 총 페이지 수
@@ -99,14 +97,15 @@ public class RoomController {
 
 		List<ResultMapDto> roomList = new ArrayList<ResultMapDto>();
 
-		if (addr_load != "") {
-			// 검색한 페이지에서 필요한 방 가져오기
-			roomList = roomService.getSearchPageRoom(start, perPage, addr_load, from, to);
-			mview.setViewName("/room/roomMain");
-		} else {
+		if (addr_load.isEmpty()) {
 			// 각 페이지에서 필요한 게시글 가져오기
 			roomList = roomService.getPageRoom(start, perPage);
 			mview.setViewName("/room/roomMain");
+		} else {
+			// 검색한 페이지에서 필요한 방 가져오기
+			roomList = roomService.getSearchPageRoom(start, perPage, addr_load, from, to);
+			mview.setViewName("/room/roomMain");
+			
 		}
 
 		for (ResultMapDto dto : roomList) {

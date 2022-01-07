@@ -11,6 +11,10 @@
 		delete from room_hosting where no = #{no} and change_date = #{change_date}
 	</delete>
 	
+	<select id="getDateRoomHosting" parameterType="HashMap">
+		select * from room_hosting where no = #{no} and change_date = #{change_date}
+	</select>
+	
 	<!-- price -->
 	<insert id="insertPrice" parameterType="rpdto">
 		insert into room_price values (#{no}, #{change_date}, #{price})
@@ -19,4 +23,12 @@
 	<delete id="deletePrice" parameterType="HashMap">
 		delete from room_price where no = #{no} and change_date = #{change_date}
 	</delete>
+	
+	<select id="getDateRoomPrice" parameterType="HashMap" resultType="rpdto">
+		select * from room_price where no = #{no} and change_date = #{change_date}
+	</select>
+	
+	<update id="updatePrice" parameterType="rpdto">
+		update room_price set price = #{price} where no = #{no} and change_date = #{change_date}
+	</update>
 </mapper>
