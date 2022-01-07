@@ -30,7 +30,6 @@
 			<div class="guestMain-filter">
 				<div class="guestMain-map">
 					<div class="guestMain-siteBtn"><button type="button" class="guestMain-site" id="guestMain-site">위치 검색</button></div>
-					<div class="bar">|</div>
 					<div class="site-search">
 						<input id="search-addr" onkeyup="search(this)" type="text" placeholder="위치를 검색하세요.">
 						<hr>
@@ -62,6 +61,7 @@
 									}
 								});
 							}
+							
 							function searchSite(e) {
 								var searchSite = $(':radio[name="addr_load"]:checked').val();
 
@@ -79,21 +79,21 @@
 
 								$("label[id=checkOut]").html(endDate);
 							}
-				
-							
 						</script>
 						<div id="search-result" onchange="searchSite(this)"></div>
 					</div>
 				</div>
+				<div class="bar">|</div>
 				<div class="guestMain-start">  
-									<jsp:useBean id="now" class="java.util.Date"/>
-									<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today"/>
-									<label id="checkIn" for="now">체크인</label> 
-									<input type="date" name="from" id="check-in" min="${today}"  oninput="checkIn(this)">  |  
+					<jsp:useBean id="now" class="java.util.Date"/>
+					<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today"/>
+					<label id="checkIn" for="check-in">체크인</label> 
+					<input type="date" name="from" id="check-in" min="${today}" oninput="checkIn(this)">
 				</div>
+				<div class="bar">|</div>
 				<div class="guestMain-end">
-									<label id="checkOut"  for="now">체크아웃</label>
-									<input type="date" name="to" id="check-out" min="${today}"   oninput="checkOut(this)">
+					<label id="checkOut" for="check-out">체크아웃</label>
+					<input type="date" name="to" id="check-out" min="${today}" oninput="checkOut(this)">
 				</div>
 			</div>
 			<div class="guestMain-search">

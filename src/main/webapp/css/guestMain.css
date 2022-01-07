@@ -10,59 +10,27 @@
 .guestMain-filter {
 	position: relative;
 	display: flex;
-	justify-content: space-between;
 	border: 2pt solid #0B57A2;
 	border-radius: 1em;
 	padding: 1% 5%;
-	width: 50%
+	align-items: center;
+	font-size: 1.3em;
 }
 
- .guestMain-map{
-	width: 23%;
+.guestMain-start, .guestMain-end{
+	display: flex;
+	justify-content: center;
 	text-align: center;
+	align-items: center;
 }
 
-.guestMain-start{
-	width: 39%;
-	text-align: center;
-}
-
-.guestMain-end{
-	width: 38%;
-	text-align: center;
-} 
-
-
-.guestMain-start, .guestMain-end {
-	position: relative;
-}
-
-.guestMain-start input {
+.guestMain-start input, .guestMain-end input {
 	border: none;
-	height: 30px;
-	width: 200px;
-	margin-top: 1.8%;
 }
 
-.guestMain-end input {
-	border: none;
-	height: 30px;
-	width: 200px;
-	margin-top: 1.8%;
-}
-
-.guestMain-start label {
+.guestMain-start label, .guestMain-end label {
 	position: absolute;
-	margin-left: 26%;
-	font-size: 15.3pt;
-	margin-top: 1.2%;
-}
-
-.guestMain-end label {
-	position: absolute;
-	margin-left: 25%;
-	font-size: 15.3pt;
-	margin-top: 1.2%;
+	margin-bottom: 0px;
 }
 
 /* placeholder 없애기 */
@@ -92,7 +60,7 @@
 	background-color: transparent;
 	cursor: pointer;
 	font-weight: bold;
-	font-size: 15pt;
+/* 	font-size: 15pt; */
 }
 
 .guestMain-search {
@@ -186,12 +154,17 @@
 .guestMain-map{
 	display: flex;
 	height: 100%;
-	padding-top: 1px;
+	text-align: center;
+/* 	padding-top: 1px; */
 }
 
-.guestMain-map .bar{
+.bar{
 	padding-left: 7px;
 	padding-top: 6px;
+}
+
+label, button{
+    white-space: nowrap;
 }
 
 .guestMain-site {
@@ -204,15 +177,15 @@
     overflow: hidden;
     background-color: transparent;
     cursor: pointer;
-    
 }
 
 .site-search{
 /* 	display: none; */
+	
 	visibility:hidden;
 	position: absolute;
     top: 65%;
-    max-height: 100px;
+    max-height: 150px;
     z-index: 15;
     border-radius: 4px;
     background-color: #fff;
