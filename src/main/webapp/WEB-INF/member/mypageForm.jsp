@@ -72,6 +72,7 @@
     <label for="pass_check">비밀번호 확인</label>
       <input type="password" name="userPW2" id="pass_check" placeholder="비밀번호 확인" required="required" onchange="check_pw()">&nbsp;<span id="check"></span> -->
       
+        <c:if test="${sessionScope.kakaologin==null }">
       <label for="pass">비밀번호</label>
       <input type="password" id="pw" name="pass" minlength="6" maxlength="16" placeholder="비밀번호를 입력하세요(특수문자 포함 6~16자 입력)" required="required" oninput="checkPw()">
     <label for="pass_check">비밀번호 확인</label>
@@ -84,6 +85,7 @@
   	  <div class="pw_check"><span class="pw_not_length">비밀번호는 6글자 이상, 16글자 이하만 사용 가능합니다.</span></div>
   	  <div class="pw_check"><span class="pw_not_sc">!,@,#,$,% 의 특수문자가 들어가 있지 않습니다.</span></div>
   	</div>
+  	</c:if>
       
   	<label for="name">이름</label>
   	  <input type="text" name="name" value="${memberDto.name}">
