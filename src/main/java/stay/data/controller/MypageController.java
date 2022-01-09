@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -28,6 +29,9 @@ public class MypageController {
 	@Autowired
 	MemberService memberService;
 
+	@Autowired
+	PasswordEncoder passwordEncoder;
+	
 	@GetMapping("/mypageform")
 	public ModelAndView member1(HttpSession session) {
 		ModelAndView mview = new ModelAndView();
@@ -47,6 +51,10 @@ public class MypageController {
 
 	@PostMapping("/update")
 	public String memberUpdate(@ModelAttribute MemberDto dto, @RequestParam MultipartFile upload, HttpSession session) {
+		
+		//패스워드 암호화
+		dto.setPass(passwordEncoder.encode(dto.getPass()));
+		
 		// 업로드할 폴더 지정
 		String path = session.getServletContext().getRealPath("/photo/memberPhoto");
 		System.out.println(path);

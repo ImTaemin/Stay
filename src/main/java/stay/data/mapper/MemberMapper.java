@@ -22,7 +22,7 @@ public interface MemberMapper {
 	public void deleteMember(String num);
 	
 	public String getName(String id);
-	public int login(HashMap<String, String> map);
+	public MemberDto login(String id);
 	
 	public void insertPhoto(MemberDto memberDto);
 	

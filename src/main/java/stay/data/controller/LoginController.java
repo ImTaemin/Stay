@@ -9,6 +9,7 @@ import java.util.HashMap;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,6 +36,9 @@ public class LoginController {
 
 	@Autowired
 	private KakaoLogin kakao;
+	
+	@Autowired
+	PasswordEncoder passwordEncoder;
 
 	@GetMapping("/login")
 	public String loginForm(HttpSession session, Model model) {
@@ -45,7 +49,6 @@ public class LoginController {
 		String loginok = (String) session.getAttribute("loginok");
 
 		if (loginok == null) {
-
 			return "/member/loginForm";
 
 		} else {
@@ -61,21 +64,17 @@ public class LoginController {
 	@PostMapping("/loginprocess")
 	public String loginProcss(@RequestParam(required = false) String cbsave, @RequestParam String id,
 			@RequestParam String pass, HttpSession session) {
-		HashMap<String, String> map = new HashMap<String, String>();
 
-		map.put("id", id);
-		map.put("pass", pass);
+		MemberDto check = mapper.login(id);
 
-		int check = mapper.login(map);
-
-		if (check == 1 && id.equals("admin")) {
+		if(passwordEncoder.matches(pass, check.getPass()) && id.equals("admin")) {
 			session.setAttribute("loginok", "yes");
 			session.setAttribute("myid", id);
 			session.setAttribute("mode", "admin");
 			return "redirect:/report";
 		}
 
-		if (check == 1) {
+		if (passwordEncoder.matches(pass, check.getPass())) {
 			session.setAttribute("myid", id);
 			session.setAttribute("loginok", "yes");
 			session.setAttribute("saveok", cbsave);

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +24,9 @@ public class GaipController {
 	
 	@Autowired
 	MemberMapper mapper;
+	
+	@Autowired
+	PasswordEncoder passwordEncoder;
 	
 	@GetMapping("/gaip")
 	public String gaipForm() {
@@ -52,7 +56,10 @@ public class GaipController {
 	//insert
 	@PostMapping("/insert")
 	public String memberInsert(@ModelAttribute MemberDto dto) {
-
+		
+		//패스워드 암호화
+		dto.setPass(passwordEncoder.encode(dto.getPass()));
+		
 		//insert 호출
 		mapper.insertMember(dto);
 
@@ -85,25 +92,25 @@ public class GaipController {
 		return "redirect:/";
 	}
 
-	@GetMapping("/delete")
-	public @ResponseBody HashMap<String, Integer> delete(@RequestParam String myid,
-														 @RequestParam String pass){
-		//db로부터 비번맞는지 체크
-		HashMap<String, String> map=new HashMap<String, String>();
-		map.put("myid",myid);
-		map.put("pass",pass);
-
-		int check=mapper.getCheckPass(map);
-
-		if(check==1) {
-			//비번이 맞는 경우
-			mapper.deleteMember(myid);
-		}
-
-		HashMap<String, Integer> rmap=new HashMap<String, Integer>();
-		rmap.put("check", check);
-
-		return rmap;
-	}
+//	@GetMapping("/delete")
+//	public @ResponseBody HashMap<String, Integer> delete(@RequestParam String myid,
+//														 @RequestParam String pass){
+//		//db로부터 비번맞는지 체크
+//		HashMap<String, String> map=new HashMap<String, String>();
+//		map.put("myid",myid);
+//		map.put("pass",pass);
+//
+//		int check=mapper.getCheckPass(map);
+//
+//		if(check==1) {
+//			//비번이 맞는 경우
+//			mapper.deleteMember(myid);
+//		}
+//
+//		HashMap<String, Integer> rmap=new HashMap<String, Integer>();
+//		rmap.put("check", check);
+//
+//		return rmap;
+//	}
 
 }
