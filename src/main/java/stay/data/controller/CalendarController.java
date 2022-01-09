@@ -55,11 +55,26 @@ public class CalendarController {
 		return roomService.getRoom(roomNo);
 	}
 	
-	@PostMapping("/searchupdate")
-	public @ResponseBody void searchUpdate() {
-		
+	@PostMapping("/searchhosting")
+	public @ResponseBody List<RoomHostingDto> searchHosting(@RequestParam String roomNo) {
+		return calendarService.getAllRoomHosting(roomNo);
 	}
-
+	
+	@PostMapping("/searchprice")
+	public @ResponseBody List<RoomPirceDto> searchPrice(@RequestParam String roomNo) {
+		return calendarService.getAllRoomPrice(roomNo);
+	}
+	
+	@PostMapping("/searchonehosting")
+	public @ResponseBody RoomHostingDto searchOneHosting(@RequestParam String roomNo, @RequestParam String chageDate) {
+		return calendarService.getDateRoomHosting(roomNo, chageDate);
+	}
+	
+	@PostMapping("/searchoneprice")
+	public @ResponseBody RoomPirceDto searchOnePrice(@RequestParam String roomNo, @RequestParam String chageDate) {
+		return calendarService.getDateRoomPrice(roomNo, chageDate);
+	}
+	
 	@PostMapping("/updatehosting")
 	public @ResponseBody void updateHosting(
 			@ModelAttribute RoomHostingDto hostingDto,
@@ -90,15 +105,17 @@ public class CalendarController {
 				priceDto.setPrice(roomPrice);
 
 				calendarService.insertPrice(priceDto);
-			} else {
-				calendarService.deletePrice(roomNo, chageDate);
 			}
 		} else {
-			roomPirceDto.setNo(roomNo);
-			roomPirceDto.setChange_date(chageDate);
-			roomPirceDto.setPrice(roomPrice);
-			
-			calendarService.updatePrice(roomPirceDto);
+			if (roomPrice == roomService.getRoom(roomNo).getPrice()) {
+				calendarService.deletePrice(roomNo, chageDate);
+			} else {
+				roomPirceDto.setNo(roomNo);
+				roomPirceDto.setChange_date(chageDate);
+				roomPirceDto.setPrice(roomPrice);
+				
+				calendarService.updatePrice(roomPirceDto);
+			}
 		}
 	}
 }

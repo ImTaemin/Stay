@@ -1,6 +1,7 @@
 package stay.data.service;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,6 +38,10 @@ public class CalendarService {
 		return mapper.getDateRoomHosting(map);
 	}
 	
+	public List<RoomHostingDto> getAllRoomHosting(String no) {
+		return mapper.getAllRoomHosting(no);
+	}
+	
 	// price
 	public void insertPrice(RoomPirceDto dto) {
 		mapper.insertPrice(dto);
@@ -62,5 +67,9 @@ public class CalendarService {
 	
 	public void updatePrice(RoomPirceDto dto) {
 		mapper.updatePrice(dto);
+	}
+	
+	public List<RoomPirceDto> getAllRoomPrice(String no) {
+		return mapper.getAllRoomPrice(no);
 	}
 }

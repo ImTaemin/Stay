@@ -11,8 +11,12 @@
 		delete from room_hosting where no = #{no} and change_date = #{change_date}
 	</delete>
 	
-	<select id="getDateRoomHosting" parameterType="HashMap">
+	<select id="getDateRoomHosting" parameterType="HashMap" resultType="rhdto">
 		select * from room_hosting where no = #{no} and change_date = #{change_date}
+	</select>
+	
+	<select id="getAllRoomHosting" parameterType="String" resultType="rhdto">
+		select * from room_hosting where no = #{no}
 	</select>
 	
 	<!-- price -->
@@ -31,4 +35,8 @@
 	<update id="updatePrice" parameterType="rpdto">
 		update room_price set price = #{price} where no = #{no} and change_date = #{change_date}
 	</update>
+	
+	<select id="getAllRoomPrice" parameterType="String" resultType="rpdto">
+		select * from room_price where no = #{no}
+	</select>
 </mapper>
