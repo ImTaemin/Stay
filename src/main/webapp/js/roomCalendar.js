@@ -1,3 +1,13 @@
+let searchRoomData;
+
+function setSearchRoomData(data) {
+	searchRoomData = data;
+}
+
+function getSearchRoomData() {
+	return searchRoomData;
+}
+
 // calender
 document.addEventListener('DOMContentLoaded', function() {
 	var calendarEl = document.getElementById('calendar');
@@ -46,211 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			document.getElementById("date").appendChild(node);
 		}
 
-		// select room
-		var select = document.getElementById("rooms");
-		var roomNo = select.options[select.selectedIndex].value;
-
-		$.ajax({
-			type: "post",
-			dataType: "json",
-			url: "/calendar/searchroom",
-			async: false,
-			data: { "roomNo": roomNo },
-			success: function(data) {
-				// 숙소 요금 출력
-				var roomPrice = data.price;
-
-				$("input[id=roomPirce]").attr("value", "￦ " + roomPrice.toLocaleString());
-
-				// 달력 요금 출력
-				var priceText = '<span class="cal-price">' + "￦ " + roomPrice.toLocaleString() + '</span>';
-				var nullText = '<span class="cal-price">&nbsp;</span>';
-
-				var pastDiv = $('.fc-day-past').children('.fc-scrollgrid-sync-inner');
-				$(pastDiv).append(nullText);
-
-				var todayDiv = $('.fc-day-today').children('.fc-scrollgrid-sync-inner');
-				$(todayDiv).append(priceText);
-
-				var futureDiv = $('.fc-day-future').children('.fc-scrollgrid-sync-inner');
-				$(futureDiv).append(priceText);
-
-				// 호스팅 여부 출력
-				if (data.hosting == true) {
-					$('#hosting-true').attr('class', 'bi bi-check-circle-fill');
-					$('#hosting-false').attr('class', 'bi bi-x-circle');
-				} else {
-					$('#hosting-true').attr('class', 'bi bi-check-circle');
-					$('#hosting-false').attr('class', 'bi bi-x-circle-fill');
-
-					$('td[data-date]').css('background-color', '#F5F5F5');
-					$('td[data-date] span').html('<span class="cal-price">&nbsp;</span>');
-				}
-
-				// 오늘 날짜 클릭 이벤트
-				$('.fc-day-today').click(function() {
-					// select room
-					var select = document.getElementById("rooms");
-					var roomNo = select.options[select.selectedIndex].value;
-
-					// 숙소 요금 출력
-					var roomPrice = data.price;
-
-					var click = $(this).attr('data-date');
-					var clickDate = click.split("-");
-
-					$("#select-day").html(clickDate[0] + "년 " + clickDate[1] + "월 " + clickDate[2] + "일");
-					$("input[id=roomPirce]").attr("value", "￦ " + roomPrice.toLocaleString());
-
-					// 호스팅 여부 출력
-					if (data.hosting == true) {
-						$('#hosting-true').attr('class', 'bi bi-check-circle-fill');
-						$('#hosting-false').attr('class', 'bi bi-x-circle');
-					} else {
-						$('#hosting-true').attr('class', 'bi bi-check-circle');
-						$('#hosting-false').attr('class', 'bi bi-x-circle-fill');
-					}
-
-					// 변경된 요금 출력
-					$.ajax({
-						type: "post",
-						dataType: "json",
-						url: "/calendar/searchoneprice",
-						data: { "roomNo": roomNo, "chageDate": click },
-						success: function(data) {
-							if (data != null) {
-								$('input[id=roomPirce]').attr('value', "￦ " + data.price.toLocaleString());
-							}
-						}
-					});
-
-					// 변경된 호스팅 출력
-					$.ajax({
-						type: "post",
-						dataType: "json",
-						url: "/calendar/searchonehosting",
-						data: { "roomNo": roomNo, "chageDate": click },
-						success: function(data) {
-							if (data != null) {
-								if (data.hosting == true) {
-									$('#hosting-true').attr('class', 'bi bi-check-circle-fill');
-									$('#hosting-false').attr('class', 'bi bi-x-circle');
-								} else {
-									$('#hosting-true').attr('class', 'bi bi-check-circle');
-									$('#hosting-false').attr('class', 'bi bi-x-circle-fill');
-								}
-							}
-						}
-					});
-				});
-
-				// 미래 날짜 클릭 이벤트
-				$('.fc-day-future').click(function() {
-					// select room
-					var select = document.getElementById("rooms");
-					var roomNo = select.options[select.selectedIndex].value;
-
-					var click = $(this).attr('data-date');
-					var clickDate = click.split("-");
-
-					$("#select-day").html(clickDate[0] + "년 " + clickDate[1] + "월 " + clickDate[2] + "일");
-					$("input[id=roomPirce]").attr("value", "￦ " + roomPrice.toLocaleString());
-
-					// 호스팅 여부 출력
-					if (data.hosting == true) {
-						$('#hosting-true').attr('class', 'bi bi-check-circle-fill');
-						$('#hosting-false').attr('class', 'bi bi-x-circle');
-					} else {
-						$('#hosting-true').attr('class', 'bi bi-check-circle');
-						$('#hosting-false').attr('class', 'bi bi-x-circle-fill');
-					}
-
-					// 변경된 요금 출력
-					$.ajax({
-						type: "post",
-						dataType: "json",
-						url: "/calendar/searchoneprice",
-						data: { "roomNo": roomNo, "chageDate": click },
-						success: function(data) {
-							if (data != null) {
-								$('input[id=roomPirce]').attr('value', "￦ " + data.price.toLocaleString());
-							}
-						}
-					});
-
-					// 변경된 호스팅 출력
-					$.ajax({
-						type: "post",
-						dataType: "json",
-						url: "/calendar/searchonehosting",
-						data: { "roomNo": roomNo, "chageDate": click },
-						success: function(data) {
-							if (data != null) {
-								if (data.hosting == true) {
-									$('#hosting-true').attr('class', 'bi bi-check-circle-fill');
-									$('#hosting-false').attr('class', 'bi bi-x-circle');
-
-								} else {
-									$('#hosting-true').attr('class', 'bi bi-check-circle');
-									$('#hosting-false').attr('class', 'bi bi-x-circle-fill');
-								}
-							}
-						}
-					});
-				});
-
-				// 변경된 요금 출력
-				$.ajax({
-					type: "post",
-					dataType: "json",
-					async: false,
-					url: "/calendar/searchprice",
-					data: { "roomNo": roomNo },
-					success: function(editPrice) {
-						for (var i = 0; i < editPrice.length; i++) {
-							if (data.hosting == true) {
-								$('td[data-date=' + editPrice[i].change_date + '] span').html("￦ " + editPrice[i].price.toLocaleString());
-							} else {
-								$('td[data-date=' + editPrice[i].change_date + '] span').html('<span class="cal-price">&nbsp;</span>');
-							}
-						}
-					}
-				});
-
-				// 변경된 호스팅 출력
-				$.ajax({
-					type: "post",
-					dataType: "json",
-					url: "/calendar/searchhosting",
-					data: { "roomNo": roomNo },
-					success: function(editHosting) {
-						for (var i = 0; i < editHosting.length; i++) {
-							if (editHosting[i].hosting == true) {
-								$('td[data-date=' + editHosting[i].change_date + ']').css('background-color', 'white');
-
-								$.ajax({
-									type: "post",
-									dataType: "json",
-									async: false,
-									url: "/calendar/searchprice",
-									data: { "roomNo": roomNo },
-									success: function(editPrice) {
-										for (var j = 0; j < editPrice.length; j++) {
-											if (editPrice[j].change_date == editHosting[i].change_date && editHosting[i].hosting == true) {
-												$('td[data-date=' + editHosting[i].change_date + '] span').html("￦ " + editPrice[j].price.toLocaleString());
-											} 
-										}
-									}
-								});
-							} else {
-								$('td[data-date=' + editHosting[i].change_date + ']').css('background-color', '#F5F5F5');
-								$('td[data-date=' + editHosting[i].change_date + '] span').html('<span class="cal-price">&nbsp;</span>');
-							}
-						}
-					}
-				});
-			}
-		});
+		searchRooms();
 	});
 
 	window.onload = function() {
@@ -260,39 +66,17 @@ document.addEventListener('DOMContentLoaded', function() {
 			var selectMonth = new Date($("#date option:selected").attr("id") + "-01");
 			calendar.gotoDate(selectMonth);
 
-			// select room
-			var select = document.getElementById("rooms");
-			var roomNo = select.options[select.selectedIndex].value;
+			searchRooms();
+		});
 
-			$.ajax({
-				type: "post",
-				dataType: "json",
-				url: "/calendar/searchroom",
-				data: { "roomNo": roomNo },
-				success: function(data) {
-					// 달력 요금 출력
-					var roomPrice = data.price;
+		// 오늘 날짜 클릭 이벤트
+		$('.fc-day-today').click(function() {
+			selectDate(this);
+		});
 
-					var priceText = '<span class="cal-price">' + "￦ " + roomPrice.toLocaleString() + '</span>';
-					var nullText = '<span class="cal-price">&nbsp;</span>';
-
-					var pastDiv = $('.fc-day-past').children('.fc-scrollgrid-sync-inner');
-					$(pastDiv).append(nullText);
-
-					var todayDiv = $('.fc-day-today').children('.fc-scrollgrid-sync-inner');
-					$(todayDiv).append(priceText);
-
-					var futureDiv = $('.fc-day-future').children('.fc-scrollgrid-sync-inner');
-					$(futureDiv).append(priceText);
-				}
-			});
-
-			// 미래 날짜 클릭 이벤트 (월 변경 시)
-			$('.fc-day-future').click(function() {
-				var clickDate = $(this).attr('data-date').split("-");
-
-				$("#select-day").html(clickDate[0] + "년 " + clickDate[1] + "월 " + clickDate[2] + "일");
-			});
+		// 미래 날짜 클릭 이벤트
+		$('.fc-day-future').click(function() {
+			selectDate(this);
 		});
 	};
 });
@@ -303,6 +87,11 @@ function selectRoom() {
 	$('.fc-day-future').css('background-color', 'white');
 	$('span[class=cal-price]').remove();
 
+	searchRooms();
+}
+
+// 숙소 정보 출력
+function searchRooms() {
 	var select = document.getElementById("rooms");
 	var roomNo = select.options[select.selectedIndex].value;
 
@@ -313,6 +102,8 @@ function selectRoom() {
 		async: false,
 		data: { "roomNo": roomNo },
 		success: function(data) {
+			setSearchRoomData(data);
+
 			// 숙소 요금 출력
 			var roomPrice = data.price;
 
@@ -331,6 +122,16 @@ function selectRoom() {
 			var futureDiv = $('.fc-day-future').children('.fc-scrollgrid-sync-inner');
 			$(futureDiv).append(priceText);
 
+			// 오늘 날짜 클릭 이벤트
+			$('.fc-day-today').click(function() {
+				selectDate(this);
+			});
+
+			// 미래 날짜 클릭 이벤트
+			$('.fc-day-future').click(function() {
+				selectDate(this);
+			});
+			
 			// 호스팅 여부 출력
 			if (data.hosting == true) {
 				$('#hosting-true').attr('class', 'bi bi-check-circle-fill');
@@ -342,118 +143,6 @@ function selectRoom() {
 				$('td[data-date]').css('background-color', '#F5F5F5');
 				$('td[data-date] span').html('<span class="cal-price">&nbsp;</span>');
 			}
-
-			// 오늘 날짜 클릭 이벤트
-			$('.fc-day-today').click(function() {
-				// select room
-				var select = document.getElementById("rooms");
-				var roomNo = select.options[select.selectedIndex].value;
-
-				// 숙소 요금 출력
-				var roomPrice = data.price;
-
-				var click = $(this).attr('data-date');
-				var clickDate = click.split("-");
-
-				$("#select-day").html(clickDate[0] + "년 " + clickDate[1] + "월 " + clickDate[2] + "일");
-				$("input[id=roomPirce]").attr("value", "￦ " + roomPrice.toLocaleString());
-
-				// 호스팅 여부 출력
-				if (data.hosting == true) {
-					$('#hosting-true').attr('class', 'bi bi-check-circle-fill');
-					$('#hosting-false').attr('class', 'bi bi-x-circle');
-				} else {
-					$('#hosting-true').attr('class', 'bi bi-check-circle');
-					$('#hosting-false').attr('class', 'bi bi-x-circle-fill');
-				}
-
-				// 변경된 요금 출력
-				$.ajax({
-					type: "post",
-					dataType: "json",
-					url: "/calendar/searchoneprice",
-					data: { "roomNo": roomNo, "chageDate": click },
-					success: function(data) {
-						if (data != null) {
-							$('input[id=roomPirce]').attr('value', "￦ " + data.price.toLocaleString());
-						}
-					}
-				});
-
-				// 변경된 호스팅 출력
-				$.ajax({
-					type: "post",
-					dataType: "json",
-					url: "/calendar/searchonehosting",
-					data: { "roomNo": roomNo, "chageDate": click },
-					success: function(data) {
-						if (data != null) {
-							if (data.hosting == true) {
-								$('#hosting-true').attr('class', 'bi bi-check-circle-fill');
-								$('#hosting-false').attr('class', 'bi bi-x-circle');
-							} else {
-								$('#hosting-true').attr('class', 'bi bi-check-circle');
-								$('#hosting-false').attr('class', 'bi bi-x-circle-fill');
-							}
-						}
-					}
-				});
-			});
-
-			// 미래 날짜 클릭 이벤트
-			$('.fc-day-future').click(function() {
-				// select room
-				var select = document.getElementById("rooms");
-				var roomNo = select.options[select.selectedIndex].value;
-
-				var click = $(this).attr('data-date');
-				var clickDate = click.split("-");
-
-				$("#select-day").html(clickDate[0] + "년 " + clickDate[1] + "월 " + clickDate[2] + "일");
-				$("input[id=roomPirce]").attr("value", "￦ " + roomPrice.toLocaleString());
-
-				// 호스팅 여부 출력
-				if (data.hosting == true) {
-					$('#hosting-true').attr('class', 'bi bi-check-circle-fill');
-					$('#hosting-false').attr('class', 'bi bi-x-circle');
-				} else {
-					$('#hosting-true').attr('class', 'bi bi-check-circle');
-					$('#hosting-false').attr('class', 'bi bi-x-circle-fill');
-				}
-
-				// 변경된 요금 출력
-				$.ajax({
-					type: "post",
-					dataType: "json",
-					url: "/calendar/searchoneprice",
-					data: { "roomNo": roomNo, "chageDate": click },
-					success: function(data) {
-						if (data != null) {
-							$('input[id=roomPirce]').attr('value', "￦ " + data.price.toLocaleString());
-						}
-					}
-				});
-
-				// 변경된 호스팅 출력
-				$.ajax({
-					type: "post",
-					dataType: "json",
-					url: "/calendar/searchonehosting",
-					data: { "roomNo": roomNo, "chageDate": click },
-					success: function(data) {
-						if (data != null) {
-							if (data.hosting == true) {
-								$('#hosting-true').attr('class', 'bi bi-check-circle-fill');
-								$('#hosting-false').attr('class', 'bi bi-x-circle');
-
-							} else {
-								$('#hosting-true').attr('class', 'bi bi-check-circle');
-								$('#hosting-false').attr('class', 'bi bi-x-circle-fill');
-							}
-						}
-					}
-				});
-			});
 
 			// 변경된 요금 출력
 			$.ajax({
@@ -477,6 +166,7 @@ function selectRoom() {
 			$.ajax({
 				type: "post",
 				dataType: "json",
+				async: false,
 				url: "/calendar/searchhosting",
 				data: { "roomNo": roomNo },
 				success: function(editHosting) {
@@ -507,6 +197,63 @@ function selectRoom() {
 					}
 				}
 			});
+		}
+	});
+}
+
+// 날짜 선택 이벤트
+function selectDate(e) {
+	var data = getSearchRoomData();
+
+	// select room
+	var select = document.getElementById("rooms");
+	var roomNo = select.options[select.selectedIndex].value;
+
+	var click = $(e).attr('data-date');
+	var clickDate = click.split("-");
+
+	$("#select-day").html(clickDate[0] + "년 " + clickDate[1] + "월 " + clickDate[2] + "일");
+	$("input[id=roomPirce]").attr("value", "￦ " + data.price.toLocaleString());
+
+	// 호스팅 여부 출력
+	if (data.hosting == true) {
+		$('#hosting-true').attr('class', 'bi bi-check-circle-fill');
+		$('#hosting-false').attr('class', 'bi bi-x-circle');
+	} else {
+		$('#hosting-true').attr('class', 'bi bi-check-circle');
+		$('#hosting-false').attr('class', 'bi bi-x-circle-fill');
+	}
+
+	// 변경된 요금 출력
+	$.ajax({
+		type: "post",
+		dataType: "json",
+		url: "/calendar/searchoneprice",
+		data: { "roomNo": roomNo, "chageDate": click },
+		success: function(data) {
+			if (data != null) {
+				$('input[id=roomPirce]').attr('value', "￦ " + data.price.toLocaleString());
+			}
+		}
+	});
+
+	// 변경된 호스팅 출력
+	$.ajax({
+		type: "post",
+		dataType: "json",
+		url: "/calendar/searchonehosting",
+		data: { "roomNo": roomNo, "chageDate": click },
+		success: function(data) {
+			if (data != null) {
+				if (data.hosting == true) {
+					$('#hosting-true').attr('class', 'bi bi-check-circle-fill');
+					$('#hosting-false').attr('class', 'bi bi-x-circle');
+
+				} else {
+					$('#hosting-true').attr('class', 'bi bi-check-circle');
+					$('#hosting-false').attr('class', 'bi bi-x-circle-fill');
+				}
+			}
 		}
 	});
 }
