@@ -90,4 +90,5 @@
 	<update id="updateRepCan" parameterType="rmdto">
 		update report_member set approve_date = now(), approve_check = 'can' where no = #{no}
 	</update>
+	
 </mapper>
