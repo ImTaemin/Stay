@@ -58,9 +58,9 @@
 				url: "/chat/recorded",
 				success: function(data){
 					if(data.sender == "${sessionScope.myid}"){
-						data.forEach(element=>createSenderRooms(element));
+						data.forEach(element=>createReceiverRooms(element));
 					} else {
-						data.forEach(element=>createReceiverRooms(element)); 
+						data.forEach(element=>createSenderRooms(element)); 
 					}
 				}
 			});
@@ -72,14 +72,14 @@
 				var dataRooms = JSON.parse(event.data);
 				
 				if(dataRooms.sender == "${sessionScope.myid}"){
-					createSenderRooms(dataRooms); //dataRooms.msg로 찾을 수 있음	
+					createReceiverRooms(dataRooms); //dataRooms.msg로 찾을 수 있음	
 				} else {
-					createReceiverRooms(dataRooms); //dataRooms.msg로 찾을 수 있음
+					createSenderRooms(dataRooms); //dataRooms.msg로 찾을 수 있음
 				}
 			};
 			
 			//채팅방 생성
-			function createSenderRooms(rooms){
+			function createReceiverRooms(rooms){
 				'use strict';
 				var s="";
 				
@@ -108,7 +108,7 @@
 			}
 			
 			//채팅방 생성
-			function createReceiverRooms(rooms){
+			function createSenderRooms(rooms){
 				'use strict';
 				var s="";
 				
@@ -121,14 +121,14 @@
 					s = `
 						<div class="chat-room" id="` + rooms.sender + `" receiver="` + rooms.sender + `">
 							<img src="` + rooms.photo + `" class="room-photo">
-							<span>` + rooms.receiver + `</span>
+							<span>` + rooms.sender + `</span>
 						</div>
 					`;
 				} else if(rooms.sender.indexOf("@") == -1){
 					s = `
 						<div class="chat-room" id="` + rooms.sender + `" receiver="` + rooms.sender + `">
 							<img src="../photo/memberPhoto/`+ rooms.photo+`" class="room-photo">
-							<span>` + rooms.receiver + `</span>
+							<span>` + rooms.sender+ `</span>
 						</div>
 					`;
 				}
