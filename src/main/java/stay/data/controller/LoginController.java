@@ -137,6 +137,7 @@ public class LoginController {
 	@RequestMapping("/kakaologout")
 	public String kakaologout(HttpSession session) {
 		if (session.getAttribute("kakaologin") == null) {
+			session.removeAttribute("myid");
 			session.removeAttribute("loginok");
 			session.removeAttribute("mode");
 			return "/member/loginForm";

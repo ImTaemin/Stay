@@ -316,7 +316,10 @@ $("#insert-btn").click(function() {
 			$("input[name=rate]").attr("value", "0.0");
 			$("input[name=rate]").attr("checked", "false");
 			$(".content-input").val("");
-			$(".content-update").val(data.content);
+			
+			result = data.content.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
+			
+			$(".content-update").val(result);
 		}
 	});
 });
