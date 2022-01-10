@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -294,8 +295,15 @@
 								<div class="co-detail">
 									<div class="mem-detail">
 										<div class="mem-img">
-											<img src="${root}/photo/memberPhoto/${coList.memDto.photo}"
-											onclick="location.href='/profile/profileform?id=${coList.memDto.id}'">
+											<c:if test="${not fn:contains(coList.memDto.id, '@')}">
+												<img src="${root}/photo/memberPhoto/${coList.memDto.photo}"
+												onclick="location.href='/profile/profileform?id=${coList.memDto.id}'">
+											</c:if>
+											
+											<c:if test="${fn:contains(coList.memDto.id, '@')}">
+												<img src="${coList.memDto.photo}"
+												onclick="location.href='/profile/profileform?id=${coList.memDto.id}'">
+											</c:if>
 										</div>
 										
 										<div class="mem-content">
@@ -343,7 +351,13 @@
 				
 				<div class="host-main">
 					<div class="photo">
-						<img alt="" src="../photo/memberPhoto/${memDto.photo}" onclick="location.href='/profile/profileform?id=${memDto.id}'">
+						<c:if test="${not fn:contains(memDto.id, '@')}">
+							<img alt="" src="../photo/memberPhoto/${memDto.photo}" onclick="location.href='/profile/profileform?id=${memDto.id}'">
+						</c:if>
+						
+						<c:if test="${fn:contains(memDto.id, '@')}">
+							<img alt="" src="${memDto.photo}" onclick="location.href='/profile/profileform?id=${memDto.id}'">
+						</c:if>
 					</div>
 					
 					<div class="content">

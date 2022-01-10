@@ -119,8 +119,15 @@
 								<div class="co-detail">
 									<div class="mem-detail">
 										<div class="mem-img">
-											<img src="${root}/photo/memberPhoto/${coList.memDto.photo}"
+											<c:if test="${not fn:contains(coList.memDto.id, '@')}">
+												<img src="${root}/photo/memberPhoto/${coList.memDto.photo}"
+													onclick="location.href='/profile/profileform?id=${coList.memDto.id}'">
+											</c:if>
+											
+											<c:if test="${fn:contains(coList.memDto.id, '@')}">
+												<img src="${coList.memDto.photo}"
 												onclick="location.href='/profile/profileform?id=${coList.memDto.id}'">
+											</c:if>
 										</div>
 
 										<div class="mem-content">
