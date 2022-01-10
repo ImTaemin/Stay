@@ -1,3 +1,13 @@
+
+// 알림창
+const swalWithBootstrapButtons = Swal.mixin({
+	customClass: {
+		confirmButton: 'btn btn-success',
+		cancelButton: 'btn btn-danger'
+	},
+	buttonsStyling: false
+});
+
 //핸드폰 번호 하이픈(-) 자동 입력
 $(document).on("keyup", ".phoneNumber", function() {
 	$(this).val($(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/, "$1-$2-$3").replace("--", "-"));
@@ -58,7 +68,12 @@ $(document).on('click', '#searchBtn2', function() {
 			"e_mail": $("#e_mail").val()
 		},
 		success: function(result) {
-			alert(result);
-		},
+			$(".footer").css("display","none");
+			swalWithBootstrapButtons.fire(result).then((result) => {
+				if (result.isConfirmed) {
+					$(".footer").css("display","");
+				}
+			});
+		}
 	});
 });

@@ -73,12 +73,13 @@
 			//채팅방 생성
 			function createRooms(rooms){
 				'use strict';
-				
 				var s="";
 				
 				if(rooms.receiver == "${sessionScope.myid}"){
 					return;
 				}
+				
+				console.log(rooms);
 				
 				if(rooms.receiver.indexOf("@") != -1){
 					

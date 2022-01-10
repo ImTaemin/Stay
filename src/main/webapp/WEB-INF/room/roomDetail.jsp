@@ -26,6 +26,7 @@
 	<form action="/pay/paymentform" method="post">
 		<!-- hidden -->
 		<input type="hidden" name="roomNo" value="${dto.roomDto.no}">
+		<input type="hidden" name="roomName" value="${dto.roomDto.name}">
 		<input type="hidden" name="startDate">
 		<input type="hidden" name="endDate">
 		<input type="hidden" name="betweenDay">

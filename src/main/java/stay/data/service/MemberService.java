@@ -8,6 +8,7 @@ import java.util.Random;
 
 import org.apache.commons.mail.HtmlEmail;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import stay.data.dto.MemberDto;
@@ -19,6 +20,9 @@ public class MemberService {
 	
 	@Autowired
 	MemberMapper mapper;
+	
+	@Autowired
+	PasswordEncoder passwordEncoder;
 	
     // 아이디 중복 체크
     public int idCheck(String id) {
@@ -60,6 +64,7 @@ public class MemberService {
 //		return mapper.checkIdEmail(id, e_mail);
 //	}
 
+	// 비밀번호
 	public MemberDto checkIdEmail(MemberDto mdto) throws Exception{
 		MemberDto dto = mapper.checkIdEmail(mdto.getId(), mdto.getE_mail());
 		
@@ -97,18 +102,16 @@ public class MemberService {
             }
             
             String pass = temp.toString();
-            //mdto.setPass(pw);
-            System.out.println(pass);
+            mdto.setPass(passwordEncoder.encode(pass));
             
-            mdto.setPass(pass);
-            
-            //비밀번호 변경
-            //mapper.updatePw(mdto.getId(), pw);
+            // 암호화 한 비밀번호 삽입
             mapper.updatePw(mdto.getId(), mdto.getPass());
+            
+            pass = temp.toString();
+            mdto.setPass(pass);
             
             //비밀번호 변경 메일 발송
             sendEmail(mdto);
-			
 		}
 		
 		return dto;

@@ -9,12 +9,29 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <title>Insert title here</title>
 </head>
 <body>
 <script type="text/javascript">
-  alert("비밀번호가 맞지 않습니다");
-  history.back();
+	//알림창
+	const swalWithBootstrapButtons = Swal.mixin({
+		customClass: {
+			confirmButton: 'btn btn-success',
+			cancelButton: 'btn btn-danger'
+		},
+		buttonsStyling: false
+	});
+
+	swalWithBootstrapButtons.fire({
+		  icon: 'error',
+		  text: '비밀번호가 맞지 않습니다',
+		}).then((result) => {
+			if(result.isConfirmed){
+				history.back();
+			}
+		});
 </script>
+<div style="width: 3000px; height: 5000px; background-color: #fff;"></div>
 </body>
 </html>

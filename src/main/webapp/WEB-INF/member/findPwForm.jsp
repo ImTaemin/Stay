@@ -13,6 +13,7 @@
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>	
 <!-- css -->
 <link rel="stylesheet" href="/css/findForm.css">
 <title>비밀번호 찾기</title>

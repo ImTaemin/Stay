@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import stay.data.dto.CanReservationDto;
+import stay.data.dto.ChatDto;
 import stay.data.dto.GuestCommentDto;
 import stay.data.dto.MemberDto;
 import stay.data.dto.PayCardDto;
@@ -37,6 +38,7 @@ import stay.data.dto.ReservationDto;
 import stay.data.dto.ResultMapDto;
 import stay.data.dto.RoomDto;
 import stay.data.service.CanReservationService;
+import stay.data.service.ChatService;
 import stay.data.service.CostService;
 import stay.data.service.GuestCommentService;
 import stay.data.service.JoinGuestService;
@@ -73,6 +75,9 @@ public class ReservationController {
 
 	@Autowired
 	ReceiptService receiptService;
+	
+	@Autowired
+	ChatService chatService;
 
 	@PostMapping("/pay/paymentform")
 	public ModelAndView paymentForm(@RequestParam String roomNo, @RequestParam String startDate,
@@ -173,7 +178,16 @@ public class ReservationController {
 		}
 
 		reservationService.insertReservation(reserDto);
-
+		
+		// 대화 추가
+		RoomDto room = roomService.getRoom(roomNo);
+		
+		ChatDto chatDto = new ChatDto();
+		chatDto.setSender(myid);
+		chatDto.setReceiver(reserDto.getHost_id());
+		chatDto.setMsg(reserDto.getStart_date() + "-" + reserDto.getEnd_date() + "에 " + room.getName().substring(0,10) + "... 예약이 완료되었습니다.");
+		chatService.insertChat(chatDto);
+		
 		// 영수증 추가
 		String reserNo = reservationService.getReserMaxNo();
 		receiptDto.setNo(reserNo);

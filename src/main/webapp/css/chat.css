@@ -18,10 +18,10 @@
 }
 
 .chat-room-list .chat-list{
-	min-width: 250px;
+	min-width: 150px;
 	height: 100%;
 	overflow: scroll;
-	overflow-x: visible;
+	overflow-x: hidden;
 }
 
 .chat-room-list .chat-room{
@@ -31,6 +31,7 @@
 }
 
 .chat-room-list .chat-title{
+	min-width: 150px;
 	height: 50px;
 	min-height: 50px;
 	border-bottom: 1px solid #716d6d;
