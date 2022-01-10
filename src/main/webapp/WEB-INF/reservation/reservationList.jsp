@@ -73,14 +73,29 @@
 				<div class="card">
 					<img class="card-img-top" src="../../photo/roomPhoto/${list.roomDto.photos}">
 					
-					<div class="card-body top">
-						<h5 class="card-title">${list.resDto.start_date} ~ ${list.resDto.end_date}</h5>
-						<b class="card-text" id="roomTitle" onclick="location.href='/room/content?no=${list.roomDto.no}'">
-							${list.roomDto.name}
-						</b>
-						<p class="card-text">
-							${list.roomDto.addr_load}
-						</p>
+					<div class="card-body top card-pre">
+						<div class="content-main">
+							<h5 class="card-title">${list.resDto.start_date} ~ ${list.resDto.end_date}</h5>
+							<b class="card-text" id="roomTitle" onclick="location.href='/room/content?no=${list.roomDto.no}'">
+								${list.roomDto.name}
+							</b>
+							<p class="card-text">
+								${list.roomDto.addr_load}
+							</p>
+						</div>
+						
+						<div class="content-review">
+							<c:if test="${list.gcoDto.countLike == 0}"> 
+								<i class="bi bi-chat"></i>
+							</c:if>
+							
+							<c:if test="${list.gcoDto.countLike == 1}"> 
+								<i class="bi bi-chat-dots"></i>
+							</c:if>
+						
+							<!-- 호스트가 댓글 단 경우 체크 -->
+	<!-- 							<i class="bi bi-chat-dots-fill"></i> -->
+						</div>
 					</div>
 					
 					<div class="card-body bottom" list-no="${list.resDto.no}" onclick="btnClick(this)">

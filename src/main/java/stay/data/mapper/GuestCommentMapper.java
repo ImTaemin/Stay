@@ -17,7 +17,8 @@ public interface GuestCommentMapper {
 	public void deleteGuestComment(String no);
 	public List<ResultMapDto> selectOneGuest(String id);
 	public int countGuestComment(String id);
-	public int checkComment(HashMap<String, String> map);
+	public int checkCommentGuest(HashMap<String, String> map);
+	public int checkCommentHost(HashMap<String, String> map);
 	
 	public void updateLikes(HashMap<String, String> map);
 }

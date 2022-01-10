@@ -492,7 +492,8 @@ input[type="radio"] {
 	resize: none;
 }
 
-.content-input:focus, .content-input:hover, .content-input:active {
+.content-input:focus, .content-input:hover, .content-input:active,
+.content-update:focus, .content-update:hover, .content-update:active {
 	width: 85%;
 	outline: none;
 	box-shadow: none;

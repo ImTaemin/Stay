@@ -49,72 +49,71 @@ import stay.data.service.RoomService;
 public class ReservationController {
 	@Autowired
 	CostService costService;
-	
+
 	@Autowired
 	GuestCommentService gCommentService;
-	
+
 	@Autowired
 	RoomService roomService;
-	
+
 	@Autowired
 	ReservationService reservationService;
-	
+
 	@Autowired
 	JoinGuestService joinGuestService;
-	
+
 	@Autowired
 	MemberService memberService;
-	
+
 	@Autowired
 	CanReservationService canReserService;
-	
+
 	@Autowired
 	JoinGuestService joinService;
-	
+
 	@Autowired
 	ReceiptService receiptService;
-	
+
 	@PostMapping("/pay/paymentform")
-	public ModelAndView paymentForm(
-			@RequestParam String roomNo, @RequestParam String startDate, @RequestParam String endDate,
-			@RequestParam String betweenDay, @RequestParam String roomPrice, @RequestParam String allPrice,
-			HttpSession session) throws Exception {
+	public ModelAndView paymentForm(@RequestParam String roomNo, @RequestParam String startDate,
+			@RequestParam String endDate, @RequestParam String betweenDay, @RequestParam String roomPrice,
+			@RequestParam String allPrice, HttpSession session) throws Exception {
 		ModelAndView mview = new ModelAndView();
-		
-		String myid = (String)session.getAttribute("myid");
-		
+
+		String myid = (String) session.getAttribute("myid");
+
 		ResultMapDto dto = roomService.getOneRoom(roomNo);
-		
+
 		// 이미지 분리
 		RoomDto roomDto = roomService.getRoom(roomNo);
-		
+
 		String photos[] = roomDto.getPhotos().split(",");
 		roomDto.setPhotos(photos[0]);
-		
+
 		dto.setRoomDto(roomDto);
-		
+
 		// 날짜 분리
 		String start[] = startDate.split("-");
 		String end[] = endDate.split("-");
-		
+
 		// 카드 리스트
 		List<PayCardDto> cardList = costService.getAllCard(myid);
-		
-		for(PayCardDto p : cardList) {
+
+		for (PayCardDto p : cardList) {
 			String num = p.getNum();
 			String numArray[] = num.split("-");
-			
+
 			p.setLast_num(numArray[3]);
 		}
-		
+
 		// 7일 전 날짜
 		String beforeWeek = AddDate(startDate, 0, 0, -7);
 		String weekArray[] = beforeWeek.split("-");
-		
+
 		// 한달 전 날짜
 		String beforeMonth = AddDate(startDate, 0, -1, 0);
 		String monthArray[] = beforeMonth.split("-");
-		
+
 		mview.addObject("dto", dto);
 		mview.addObject("startDate", startDate);
 		mview.addObject("endDate", endDate);
@@ -126,41 +125,41 @@ public class ReservationController {
 		mview.addObject("cardList", cardList);
 		mview.addObject("weekArray", weekArray);
 		mview.addObject("monthArray", monthArray);
-		
+
 		mview.setViewName("/cost/paymentForm");
-		
+
 		return mview;
 	}
 
 	private static String AddDate(String strDate, int year, int month, int day) throws Exception {
 		SimpleDateFormat dtFormat = new SimpleDateFormat("yyyy-MM-dd");
-		
+
 		Calendar cal = Calendar.getInstance();
-		
+
 		Date dt = dtFormat.parse(strDate);
-		
+
 		cal.setTime(dt);
-		
+
 		cal.add(Calendar.YEAR, year);
 		cal.add(Calendar.MONTH, month);
 		cal.add(Calendar.DATE, day);
-		
+
 		return dtFormat.format(cal.getTime());
 	}
 
 	@PostMapping("/pay/insert")
-	public ModelAndView payInsert(
-			@ModelAttribute ReservationDto reserDto, @ModelAttribute ReceiptDto receiptDto, @RequestParam String roomNo,
-			@RequestParam String startDate, @RequestParam String endDate, @RequestParam String betweenDay,
-			@RequestParam String calPrice, @RequestParam String taxPrice, @RequestParam String allPrice,
-			@RequestParam String payMethod, @RequestParam String cardNum, HttpSession session) {
+	public ModelAndView payInsert(@ModelAttribute ReservationDto reserDto, @ModelAttribute ReceiptDto receiptDto,
+			@RequestParam String roomNo, @RequestParam String startDate, @RequestParam String endDate,
+			@RequestParam String betweenDay, @RequestParam String calPrice, @RequestParam String taxPrice,
+			@RequestParam String allPrice, @RequestParam String payMethod, @RequestParam String cardNum,
+			HttpSession session) {
 		ModelAndView mview = new ModelAndView();
-		
-		String myid = (String)session.getAttribute("myid");
-		
+
+		String myid = (String) session.getAttribute("myid");
+
 		// 예약 추가
 		RoomDto roomDto = roomService.getRoom(roomNo);
-		
+
 		reserDto.setHost_id(roomDto.getHost_id());
 		reserDto.setGuest_id(myid);
 		reserDto.setRoom_no(roomNo);
@@ -168,38 +167,37 @@ public class ReservationController {
 		reserDto.setEnd_date(endDate);
 		reserDto.setPrice(allPrice);
 		reserDto.setPay_method(payMethod);
-		
-		if(payMethod == "card") {
+
+		if (payMethod == "card") {
 			reserDto.setCard_num(cardNum);
 		}
-		
+
 		reservationService.insertReservation(reserDto);
-		
+
 		// 영수증 추가
 		String reserNo = reservationService.getReserMaxNo();
 		receiptDto.setNo(reserNo);
-		
+
 		receiptService.receInsert(receiptDto);
-		
+
 		mview.setViewName("redirect:/reser/reservationlist");
-		
+
 		return mview;
 	}
-	
+
 	@GetMapping("/pay/kakaopay")
-	public @ResponseBody String kakaoPay(
-			@ModelAttribute ReservationDto reserDto, @ModelAttribute ReceiptDto receiptDto,
+	public @ResponseBody String kakaoPay(@ModelAttribute ReservationDto reserDto, @ModelAttribute ReceiptDto receiptDto,
 			@RequestParam Map<String, Object> param, HttpSession session) {
-		String myid = (String)session.getAttribute("myid");
-		
-		String roomNo = (String)param.get("roomNo");
-		String allPrice = (String)param.get("allPrice");
-		String taxPrice = (String)param.get("taxPrice");
-		String startDate = (String)param.get("startDate");
-		String endDate = (String)param.get("endDate");
-		
+		String myid = (String) session.getAttribute("myid");
+
+		String roomNo = (String) param.get("roomNo");
+		String allPrice = (String) param.get("allPrice");
+		String taxPrice = (String) param.get("taxPrice");
+		String startDate = (String) param.get("startDate");
+		String endDate = (String) param.get("endDate");
+
 		RoomDto roomDto = roomService.getRoom(roomNo);
-		
+
 		reserDto.setGuest_id(myid);
 		reserDto.setHost_id(roomDto.getHost_id());
 		reserDto.setStart_date(startDate);
@@ -207,7 +205,7 @@ public class ReservationController {
 		reserDto.setPrice(allPrice);
 		reserDto.setPay_method("kakao");
 		reserDto.setRoom_no(roomNo);
-		
+
 		try {
 			URL address = new URL("https://kapi.kakao.com/v1/payment/ready");
 			HttpURLConnection connection = (HttpURLConnection) address.openConnection(); // 서버연결
@@ -215,41 +213,41 @@ public class ReservationController {
 			connection.setRequestProperty("Authorization", "KakaoAK 5e26b9346af700eb3b3a3c9286aa7c87"); // 어드민 키
 			connection.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
 			connection.setDoOutput(true); // 서버한테 전달할게 있는지 없는지
-			
+
 			String parameter = "cid=TC0ONETIME" // 가맹점 코드
-								+ "&partner_order_id=partner_order_id" // 가맹점 주문번호
-								+ "&partner_user_id=" + myid // 가맹점 회원 id
-								+ "&item_name=Swim,"// 상품명
-								+ "&quantity=1"// 상품 수량
-								+ "&total_amount=" + allPrice // 총 금액
-								+ "&vat_amount=" + taxPrice // 부가세
-								+ "&tax_free_amount=0" // 상품 비과세 금액
-								+ "&approval_url=http://localhost:8080/reser/reservationlist" // 결제 성공 시
-								+ "&fail_url=http://localhost:8080/" // 결제 실패 시
-								+ "&cancel_url=http://localhost:8080/"; // 결제 취소 시
-			
+					+ "&partner_order_id=partner_order_id" // 가맹점 주문번호
+					+ "&partner_user_id=" + myid // 가맹점 회원 id
+					+ "&item_name=Swim,"// 상품명
+					+ "&quantity=1"// 상품 수량
+					+ "&total_amount=" + allPrice // 총 금액
+					+ "&vat_amount=" + taxPrice // 부가세
+					+ "&tax_free_amount=0" // 상품 비과세 금액
+					+ "&approval_url=http://localhost:8080/reser/reservationlist" // 결제 성공 시
+					+ "&fail_url=http://localhost:8080/" // 결제 실패 시
+					+ "&cancel_url=http://localhost:8080/"; // 결제 취소 시
+
 			OutputStream send = connection.getOutputStream(); // 이제 뭔가를 를 줄 수 있다.
 			DataOutputStream dataSend = new DataOutputStream(send); // 이제 데이터를 줄 수 있다.
 			dataSend.writeBytes(parameter); // OutputStream은 데이터를 바이트 형식으로 주고 받기로 약속되어 있다. (형변환)
 			dataSend.close(); // flush가 자동으로 호출이 되고 닫는다. (보내고 비우고 닫다)
-			
+
 			int result = connection.getResponseCode(); // 전송 잘 됐나 안됐나 번호를 받는다.
 			InputStream receive; // 받다
-			
+
 			if (result == 200) {
 				receive = connection.getInputStream();
-				
+
 				reservationService.insertReservation(reserDto);
 			} else {
-				receive = connection.getErrorStream(); 
+				receive = connection.getErrorStream();
 			}
 
 			// 영수증 추가
 			String reserNo = reservationService.getReserMaxNo();
 			receiptDto.setNo(reserNo);
-			
+
 			receiptService.receInsert(receiptDto);
-			
+
 			// 읽는 부분
 			InputStreamReader read = new InputStreamReader(receive); // 받은걸 읽는다.
 			BufferedReader change = new BufferedReader(read); // 바이트를 읽기 위해 형변환 버퍼리더는 실제로 형변환을 위해 존제하는 클레스는 아니다.
@@ -263,122 +261,137 @@ public class ReservationController {
 
 		return "";
 	}
-	
+
 	@GetMapping("/reser/reservationlist")
 	public ModelAndView reservationList(HttpSession session) {
 		ModelAndView mview = new ModelAndView();
-		
-		String myid = (String)session.getAttribute("myid");
-		
+
+		String myid = (String) session.getAttribute("myid");
+
 		List<ResultMapDto> nowList = reservationService.selectNowGuestReservation(myid);
 		List<ResultMapDto> preList = reservationService.selectPreGuestReservation(myid);
 		List<ResultMapDto> canList = canReserService.getAllCanReser(myid);
-		
+
 		// 예정된 예약
-		for(ResultMapDto dto : nowList) {
+		for (ResultMapDto dto : nowList) {
 			String photos = dto.getRoomDto().getPhotos();
 			String photo[] = photos.split(",");
-			
+
 			String roomNo = dto.getResDto().getRoom_no();
 			RoomDto rdto = roomService.getRoom(roomNo);
 			rdto.setPhotos(photo[0]);
-			
+
 			dto.setRoomDto(rdto);
 		}
-		
+
 		// 이전 예약
-		for(ResultMapDto dto : preList) {
+		for (ResultMapDto dto : preList) {
 			String photos = dto.getRoomDto().getPhotos();
 			String photo[] = photos.split(",");
-			
+
 			String roomNo = dto.getResDto().getRoom_no();
 			RoomDto rdto = roomService.getRoom(roomNo);
 			rdto.setPhotos(photo[0]);
-			
+
 			dto.setRoomDto(rdto);
+
+			// 후기 여부
+			String reserNo = dto.getResDto().getNo();
+
+			GuestCommentDto gcommentDto = gCommentService.getOneComment(reserNo, dto.getResDto().getGuest_id());
+			int countComment = gCommentService.checkCommentGuest(reserNo, myid);
+			
+			if (gcommentDto == null) {
+				countComment = 0;
+				gcommentDto = new GuestCommentDto();
+			}
+
+			gcommentDto.setCountLike(countComment);
+
+			dto.setGcoDto(gcommentDto);
 		}
-		
+
 		// 취소된 예약
-		for(ResultMapDto dto : canList) {
+		for (ResultMapDto dto : canList) {
 			String roomNo = dto.getResDto().getRoom_no();
 			RoomDto rdto = roomService.getRoom(roomNo);
-			
+
 			String photos = rdto.getPhotos();
 			String photo[] = photos.split(",");
-			
+
 			rdto.setPhotos(photo[0]);
-			
+
 			dto.setRoomDto(rdto);
 		}
-		
+
 		mview.addObject("nowList", nowList);
 		mview.addObject("preList", preList);
 		mview.addObject("canList", canList);
-		
+
 		mview.setViewName("/reservation/reservationList");
-		
+
 		return mview;
 	}
-	
+
 	@PostMapping("/reser/reservation")
 	public ModelAndView reservation(@RequestParam String reserNo, HttpSession session) throws Exception {
 		ModelAndView mview = new ModelAndView();
-		
-		String myid = (String)session.getAttribute("myid");
-		
+
+		String myid = (String) session.getAttribute("myid");
+
 		ReservationDto reserDto = reservationService.selectGuestOneReservation(reserNo, myid);
-		
+
 		// 숙소 정보 가져오기
 		String roomNo = reserDto.getRoom_no();
 		RoomDto roomDto = roomService.getRoom(roomNo);
-		
+
 		// 날짜 split
 		String startDate = reserDto.getStart_date();
 		String start[] = startDate.split("-");
-		
+
 		String endDate = reserDto.getEnd_date();
 		String end[] = endDate.split("-");
-		
+
 		// 요일 구하기
-		String startDayWeek = getDateDay(startDate); 
+		String startDayWeek = getDateDay(startDate);
 		String endDayWeek = getDateDay(endDate);
-		
+
 		// 공동 게스트 출력
 		int joinGuestNum = joinGuestService.countJoinGuest(reserNo) + 1;
-		
+
 		// 호스트 정보 가져오기
 		String hostId = reserDto.getHost_id();
 		MemberDto hostDto = memberService.getMember(hostId);
-		
+
 		// 날짜 비교
 		LocalDate today = LocalDate.now();
 		LocalDate startLocal = LocalDate.parse(startDate, DateTimeFormatter.ISO_DATE);
 		Boolean preCheck = false;
-		
+
 		if (startLocal.isBefore(today)) {
 			preCheck = true;
 		}
-		
+
 		// 후기 작성
 		GuestCommentDto gCommentDto = gCommentService.getOneComment(reserNo, myid);
-		
+
 		// 예약 취소 여부
 		CanReservationDto canReserDto = canReserService.getOneCanReser(reserNo);
-		
+
 		Boolean canCheck = false;
-		
-		if(canReserDto != null) {
+
+		if (canReserDto != null) {
 			String canNo = canReserDto.getNo();
-			
+
 			if (reserNo.equals(canNo)) {
 				canCheck = true;
 			}
 		}
-		
+
 		// 조인 게스트
 		MemberDto guestDto = memberService.getMember(myid);
 		List<ResultMapDto> joinList = joinService.getAllJoinGuest(reserNo);
-		
+
 		mview.addObject("reserDto", reserDto);
 		mview.addObject("roomDto", roomDto);
 		mview.addObject("start", start);
@@ -393,12 +406,12 @@ public class ReservationController {
 		mview.addObject("canCheck", canCheck);
 		mview.addObject("guestDto", guestDto);
 		mview.addObject("joinList", joinList);
-		
+
 		mview.setViewName("/reservation/reservationDetail");
-		
+
 		return mview;
 	}
-	
+
 	public String getDateDay(String date) throws Exception {
 		String day = "";
 
@@ -411,27 +424,27 @@ public class ReservationController {
 		int dayNum = cal.get(Calendar.DAY_OF_WEEK);
 
 		switch (dayNum) {
-			case 1:
-				day = "일";
-				break;
-			case 2:
-				day = "월";
-				break;
-			case 3:
-				day = "화";
-				break;
-			case 4:
-				day = "수";
-				break;
-			case 5:
-				day = "목";
-				break;
-			case 6:
-				day = "금";
-				break;
-			case 7:
-				day = "토";
-				break;
+		case 1:
+			day = "일";
+			break;
+		case 2:
+			day = "월";
+			break;
+		case 3:
+			day = "화";
+			break;
+		case 4:
+			day = "수";
+			break;
+		case 5:
+			day = "목";
+			break;
+		case 6:
+			day = "금";
+			break;
+		case 7:
+			day = "토";
+			break;
 		}
 
 		return day;

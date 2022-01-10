@@ -96,7 +96,7 @@ public class HostReservationController {
 			String reserNo = dto.getResDto().getNo();
 			
 			GuestCommentDto gcommentDto = guestCommentService.getOneComment(reserNo, dto.getResDto().getGuest_id());
-			int countComment = guestCommentService.checkComment(reserNo, myid);
+			int countComment = guestCommentService.checkCommentHost(reserNo, myid);
 
 			if (gcommentDto == null) {
 				countComment = 0;

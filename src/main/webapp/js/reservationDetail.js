@@ -286,7 +286,6 @@ function changeStarNumUpdate(e) {
 	$('span[id=starNum]').html(rating);
 }
 
-
 // 후기 입력
 $("#insert-btn").click(function() {
 	var content = $('.content-input').val();
@@ -320,14 +319,14 @@ $("#insert-btn").click(function() {
 			$(".content-update").val(data.content);
 		}
 	});
-	//document.commentInsert.submit();
 });
 
-//후기 수정
+// 후기 수정
 $("#update-btn").click(function() {
 	var content = $('.content-update').val();
-	content = content.replace(/(?:\r\n|\r|\n)/g, '<br/>');
-	$(".content-input").val(content);
+	result = content.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
+
+	$(".content-input").val(result);
 
 	const swalWithBootstrapButtons = Swal.mixin({
 		customClass: {
@@ -352,6 +351,9 @@ $("#update-btn").click(function() {
 				dataType: "json",
 				url: "/comment/update",
 				success: function(data) {
+					var s = `<span class="date">작성일 | ` + data.write_day.substr(0, 4) + "년 " + data.write_day.substr(5, 2) + "월 " + (Number(data.write_day.substr(8, 2)) + 1) + "일 " + `</span>`;
+					$(".date-part").html(s);
+
 					$("#content-update").val(data.content);
 					$("#insertContainer").hide();
 					$("#updateDeleteContainer").show();
@@ -365,7 +367,7 @@ $("#update-btn").click(function() {
 	});
 });
 
-//후기 삭제
+// 후기 삭제
 $("#delete-btn").click(function() {
 	const swalWithBootstrapButtons = Swal.mixin({
 		customClass: {
@@ -417,12 +419,12 @@ $("#delete-btn").click(function() {
 	});
 });
 
-//엔터값 출력
+// 엔터값 출력
 $(document).ready(function() {
-	var content = $(".content-input").val();
+	var content = $('.content-update').val();
 	result = content.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
 
-	$(".content-input").val(result);
+	$(".content-update").val(result);
 });
 
 // 예약 취소
@@ -465,7 +467,7 @@ function reserCan(e) {
 				data: { "no": no, "price": price }
 			});
 		}
-	})
+	});
 }
 
 // 모달 창 닫을 때 이벤트 (body 화면 줄어듦)

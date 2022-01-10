@@ -45,7 +45,10 @@ public class GuestCommentController {
 	@PostMapping("/update")
 	@ResponseBody
 	public GuestCommentDto commentUpdate(
-			@RequestParam String reserNo, @RequestParam String content, @RequestParam String rate) {
+			@RequestParam String reserNo, @RequestParam String content, @RequestParam String rate,
+			HttpSession session) {
+		String myid = (String)session.getAttribute("myid");
+		
 		double rating = Double.parseDouble(rate);
 		
 		GuestCommentDto gCommentDto = new GuestCommentDto();
@@ -54,6 +57,8 @@ public class GuestCommentController {
 		gCommentDto.setRating(rating);
 		
 		gCommentService.updateGuestComment(gCommentDto);
+		
+		gCommentDto = gCommentService.getOneComment(reserNo, myid);
 
 		return gCommentDto;
 	}
