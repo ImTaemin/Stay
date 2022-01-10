@@ -144,7 +144,7 @@ function addGuest(e) {
 function delGuest(e) {
 	var no = $(e).attr("resNo");
 	var id = $(e).attr("guestId");
-	var maxPer = $(e).attr("maxPer");
+	var maxPer = parseInt($(e).attr("maxPer"));
 	var joinNum = parseInt($('input[name=joinNum]').attr('value'));
 
 	const swalWithBootstrapButtons = Swal.mixin({
@@ -178,7 +178,16 @@ function delGuest(e) {
 			document.getElementById(id).remove();
 
 			if (maxPer > joinNum) {
-				$("#addGuest").show();
+				if (!!document.getElementById("addGuest")) {
+					$("#addGuest").show();
+					
+				} else {
+					s = '<span class="bi bi-plus-circle" onclick="addGuest(this)" style="margin-right: 20%"';
+					s += 'no="${reserDto.no}" hostId="${hostDto.id}" myid="${sessionScope.myid}"';
+					s += 'maxPer="${roomDto.max_per}" id="addGuest"></span>';
+					
+					$('.guest-btn').prepend(s);
+				}
 			}
 		}
 	})
@@ -316,9 +325,9 @@ $("#insert-btn").click(function() {
 			$("input[name=rate]").attr("value", "0.0");
 			$("input[name=rate]").attr("checked", "false");
 			$(".content-input").val("");
-			
+
 			result = data.content.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
-			
+
 			$(".content-update").val(result);
 		}
 	});
