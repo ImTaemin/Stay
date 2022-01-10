@@ -57,11 +57,7 @@
 				data: {"sender":"${sessionScope.myid}"},
 				url: "/chat/recorded",
 				success: function(data){
-					if(data.sender == "${sessionScope.myid}"){
-						data.forEach(element=>createReceiverRooms(element));
-					} else {
-						data.forEach(element=>createSenderRooms(element)); 
-					}
+					data.forEach(element=>createRooms(element)); 
 				}
 			});
 			
@@ -71,24 +67,15 @@
 			eventSourceRoom.onmessage = function(event) {
 				var dataRooms = JSON.parse(event.data);
 				
-				if(dataRooms.sender == "${sessionScope.myid}"){
-					createReceiverRooms(dataRooms); //dataRooms.msg로 찾을 수 있음	
-				} else {
-					createSenderRooms(dataRooms); //dataRooms.msg로 찾을 수 있음
-				}
+				createRooms(dataRooms); //dataRooms.msg로 찾을 수 있음
 			};
 			
 			//채팅방 생성
-			function createReceiverRooms(rooms){
+			function createRooms(rooms){
 				'use strict';
 				var s="";
-				
-				if(rooms.receiver == "${sessionScope.myid}"){
-					return;
-				}
 
 				if(rooms.receiver.indexOf("@") != -1){
-					
 					s = `
 						<div class="chat-room" id="` + rooms.receiver + `" receiver="` + rooms.receiver + `">
 							<img src="` + rooms.photo + `" class="room-photo">
@@ -100,35 +87,6 @@
 						<div class="chat-room" id="` + rooms.receiver + `" receiver="` + rooms.receiver + `">
 							<img src="../photo/memberPhoto/`+ rooms.photo+`" class="room-photo">
 							<span>` + rooms.receiver + `</span>
-						</div>
-					`;
-				}
-				$(".chat-list").append(s);
-				$(".chat-list").scrollTop(document.body.scrollHeight);
-			}
-			
-			//채팅방 생성
-			function createSenderRooms(rooms){
-				'use strict';
-				var s="";
-				
-				if(rooms.sender == "${sessionScope.myid}"){
-					return;
-				}
-
-				if(rooms.sender.indexOf("@") != -1){
-					
-					s = `
-						<div class="chat-room" id="` + rooms.sender + `" receiver="` + rooms.sender + `">
-							<img src="` + rooms.photo + `" class="room-photo">
-							<span>` + rooms.sender + `</span>
-						</div>
-					`;
-				} else if(rooms.sender.indexOf("@") == -1){
-					s = `
-						<div class="chat-room" id="` + rooms.sender + `" receiver="` + rooms.sender + `">
-							<img src="../photo/memberPhoto/`+ rooms.photo+`" class="room-photo">
-							<span>` + rooms.sender+ `</span>
 						</div>
 					`;
 				}
