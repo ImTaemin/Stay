@@ -20,8 +20,6 @@
 </head>
 <body>
 	<div class="reser-detail-wrap">
-${gcoDto.no}
-${hcoDto.no}
 		<div class="room-detail">
 			<!-- 숙소 이름 -->
 			<div class="title">
@@ -193,32 +191,34 @@ ${hcoDto.no}
 					<label class="title">게스트 후기  |  <i class="bi bi-star-fill" style="font-size: 2.0rem;"></i>${dto.gcoDto.rating} 점</label>
 				</div>
 				<div class="comment">
-					<c:if test="${dto.gcoDto.no != dto.hcoDto.no}">
+				  <c:forEach var="list" items="${guestComment}">
+					<c:if test="${list.gcoDto.no != list.hcoDto.no}">
 						<div class="empty">등록된 후기가 없습니다.</div>
 					</c:if>
 					
-					<c:if test="${dto.gcoDto.no == dto.hcoDto.no}">
+					<c:if test="${list.gcoDto.no == list.hcoDto.no}">
 						<div class="co-wrap">
 							<div class="co-detail">
 								<div class="mem-detail">
 									<div class="mem-img">
-										<img src="${root}/photo/memberPhoto/${dto.memDto.photo}"
-										onclick="location.href='/profile/profileform?id=${dto.memDto.id}'">
+										<img src="${root}/photo/memberPhoto/${list.memDto.photo}"
+										onclick="location.href='/profile/profileform?id=${list.memDto.id}'">
 									</div>
 									
 									<div class="mem-content">
-										<fmt:formatDate var="wirteDay" value="${dto.gcoDto.write_day}" pattern="yyyy년 MM월 dd일"/>
-										<span class="mem-id" onclick="location.href='/profile/profileform?id=${dto.memDto.id}'">${dto.memDto.id}</span>
-										<span class="write-day">${wirteDay}</span>
+										<fmt:formatDate var="wirteDay" value="${list.gcoDto.write_day}" pattern="yyyy년 MM월 dd일"/>
+										<span class="mem-id" onclick="location.href='/profile/profileform?id=${list.memDto.id}'">${list.memDto.id}</span>
+										<span class="write-day">${writeDay}</span>
 									</div>
 								</div>
 								 
 								<div class="co-content">
-									<span>${dto.gcoDto.content}</span>
+									<span>${list.gcoDto.content}</span>
 								</div>
 							</div>
 						</div>
 					</c:if>
+				  </c:forEach>
 				</div>
 			</div>
 			

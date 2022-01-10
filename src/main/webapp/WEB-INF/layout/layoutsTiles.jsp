@@ -16,7 +16,10 @@ Gugi&family=Nanum+Pen+Script&display=Nanum+Gothic&display=swap"
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <!-- css -->
 <link rel="stylesheet" href="../../css/layoutsTiles.css">
-<title>Insert title here</title>
+<title>힐링이 필요할 때</title>
+<!-- Favicon 즐겨찾기 아이콘(favorites icon)-->
+<link rel="icon" type="image/x-icon" href="../photo/쉼_탭.png" />
+
 </head>
 <body>
 	<div class="main-layout">
