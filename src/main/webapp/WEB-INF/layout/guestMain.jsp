@@ -88,7 +88,7 @@
 					<jsp:useBean id="now" class="java.util.Date"/>
 					<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today"/>
 					<label id="checkIn" for="check-in">체크인</label> 
-					<input type="date" name="from" id="check-in" min="${today}" oninput="checkIn(this)">
+					<input type="date" name="from" data-placeholder="체크인" id="check-in" min="${today}" oninput="checkIn(this)">
 				</div>
 				<div class="bar">|</div>
 				<div class="guestMain-end">
