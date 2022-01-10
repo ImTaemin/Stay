@@ -219,6 +219,13 @@ public class ReservationController {
 		reserDto.setPrice(allPrice);
 		reserDto.setPay_method("kakao");
 		reserDto.setRoom_no(roomNo);
+		
+		// 대화 추가
+		ChatDto chatDto = new ChatDto();
+		chatDto.setSender(myid);
+		chatDto.setReceiver(reserDto.getHost_id());
+		chatDto.setMsg(reserDto.getStart_date() + "-" + reserDto.getEnd_date() + "에 " + roomDto.getName().substring(0,10) + "... 예약이 완료되었습니다.");
+		chatService.insertChat(chatDto);
 
 		try {
 			URL address = new URL("https://kapi.kakao.com/v1/payment/ready");

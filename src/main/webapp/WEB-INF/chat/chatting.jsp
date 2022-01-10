@@ -78,9 +78,7 @@
 				if(rooms.receiver == "${sessionScope.myid}"){
 					return;
 				}
-				
-				console.log(rooms);
-				
+
 				if(rooms.receiver.indexOf("@") != -1){
 					
 					s = `
