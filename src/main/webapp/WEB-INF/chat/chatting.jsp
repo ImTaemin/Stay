@@ -8,13 +8,27 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="../../css/chat.css">
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
-
 <body>
 	<c:if test="${sessionScope.myid ==null}">
 		<script>
-			alert("로그인을 해주세요");
-			location.href="/";
+			const swalWithBootstrapButtons = Swal.mixin({
+				customClass: {
+					confirmButton: 'btn btn-success',
+					cancelButton: 'btn btn-danger'
+				},
+				buttonsStyling: false
+			});
+			
+			swalWithBootstrapButtons.fire({
+				  icon: 'error',
+				  text: '로그인을 해주세요',
+				}).then((result) => {
+					if(result.isConfirmed){
+						location.href="/";
+					}
+				});
 		</script>
 	</c:if>
 	<div class="chat-container">
