@@ -43,6 +43,10 @@ public class ReservationService {
 		return mapper.selectHostReservation(hostId);
 	}
 	
+	public int checkHostReservation(String hostId) {
+		return mapper.checkHostReservation(hostId);
+	}
+	
 	public List<ResultMapDto> selectHostThreeReservation(String hostId) {
 		return mapper.selectHostThreeReservation(hostId);
 	}

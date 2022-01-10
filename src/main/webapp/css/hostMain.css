@@ -5,6 +5,23 @@
 	justify-content: space-around;
 }
 
+.none-hostMain-top {
+	display: flex;
+}
+
+.none-hostMain-top>.none-span {
+	width: 100%;
+	height: 70px;
+	border-radius: 7px;
+	font-size: 2em;
+	border: 2px solid #0B57A2;
+	transition: border-color 200ms ease-in-out;
+	font-weight: bold;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 .hostMain .card {
 	border-radius: 7px !important;
 	width: 30%;

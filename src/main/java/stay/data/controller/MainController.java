@@ -80,6 +80,8 @@ public class MainController {
 		ModelAndView mview = new ModelAndView();
 
 		String myid = (String) session.getAttribute("myid");
+		
+		int checkReser = reservationService.checkHostReservation(myid);
 
 		List<ResultMapDto> checkInList = reservationService.selectCheckInHostReservation(myid);
 		List<ResultMapDto> checkOutList = reservationService.selectCheckOutHostReservation(myid);
@@ -174,6 +176,8 @@ public class MainController {
 			reser.setRoomDto(roomDto);
 		}
 
+		mview.addObject("checkReser", checkReser);
+		
 		mview.addObject("checkInList", checkInList);
 		mview.addObject("checkOutList", checkOutList);
 		mview.addObject("hostingList", hostingList);
