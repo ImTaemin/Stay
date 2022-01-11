@@ -146,7 +146,6 @@ public class RoomController {
 			HttpSession session) {
 		// 업로드할 폴더 지정
 		String path = session.getServletContext().getRealPath("/photo/roomPhoto");
-		System.out.println(path);
 
 		String photo = "";
 
@@ -261,7 +260,6 @@ public class RoomController {
 			@RequestParam ArrayList<MultipartFile> upload, HttpSession session) {
 		// 업로드할 폴더 지정
 		String path = session.getServletContext().getRealPath("/photo/roomPhoto");
-		System.out.println(path);
 
 		String photo = "";
 

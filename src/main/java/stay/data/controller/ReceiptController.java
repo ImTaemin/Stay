@@ -65,8 +65,6 @@ public class ReceiptController {
 			String cardName = costService.getCardName(receiptDto.getResDto().getCard_num());
 			
 			mview.addObject("cardName", cardName);
-			
-			System.out.println(cardName);
 		}
 		
 		mview.addObject("receiptDto", receiptDto);
