@@ -18,6 +18,7 @@ public interface MemberMapper {
 	public int getEmailCheck(String e_mail);
 	public int getCheckPass(HashMap<String, String> map);
 	public MemberDto getMember(String id);
+	public MemberDto getMemName(String name);
 	public void updateMember(MemberDto dto);
 	public void deleteMember(String num);
 	

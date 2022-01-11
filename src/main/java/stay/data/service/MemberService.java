@@ -32,6 +32,10 @@ public class MemberService {
     public MemberDto getMember(String id) {
     	return mapper.getMember(id);
     }
+    
+    public MemberDto getMemName(String name) {
+    	return mapper.getMemName(name);
+    }
 	
 	public void insertPhoto(MemberDto memberDto) {
 		mapper.insertPhoto(memberDto);
