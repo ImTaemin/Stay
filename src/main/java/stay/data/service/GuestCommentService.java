@@ -15,13 +15,8 @@ public class GuestCommentService {
 	@Autowired
 	GuestCommentMapper mapper;
 
-	public GuestCommentDto getOneComment(String no, String guest_id) {
-		HashMap<String, String> map = new HashMap<String, String>();
-
-		map.put("no", no);
-		map.put("guest_id", guest_id);
-
-		return mapper.getOneComment(map);
+	public GuestCommentDto getOneComment(String no) {
+		return mapper.getOneComment(no);
 	}
 
 	public List<ResultMapDto> getRoomComment(String roomNo) {

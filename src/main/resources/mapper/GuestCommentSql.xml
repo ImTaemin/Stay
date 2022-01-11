@@ -4,8 +4,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="stay.data.mapper.GuestCommentMapper">
-	<select id="getOneComment" parameterType="HashMap" resultType="gcdto">
-		select * from guest_comment where no = #{no} and guest_id = #{guest_id}
+	<select id="getOneComment" parameterType="String" resultType="gcdto">
+		select * from guest_comment where no = #{no}
 	</select>
 	
 	<resultMap type="stay.data.dto.ResultMapDto" id="resultMap">

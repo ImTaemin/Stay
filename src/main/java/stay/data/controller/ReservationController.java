@@ -319,7 +319,7 @@ public class ReservationController {
 			// 후기 여부
 			String reserNo = dto.getResDto().getNo();
 
-			GuestCommentDto gcommentDto = gCommentService.getOneComment(reserNo, myid);
+			GuestCommentDto gcommentDto = gCommentService.getOneComment(reserNo);
 			int countComment = gCommentService.checkCommentGuest(reserNo, myid);
 			
 			if (gcommentDto == null) {
@@ -366,8 +366,6 @@ public class ReservationController {
 	public ModelAndView reservation(@RequestParam String reserNo, HttpSession session) throws Exception {
 		ModelAndView mview = new ModelAndView();
 
-		String myid = (String) session.getAttribute("myid");
-
 		ReservationDto reserDto = reservationService.selectGuestOneReservation(reserNo);
 		
 		// 숙소 정보 가져오기
@@ -402,7 +400,7 @@ public class ReservationController {
 		}
 
 		// 후기 작성
-		GuestCommentDto gCommentDto = gCommentService.getOneComment(reserNo, myid);
+		GuestCommentDto gCommentDto = gCommentService.getOneComment(reserNo);
 
 		// 예약 취소 여부
 		CanReservationDto canReserDto = canReserService.getOneCanReser(reserNo);
