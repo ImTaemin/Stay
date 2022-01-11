@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import stay.data.dto.CanReservationDto;
 import stay.data.dto.GuestCommentDto;
+import stay.data.dto.HostCommentDto;
 import stay.data.dto.MemberDto;
 import stay.data.dto.ReservationDto;
 import stay.data.dto.ResultMapDto;
@@ -92,21 +93,34 @@ public class HostReservationController {
 			rdto.setPhotos(photo[0]);
 
 			dto.setRoomDto(rdto);
-
-			// 후기 여부
+			
 			String reserNo = dto.getResDto().getNo();
 			
+			// 게스트 후기 여부
 			GuestCommentDto gcommentDto = guestCommentService.getOneComment(reserNo);
-			int countComment = guestCommentService.checkCommentHost(reserNo, myid);
+			int countGuestComment = guestCommentService.checkCommentHost(reserNo, myid);
 
 			if (gcommentDto == null) {
-				countComment = 0;
+				countGuestComment = 0;
 				gcommentDto = new GuestCommentDto();
 			}
 
-			gcommentDto.setCountLike(countComment);
+			gcommentDto.setCountLike(countGuestComment);
 
 			dto.setGcoDto(gcommentDto);
+			
+			// 호스트 후기 여부
+			HostCommentDto hcommentDto = hostCommentService.getOneHostComment(reserNo);
+			int countHostComment = hostCommentService.checkRecommentHost(reserNo, myid);
+			
+			if (hcommentDto == null) {
+				countHostComment = 0;
+				hcommentDto = new HostCommentDto();
+			}
+			
+			hcommentDto.setCount(countHostComment);
+			
+			dto.setHcoDto(hcommentDto);
 		}
 
 		// 취소된 예약

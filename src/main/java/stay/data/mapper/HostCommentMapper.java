@@ -12,4 +12,6 @@ public interface HostCommentMapper {
 	public void insertHostComment(HostCommentDto dto);
 	public void updateHostComment(HostCommentDto dto);
 	public void deleteHostComment(HashMap<String, String> map);
+	public int checkRecommentGuest(HashMap<String, String> map);
+	public int checkRecommentHost(HashMap<String, String> map);
 }

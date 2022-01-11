@@ -12,10 +12,10 @@ public class ResultMapDto {
 	private CanReceiptDto crecDto;
 	private JoinGuestDto joinDto;
 	private GuestCommentDto gcoDto;
+	private HostCommentDto hcoDto;
 	private WishListDto wishDto;
 	private CommentLikeDto likeDto;
 	private AvgTotalDto atDto;
 	private ReservationNoDto resNoDto;
 	private ReportMemberDto rmDto;
-	private HostCommentDto hcoDto;
 }

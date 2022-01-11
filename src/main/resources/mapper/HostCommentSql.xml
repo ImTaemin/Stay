@@ -19,4 +19,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteHostComment" parameterType="HashMap">
 		delete from host_comment where no = #{no} and host_id = #{host_id}
 	</delete>
+	
+	<select id="checkRecommentGuest" parameterType="HashMap" resultType="int">
+		select count(*) from host_comment h, reservation r where h.no = r.no and h.no = #{no} and h.guest_id = #{guest_id}
+	</select>
+	
+	<select id="checkRecommentHost" parameterType="HashMap" resultType="int">
+		select count(*) from host_comment h, reservation r where h.no = r.no and h.no = #{no} and h.host_id = #{host_id}
+	</select>
 </mapper>

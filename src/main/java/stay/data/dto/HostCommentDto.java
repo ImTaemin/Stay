@@ -12,5 +12,5 @@ public class HostCommentDto {
 	private String host_id;
 	private String content;
 	
-	private int countLike;
+	private int count;
 }

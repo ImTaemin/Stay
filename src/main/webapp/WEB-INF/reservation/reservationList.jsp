@@ -90,12 +90,13 @@
 									<i class="bi bi-chat"></i>
 								</c:if>
 								
-								<c:if test="${list.gcoDto.countLike == 1}"> 
+								<c:if test="${list.gcoDto.countLike == 1 and list.hcoDto.count == 0}"> 
 									<i class="bi bi-chat-dots"></i>
 								</c:if>
-							
-								<!-- 호스트가 댓글 단 경우 체크 -->
-	<!-- 						<i class="bi bi-chat-dots-fill"></i> -->
+								
+								<c:if test="${list.hcoDto.count == 1}">
+									<i class="bi bi-chat-dots-fill"></i>
+								</c:if>
 							</c:if>
 						</div>
 					</div>
