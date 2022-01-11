@@ -117,7 +117,8 @@ public class KakaoLogin {
     		JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
     		
     		String nickname = properties.getAsJsonObject().get("nickname").getAsString();
-    		String profile_image = properties.getAsJsonObject().get("profile_image").getAsString() == null ? "../../../webapp/photo/memberPhoto/user.png" : properties.getAsJsonObject().get("profile_image").getAsString() ;
+    		String profile_image = properties.getAsJsonObject().get("profile_image").getAsString() == null ? 
+    				"../../../webapp/photo/memberPhoto/user.png" : properties.getAsJsonObject().get("profile_image").getAsString() ;
     		String email = kakao_account.getAsJsonObject().get("email").getAsString();
     		String birthday = kakao_account.getAsJsonObject().get("birthday").getAsString();
     		
