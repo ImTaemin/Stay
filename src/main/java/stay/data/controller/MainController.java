@@ -60,10 +60,12 @@ public class MainController {
 
 		String myid = (String) session.getAttribute("myid");
 		String loginok = (String) session.getAttribute("loginok");
+		String name = (String) session.getAttribute("name");
 
 		if (loginok != null) {
 			MemberDto memberDto = memberService.getMember(myid);
-
+			memberDto = memberService.getMemName(name);
+			
 			String photo = memberDto.getPhoto();
 
 			session.setAttribute("photo", photo);

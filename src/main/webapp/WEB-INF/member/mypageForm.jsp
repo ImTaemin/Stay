@@ -15,28 +15,6 @@
 <title>마이페이지</title>
 </head>
 <body>
-<script type="text/javascript">
-	if(${sessionScope.myid == null}){
-		//알림창
-		const swalWithBootstrapButtons = Swal.mixin({
-			customClass: {
-				confirmButton: 'btn btn-success',
-				cancelButton: 'btn btn-danger'
-			},
-			buttonsStyling: false
-		});
-
-		swalWithBootstrapButtons.fire({
-			  icon: 'error',
-			  text: '비밀번호가 맞지 않습니다',
-			}).then((result) => {
-				if(result.isConfirmed){
-					location.href="/";
-				}
-			});
-	}
-</script>
-
   <div class="mypage-form">
   <form action="update" method="post" enctype="multipart/form-data"  style="float: left;">
 <!--    <form action="mypageform" method="post" enctype="multipart/form-data" onsubmit="return check(this)"> -->
