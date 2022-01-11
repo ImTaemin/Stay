@@ -383,7 +383,7 @@ public class ReservationController {
 	@PostMapping("/reser/reservation")
 	public ModelAndView reservation(@RequestParam String reserNo, HttpSession session) throws Exception {
 		ModelAndView mview = new ModelAndView();
-
+		
 		ReservationDto reserDto = reservationService.selectGuestOneReservation(reserNo);
 		
 		// 숙소 정보 가져오기
@@ -417,7 +417,7 @@ public class ReservationController {
 			preCheck = true;
 		}
 
-		// 후기 작성
+		// 게스트 후기
 		GuestCommentDto gCommentDto = gCommentService.getOneComment(reserNo);
 
 		// 예약 취소 여부
@@ -439,6 +439,9 @@ public class ReservationController {
 
 		// 조인 게스트
 		List<ResultMapDto> joinList = joinService.getAllJoinGuest(reserNo);
+		
+		// 호스트 댓글
+		HostCommentDto hCommentDto = hostCommentService.getOneHostComment(reserNo);
 
 		mview.addObject("reserDto", reserDto);
 		mview.addObject("roomDto", roomDto);
@@ -454,6 +457,7 @@ public class ReservationController {
 		mview.addObject("canCheck", canCheck);
 		mview.addObject("mainDto", mainDto);
 		mview.addObject("joinList", joinList);
+		mview.addObject("hCommentDto", hCommentDto);
 
 		mview.setViewName("/reservation/reservationDetail");
 

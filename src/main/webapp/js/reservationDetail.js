@@ -440,6 +440,11 @@ $(document).ready(function() {
 	result = content.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
 
 	$(".content-update").val(result);
+	
+	content = $('.comment-content').val();
+	result = content.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
+
+	$(".comment-content").val(result);
 });
 
 // 예약 취소

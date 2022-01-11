@@ -295,6 +295,6 @@
 			
 	
 	<!-- js -->
-	<script src="${root}/js/HostReservationDetail.js"></script>
+	<script src="${root}/js/hostReservationDetail.js"></script>
 </body>
 </html>

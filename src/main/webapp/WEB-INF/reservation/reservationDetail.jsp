@@ -306,6 +306,13 @@
 					$("#updateDeleteContainer").show();
 					$("#insertContainer").hide();
 				</script>
+				
+				<c:if test="${hCommentDto != null}">
+					<div class="recomment-wrap">
+						<i class="bi bi-arrow-return-right"></i>
+						<textarea class="comment-content" id="comment-content" readonly="readonly">${hCommentDto.content}</textarea>
+					</div>
+				</c:if>
 			</c:if>
 			
 			<c:if test="${canCheck == true}">
