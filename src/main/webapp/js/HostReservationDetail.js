@@ -118,7 +118,7 @@ function reserRef(e) {
 $(document).ready(function() {
 	$('#guestList').on('hidden.bs.modal', function() {
 		document.body.style.padding = "0";
-    });
+	});
 });
 
 // 영수증 출력
@@ -135,9 +135,6 @@ function postPopUp() {
 
 // 조인 게스트 출력
 function guestInfo(no, maxPer) {
-	// 메인 게스트 이미지 설정 (kakao)
-	$("#main-img").attr("src", $("#img").attr("src"));
-
 	var joinNum = parseInt($('input[name=joinNum]').attr('value'));
 
 	var s = "";
@@ -172,118 +169,91 @@ function guestInfo(no, maxPer) {
 	});
 }
 
-// 후기 입력
-$("#insert-btn").click(function() {
+// 엔터값 출력
+$(document).ready(function() {
 	var content = $('.content-input').val();
-	content = content.replace(/(?:\r\n|\r|\n)/g, '<br/>');
-	$(".content-input").val(content);
-
-	$.ajax({
-		data: { "reserNo": $("#reserNo").val(), "content": content},
-		type: "post",
-		dataType: "json",
-		url: "/hcomment/insert",
-		success: function(data) {
-			$("#updateDeleteContainer").show();
-			$("#insertContainer").hide();
-
-			//input-container 초기화
-			$(".content-input").val("");
-
-			result = data.content.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
-
-			$(".content-update").val(result);
-		}
-	});
-});
-
-// 후기 수정
-$("#update-btn").click(function() {
-	var content = $('.content-update').val();
 	result = content.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
 
 	$(".content-input").val(result);
+});
 
-	const swalWithBootstrapButtons = Swal.mixin({
-		customClass: {
-			confirmButton: 'btn btn-success',
-			cancelButton: 'btn btn-danger'
-		},
-		buttonsStyling: false
-	})
+// 호스트 후기 출력
+window.onload = function() {
+	var reserNo = $('input[name=reserNo]').attr('value');
 
-	swalWithBootstrapButtons.fire({
-		title: '댓글을 수정하시겠습니까?',
-		icon: 'warning',
-		cancelButtonText: '취소',
-		showCancelButton: true,
-		showCloseButton: true,
-		confirmButtonText: '수정',
-	}).then((result) => {
-		if (result.isConfirmed) {
-			$.ajax({
-				data: { "reserNo": $("#reserNo").val(), "content": content},
-				type: "post",
-				dataType: "json",
-				url: "/hcomment/update",
-				success: function(data) {
-					$("#content-update").val(data.content);
-					$("#insertContainer").hide();
-					$("#updateDeleteContainer").show();
-				},
-				error: function() {
-					$("#insertContainer").hide();
-					$("#updateDeleteContainer").show();
-				}
-			});
+	var s = '';
+
+	$.ajax({
+		type: "post",
+		data: { "reserNo": reserNo },
+		url: "/recomment/search",
+		success: function(hcommentDto) {
+			if (hcommentDto == '' || hcommentDto == null) {
+				s += '<div class="comment-wrap">';
+				s += '<i class="bi bi-arrow-return-right"></i>';
+				s += '<textarea class="comment-content" id="comment-content"></textarea>';
+				s += '<div class="btn-wrap">'
+				s += '<button type="button" id="insert-btn" class="btn btn-primary" onclick="insertComment()">댓글 저장</button>';
+				s += '</div>';
+				s += '</div>';
+
+				$('.comment-content').parent().append(s);
+			} else {
+				var content = hcommentDto.content.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
+				
+				s += '<div class="comment-wrap">';
+				s += '<i class="bi bi-arrow-return-right"></i>';
+				s += '<textarea class="comment-content" id="comment-content">' + content + '</textarea>';
+				s += '<div class="btn-wrap">'
+				s += '<button type="button" id="update-btn" class="btn btn-primary" onclick="updateComment()">후기 수정</button>';
+				s += '<button type="button" id="delete-btn" class="btn btn-danger" onclick="deleteComment()">후기 삭제</button>';
+				s += '</div>';
+				s += '</div>';
+
+				$('.comment-content').parent().append(s);
+			}
 		}
 	});
-});
+}
 
-// 후기 삭제
-$("#delete-btn").click(function() {
-	const swalWithBootstrapButtons = Swal.mixin({
-		customClass: {
-			confirmButton: 'btn btn-success',
-			cancelButton: 'btn btn-danger'
-		},
-		buttonsStyling: false
-	});
+// 호스트 후기 입력
+function insertComment() {
+	var reserNo = $('input[name=reserNo]').attr('value');
+	var guestId = $('input[name=guestId]').attr('value');
 
-	swalWithBootstrapButtons.fire({
-		title: '후기를 삭제하시겠습니까?',
-		icon: 'warning',
-		cancelButtonText: '취소',
-		showCancelButton: true,
-		showCloseButton: true,
-		confirmButtonText: '삭제',
-	}).then((result) => {
-		if (result.isConfirmed) {
-			$.ajax({
-				type: "post",
-				url: "/hcomment/delete",
-				data: { "no": $("#reserNo").val() },
-				success: function() {
-					$(".content-input").val("");
-					$(".content-update").val("");
-					$("#updateDeleteContainer").hide();
-					$("#insertContainer").show();
+	var content = $('#comment-content').val();
+	content = content.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+	$("#comment-content").val(content);
+	
+	$.ajax({
+		type: "post",
+		data: { "reserNo": reserNo, "guestId": guestId, "content": content },
+		url: "/recomment/insert",
+		success: function() {
+			const swalWithBootstrapButtons = Swal.mixin({
+				customClass: {
+					confirmButton: 'btn btn-success',
+					cancelButton: 'btn btn-danger'
 				},
-				error: function() {
-					$(".content-input").val("");
-					$(".content-update").val("");
-					$("#updateDeleteContainer").hide();
-					$("#insertContainer").show();
-				}
-			});
+				buttonsStyling: false
+			})
+
+			swalWithBootstrapButtons.fire({
+				icon: 'success',
+				title: '호스트 댓글이 작성되었습니다.'
+			})
+			
+			content = content.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
+			$("#comment-content").val(content);
+			
+			$("#insert-btn").remove();
+			
+			var s = '<button type="button" id="update-btn" class="btn btn-primary" onclick="updateComment()">후기 수정</button>';
+			s += '<button type="button" id="delete-btn" class="btn btn-danger" onclick="deleteComment()">후기 삭제</button>';
+			
+			$('.btn-wrap').append(s);
 		}
 	});
-});
+}
 
-// 엔터값 출력
-$(document).ready(function() {
-	var content = $('.content-update').val();
-	result = content.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
-
-	$(".content-update").val(result);
-});
+// 호스트 후기 수정

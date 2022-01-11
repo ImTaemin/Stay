@@ -152,6 +152,7 @@ create table host_comment(
 	guest_id varchar(20) not null,
 	host_id varchar(20) not null,
 	content varchar(500) not null,
+	write_day date not null,
 	primary key (no, guest_id, host_id),
 	foreign key (no) references reservation(no),
 	foreign key (guest_id) references member(id),

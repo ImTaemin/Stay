@@ -148,7 +148,13 @@
 									<div class="modal-body">
 										<div class="main-guest-wrap">
 											<div class="main-guest-img">
-												<img id="main-img" src="${root}/photo/memberPhoto/${guestDto.photo}">
+												<c:if test="${not fn:contains(guestDto.id, '@')}">
+													<img id="main-img" src="${root}/photo/memberPhoto/${guestDto.photo}">
+												</c:if>
+												
+												<c:if test="${fn:contains(guestDto.id, '@')}">
+													<img id="main-img" src="${guestDto.photo}">
+												</c:if>
 											</div>
 											
 											<label>${guestDto.id}</label>
@@ -165,7 +171,13 @@
 												
 												<div class="join-guest-de">
 													<div class="join-guest-img">
-														<img src="${root}/photo/memberPhoto/${join.memDto.photo}">
+														<c:if test="${not fn:contains(join.memDto.id, '@')}">
+															<img src="${root}/photo/memberPhoto/${join.memDto.photo}">
+														</c:if>
+														
+														<c:if test="${fn:contains(join.memDto.id, '@')}">
+															<img src="${join.memDto.photo}">
+														</c:if>
 													</div>
 													
 													<label>${join.memDto.id}</label>
@@ -186,88 +198,99 @@
 			
 			<hr>
 			
-			<!-- 게스트 후기 -->
 			<div class="guest-comment-wrap">
-				<div class="comment">
-					<c:if test="${gcommentDto == null and preCheck == true}">
+				<div class="guest-comment-main">
+					<!-- 게스트 후기 -->
+					<c:if test="${gcommentDto == null and preCheck == true and canCheck == false}">
 						<div class="empty">등록된 후기가 없습니다.</div>
 					</c:if>
 					
-					<c:if test="${gcommentDto != null and preCheck == true}">
+					<c:if test="${gcommentDto != null and preCheck == true and canCheck == false}">
 						<div class="comment-title">
-							<label class="title">게스트 후기  |  <i class="bi bi-star-fill" style="font-size: 2.0rem;"></i>${gcommentDto.rating} 점</label>
-						</div>
-					
-						<div class="co-wrap">
-							<div class="co-detail">
-								<div class="mem-detail">
-									<div class="mem-img">
-										<c:if test="${not fn:contains(guestDto.id, '@')}">
-											<img src="${root}/photo/memberPhoto/${guestDto.photo}"
-											onclick="location.href='/profile/profileform?id=${guestDto.id}'">
-										</c:if>
-										
-										<c:if test="${fn:contains(guestDto.id, '@')}">
-											<img src="${guestDto.photo}" onclick="location.href='/profile/profileform?id=${guestDto.id}'">
-										</c:if>
-									</div>
-								
-									<div class="mem-content">
-										<fmt:formatDate var="writeDay" value="${gcommentDto.write_day}" pattern="yyyy년 MM월 dd일"/>
-										<span class="mem-id" onclick="location.href='/profile/profileform?id=${guestDto.id}'">${guestDto.id}</span>
-										<span class="write-day">${writeDay}</span>
-									</div>
-								</div>
-							 
-								<div class="co-content">
-									<span>${gcommentDto.content}</span>
-								</div>
-								
-								
-								<!-- 호스트 댓글 작성 -->
-								<div id="insertContainer">
-									<form action="/hcomment/insert" method="post" name="commentInsert" class="comment-wrap">
-										<div class="comment">
-											<textarea class="content-input" name="content"></textarea>
-											<button type="button" id="insert-btn" class="btn btn-primary">댓글 저장</button>
-										</div>
-									</form>
-								</div>
-								
-								<!-- 댓글 수정 및 삭제 -->
-								<div id="updateDeleteContainer">
-									<form action="/hcomment/update" method="post" name="commentUpdate" class="comment-wrap">
-										<div class="comment">
-											<textarea class="content-update" name="content">${hCommentDto.content}</textarea>
-											
-											<div class="btn-wrap">
-												<button type="button" id="update-btn" class="btn btn-primary">후기 수정</button>
-												<button type="button" id="delete-btn" class="btn btn-danger">후기 삭제</button>
-											</div>
-										</div>
-									</form>
-								</div>
-			
-								<c:if test="${hcommentDto == null}">
-									<script type="text/javascript">
-										$("#insertContainer").show();
-										$("#updateDeleteContainer").hide();
-									</script>
+							<div class="guest-photo">
+								<c:if test="${not fn:contains(guestDto.id, '@')}">
+									<img src="${root}/photo/memberPhoto/${guestDto.photo}"
+									onclick="location.href='/profile/profileform?id=${guestDto.id}'">
 								</c:if>
 								
-								<c:if test="${hcommentDto != null}">
-									<script type="text/javascript">
-										$("#updateDeleteContainer").show();
-										$("#insertContainer").hide();
-									</script>
+								<c:if test="${fn:contains(guestDto.id, '@')}">
+									<img src="${guestDto.photo}" onclick="location.href='/profile/profileform?id=${guestDto.id}'">
 								</c:if>
 							</div>
+						
+							<div class="comment-detail-wrap">
+								<div class="guest-id">
+									<span>${guestDto.id}</span>
+								</div>
+							
+								<div class="rating">
+									<div class="rate-part">
+										<input type="radio" name="rate-u" id="star-1-u" value="${gcommentDto.rating}"
+										 ${gcommentDto.rating == '1.0' ? 'checked="checked"' : ''} onclick="return(false);">
+									    <input type="radio" name="rate-u" id="star-2-u" value="${gcommentDto.rating}"
+									     ${gcommentDto.rating == '2.0' ? 'checked="checked"' : ''} onclick="return(false);">
+									    <input type="radio" name="rate-u" id="star-3-u" value="${gcommentDto.rating}"
+									     ${gcommentDto.rating == '3.0' ? 'checked="checked"' : ''} onclick="return(false);">
+									    <input type="radio" name="rate-u" id="star-4-u" value="${gcommentDto.rating}"
+									     ${gcommentDto.rating == '4.0' ? 'checked="checked"' : ''} onclick="return(false);">
+									    <input type="radio" name="rate-u" id="star-5-u" value="${gcommentDto.rating}"
+									     ${gcommentDto.rating == '5.0' ? 'checked="checked"' : ''} onclick="return(false);">
+									    
+									    <div class="content">
+									        <div class="stars">
+									            <label for="star-1-u" class="star-1 fas fa-star"></label>
+									            <label for="star-2-u" class="star-2 fas fa-star"></label>
+									            <label for="star-3-u" class="star-3 fas fa-star"></label>
+									            <label for="star-4-u" class="star-4 fas fa-star"></label>
+									            <label for="star-5-u" class="star-5 fas fa-star"></label>
+									        </div>
+									    </div>
+									    
+									    <!-- hidden -->
+								    	<input type="hidden" name="reserNo" id="reserNo" value="${reserDto.no}">
+								    	
+									    <fmt:parseNumber var="star" value="${gcommentDto.rating}" integerOnly="true" />
+									    
+									    <span class="numa" id="starNum">${star}</span>
+									    <span class="numa" style="margin-left: 0;">점</span>
+									</div>
+									
+									<div class="date-part">
+								    	<fmt:formatDate var="writeDay" value="${gcommentDto.write_day}" pattern="yyyy년 MM월 dd일"/>
+								    	<span class="date">작성일 | ${writeDay}</span>
+								    </div>
+								</div>
 							</div>
-						  </c:if>
 						</div>
 						
+						<div class="comment-content">
+							<textarea class="content-input" readonly="readonly">${gcommentDto.content}</textarea>
+						</div>
+						
+						<!-- 게스트 후기 댓글 -->
+						<!-- hidden -->
+						<input type="hidden" name="guestId" value="${guestDto.id}">
+					</c:if>
 				</div>
 			</div>
+			
+			<c:if test="${canCheck == true}">
+				<!-- 취소 버튼 -->
+				<div class="can-wrap">
+					<c:if test="${canReserDto.refund_check == 'ing'}">
+						<button class="btn btn-secondary can-btn" id="can-reser" no="${reserDto.no}" onclick="reserRef(this)">예약 취소가 진행 중입니다.</button>
+					</c:if>
+					
+					<c:if test="${canReserDto.refund_check == 'end'}">
+						<button class="btn btn-secondary can-btn" id="can-reser" style="pointer-events: none;">결제 환불이 진행 중입니다.</button>
+					</c:if>
+					
+					<c:if test="${canReserDto.refund_check == 'can'}">
+						<button class="btn btn-warning can-btn" id="can-reser" style="pointer-events: none;">예약 취소가 완료되었습니다.</button>
+					</c:if>
+				</div>
+			</c:if>
+		</div>
 	</div>
 			
 	
