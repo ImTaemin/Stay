@@ -62,14 +62,14 @@ public class MainController {
 		String loginok = (String) session.getAttribute("loginok");
 		String name = (String) session.getAttribute("name");
 
-		if (loginok != null) {
-			MemberDto memberDto = memberService.getMember(myid);
-			memberDto = memberService.getMemName(name);
-			
-			String photo = memberDto.getPhoto();
-
-			session.setAttribute("photo", photo);
-		}
+//		if (loginok != null) {
+//			MemberDto memberDto = memberService.getMember(myid);
+//			memberDto = memberService.getMemName(name);
+//			
+//			String photo = memberDto.getPhoto();
+//
+//			session.setAttribute("photo", photo);
+//		}
 
 		mview.setViewName("/layout/guestMain");
 
