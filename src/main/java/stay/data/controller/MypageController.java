@@ -52,12 +52,13 @@ public class MypageController {
 	@PostMapping("/update")
 	public String memberUpdate(@ModelAttribute MemberDto dto, @RequestParam MultipartFile upload, HttpSession session) {
 		
-		//패스워드 암호화
-		dto.setPass(passwordEncoder.encode(dto.getPass()));
+		if(dto.getPass() != null) {
+			//패스워드 암호화
+			dto.setPass(passwordEncoder.encode(dto.getPass()));
+		}
 		
 		// 업로드할 폴더 지정
 		String path = session.getServletContext().getRealPath("/photo/memberPhoto");
-		System.out.println(path);
 
 		if (upload.getOriginalFilename().equals("")) {
 			dto.setPhoto(null);
