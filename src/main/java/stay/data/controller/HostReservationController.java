@@ -202,8 +202,8 @@ public class HostReservationController {
 		List<ResultMapDto> joinList = joinService.getAllJoinGuest(reserNo);
 		
 		// 게스트 후기
-		GuestCommentDto gcommentDto = guestCommentService.getOneComment(roomNo);
-
+		GuestCommentDto gcommentDto = guestCommentService.getOneComment(reserNo);
+		
 		mview.addObject("reserDto", reserDto);
 		mview.addObject("roomDto", roomDto);
 		mview.addObject("start", start);
@@ -216,6 +216,7 @@ public class HostReservationController {
 		mview.addObject("canCheck", canCheck);
 		mview.addObject("guestDto", guestDto);
 		mview.addObject("joinList", joinList);
+		mview.addObject("gcommentDto", gcommentDto);
 
 		mview.setViewName("/reservation/hostReservationDetail");
 

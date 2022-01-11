@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -188,54 +189,48 @@
 			<!-- 게스트 후기 -->
 			<div class="comment-wrap">
 				<div class="comment">
-				<c:if test="${gcommentDto == true}">
-					<div class="empty">등록된 후기가 없습니다.</div>
-				</c:if>
-				
-				  <c:forEach var="list" items="${gcommentDto}">
-					<c:if test="${list != true}">
+					<c:if test="${gcommentDto == null and preCheck == true}">
+						<div class="empty">등록된 후기가 없습니다.</div>
+					</c:if>
+					
+					<c:if test="${gcommentDto != null and preCheck == true}">
 						<div class="comment-title">
-							<label class="title">게스트 후기  |  <i class="bi bi-star-fill" style="font-size: 2.0rem;"></i>${dto.gcoDto.rating} 점</label>
+							<label class="title">게스트 후기  |  <i class="bi bi-star-fill" style="font-size: 2.0rem;"></i>${gcommentDto.rating} 점</label>
 						</div>
-						
+					
 						<div class="co-wrap">
 							<div class="co-detail">
 								<div class="mem-detail">
 									<div class="mem-img">
-										<img src="${root}/photo/memberPhoto/${list.memDto.photo}"
-										onclick="location.href='/profile/profileform?id=${list.memDto.id}'">
+										<c:if test="${not fn:contains(guestDto.id, '@')}">
+											<img src="${root}/photo/memberPhoto/${guestDto.photo}"
+											onclick="location.href='/profile/profileform?id=${guestDto.id}'">
+										</c:if>
+										
+										<c:if test="${fn:contains(guestDto.id, '@')}">
+											<img src="${guestDto.photo}" onclick="location.href='/profile/profileform?id=${guestDto.id}'">
+										</c:if>
 									</div>
-									
+								
 									<div class="mem-content">
-										<fmt:formatDate var="wirteDay" value="${list.gcoDto.write_day}" pattern="yyyy년 MM월 dd일"/>
-										<span class="mem-id" onclick="location.href='/profile/profileform?id=${list.memDto.id}'">${list.memDto.id}</span>
+										<fmt:formatDate var="wirteDay" value="${gcommentDto.write_day}" pattern="yyyy년 MM월 dd일"/>
+										<span class="mem-id" onclick="location.href='/profile/profileform?id=${guestDto.id}'">${guestDto.id}</span>
 										<span class="write-day">${writeDay}</span>
 									</div>
 								</div>
-								 
+							 
 								<div class="co-content">
-									<span>${list.gcoDto.content}</span>
-								</div>
-								
-								<div class="re-comment">
-									<input type="text" class="hostcomment">
-									<button type="button" class="enter"></button>
+									<span>${gcommentDto.content}</span>
 								</div>
 							</div>
 						</div>
 					</c:if>
-				  </c:forEach>
 				</div>
 			</div>
 			
 			<c:if test="${preCheck == false}">
 				<!-- 취소 버튼 -->
 				<div class="can-wrap">
-					<%-- <c:if test="${canReserDto == null}">
-						<button class="btn btn-danger" id="can-reser" no="${reserDto.no}" price="${reserDto.price}"
-						onclick="reserCan(this)">예약 취소</button>
-					</c:if> --%>
-					
 					<c:if test="${canReserDto.refund_check == 'ing'}">
 						<button class="btn btn-secondary can-btn" id="can-reser" no="${reserDto.no}" onclick="reserRef(this)">예약 취소가 진행 중입니다.</button>
 					</c:if>
