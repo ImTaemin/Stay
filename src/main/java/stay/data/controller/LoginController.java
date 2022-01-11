@@ -64,9 +64,13 @@ public class LoginController {
 	@PostMapping("/loginprocess")
 	public String loginProcss(@RequestParam(required = false) String cbsave, @RequestParam String id,
 			@RequestParam String pass, HttpSession session) {
-
+		
 		MemberDto check = mapper.login(id);
-
+		
+		if(!id.equals(check.getId())) {
+			return "/member/passfail";
+		}
+		
 		if(passwordEncoder.matches(pass, check.getPass()) && id.equals("admin")) {
 			session.setAttribute("loginok", "yes");
 			session.setAttribute("myid", id);

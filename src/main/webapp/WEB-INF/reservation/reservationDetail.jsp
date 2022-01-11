@@ -166,6 +166,7 @@
 										<!-- hidden -->
 										<input type="hidden" name="myid" value="${sessionScope.myid}">
 										<input type="hidden" name="mainId" value="${mainDto.id}">
+										<input type="hidden" name="preCheck" value="${preCheck}">
 										
 										<div class="join-guest"></div>
 									</div>
@@ -207,7 +208,7 @@
 			
 			<hr>
 			
-			<c:if test="${preCheck == true}">
+			<c:if test="${preCheck == true and mainDto.id == sessionScope.myid}">
 				<!-- 후기 작성 -->
 				<div id="insertContainer">
 					<form action="/comment/insert" method="post" name="commentInsert" class="comment-wrap">
