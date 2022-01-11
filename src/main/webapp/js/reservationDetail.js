@@ -195,11 +195,10 @@ function delGuest(e) {
 
 // 조인 게스트 출력
 function guestInfo(no, maxPer) {
-	// 메인 게스트 이미지 설정 (kakao)
-	$("#main-img").attr("src", $("#img").attr("src"));
-
 	var joinNum = parseInt($('input[name=joinNum]').attr('value'));
-
+	var myid = $('input[name=myid]').attr('value');
+	var mainId = $('input[name=mainId]').attr('value');
+	
 	var s = "";
 
 	$.ajax({
@@ -220,9 +219,11 @@ function guestInfo(no, maxPer) {
 				}
 				s += '</div>';
 				s += '<label>' + element.memDto.id + '</label>';
-				s += '<button type="button" id="joinDel" class="btn btn-danger" onclick="delGuest(this)"';
-				s += 'resNo="' + element.joinDto.no + '" guestId="' + element.memDto.id + '" joinNum="' + joinNum + '"';
-				s += 'maxPer="' + maxPer + '">게스트 삭제</button>';
+				if (element.memDto.id == myid || mainId == myid) {  
+					s += '<button type="button" id="joinDel" class="btn btn-danger" onclick="delGuest(this)"';
+					s += 'resNo="' + element.joinDto.no + '" guestId="' + element.memDto.id + '" joinNum="' + joinNum + '"';
+					s += 'maxPer="' + maxPer + '">게스트 삭제</button>';
+				}
 				s += '</div>';
 				s += '</div>';
 			});

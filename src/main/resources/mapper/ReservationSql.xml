@@ -24,18 +24,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<resultMap type="stay.data.dto.ResultMapDto" id="resultMap">
 		<collection property="roomDto" resultMap="roomMap"></collection>
 		<collection property="resDto" resultMap="resMap"></collection>
+		<collection property="joinDto" resultMap="joinMap"></collection>
 		<collection property="resNoDto" resultMap="resNoMap"></collection>
 	</resultMap>
 	
 	<select id="selectNowGuestReservation" parameterType="String" resultMap="resultMap">
-		select * from reservation res, room r 
-		where res.guest_id = #{guest_id} and res.room_no = r.no 
-		and res.start_date >= date_format(now(), "%y-%m-%d") 
-		and res.no not in (
-			select res.no from can_reservation can, reservation res
-			where can.no = res.no and res.guest_id = #{guest_id}
+		select res.no, j.id, res.host_id, start_date, end_date, res.price, pay_method, card_num, account_num, pay_date, room_no,
+		r.no, r.host_id, type, addr_load, addr_detail, max_per, content, name, photos, r.price, r.hosting
+		from reservation res, room r, join_guest j
+		where res.no = j.no and j.id = #{guest_id} and r.no = res.room_no
+		and res.start_date >= date_format(now(), "%y-%m-%d") and res.no not in (
+   			select res.no
+  			from can_reservation can, reservation res
+   			where can.no = res.no and res.guest_id = #{guest_id}
 		)
-		order by res.start_date
+		union
+		select *
+		from reservation res, room r 
+		where res.guest_id = #{guest_id} and res.room_no = r.no
+		and res.start_date >= date_format(now(), "%y-%m-%d") and res.no not in (
+		   select res.no
+		   from can_reservation can, reservation res
+		   where can.no = res.no and res.guest_id = #{guest_id}
+		)
+		order by start_date
 	</select>
 	
 	<select id="selectNowHostReservation" parameterType="String" resultMap="resultMap">
@@ -50,14 +62,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectPreGuestReservation" parameterType="String" resultMap="resultMap">
+		select res.no, j.id, res.host_id, start_date, end_date, res.price, pay_method, card_num, account_num, pay_date, room_no,
+		r.no, r.host_id, type, addr_load, addr_detail, max_per, content, name, photos, r.price, r.hosting
+		from reservation res, room r, join_guest j
+		where res.no = j.no and j.id = #{guest_id} and r.no = res.room_no
+		and date_format(now(), "%y-%m-%d") > res.start_date and res.no not in (
+			select res.no
+			from can_reservation can, reservation res
+			where can.no = res.no and res.guest_id = #{guest_id}
+		)
+		union
 		select * from reservation res, room r 
 		where res.guest_id = #{guest_id} and res.room_no = r.no 
-		and date_format(now(), "%y-%m-%d") > res.start_date 
-		and res.no not in (
+		and date_format(now(), "%y-%m-%d") > res.start_date and res.no not in (
 			select res.no from can_reservation can, reservation res
 			where can.no = res.no and res.guest_id = #{guest_id}
 		)
-		order by res.start_date
+		order by start_date
 	</select>
 	
 	<select id="selectPreHostReservation" parameterType="String" resultMap="resultMap">
@@ -125,8 +146,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		) b on a.no = b.room_no where b.h = #{host_id}
 	</select>
 	
-	<select id="selectGuestOneReservation" parameterType="HashMap" resultType="redto">
-		select * from reservation where no = #{no} and guest_id = #{guestId}
+	<select id="selectGuestOneReservation" parameterType="String" resultType="redto">
+		select * from reservation where no = #{no}
 	</select>
 	
 	<select id="selectHostOneReservation" parameterType="HashMap" resultType="redto">
@@ -135,6 +156,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="getRoomNo" parameterType="String" resultType="String">
 		select room_no from reservation where no = #{no}
+	</select>
+	
+	<select id="getMainGuest" parameterType="String" resultType="String">
+		select guest_id from reservation where no = #{no}
 	</select>
 	
 	<!-- join -->
@@ -166,6 +191,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<id column="account_num" property="account_num"/>
 		<id column="pay_date" property="pay_date"/>
 		<id column="room_no" property="room_no"/>
+	</resultMap>
+	
+	<!-- join guest -->
+	<resultMap type="stay.data.dto.JoinGuestDto" id="joinMap">
+		<id column="no" property="no"/>
+		<id column="id" property="id"/>
 	</resultMap>
 	
 	<!-- reservation no -->

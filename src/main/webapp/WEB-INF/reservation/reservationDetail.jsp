@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -123,7 +124,7 @@
 							
 							<div class="guest-btn">
 								<c:if test="${roomDto.max_per > joinGuestNum}">
-									<c:if test="${preCheck == false and canCheck == false}">
+									<c:if test="${preCheck == false and canCheck == false and mainDto.id == sessionScope.myid}">
 										<span class="bi bi-plus-circle" onclick="addGuest(this)" style="margin-right: 20%"
 										no="${reserDto.no}" hostId="${hostDto.id}" myid="${sessionScope.myid}"
 										maxPer="${roomDto.max_per}" id="addGuest"></span>
@@ -148,13 +149,23 @@
 									<div class="modal-body">
 										<div class="main-guest-wrap">
 											<div class="main-guest-img">
-												<img id="main-img" src="${root}/photo/memberPhoto/${guestDto.photo}">
+												<c:if test="${not fn:contains(mainDto.id, '@')}">
+													<img id="main-img" src="${root}/photo/memberPhoto/${mainDto.photo}">
+												</c:if>
+												
+												<c:if test="${fn:contains(mainDto.id, '@')}">
+													<img id="main-img" src="${mainDto.photo}">
+												</c:if>
 											</div>
 											
-											<label>${guestDto.id}</label>
+											<label>${mainDto.id}</label>
 											
 											<button type="button" class="btn btn-default" style="pointer-events: none;">메인 게스트</button>
 										</div>
+										
+										<!-- hidden -->
+										<input type="hidden" name="myid" value="${sessionScope.myid}">
+										<input type="hidden" name="mainId" value="${mainDto.id}">
 										
 										<div class="join-guest"></div>
 									</div>
@@ -296,7 +307,12 @@
 				</script>
 			</c:if>
 			
-			<c:if test="${preCheck == false}">
+			<c:if test="${canCheck == true}">
+				<script type="text/javascript">
+					$("#insertContainer").hide();
+					$("#updateDeleteContainer").hide();
+				</script>
+				
 				<!-- 취소 버튼 -->
 				<div class="can-wrap">
 					<c:if test="${canReserDto == null}">

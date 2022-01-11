@@ -22,7 +22,8 @@ public interface ReservationMapper {
 	public List<ResultMapDto> selectCheckOutHostReservation(String hostId);
 	public List<ResultMapDto> selectHostingHostReservation(String hostId);
 	public List<ReservationDto> selectHostReservation(String hostId);
-	public ReservationDto selectGuestOneReservation(HashMap<String, String> map);
+	public ReservationDto selectGuestOneReservation(String no);
 	public ReservationDto selectHostOneReservation(HashMap<String, String> map);
 	public String getRoomNo(String reserNo);
+	public String getMainGuest(String no);
 }

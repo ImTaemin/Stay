@@ -63,13 +63,8 @@ public class ReservationService {
 		return mapper.selectHostingHostReservation(hostId);
 	}
 	
-	public ReservationDto selectGuestOneReservation(String no, String guestId) {
-		HashMap<String, String> map = new HashMap<String, String>();
-		
-		map.put("no", no);
-		map.put("guestId", guestId);
-		
-		return mapper.selectGuestOneReservation(map);
+	public ReservationDto selectGuestOneReservation(String no) {
+		return mapper.selectGuestOneReservation(no);
 	}
 	
 	public ReservationDto selectHostOneReservation(String no, String hostId) {
@@ -86,5 +81,9 @@ public class ReservationService {
 	
 	public String getRoomNo(String reserNo) {
 		return mapper.getRoomNo(reserNo);
+	}
+	
+	public String getMainGuest(String no) {
+		return mapper.getMainGuest(no);
 	}
 }

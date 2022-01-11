@@ -51,6 +51,7 @@
 		<id column="e_mail" property="e_mail"/>
 	</resultMap>
 	
+	<!-- join guest -->
 	<resultMap type="stay.data.dto.JoinGuestDto" id="joinMap">
 		<id column="no" property="no"/>
 		<id column="id" property="id"/>

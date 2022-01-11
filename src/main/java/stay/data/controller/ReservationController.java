@@ -360,8 +360,8 @@ public class ReservationController {
 
 		String myid = (String) session.getAttribute("myid");
 
-		ReservationDto reserDto = reservationService.selectGuestOneReservation(reserNo, myid);
-
+		ReservationDto reserDto = reservationService.selectGuestOneReservation(reserNo);
+		
 		// 숙소 정보 가져오기
 		String roomNo = reserDto.getRoom_no();
 		RoomDto roomDto = roomService.getRoom(roomNo);
@@ -408,9 +408,12 @@ public class ReservationController {
 				canCheck = true;
 			}
 		}
+		
+		// 메인 게스트
+		String mainId = reservationService.getMainGuest(reserNo);
+		MemberDto mainDto = memberService.getMember(mainId);
 
 		// 조인 게스트
-		MemberDto guestDto = memberService.getMember(myid);
 		List<ResultMapDto> joinList = joinService.getAllJoinGuest(reserNo);
 
 		mview.addObject("reserDto", reserDto);
@@ -425,7 +428,7 @@ public class ReservationController {
 		mview.addObject("gCommentDto", gCommentDto);
 		mview.addObject("canReserDto", canReserDto);
 		mview.addObject("canCheck", canCheck);
-		mview.addObject("guestDto", guestDto);
+		mview.addObject("mainDto", mainDto);
 		mview.addObject("joinList", joinList);
 
 		mview.setViewName("/reservation/reservationDetail");

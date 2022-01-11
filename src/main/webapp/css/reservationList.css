@@ -48,8 +48,8 @@
 	height: 250px;
 }
 
-.card-body>.card-title {
-	margin-bottom: 20px;
+.card-title {
+	margin-bottom: 20px !important;
 }
 
 #roomTitle {
@@ -80,7 +80,7 @@
 	color: white;
 }
 
-.card>.top>b {
+.card>.top>b, .content-main>b {
 	font-size: 1.5em;
 }
 
