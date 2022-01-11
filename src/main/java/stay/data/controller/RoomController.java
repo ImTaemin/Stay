@@ -19,12 +19,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import stay.data.dto.CommentLikeDto;
 import stay.data.dto.GuestCommentDto;
+import stay.data.dto.HostCommentDto;
 import stay.data.dto.MemberDto;
 import stay.data.dto.ResultMapDto;
 import stay.data.dto.RoomDto;
 import stay.data.dto.WishListDto;
 import stay.data.service.CommentLikeService;
 import stay.data.service.GuestCommentService;
+import stay.data.service.HostCommentService;
 import stay.data.service.MemberService;
 import stay.data.service.RoomService;
 import stay.data.service.WishListService;
@@ -46,6 +48,9 @@ public class RoomController {
 
 	@Autowired
 	CommentLikeService likeService;
+	
+	@Autowired
+	HostCommentService hcommentService;
 
 	@GetMapping("/main")
 	public ModelAndView roomMain(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage,
@@ -225,6 +230,11 @@ public class RoomController {
 			gCoDto.setCountLike(likes);
 
 			c.setGcoDto(gCoDto);
+			
+			// 호스트 댓글 
+			HostCommentDto hcommentDto = hcommentService.getOneHostComment(reserNo);
+			
+			c.setHcoDto(hcommentDto);
 		}
 
 		// 좋아요한 댓글 리스트

@@ -334,6 +334,45 @@
 									<div class="co-content">
 										<span>${coList.gcoDto.content}</span>
 									</div>
+									
+									<c:if test="${coList.hcoDto != null}">
+										<div class="recomment-wrap">
+											<div class="recomment-title">
+												<i class="bi bi-arrow-return-right"></i>
+												
+												<div class="host-img">
+													<c:if test="${not fn:contains(memDto.id, '@')}">
+														<img src="${root}/photo/memberPhoto/${memDto.photo}"
+														onclick="location.href='/profile/profileform?id=${memDto.id}'">
+													</c:if>
+													
+													<c:if test="${fn:contains(memDto.id, '@')}">
+														<img src="${memDto.photo}"
+														onclick="location.href='/profile/profileform?id=${memDto.id}'">
+													</c:if>
+												</div>
+												
+												<div class="recomment-detail">
+													<div class="host-id">
+														<span onclick="location.href='/profile/profileform?id=${memDto.id}'">${memDto.id}</span>
+													</div>
+													
+													<div class="writeday">
+														<fmt:formatDate var="hostWriteDay" value="${coList.hcoDto.write_day}" pattern="yyyy년 MM월 dd일"/>
+														<span>${hostWriteDay}</span>
+													</div>
+												</div>
+												
+												<div class="host-icon">
+													<i class="bi bi-house-fill"></i>
+												</div>
+											</div>
+											
+											<div class="recomment-content">
+												${coList.hcoDto.content}
+											</div>
+										</div>
+									</c:if>
 								</div>
 							</c:forEach>
 						</div>

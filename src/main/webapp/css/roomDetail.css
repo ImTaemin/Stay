@@ -330,7 +330,7 @@
 	cursor: pointer;
 }
 
-.mem-img>img {
+.mem-img>img, .host-img>img {
 	border-radius: 100%;
 	width: 80px;
 	height: 80px;
@@ -465,4 +465,71 @@
 #reser-btn {
 	width: 100%;
 	height: 45px;
+}
+
+.recomment-wrap {
+	margin-top: 20px;
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+	flex-direction: column;
+}
+
+.recomment-title {
+	width: 95%;
+	display: flex;
+	justify-content: space-between;
+}
+
+.recomment-title>i {
+	width: 5%;
+	font-weight: bold;
+	font-size: 1.5em;
+	color: #696969;
+}
+
+.host-img {
+	width: 17%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
+
+.recomment-detail {
+	display: flex;
+	flex-direction: column;
+	width: 68%;
+	justify-content: space-evenly;
+}
+
+.recomment-detail>.host-id {
+	font-weight: bold;
+	font-size: 1.5em;
+}
+
+.host-id>span {
+	cursor: pointer;
+}
+
+.host-id>span:hover {
+	color: #0B57A2;
+}
+
+.host-icon {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 8%;
+}
+
+.host-icon>.bi-house-fill {
+	font-size: 2em;
+	color: #0B57A2;
+}
+
+.recomment-content {
+	margin-left: 10%;
+	margin-top: 3.5%;
+	width: 100%;
 }
