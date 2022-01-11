@@ -221,7 +221,7 @@ public class RoomController {
 
 			int likes = likeService.countLike(reserNo, guestId);
 
-			GuestCommentDto gCoDto = gcommentService.getOneComment(reserNo, guestId);
+			GuestCommentDto gCoDto = gcommentService.getOneComment(reserNo);
 
 			gCoDto.setCountLike(likes);
 

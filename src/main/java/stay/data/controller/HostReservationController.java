@@ -97,7 +97,7 @@ public class HostReservationController {
 			// 후기 여부
 			String reserNo = dto.getResDto().getNo();
 			
-			GuestCommentDto gcommentDto = guestCommentService.getOneComment(reserNo, dto.getResDto().getGuest_id());
+			GuestCommentDto gcommentDto = guestCommentService.getOneComment(reserNo);
 			int countComment = guestCommentService.checkCommentHost(reserNo, myid);
 
 			if (gcommentDto == null) {
@@ -200,6 +200,9 @@ public class HostReservationController {
 
 		// 조인 게스트
 		List<ResultMapDto> joinList = joinService.getAllJoinGuest(reserNo);
+		
+		// 게스트 후기
+		GuestCommentDto gcommentDto = guestCommentService.getOneComment(roomNo);
 
 		mview.addObject("reserDto", reserDto);
 		mview.addObject("roomDto", roomDto);

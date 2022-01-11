@@ -39,7 +39,7 @@ public class GuestCommentController {
 		gCommentDto.setRating(rating);
 		
 		gCommentService.insertGuestComment(gCommentDto);
-		return gCommentService.getOneComment(reserNo, myid);
+		return gCommentService.getOneComment(reserNo);
 	}
 	
 	@PostMapping("/update")
@@ -47,8 +47,6 @@ public class GuestCommentController {
 	public GuestCommentDto commentUpdate(
 			@RequestParam String reserNo, @RequestParam String content, @RequestParam String rate,
 			HttpSession session) {
-		String myid = (String)session.getAttribute("myid");
-		
 		double rating = Double.parseDouble(rate);
 		
 		GuestCommentDto gCommentDto = new GuestCommentDto();
@@ -58,7 +56,7 @@ public class GuestCommentController {
 		
 		gCommentService.updateGuestComment(gCommentDto);
 		
-		gCommentDto = gCommentService.getOneComment(reserNo, myid);
+		gCommentDto = gCommentService.getOneComment(reserNo);
 
 		return gCommentDto;
 	}

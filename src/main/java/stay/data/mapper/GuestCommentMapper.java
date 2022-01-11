@@ -10,7 +10,7 @@ import stay.data.dto.ResultMapDto;
 
 @Mapper
 public interface GuestCommentMapper {
-	public GuestCommentDto getOneComment(HashMap<String, String> map);
+	public GuestCommentDto getOneComment(String no);
 	public List<ResultMapDto> getRoomComment(String roomNo);
 	public void insertGuestComment(GuestCommentDto gcdto);
 	public void updateGuestComment(GuestCommentDto gcdto);

@@ -71,7 +71,7 @@ public class ProfileController {
 
 			int likes = likeService.countLike(reserNo, id);
 
-			GuestCommentDto gcoDto = gcommentService.getOneComment(reserNo, id);
+			GuestCommentDto gcoDto = gcommentService.getOneComment(reserNo);
 			gcoDto.setCountLike(likes);
 
 			c.setGcoDto(gcoDto);
