@@ -68,7 +68,7 @@ public class LoginController {
 		MemberDto check = mapper.login(id);
 		
 		if(!id.equals(check.getId())) {
-			return "/member/passfail";
+			return "/member/idfail";
 		}
 		
 		if(passwordEncoder.matches(pass, check.getPass()) && id.equals("admin")) {
