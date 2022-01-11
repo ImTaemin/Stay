@@ -4,7 +4,7 @@
 var dropdownMenu = document.querySelector(".dropdown-menu")
 var dropdownButton = document.querySelector(".dropdown-button")
 
-dropdownButton.addEventListener("click", function(event) {
+dropdownButton.addEventListener("mouseover", function(event) {
   if (this.active) {
     dropdownMenu.classList.remove("active")
   } else {
@@ -14,4 +14,11 @@ dropdownButton.addEventListener("click", function(event) {
   this.active = !this.active
 })
 
+dropdownMenu.addEventListener("mouseleave", function(event) {
+
+    dropdownMenu.classList.remove("active")
+})
+
 dropdownButton.active = false
+
+
