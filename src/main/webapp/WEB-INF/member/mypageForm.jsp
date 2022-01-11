@@ -84,10 +84,11 @@
   	  <div class="pw_check"><span class="pw_not_length">비밀번호는 6글자 이상, 16글자 이하만 사용 가능합니다.</span></div>
   	  <div class="pw_check"><span class="pw_not_sc">!,@,#,$,% 의 특수문자가 들어가 있지 않습니다.</span></div>
   	</div>
-  	</c:if>
+  	
       
   	<label for="name">이름</label>
   	  <input type="text" name="name" value="${memberDto.name}">
+  	 </c:if> 
   	<label for="brith">생년월일</label>
   	  <input type="date" name="birth" value="${memberDto.birth}">
   	<label for="addr_load">주소</label>
