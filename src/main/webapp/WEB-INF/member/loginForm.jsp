@@ -44,7 +44,7 @@
   
   <!-- 카카오톡 로그인 -->
 	<c:if test="${sessionScope.kakaologin eq null}">
-        <a href="https://kauth.kakao.com/oauth/authorize?client_id=caa825a053430f44f87ec4ac4c7e463e&redirect_uri=http://localhost:8080/member/kakaologin&response_type=code">
+        <a href="https://kauth.kakao.com/oauth/authorize?client_id=caa825a053430f44f87ec4ac4c7e463e&redirect_uri=https://localhost:8080/member/kakaologin&response_type=code">
       		<img src="/photo/kakao_login_medium_narrow.png">
   		</a>
     </c:if>

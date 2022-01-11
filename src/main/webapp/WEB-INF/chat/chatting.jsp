@@ -76,7 +76,7 @@
 			});
 			
 			//채팅방 요청
-			var eventSourceRoom = new EventSource("http://localhost:8080/chat/chatting/${sessionScope.myid}");
+			var eventSourceRoom = new EventSource("https://localhost:8080/chat/chatting/${sessionScope.myid}");
 	
 			eventSourceRoom.onmessage = function(event) {
 				var dataRooms = JSON.parse(event.data);
@@ -141,13 +141,13 @@
 					dataType: "json",
 					type: "post",
 					data: {"sender":"${sessionScope.myid}","receiver": profileName},
-					url: "http://localhost:8080/chat/chatting",
+					url: "https://localhost:8080/chat/chatting",
 					success: function(data){
 						data.forEach(element=>createChats(element));
 					}
 				});
 				
-				var eventSourceChat = new EventSource("http://localhost:8080/chat/chatting/${sessionScope.myid}/" + profileName);
+				var eventSourceChat = new EventSource("https://localhost:8080/chat/chatting/${sessionScope.myid}/" + profileName);
 				eventSourceChat.onmessage = (event) => {
 					var dataChats = JSON.parse(event.data);
 					createChats(dataChats);//dataChats.msg로 찾을 수 있음
@@ -197,7 +197,7 @@
 			
 				//통신이 끝날떄까지 기다려야함
 				/*var response = await */
-				fetch("http://localhost:8080/chat/chatting/insert",{
+				fetch("https://localhost:8080/chat/chatting/insert",{
 					method: "post",
 					body: JSON.stringify(chat), //JS->JSON
 					headers: {
