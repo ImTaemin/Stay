@@ -319,7 +319,7 @@ public class ReservationController {
 			// 후기 여부
 			String reserNo = dto.getResDto().getNo();
 
-			GuestCommentDto gcommentDto = gCommentService.getOneComment(reserNo, dto.getResDto().getGuest_id());
+			GuestCommentDto gcommentDto = gCommentService.getOneComment(reserNo, myid);
 			int countComment = gCommentService.checkCommentGuest(reserNo, myid);
 			
 			if (gcommentDto == null) {
@@ -330,6 +330,14 @@ public class ReservationController {
 			gcommentDto.setCountLike(countComment);
 
 			dto.setGcoDto(gcommentDto);
+			
+			// 메인 게스트
+			String mainId = reservationService.getMainGuest(reserNo);
+			
+			ReservationDto reserDto = reservationService.selectGuestOneReservation(reserNo);
+			reserDto.setGuest_id(mainId);
+			
+			dto.setResDto(reserDto);
 		}
 
 		// 취소된 예약
