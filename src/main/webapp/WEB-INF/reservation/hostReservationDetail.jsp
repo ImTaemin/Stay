@@ -248,24 +248,17 @@
 									</form>
 								</div>
 			
-								<c:if test="${commentNo == null}">
+								<c:if test="${hcommentDto == null}">
 									<script type="text/javascript">
 										$("#insertContainer").show();
 										$("#updateDeleteContainer").hide();
 									</script>
 								</c:if>
 								
-								<c:if test="${commentNo != null}">
+								<c:if test="${hcommentDto != null}">
 									<script type="text/javascript">
 										$("#updateDeleteContainer").show();
 										$("#insertContainer").hide();
-									</script>
-								</c:if>
-								
-								<c:if test="${canCheck == true}">
-									<script type="text/javascript">
-										$("#insertContainer").hide();
-										$("#updateDeleteContainer").hide();
 									</script>
 								</c:if>
 							</div>

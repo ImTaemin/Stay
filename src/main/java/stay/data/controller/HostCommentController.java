@@ -13,7 +13,6 @@ import stay.data.dto.GuestCommentDto;
 import stay.data.dto.HostCommentDto;
 import stay.data.service.GuestCommentService;
 import stay.data.service.HostCommentService;
-import stay.data.service.ReservationService;
 
 @Controller
 @RequestMapping("/hcomment")
@@ -21,13 +20,17 @@ public class HostCommentController {
 	@Autowired
 	HostCommentService hCommentService;
 	
+	@Autowired
+	GuestCommentService gCommentService;
+	
 	@PostMapping("/insert")
 	@ResponseBody
-	public HostCommentDto commentInsert(@RequestParam String content, HttpSession session) {
+	public HostCommentDto commentInsert(@RequestParam String no, @RequestParam String content, HttpSession session) {
 		
 		String myid = (String)session.getAttribute("myid");
 		
-		GuestCommentDto gCommentDto = new GuestCommentDto();
+		GuestCommentDto gCommentDto=gCommentService.getOneComment(no);
+		
 		HostCommentDto hCommentDto = new HostCommentDto();
 		hCommentDto.setNo(gCommentDto.getNo());
 		hCommentDto.setGuest_id(gCommentDto.getGuest_id());
@@ -40,9 +43,9 @@ public class HostCommentController {
 	
 	@PostMapping("/update")
 	@ResponseBody
-	public HostCommentDto commentUpdate(@RequestParam String content, HttpSession session) {
+	public HostCommentDto commentUpdate(@RequestParam String no, @RequestParam String content, HttpSession session) {
 		
-		GuestCommentDto gCommentDto = new GuestCommentDto();
+		GuestCommentDto gCommentDto=gCommentService.getOneComment(no);
 
 		HostCommentDto hCommentDto = new HostCommentDto();
 		hCommentDto.setNo(gCommentDto.getNo());
