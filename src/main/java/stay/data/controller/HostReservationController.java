@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import stay.data.dto.CanReservationDto;
 import stay.data.dto.GuestCommentDto;
+import stay.data.dto.HostCommentDto;
 import stay.data.dto.MemberDto;
 import stay.data.dto.ReservationDto;
 import stay.data.dto.ResultMapDto;
@@ -25,6 +26,7 @@ import stay.data.dto.RoomDto;
 import stay.data.service.CanReservationService;
 import stay.data.service.CostService;
 import stay.data.service.GuestCommentService;
+import stay.data.service.HostCommentService;
 import stay.data.service.JoinGuestService;
 import stay.data.service.MemberService;
 import stay.data.service.ReservationService;
@@ -34,9 +36,6 @@ import stay.data.service.RoomService;
 public class HostReservationController {
 	@Autowired
 	CostService costService;
-
-	@Autowired
-	GuestCommentService gCommentService;
 
 	@Autowired
 	RoomService roomService;
@@ -58,6 +57,9 @@ public class HostReservationController {
 	
 	@Autowired
 	GuestCommentService guestCommentService;
+	
+	@Autowired
+	HostCommentService hostCommentService;
 
 	@GetMapping("/reser/hostreservationlist")
 	public ModelAndView HostReservationList(HttpSession session) {
@@ -106,6 +108,19 @@ public class HostReservationController {
 			gcommentDto.setCountLike(countComment);
 
 			dto.setGcoDto(gcommentDto);
+			
+			// 호스트 후기 여부
+			HostCommentDto hcommentDto = hostCommentService.getHostComment(reserNo, dto.getResDto().getHost_id());
+			int hcountComment = hostCommentService.checkComment(reserNo, myid);
+			
+			if (hcommentDto == null) {
+				hcountComment = 0;
+				hcommentDto = new HostCommentDto();
+			}
+			
+			hcommentDto.setCountLike(hcountComment);
+			
+			dto.setHcoDto(hcommentDto);
 		}
 
 		// 취소된 예약

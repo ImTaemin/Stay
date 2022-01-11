@@ -19,6 +19,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+  <c:set var="commentNo" value="${gcommentDto.no}"></c:set>
 	<div class="reser-detail-wrap">
 		<div class="room-detail">
 			<!-- 숙소 이름 -->
@@ -191,12 +192,12 @@
 					<label class="title">게스트 후기  |  <i class="bi bi-star-fill" style="font-size: 2.0rem;"></i>${dto.gcoDto.rating} 점</label>
 				</div>
 				<div class="comment">
-				  <c:forEach var="list" items="${guestComment}">
-					<c:if test="${list.gcoDto.no != list.hcoDto.no}">
+				  <c:forEach var="list" items="${gcommentDto}">
+					<c:if test="${commentNo == null}">
 						<div class="empty">등록된 후기가 없습니다.</div>
 					</c:if>
 					
-					<c:if test="${list.gcoDto.no == list.hcoDto.no}">
+					<c:if test="${commentNo != null}">
 						<div class="co-wrap">
 							<div class="co-detail">
 								<div class="mem-detail">
@@ -214,6 +215,11 @@
 								 
 								<div class="co-content">
 									<span>${list.gcoDto.content}</span>
+								</div>
+								
+								<div class="re-comment">
+									<input type="text" class="hostcomment">
+									<button type="button" class="enter"></button>
 								</div>
 							</div>
 						</div>
