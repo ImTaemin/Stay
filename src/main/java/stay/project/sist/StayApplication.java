@@ -9,7 +9,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 @SpringBootApplication
 @ComponentScan({"stay.data.*", "stay.project.sist"})
-@MapperScan("stay.data.*")
+@MapperScan("stay.data.mapper")
 public class StayApplication {
 
 	public static void main(String[] args) {

@@ -34,9 +34,8 @@ public class ChatService {
 	public void emitRoom() {
 		
 		for(Map.Entry<ResponseBodyEmitter, String> entry : emitterRoomMap.entrySet()) {
-//			ChatDto dto = new RestTemplate().getForObject("http://localhost:8080/chat/{sender}", ChatDto.class, sender);
 
-			emitterRoom = entry.getKey(); // emmiter|sender
+			emitterRoom = entry.getKey();
 			
 			try {
 				for(ChatDto chatDto : chatMapper.getChattingRooms(entry.getValue())) {
@@ -82,12 +81,12 @@ public class ChatService {
 		}
 	}
 	
-	//채팅방 Map
+	//채팅방 MapEmitter
 	public void roomAdd(ResponseBodyEmitter emitter, String sender) {
 		emitterRoomMap.put(emitter, sender);
 	}
 	
-	//채팅 Map
+	//채팅 MapEmitter
 	public void chatAdd(ResponseBodyEmitter emitter, String sender, String receiver) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put(sender, receiver);
