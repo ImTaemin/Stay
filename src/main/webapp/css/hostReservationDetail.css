@@ -376,6 +376,21 @@
 	flex-direction: column;
 }
 
+.guest-comment-main>.empty {
+	width: 100%;
+	height: 50px;
+	padding: 12px;
+	border-radius: 7px;
+	font-size: 16px;
+	border: 2px solid #d3dce6;
+	outline: none;
+	box-shadow: none;
+	border-color: #0B57A2;
+	font-weight: bold;
+	color: #696969;
+	resize: none;
+}
+
 .comment-title {
 	display: flex;
 	width: 100%;

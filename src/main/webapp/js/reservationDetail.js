@@ -180,12 +180,12 @@ function delGuest(e) {
 			if (maxPer > joinNum) {
 				if (!!document.getElementById("addGuest")) {
 					$("#addGuest").show();
-					
+
 				} else {
 					s = '<span class="bi bi-plus-circle" onclick="addGuest(this)" style="margin-right: 20%"';
 					s += 'no="${reserDto.no}" hostId="${hostDto.id}" myid="${sessionScope.myid}"';
 					s += 'maxPer="${roomDto.max_per}" id="addGuest"></span>';
-					
+
 					$('.guest-btn').prepend(s);
 				}
 			}
@@ -196,11 +196,11 @@ function delGuest(e) {
 // 조인 게스트 출력
 function guestInfo(no, maxPer) {
 	var joinNum = parseInt($('input[name=joinNum]').attr('value'));
-	
+
 	var myid = $('input[name=myid]').attr('value');
 	var mainId = $('input[name=mainId]').attr('value');
 	var preCheck = $('input[name=preCheck]').attr('value');
-	
+
 	var s = "";
 
 	$.ajax({
@@ -221,7 +221,7 @@ function guestInfo(no, maxPer) {
 				}
 				s += '</div>';
 				s += '<label>' + element.memDto.id + '</label>';
-				if (preCheck == false && element.memDto.id == myid || preCheck == false && mainId == myid) {  
+				if (preCheck == false && element.memDto.id == myid || preCheck == false && mainId == myid) {
 					s += '<button type="button" id="joinDel" class="btn btn-danger" onclick="delGuest(this)"';
 					s += 'resNo="' + element.joinDto.no + '" guestId="' + element.memDto.id + '" joinNum="' + joinNum + '"';
 					s += 'maxPer="' + maxPer + '">게스트 삭제</button>';
@@ -304,36 +304,63 @@ $("#insert-btn").click(function() {
 	content = content.replace(/(?:\r\n|\r|\n)/g, '<br/>');
 	$(".content-input").val(content);
 
-	//rate하나만 선택해도 star1에는 값 정해짐 (초기값 0.0)
-	$.ajax({
-		data: { "reserNo": $("#reserNo").val(), "content": content, "rate": $("#star-1").val() },
-		type: "post",
-		dataType: "json",
-		url: "/comment/insert",
-		success: function(data) {
-			$("#updateDeleteContainer").show();
-			$("#insertContainer").hide();
+	if (content == '' || content == null) {
+		const swalWithBootstrapButtons = Swal.mixin({
+			customClass: {
+				confirmButton: 'btn btn-success',
+				cancelButton: 'btn btn-danger'
+			},
+			buttonsStyling: false
+		})
 
-			var s = `
+		swalWithBootstrapButtons.fire({
+			icon: 'error',
+			title: '게스트 후기를 작성해주세요.'
+		})
+	} else {
+		$.ajax({
+			data: { "reserNo": $("#reserNo").val(), "content": content, "rate": $("#star-1").val() },
+			type: "post",
+			dataType: "json",
+			url: "/comment/insert",
+			success: function(data) {
+				const swalWithBootstrapButtons = Swal.mixin({
+					customClass: {
+						confirmButton: 'btn btn-success',
+						cancelButton: 'btn btn-danger'
+					},
+					buttonsStyling: false
+				})
+
+				swalWithBootstrapButtons.fire({
+					icon: 'success',
+					title: '게스트 후기가 작성되었습니다.'
+				})
+
+				$("#updateDeleteContainer").show();
+				$("#insertContainer").hide();
+
+				var s = `
 		    	<span class="date">작성일 | ` + data.write_day.substr(0, 4) + "년 " + data.write_day.substr(5, 2) + "월 " + (Number(data.write_day.substr(8, 2)) + 1) + "일 " + `</span>
 			`;
 
-			$(".date-part").html(s);
+				$(".date-part").html(s);
 
-			$("#starNum").text($("#star-1").val().substr(0, 1));
-			$("input[name=rate-u]").val(data.rating + ".0");
-			$("#star-" + data.rating + "-u").attr("checked", "checked");
+				$("#starNum").text($("#star-1").val().substr(0, 1));
+				$("input[name=rate-u]").val(data.rating + ".0");
+				$("#star-" + data.rating + "-u").attr("checked", "checked");
 
-			//input-container 초기화
-			$("input[name=rate]").attr("value", "0.0");
-			$("input[name=rate]").attr("checked", "false");
-			$(".content-input").val("");
+				//input-container 초기화
+				$("input[name=rate]").attr("value", "0.0");
+				$("input[name=rate]").attr("checked", "false");
+				$(".content-input").val("");
 
-			result = data.content.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
+				result = data.content.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
 
-			$(".content-update").val(result);
-		}
-	});
+				$(".content-update").val(result);
+			}
+		});
+	}
 });
 
 // 후기 수정
@@ -351,35 +378,63 @@ $("#update-btn").click(function() {
 		buttonsStyling: false
 	})
 
-	swalWithBootstrapButtons.fire({
-		title: '댓글을 수정하시겠습니까?',
-		icon: 'warning',
-		cancelButtonText: '취소',
-		showCancelButton: true,
-		showCloseButton: true,
-		confirmButtonText: '수정',
-	}).then((result) => {
-		if (result.isConfirmed) {
-			$.ajax({
-				data: { "reserNo": $("#reserNo").val(), "content": content, "rate": $("#star-1-u").val() },
-				type: "post",
-				dataType: "json",
-				url: "/comment/update",
-				success: function(data) {
-					var s = `<span class="date">작성일 | ` + data.write_day.substr(0, 4) + "년 " + data.write_day.substr(5, 2) + "월 " + (Number(data.write_day.substr(8, 2)) + 1) + "일 " + `</span>`;
-					$(".date-part").html(s);
+	if (content == '' || content == null) {
+		const swalWithBootstrapButtons = Swal.mixin({
+			customClass: {
+				confirmButton: 'btn btn-success',
+				cancelButton: 'btn btn-danger'
+			},
+			buttonsStyling: false
+		})
 
-					$("#content-update").val(data.content);
-					$("#insertContainer").hide();
-					$("#updateDeleteContainer").show();
-				},
-				error: function() {
-					$("#insertContainer").hide();
-					$("#updateDeleteContainer").show();
-				}
-			});
-		}
-	});
+		swalWithBootstrapButtons.fire({
+			icon: 'error',
+			title: '게스트 후기를 작성해주세요.'
+		})
+	} else {
+		swalWithBootstrapButtons.fire({
+			title: '댓글을 수정하시겠습니까?',
+			icon: 'warning',
+			cancelButtonText: '취소',
+			showCancelButton: true,
+			showCloseButton: true,
+			confirmButtonText: '수정',
+		}).then((result) => {
+			if (result.isConfirmed) {
+				$.ajax({
+					data: { "reserNo": $("#reserNo").val(), "content": content, "rate": $("#star-1-u").val() },
+					type: "post",
+					dataType: "json",
+					url: "/comment/update",
+					success: function(data) {
+						const swalWithBootstrapButtons = Swal.mixin({
+							customClass: {
+								confirmButton: 'btn btn-success',
+								cancelButton: 'btn btn-danger'
+							},
+							buttonsStyling: false
+						})
+
+						swalWithBootstrapButtons.fire({
+							icon: 'success',
+							title: '게스트 후기가 수정되었습니다.'
+						})
+
+						var s = `<span class="date">작성일 | ` + data.write_day.substr(0, 4) + "년 " + data.write_day.substr(5, 2) + "월 " + (Number(data.write_day.substr(8, 2)) + 1) + "일 " + `</span>`;
+						$(".date-part").html(s);
+
+						$("#content-update").val(data.content);
+						$("#insertContainer").hide();
+						$("#updateDeleteContainer").show();
+					},
+					error: function() {
+						$("#insertContainer").hide();
+						$("#updateDeleteContainer").show();
+					}
+				});
+			}
+		});
+	}
 });
 
 // 후기 삭제
@@ -430,6 +485,19 @@ $("#delete-btn").click(function() {
 					$("#insertContainer").show();
 				}
 			});
+
+			const swalWithBootstrapButtons = Swal.mixin({
+				customClass: {
+					confirmButton: 'btn btn-success',
+					cancelButton: 'btn btn-danger'
+				},
+				buttonsStyling: false
+			})
+
+			swalWithBootstrapButtons.fire({
+				icon: 'success',
+				title: '게스트 후기가 삭제되었습니다.'
+			})
 		}
 	});
 });
@@ -440,7 +508,7 @@ $(document).ready(function() {
 	result = content.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
 
 	$(".content-update").val(result);
-	
+
 	content = $('.comment-content').val();
 	result = content.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
 
