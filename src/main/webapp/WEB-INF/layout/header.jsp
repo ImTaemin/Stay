@@ -150,11 +150,8 @@
 				<c:if test="${sessionScope.kakaologin == null }">
 					<b>${sessionScope.myid } 님</b>
 				</c:if>
-				<%-- <c:if test="${sessionScope.kakaologin!=null }">
+				<c:if test="${sessionScope.kakaologin != null }">
 					<b>${sessionScope.kakaoName } 님</b>
-				</c:if> --%>
-				<c:if test="${sessionScope.kakaologin!=null }">
-					<b>${sessionScope.name} 님</b>
 				</c:if>
 				<div class="mypage-img" onclick="location.href='/mypage/mypageform'">
 					<!-- 일반 로그인 -->
