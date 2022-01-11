@@ -187,7 +187,7 @@
 			<hr>
 			
 			<!-- 게스트 후기 -->
-			<div class="comment-wrap">
+			<div class="guest-comment-wrap">
 				<div class="comment">
 					<c:if test="${gcommentDto == null and preCheck == true}">
 						<div class="empty">등록된 후기가 없습니다.</div>
@@ -213,7 +213,7 @@
 									</div>
 								
 									<div class="mem-content">
-										<fmt:formatDate var="wirteDay" value="${gcommentDto.write_day}" pattern="yyyy년 MM월 dd일"/>
+										<fmt:formatDate var="writeDay" value="${gcommentDto.write_day}" pattern="yyyy년 MM월 dd일"/>
 										<span class="mem-id" onclick="location.href='/profile/profileform?id=${guestDto.id}'">${guestDto.id}</span>
 										<span class="write-day">${writeDay}</span>
 									</div>
@@ -222,30 +222,61 @@
 								<div class="co-content">
 									<span>${gcommentDto.content}</span>
 								</div>
+								
+								
+								<!-- 호스트 댓글 작성 -->
+								<div id="insertContainer">
+									<form action="/hcomment/insert" method="post" name="commentInsert" class="comment-wrap">
+										<div class="comment">
+											<textarea class="content-input" name="content"></textarea>
+											<button type="button" id="insert-btn" class="btn btn-primary">댓글 저장</button>
+										</div>
+									</form>
+								</div>
+								
+								<!-- 댓글 수정 및 삭제 -->
+								<div id="updateDeleteContainer">
+									<form action="/hcomment/update" method="post" name="commentUpdate" class="comment-wrap">
+										<div class="comment">
+											<textarea class="content-update" name="content">${hCommentDto.content}</textarea>
+											
+											<div class="btn-wrap">
+												<button type="button" id="update-btn" class="btn btn-primary">후기 수정</button>
+												<button type="button" id="delete-btn" class="btn btn-danger">후기 삭제</button>
+											</div>
+										</div>
+									</form>
+								</div>
+			
+								<c:if test="${commentNo == null}">
+									<script type="text/javascript">
+										$("#insertContainer").show();
+										$("#updateDeleteContainer").hide();
+									</script>
+								</c:if>
+								
+								<c:if test="${commentNo != null}">
+									<script type="text/javascript">
+										$("#updateDeleteContainer").show();
+										$("#insertContainer").hide();
+									</script>
+								</c:if>
+								
+								<c:if test="${canCheck == true}">
+									<script type="text/javascript">
+										$("#insertContainer").hide();
+										$("#updateDeleteContainer").hide();
+									</script>
+								</c:if>
 							</div>
+							</div>
+						  </c:if>
 						</div>
-					</c:if>
+						
 				</div>
 			</div>
-			
-			<c:if test="${preCheck == false}">
-				<!-- 취소 버튼 -->
-				<div class="can-wrap">
-					<c:if test="${canReserDto.refund_check == 'ing'}">
-						<button class="btn btn-secondary can-btn" id="can-reser" no="${reserDto.no}" onclick="reserRef(this)">예약 취소가 진행 중입니다.</button>
-					</c:if>
-					
-					<c:if test="${canReserDto.refund_check == 'end'}">
-						<button class="btn btn-secondary can-btn" id="can-reser" style="pointer-events: none;">결제 환불이 진행 중입니다.</button>
-					</c:if>
-					
-					<c:if test="${canReserDto.refund_check == 'can'}">
-						<button class="btn btn-warning can-btn" id="can-reser" style="pointer-events: none;">예약 취소가 완료되었습니다.</button>
-					</c:if>
-				</div>
-			</c:if>
-		</div>
 	</div>
+			
 	
 	<!-- js -->
 	<script src="${root}/js/HostReservationDetail.js"></script>

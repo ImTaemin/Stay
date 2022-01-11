@@ -171,3 +171,119 @@ function guestInfo(no, maxPer) {
 		}
 	});
 }
+
+// 후기 입력
+$("#insert-btn").click(function() {
+	var content = $('.content-input').val();
+	content = content.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+	$(".content-input").val(content);
+
+	$.ajax({
+		data: { "reserNo": $("#reserNo").val(), "content": content},
+		type: "post",
+		dataType: "json",
+		url: "/hcomment/insert",
+		success: function(data) {
+			$("#updateDeleteContainer").show();
+			$("#insertContainer").hide();
+
+			//input-container 초기화
+			$(".content-input").val("");
+
+			result = data.content.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
+
+			$(".content-update").val(result);
+		}
+	});
+});
+
+// 후기 수정
+$("#update-btn").click(function() {
+	var content = $('.content-update').val();
+	result = content.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
+
+	$(".content-input").val(result);
+
+	const swalWithBootstrapButtons = Swal.mixin({
+		customClass: {
+			confirmButton: 'btn btn-success',
+			cancelButton: 'btn btn-danger'
+		},
+		buttonsStyling: false
+	})
+
+	swalWithBootstrapButtons.fire({
+		title: '댓글을 수정하시겠습니까?',
+		icon: 'warning',
+		cancelButtonText: '취소',
+		showCancelButton: true,
+		showCloseButton: true,
+		confirmButtonText: '수정',
+	}).then((result) => {
+		if (result.isConfirmed) {
+			$.ajax({
+				data: { "reserNo": $("#reserNo").val(), "content": content},
+				type: "post",
+				dataType: "json",
+				url: "/hcomment/update",
+				success: function(data) {
+					$("#content-update").val(data.content);
+					$("#insertContainer").hide();
+					$("#updateDeleteContainer").show();
+				},
+				error: function() {
+					$("#insertContainer").hide();
+					$("#updateDeleteContainer").show();
+				}
+			});
+		}
+	});
+});
+
+// 후기 삭제
+$("#delete-btn").click(function() {
+	const swalWithBootstrapButtons = Swal.mixin({
+		customClass: {
+			confirmButton: 'btn btn-success',
+			cancelButton: 'btn btn-danger'
+		},
+		buttonsStyling: false
+	});
+
+	swalWithBootstrapButtons.fire({
+		title: '후기를 삭제하시겠습니까?',
+		icon: 'warning',
+		cancelButtonText: '취소',
+		showCancelButton: true,
+		showCloseButton: true,
+		confirmButtonText: '삭제',
+	}).then((result) => {
+		if (result.isConfirmed) {
+			$.ajax({
+				type: "post",
+				url: "/hcomment/delete",
+				data: { "no": $("#reserNo").val() },
+				success: function() {
+					$(".content-input").val("");
+					$(".content-update").val("");
+					$("#updateDeleteContainer").hide();
+					$("#insertContainer").show();
+				},
+				error: function() {
+					$(".content-input").val("");
+					$(".content-update").val("");
+					$("#updateDeleteContainer").hide();
+					$("#insertContainer").show();
+				}
+			});
+		}
+	});
+});
+
+// 엔터값 출력
+$(document).ready(function() {
+	var content = $('.content-update').val();
+	result = content.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
+
+	$(".content-update").val(result);
+});
