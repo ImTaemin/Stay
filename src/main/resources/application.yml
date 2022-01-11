@@ -1,6 +1,14 @@
 #tomcat port
 server:
   port: 8080
+  ssl:
+    enabled: true
+    key-alias: staykeystore
+    key-store: staykeystore.pkcs12
+    key-store-password: 'sist1234'
+    key-password: 'sist1234'
+    trust-store: staytrust.pkcs12
+    trust-store-password: 'sist1234'
 
 #jsp
 spring:
