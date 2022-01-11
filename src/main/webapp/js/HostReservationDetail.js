@@ -200,7 +200,7 @@ window.onload = function() {
 				$('.comment-content').parent().append(s);
 			} else {
 				var content = hcommentDto.content.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
-				
+
 				s += '<div class="comment-wrap">';
 				s += '<i class="bi bi-arrow-return-right"></i>';
 				s += '<textarea class="comment-content" id="comment-content">' + content + '</textarea>';
@@ -224,11 +224,107 @@ function insertComment() {
 	var content = $('#comment-content').val();
 	content = content.replace(/(?:\r\n|\r|\n)/g, '<br/>');
 	$("#comment-content").val(content);
+
+	if (content == '' || content == null) {
+		const swalWithBootstrapButtons = Swal.mixin({
+			customClass: {
+				confirmButton: 'btn btn-success',
+				cancelButton: 'btn btn-danger'
+			},
+			buttonsStyling: false
+		})
+
+		swalWithBootstrapButtons.fire({
+			icon: 'error',
+			title: '호스트 댓글을 작성해주세요.'
+		})
+	} else {
+		$.ajax({
+			type: "post",
+			data: { "reserNo": reserNo, "guestId": guestId, "content": content },
+			url: "/recomment/insert",
+			success: function() {
+				const swalWithBootstrapButtons = Swal.mixin({
+					customClass: {
+						confirmButton: 'btn btn-success',
+						cancelButton: 'btn btn-danger'
+					},
+					buttonsStyling: false
+				})
+
+				swalWithBootstrapButtons.fire({
+					icon: 'success',
+					title: '호스트 댓글이 작성되었습니다.'
+				})
+
+				content = content.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
+				$("#comment-content").val(content);
+
+				$("#insert-btn").remove();
+
+				var s = '<button type="button" id="update-btn" class="btn btn-primary" onclick="updateComment()">후기 수정</button>';
+				s += '<button type="button" id="delete-btn" class="btn btn-danger" onclick="deleteComment()">후기 삭제</button>';
+
+				$('.btn-wrap').append(s);
+			}
+		});
+	}
+}
+
+// 호스트 후기 수정
+function updateComment() {
+	var reserNo = $('input[name=reserNo]').attr('value');
+
+	var content = $('#comment-content').val();
+	content = content.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+
+	if (content == '' || content == null) {
+		const swalWithBootstrapButtons = Swal.mixin({
+			customClass: {
+				confirmButton: 'btn btn-success',
+				cancelButton: 'btn btn-danger'
+			},
+			buttonsStyling: false
+		})
+
+		swalWithBootstrapButtons.fire({
+			icon: 'error',
+			title: '호스트 댓글을 작성해주세요.'
+		})
+	} else {
+		$.ajax({
+			type: "post",
+			data: { "reserNo": reserNo, "content": content },
+			url: "/recomment/update",
+			success: function() {
+				const swalWithBootstrapButtons = Swal.mixin({
+					customClass: {
+						confirmButton: 'btn btn-success',
+						cancelButton: 'btn btn-danger'
+					},
+					buttonsStyling: false
+				})
+
+				swalWithBootstrapButtons.fire({
+					icon: 'success',
+					title: '호스트 댓글이 수정되었습니다.'
+				})
+
+				content = content.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
+				$("#comment-content").val(content);
+			}
+		});
+	}
+}
+
+// 호스트 후기 삭제
+function deleteComment() {
+	var reserNo = $('input[name=reserNo]').attr('value');
 	
 	$.ajax({
 		type: "post",
-		data: { "reserNo": reserNo, "guestId": guestId, "content": content },
-		url: "/recomment/insert",
+		data: { "reserNo": reserNo},
+		url: "/recomment/delete",
 		success: function() {
 			const swalWithBootstrapButtons = Swal.mixin({
 				customClass: {
@@ -240,20 +336,17 @@ function insertComment() {
 
 			swalWithBootstrapButtons.fire({
 				icon: 'success',
-				title: '호스트 댓글이 작성되었습니다.'
+				title: '호스트 댓글이 삭제되었습니다.'
 			})
 			
-			content = content.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
-			$("#comment-content").val(content);
+			$("#comment-content").val('');
 			
-			$("#insert-btn").remove();
-			
-			var s = '<button type="button" id="update-btn" class="btn btn-primary" onclick="updateComment()">후기 수정</button>';
-			s += '<button type="button" id="delete-btn" class="btn btn-danger" onclick="deleteComment()">후기 삭제</button>';
-			
+			$("#update-btn").remove();
+			$("#delete-btn").remove();
+
+			var s = '<button type="button" id="insert-btn" class="btn btn-primary" onclick="insertComment()">댓글 저장</button>';
+
 			$('.btn-wrap').append(s);
 		}
 	});
 }
-
-// 호스트 후기 수정

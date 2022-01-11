@@ -11,4 +11,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertHostComment" parameterType="hcdto">
 		insert into host_comment values (#{no}, #{guest_id}, #{host_id}, #{content}, now())
 	</insert>
+	
+	<update id="updateHostComment" parameterType="hcdto">
+		update host_comment set content = #{content}, write_day = now() where no = #{no}
+	</update>
+	
+	<delete id="deleteHostComment" parameterType="HashMap">
+		delete from host_comment where no = #{no} and host_id = #{host_id}
+	</delete>
 </mapper>

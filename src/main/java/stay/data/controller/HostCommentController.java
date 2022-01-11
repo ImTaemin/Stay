@@ -41,4 +41,20 @@ public class HostCommentController {
 		
 		hcommentService.insertHostComment(hcoDto);
 	}
+	
+	@PostMapping("/update")
+	public @ResponseBody void updateHostComment(@RequestParam String reserNo, @RequestParam String content) {
+		HostCommentDto hcommentDto = hcommentService.getOneHostComment(reserNo);
+		
+		hcommentDto.setContent(content);
+		
+		hcommentService.updateHostComment(hcommentDto);
+	}
+	
+	@PostMapping("/delete")
+	public @ResponseBody void deleteHostComment(@RequestParam String reserNo, HttpSession session) {
+		String myid = (String)session.getAttribute("myid");
+		
+		hcommentService.deleteHostComment(reserNo, myid);
+	}
 }
