@@ -9,12 +9,33 @@
 <link rel="stylesheet" href="${root}/css/mypageForm.css">
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <c:set var="root" value="<%=request.getContextPath() %>"/>
 
 <title>마이페이지</title>
 </head>
 <body>
+<script type="text/javascript">
+	if(${sessionScope.myid == null}){
+		//알림창
+		const swalWithBootstrapButtons = Swal.mixin({
+			customClass: {
+				confirmButton: 'btn btn-success',
+				cancelButton: 'btn btn-danger'
+			},
+			buttonsStyling: false
+		});
 
+		swalWithBootstrapButtons.fire({
+			  icon: 'error',
+			  text: '비밀번호가 맞지 않습니다',
+			}).then((result) => {
+				if(result.isConfirmed){
+					location.href="/";
+				}
+			});
+	}
+</script>
 
   <div class="mypage-form">
   <form action="update" method="post" enctype="multipart/form-data"  style="float: left;">
