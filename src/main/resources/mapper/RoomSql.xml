@@ -10,22 +10,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="getRoomSearchCount" parameterType="HashMap" resultType="int">
 		select count(*) from (
-				select a.no, b.no res_no, b.room_no, a.host_id, a.type, a.addr_load, a.addr_detail, a.max_per, a.content, a.name, a.photos, a.price, a.hosting 
-				from room a left join (
-					select res.no, res.start_date,res.end_date,r.price,res.room_no,r.host_id,r.type,r.addr_load,r.addr_detail,r.max_per,r.name,r.photos,r.hosting
-					from reservation res, room r
-					where res.room_no = r.no
-					and res.start_date not in(
-						select res.start_date from reservation 
-						where res.start_date between #{from} and #{to}
-					)	 
-					and res.end_date not in(
-						select res.end_date from reservation
-						where res.end_date between #{from} and #{to}
-					)
-				) b on a.no = b.room_no
-				where a.addr_load like concat(#{addr_load},"%")
-				group by a.no
+			select a.no, b.no res_no, b.room_no, a.host_id, a.type, a.addr_load, a.addr_detail, a.max_per, a.content, a.name, a.photos, a.price, a.hosting 
+			from room a left join (
+				select res.no, res.start_date,res.end_date,r.price,res.room_no,r.host_id,r.type,r.addr_load,r.addr_detail,r.max_per,r.name,r.photos,r.hosting
+				from reservation res, room r
+				where res.room_no = r.no
+				and res.start_date not in(
+					select res.start_date from reservation 
+					where res.start_date between #{from} and #{to}
+				)	 
+				and res.end_date not in(
+					select res.end_date from reservation
+					where res.end_date between #{from} and #{to}
+				)
+			) b on a.no = b.room_no
+			where a.addr_load like concat(#{addr_load},"%")
+			and b.no is null
+			and a.hosting = true
+			group by a.no
 		) result_t left join guest_comment g
 		on result_t.res_no = g.no
 	</select>
@@ -48,24 +50,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="getSearchPageRoom" parameterType="HashMap" resultMap="resultMap">
 		select *, ifnull(avg(g.rating), 0) avg, ifnull(count(g.rating), 0) total from (
-				select a.no, b.no res_no, b.room_no, a.host_id, a.type, a.addr_load, a.addr_detail, a.max_per, a.content, a.name, a.photos, a.price, a.hosting 
-				from room a left join (
-					select res.no, res.start_date,res.end_date,r.price,res.room_no,r.host_id,r.type,r.addr_load,r.addr_detail,r.max_per,r.name,r.photos,r.hosting
-					from reservation res, room r
-					where res.room_no = r.no
-					and res.start_date not in(
-						select res.start_date from reservation 
-						where res.start_date between #{from} and #{to}
-					)	 
-					and res.end_date not in(
-						select res.end_date from reservation
-						where res.end_date between #{from} and #{to}
-					)
-				) b on a.no = b.room_no
-				where a.addr_load like concat(#{addr_load},"%")
-				group by a.no
+			select a.no, b.no res_no, b.room_no, a.host_id, a.type, a.addr_load, a.addr_detail, a.max_per, a.content, a.name, a.photos, a.price, a.hosting 
+			from room a left join (
+				select res.no, res.start_date,res.end_date,r.price,res.room_no,r.host_id,r.type,r.addr_load,r.addr_detail,r.max_per,r.name,r.photos,r.hosting
+				from reservation res, room r
+				where res.room_no = r.no
+				and res.start_date not in(
+					select res.start_date from reservation 
+					where res.start_date between #{from} and #{to}
+				)	 
+				and res.end_date not in(
+					select res.end_date from reservation
+					where res.end_date between #{from} and #{to}
+				)
+			) b on a.no = b.room_no
+			where a.addr_load like concat(#{addr_load},"%")
+			group by a.no
 		) result_t left join guest_comment g
 		on result_t.res_no = g.no
+		where result_t.res_no is null
+		and result_t.hosting = true
 		group by result_t.no 
 		limit #{start}, #{perPage}
 	</select>
